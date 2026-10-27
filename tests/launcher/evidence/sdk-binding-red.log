@@ -1,0 +1,44 @@
+Location-only redaction: package root replaced with <PACKAGE_ROOT>; failures/results unchanged.
+✔ actual SDK input delivery replays accepted request without duplicate admission (73.613426ms)
+✔ lost accepted response is reconciled from public durable receipt (26.74574ms)
+✖ changed approved payload with correct new digest cannot reuse an accepted request after reopen (22.278871ms)
+✖ existing external request without approved binding or with write type is not certified as input delivery (16.212363ms)
+✔ missing policy, wrong exact session, edited input and denial fail closed (11.64034ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 3
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 753.715947
+
+✖ failing tests:
+
+test at tests/launcher/input-sdk.test.mjs:71:1
+✖ changed approved payload with correct new digest cannot reuse an accepted request after reopen (22.278871ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file://<PACKAGE_ROOT>/tests/launcher/input-sdk.test.mjs:80:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /binding|different|reconcile/i,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at tests/launcher/input-sdk.test.mjs:87:1
+✖ existing external request without approved binding or with write type is not certified as input delivery (16.212363ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file://<PACKAGE_ROOT>/tests/launcher/input-sdk.test.mjs:93:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /binding|reconcile/i,
+    operator: 'rejects',
+    diff: 'simple'
+  }

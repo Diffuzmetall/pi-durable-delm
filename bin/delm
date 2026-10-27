@@ -1,0 +1,6 @@
+#!/usr/bin/env python3
+"""Installed Python CLI; no Tern, model, Node SDK or author checkout required."""
+from pathlib import Path
+import runpy
+
+runpy.run_path(str(Path(__file__).resolve().parents[1] / "scripts" / "delm_local.py"), run_name="__main__")

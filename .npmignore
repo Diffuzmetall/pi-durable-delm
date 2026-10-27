@@ -1,0 +1,6 @@
+**/__pycache__/
+**/*.pyc
+**/.local/
+**/node_modules/
+**/.git/
+*.tgz

@@ -1,0 +1,17 @@
+{
+  "name": "pi-durable-delm",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "Shared-checkout DeLM board, CLI and Native SDK components; production Native host integration gated",
+  "repository": {"type": "git", "url": "https://github.com/Diffuzmetall/pi-durable-delm.git"},
+  "type": "module",
+  "pi": {"extensions": [], "skills": ["./skills/delm"], "prompts": [], "themes": []},
+  "devDependencies": {"jiti": "2.7.0"},
+  "engines": {"node": ">=22.19.0"},
+  "bin": {"delm": "bin/delm"},
+  "exports": {".": "./extensions/delm/index.js", "./protocol": "./extensions/delm/protocol.js", "./package.json": "./package.json"},
+  "peerDependencies": {"@earendil-works/pi-durable": "1.4.0", "@earendil-works/pi-ai": "1.4.0", "@earendil-works/chord": "1.4.0"},
+  "files": ["bin/", "scripts/", "vendor/DeLM/", "prompts/", "extensions/delm/", "skills/delm/", "packaging/", "tests/", "examples/", "docs/", "LICENSE", "UPSTREAM.md", "THIRD_PARTY_NOTICES.md", "provenance.json", "parity.json", "release-readiness.md"],
+  "scripts": {"test:python": "python3 -B -m unittest discover -s tests -v", "test:packaging": "python3 -B -m unittest discover -s tests/packaging -v"}
+}

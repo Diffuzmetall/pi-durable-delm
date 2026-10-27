@@ -1,0 +1,181 @@
+{
+  "schema": 1,
+  "verdict": "LOCAL_ARTIFACT_PASS_PRODUCTION_NATIVE_BLOCKED",
+  "archive_sha256": "942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96",
+  "files": 74,
+  "runtime_hashes": {
+    "package.json": "fa0b888ab0b790e98a659ab56012add4dda9e488d3a991448e5559d1e02f6e2d",
+    "vendor/DeLM/board/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/DeLM/board/shared_context.py": "abe10eb86a5c6326e250ecf56db603346688530b45c4fac472ce77d9e5dc8661",
+    "vendor/DeLM/board/protected_board.py": "859244453060416f190cafbaf34a47e127d875fe53b679d34950f8aa3c116058",
+    "vendor/DeLM/board/context_client.py": "4d379cd1ca9aec87438a61d0fc878024b34f4d4af52096f33ff5f1c0fcb8e766",
+    "vendor/DeLM/runtime/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/DeLM/runtime/containers.py": "8f0caab23910145417eeeb7800019168554f2d83cb19a4bdb80cc76cacca487f",
+    "vendor/DeLM/LICENSE": "ef348c33d9ae6c089675ce57e1a8834cf465c6bfe5c4347404b596371213de66",
+    "scripts/delm_local.py": "3a5f78f774e2f85babe2b7f62b1943ed8768584cedbf9e36e0a2102ad6fc6112",
+    "scripts/delm_domain.py": "5da54ffc3e39e4a162d0b851e008d80fa7675adef44cce613a98d0f39854179a",
+    "scripts/delm_delivery.py": "8957d4a4d0b37b2b32070bb0770db0f0f524cdf0687088126907a79da97c4f80",
+    "scripts/delm_leases.py": "0b310a13af0139b3f75ebaf430363e9432a69b150db955b17d5f5cb46a0f977e",
+    "scripts/delm_board.py": "9c5bfc5f545be7eb8a63df14d68892a03a780c7e45dd03c4fa4be604a22382be",
+    "prompts/delm-worker.md": "5b827ed0a203b500df9209a775f7b48a1475c26af2e26eda68658c495959f956",
+    "extensions/delm/index.js": "0ae378704250538ae28efe0ca14035163d71af41356fe296212b655ad06f497e",
+    "extensions/delm/index.mjs": "f334734a2fd7a0cbe11104ecf1d6f2944cb24c869c935ad41e6300839f5dbaeb",
+    "extensions/delm/protocol.js": "4a538bb850c9b285c6de9920f99397519b3a7cd464bc629b462807aa9fd1b4cd",
+    "bin/delm": "b158e4e6b9b4b4b7d7d3fad3b87462c63088978ed1acdf49ba578e3ba76786ea",
+    "packaging/install.py": "3cf0445c86dbf53df5643df52448650918e082d0455378e1c9b601c1097e80ef",
+    "skills/delm/SKILL.md": "b9245a33ec6fdaff70fb96619f9d0b92523c0753de78c10d3c81225522be227b",
+    "skills/delm/TaskPlanning.md": "1af03db2e4aaeeea6ab6e03edc2b153b669cd3375916ac52be4e07d422a8467b",
+    "skills/delm/Tools/NativeInput.mjs": "7f68b45ee94248c386161cbdedd8573054fcc5a00ceefec6bd0813cce002943c",
+    "skills/delm/Tools/Run.help.md": "9d60ceea9303367196f10d3c217dd072bc2a969d3fd5f6b418edea49f74a1155",
+    "skills/delm/Tools/Run.py": "6f162efa0fad32294787d7fd97a2520c29f8cf1cd97ff46da5673c7379cc9288",
+    "skills/delm/WorkerAddendum.md": "2ca7830e9b326896edba6465f54bec9cae636615cfe0584a96e64a71d4798d7c",
+    "skills/delm/Workflows/Launch.md": "0b6d62236f66e0cd02803f47a30b79168e19577a9983dc61fa04f3f37670b883",
+    "skills/delm/Workflows/Prepare.md": "3bfb16ead6c26fd31534a37c36fde53baf85e3f155ad341b260317e443841e90",
+    "skills/delm/Workflows/Recover.md": "bbb7ad7c4ad1a217a4c54f344f48192cbe2ac060f4d19414c40099e3f32766a6",
+    "skills/delm/Workflows/Resume.md": "1a0fe1e92cdeea89dac218c103a58565143c0b8655a9ef395648e695bef41f7c"
+  },
+  "environment": {
+    "python": "3.13.7",
+    "platform": "Linux",
+    "architecture": "x86_64",
+    "node": "v24.19.0",
+    "public_dependencies": {
+      "@earendil-works/pi-durable": "1.4.0",
+      "@earendil-works/pi-ai": "1.4.0",
+      "@earendil-works/chord": "1.4.0"
+    },
+    "ordinary_pi": "1.4.0"
+  },
+  "checks": [
+    {
+      "check": "install",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "check": "repeat-install",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "check": "installed-bin",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "check": "python",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "check": "packaging",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "check": "launcher-python",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "check": "demo",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "check": "demo-cli",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "check": "native-sdk-faux",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "check": "skill-discovery",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "import-closure",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "update",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "rollback",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "refuse-edited-update",
+      "exit_code": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "check": "uninstall",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "node-version",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true
+    }
+  ],
+  "suite_counts": {
+    "python": 48,
+    "packaging": 5,
+    "launcher_python": 7,
+    "demo": 1,
+    "native_and_input_sdk_faux": 29
+  },
+  "private_root_hits": [],
+  "negative_test_guard_literals": [
+    "tests/launcher/test_launcher.py"
+  ],
+  "source_imports": false,
+  "real_model_calls": 0,
+  "log_hashes": {
+    "install.log": "bd20ed337dfe080ede27897941b5d4c0243c58c0bf4172336ec92162f20ee304",
+    "skill-discovery.log": "4241ca61ca76ef5a2f7bca1928d4dd898c0ec9e67d4975da76059457b8eaeef7",
+    "python.log": "0e499049b6e3ce1ff8eaa47880bd96a8da52607e2e870d244a68e71a98d9a9bd",
+    "native-sdk-unsupported-1.2.log": "70cf294a07ce6822ceecd78b8b863b09888fc584fc9efc08f2585e4d9d2afc89",
+    "demo-cli.log": "34ef2cee32cda0eb022f85b1fc5309821452c8a6232ca3ef006bd27e51730edd",
+    "packaging.log": "b6d485fe1978615523c80f9c0a81096a4d262173b0556874f71040c1f7eadacb",
+    "uninstall.log": "7e3cfa1bfbd59adbd05d415d1aec3ceac5a2dcbb802eb69cf69e5a793918b611",
+    "launcher-python.log": "30fc5c4ea39c38814cc9e90d3462aea9b4a75f86044e1810ceb2462639dee18f",
+    "repeat-install.log": "cbcea4499ce6f5a7e9ec2ee9e6b40bdb06675fc03634e0e41d3223a7540612cd",
+    "node-version.log": "b7677d3ec37ee1897ba07dc2cfe8292fe421c9ac93396cca5bbece486d1a2a41",
+    "refuse-edited-update.log": "cf177437c9343085947e49d3665cb618617908795999b889e468c31225da1033",
+    "update.log": "4c8d6b11b004efb324b7518605805c9b6e93b8efe2a1a2117764c9dca1c1d9ce",
+    "import-closure.log": "1897949a08a1472e28881985a9870748ec31b93a791e6ea2f25164988a557869",
+    "demo.log": "94be742c8e80b120cb962f91e182b782ec3cbdd7e2f94ac984c0397641049c1a",
+    "rollback.log": "7fdcc2aa093af447b52d48b18720f9535574679a449672bfacdc3bd465758291",
+    "skill-discovery-mixed-dependencies.log": "ba95a132fd8af26204596aac2fcc83bde12fd83a1e29ba9e76546a11f4844e9c",
+    "native-sdk-faux.log": "4efd622a45e9dc83516bfa05bee866c9f868c26e600b7d11c8fc2e577b499291",
+    "installed-bin.log": "c51fbcb2b8cacc04e4ec8e9c8ca56fc67c302c572f63abf7dab83998df151b2c"
+  },
+  "limits": [
+    "Initial wrong-prerequisite SDK1.2 run20/29 preserved, corrected existing publicSDK1.4 run29/29; unchanged passed Python suites not repeated",
+    "Ordinary Pi parser must use its own dependency tree, not DurableSDK override; initial mixed-dependency parser failure preserved",
+    "Ordinary Pi public skill parsing is not stock Native registry/protected-admission discovery",
+    "SDK/faux is not live models or actual editor-draft verification",
+    "Full payload update/rollback passed; actual work-unaware Native predecessor downgrade NOT_TESTED",
+    "Source checkout remains on filesystem but is absent from clean environment/import closure",
+    "Only existing public dependencies used; none installed",
+    "One negative privacy-deny assertion contains a home-prefix literal, not a private runtime dependency"
+  ]
+}

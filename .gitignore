@@ -1,0 +1,14 @@
+/dist/
+node_modules/
+__pycache__/
+*.py[cod]
+.local/
+.env
+.env.*
+!.env.example
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+*.tgz
+.DS_Store

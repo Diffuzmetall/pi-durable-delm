@@ -1,0 +1,63 @@
+test_active_first_full_results_wait_and_read_only (test_board.BoardTest.test_active_first_full_results_wait_and_read_only) ... ok
+test_actual_terminal_keys_scroll_search_notes_resize_and_quit (test_board.BoardTest.test_actual_terminal_keys_scroll_search_notes_resize_and_quit) ... ok
+test_bottom_log_scroll_and_full_waiter_names (test_board.BoardTest.test_bottom_log_scroll_and_full_waiter_names) ... ok
+test_filters_selection_refresh_and_full_details (test_board.BoardTest.test_filters_selection_refresh_and_full_details) ... ok
+test_local_writer_records_wall_time (test_board.BoardTest.test_local_writer_records_wall_time) ... ok
+test_log_five_second_monotonic_inactivity_and_navigation_reset (test_board.BoardTest.test_log_five_second_monotonic_inactivity_and_navigation_reset) ... ok
+test_log_focus_exit_keys_resume_live_without_mouse_capture (test_board.BoardTest.test_log_focus_exit_keys_resume_live_without_mouse_capture) ... ok
+test_log_newest_and_focus_exit_resume_live_immediately (test_board.BoardTest.test_log_newest_and_focus_exit_resume_live_immediately) ... ok
+test_native_deltas_terminal_and_unavailable_are_distinct (test_board.BoardTest.test_native_deltas_terminal_and_unavailable_are_distinct) ... ok
+test_readable_key_is_always_visible_and_task_name_keeps_space (test_board.BoardTest.test_readable_key_is_always_visible_and_task_name_keeps_space) ... ok
+test_rendered_table_columns_align_for_all_rows_and_widths (test_board.BoardTest.test_rendered_table_columns_align_for_all_rows_and_widths) ... ok
+test_repo_keys_survive_updates_sorting_and_new_tasks_without_rewriting_history (test_board.BoardTest.test_repo_keys_survive_updates_sorting_and_new_tasks_without_rewriting_history) ... ok
+test_ten_event_preview_and_section_spacing (test_board.BoardTest.test_ten_event_preview_and_section_spacing) ... ok
+test_time_exact_legacy_and_clock_reset (test_board.BoardTest.test_time_exact_legacy_and_clock_reset) ... ok
+test_delta_sticky_state_monotonic_ack_and_full_recovery (test_delivery.DeliveryTest.test_delta_sticky_state_monotonic_ack_and_full_recovery) ... ok
+test_lost_response_reopen_immutable_replay_and_identity (test_delivery.DeliveryTest.test_lost_response_reopen_immutable_replay_and_identity) ... ok
+test_transaction_rollback_and_explicit_caller_boundary (test_delivery.DeliveryTest.test_transaction_rollback_and_explicit_caller_boundary) ... ok
+test_dependency_cycle_parent_mapping_and_partial_not_done (test_domain.DomainTest.test_dependency_cycle_parent_mapping_and_partial_not_done) ... ok
+test_handoff_legacy_and_single_claim (test_domain.DomainTest.test_handoff_legacy_and_single_claim) ... ok
+test_lifecycle_idle_ended_fences_salvage_and_human_gate (test_domain.DomainTest.test_lifecycle_idle_ended_fences_salvage_and_human_gate) ... ok
+test_migrated_legacy_task_cannot_bypass_fences (test_domain.DomainTest.test_migrated_legacy_task_cannot_bypass_fences) ... ok
+test_race_replay_and_generation_fences (test_domain.DomainTest.test_race_replay_and_generation_fences) ... ok
+test_real_authenticated_http_and_cli (test_domain.DomainTest.test_real_authenticated_http_and_cli) ... ok
+test_snapshot_replay_and_observer_nonconsumption (test_domain.DomainTest.test_snapshot_replay_and_observer_nonconsumption) ... ok
+test_split_rejects_child_completion_cycle_atomically (test_domain.DomainTest.test_split_rejects_child_completion_cycle_atomically) ... ok
+test_split_rejects_transitive_ancestor_completion_cycles (test_domain.DomainTest.test_split_rejects_transitive_ancestor_completion_cycles) ... ok
+test_structured_publications_and_sticky_fail (test_domain.DomainTest.test_structured_publications_and_sticky_fail) ... ok
+test_update_after_split_rejects_completion_cycles_atomically (test_domain.DomainTest.test_update_after_split_rejects_completion_cycles_atomically) ... ok
+test_early_output_done_releases_producer_for_remaining_work (test_first_slice.FirstSliceTest.test_early_output_done_releases_producer_for_remaining_work) ... ok
+test_four_actor_snapshot_identity_and_safety (test_first_slice.FirstSliceTest.test_four_actor_snapshot_identity_and_safety) ... ok
+test_run_inside_workspace_rejected_without_mutation (test_first_slice.FirstSliceTest.test_run_inside_workspace_rejected_without_mutation) ... ok
+test_alias_overlap_atomic_multipath_and_resources (test_leases.LeasesTest.test_alias_overlap_atomic_multipath_and_resources) ... ok
+test_escape_invalid_inputs_and_retargeted_alias (test_leases.LeasesTest.test_escape_invalid_inputs_and_retargeted_alias) ... ok
+test_expiry_stale_writer_renew_release_and_task_handoff (test_leases.LeasesTest.test_expiry_stale_writer_renew_release_and_task_handoff) ... ok
+test_four_and_eight_actor_conflict_race_has_one_winner (test_leases.LeasesTest.test_four_and_eight_actor_conflict_race_has_one_winner) ... ok
+test_observer_readonly_absent_table_and_no_cleanup (test_leases.LeasesTest.test_observer_readonly_absent_table_and_no_cleanup) ... ok
+test_coordination_files_conflict_and_restart (test_local.LocalBoardTest.test_coordination_files_conflict_and_restart) ... ok
+test_four_peers_shared_workspace_and_observer (test_local.LocalBoardTest.test_four_peers_shared_workspace_and_observer) ... ok
+test_local_auth_and_source_safety (test_local.LocalBoardTest.test_local_auth_and_source_safety) ... ok
+test_simultaneous_claim_single_winner (test_local.LocalBoardTest.test_simultaneous_claim_single_winner) ... ok
+test_worker_launcher_environment (test_local.LocalBoardTest.test_worker_launcher_environment) ... ok
+test_available_work_wait_is_not_reported_as_zero_dependencies_ready (test_observer_v2.ObserverV2Test.test_available_work_wait_is_not_reported_as_zero_dependencies_ready) ... ok
+test_canonical_transitions_links_blockers_and_read_only (test_observer_v2.ObserverV2Test.test_canonical_transitions_links_blockers_and_read_only) ... /usr/lib/python3.13/copy.py:246: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x71384e99fd30>
+  memo[id(memo)]=[x]
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.13/copy.py:246: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x71384e99c400>
+  memo[id(memo)]=[x]
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.13/copy.py:246: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x71384e99fe20>
+  memo[id(memo)]=[x]
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_completed_team_keeps_results_visible_and_resolution_history (test_observer_v2.ObserverV2Test.test_completed_team_keeps_results_visible_and_resolution_history) ... ok
+test_four_and_eight_actor_delivery_handoff_and_recovery (test_remaining_integration.RemainingIntegrationTest.test_four_and_eight_actor_delivery_handoff_and_recovery) ... ok
+test_future_worker_profile_and_offline_help (test_scale.ScaleTest.test_future_worker_profile_and_offline_help) ... ok
+test_invalid_counts_preflight (test_scale.ScaleTest.test_invalid_counts_preflight) ... ok
+test_roster_bindings_races_delivery_reopen_and_rejection (test_scale.ScaleTest.test_roster_bindings_races_delivery_reopen_and_rejection) ... ok
+
+----------------------------------------------------------------------
+Ran 48 tests in 41.968s
+
+OK
+Initialized <SANDBOX>/tmpve9u8fw6/run; start: python3 scripts/delm_local.py serve <SANDBOX>/tmpve9u8fw6/run

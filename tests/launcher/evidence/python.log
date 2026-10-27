@@ -1,0 +1,12 @@
+test_blocked_native_commands_spawn_nothing_preserve_state (test_launcher.LauncherTest.test_blocked_native_commands_spawn_nothing_preserve_state) ... ok
+test_capabilities_help_and_missing_manifest_without_service (test_launcher.LauncherTest.test_capabilities_help_and_missing_manifest_without_service) ... ok
+test_no_private_config_or_root_override (test_launcher.LauncherTest.test_no_private_config_or_root_override) ... ok
+test_portable_skill_structure_and_workflows (test_launcher.LauncherTest.test_portable_skill_structure_and_workflows) ... ok
+test_prepare_2_4_8_exact_inputs_and_no_launch (test_launcher.LauncherTest.test_prepare_2_4_8_exact_inputs_and_no_launch) ... ok
+test_readonly_status_with_real_board_http (test_launcher.LauncherTest.test_readonly_status_with_real_board_http) ... ok
+test_required_instructions_and_existing_run_preserved (test_launcher.LauncherTest.test_required_instructions_and_existing_run_preserved) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 1.793s
+
+OK

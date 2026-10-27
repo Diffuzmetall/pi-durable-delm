@@ -1,0 +1,15 @@
+{
+  "task": "41c4adf95cc14d7aa5f699574fdd4b60",
+  "finding": "70504f2f09b74e59800d099deb99016b",
+  "workflow": "CreateSkill/UpdateSkill, target-only loaded workflow",
+  "cause": "Accepted native request identity did not bind the approved payload; a different payload and its own valid digest could incorrectly return replay success.",
+  "repair": "Atomically persist requestId to approved input SHA-256/type in delm.launch.inputs via existing public SDK host.commit/tx.doc before external admission or submit. Require matching persisted binding and input type before accepting a native receipt as replay. Unbound prior native requests refuse reconciliation rather than fabricate delivery.",
+  "tests": {
+    "red": {"tests": 5, "passed": 3, "failed": 2, "exit": 1, "log": "evidence/sdk-binding-red.log"},
+    "green": {"tests": 5, "passed": 5, "failed": 0, "exit": 0, "log": "evidence/sdk-binding.log"},
+    "coverage": ["changed approved text with correct new SHA under same request ID rejected after actual SDK reopen", "original matching request still replays without duplicate admission", "unbound accepted native input requires reconciliation", "existing write submission is not accepted as input", "accepted response loss/reopen, exact session and policy/fingerprint refusal retained"],
+    "python_baseline": "7 PASS retained, preparation code/tests unchanged, not rerun"
+  },
+  "scope": "Only target skill NativeInput/help and own launcher tests/evidence. No source product, installed skill/config, live Native/board, global files, new host/database owner or real models.",
+  "limits": ["Test admission callbacks/faux prove SDK mechanics, not public production host integration", "Stock automatic Native launch/control remains blocked", "Canonical full hygiene gate remains unavailable in this non-Git target; no policy or global mutation performed", "Independent finding author must formally resolve after consuming this repair evidence; local fixture green is not independent acceptance"]
+}

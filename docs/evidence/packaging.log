@@ -1,0 +1,10 @@
+test_manifest_and_runtime_provenance_are_complete (test_payload.PayloadTest.test_manifest_and_runtime_provenance_are_complete) ... ok
+test_modified_and_untracked_files_are_not_overwritten_or_deleted (test_payload.PayloadTest.test_modified_and_untracked_files_are_not_overwritten_or_deleted) ... ok
+test_repeat_update_rollback_and_default_data_preservation (test_payload.PayloadTest.test_repeat_update_rollback_and_default_data_preservation) ... ok
+test_unrelated_current_and_versions_symlink_refused (test_payload.PayloadTest.test_unrelated_current_and_versions_symlink_refused) ... ok
+test_untrusted_archive_traversal_and_links_refused_without_activation (test_payload.PayloadTest.test_untrusted_archive_traversal_and_links_refused_without_activation) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.031s
+
+OK

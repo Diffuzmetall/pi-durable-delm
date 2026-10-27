@@ -1,0 +1,292 @@
+✔ native registry fails closed without trusted admission; no importer starts services (2.123906ms)
+✖ real 1.4 SQLite + faux model: exact dependency wake in same conversation; unrelated events ignored (831.124552ms)
+✖ ready at arm, invalid dependency, cross-conversation and cancellation (612.638856ms)
+✔ reopen persisted native watch, same request identity, no duplicate wake after second reopen (564.659781ms)
+✖ temporary SQLite writer lock keeps the native wait armed and wakes after unlock (1178.353408ms)
+✖ trusted admission denial does not submit a wake (569.328615ms)
+✖ first slice: real native + faux consumer resumes on early output, not producer remainder; delta wake (1221.349814ms)
+✔ canonical Python/JS conformance includes full task replacements, legacy and sticky resolution (89.058894ms)
+✔ compact ready and reevaluate messages bound Unicode reasons/IDs without truncating replay identity (5.001258ms)
+✔ compact reference for large persisted receipt stays unread until explicit CLI replay/read/ack (15457.229695ms)
+ℹ wake_utf8_bytes=461 persisted_receipt_utf8_bytes=578058 queue_tasks=71
+✔ real HTTP snapshot -> native denial -> reopen/retry -> submit -> ack retains unread and stable identity (2202.026626ms)
+✔ accepted compact reference survives lost submit response/reopen/retry without autoACK or duplicate input (2012.322835ms)
+✔ legacy accepted full-inline: submit-before-ack transport loss retries without duplicate continuation or admission (2375.984325ms)
+✔ final dispatch is cancel-fenced and persists a FAIL arriving during trusted admission as reevaluation (1214.465304ms)
+✔ available-work predicate does not change exact dependencies or let unrelated FAIL stop independent work (1.071465ms)
+✔ work returns immediately for existing work, rejects busy actors/mixed modes and preserves single active wait (1027.190072ms)
+✖ new claimable work wakes 4/8-identity HTTP + Native/faux fixtures; FACT and unready work do not (1347.435345ms)
+✖ work rechecks a competing claim during admission and resumes only on later available work (1268.359622ms)
+✔ work wait accepts direct handoff and survives accepted-response loss/reopen without duplicate input (1201.792731ms)
+✖ unrelated FACT is ignored; linked FAIL and explicit ended producer cause reevaluation, never ready (1115.338624ms)
+✔ actual installed loader refreshes JS adapter AND transitive JS implementation (349.24212ms)
+✔ public SDK adapter refuses unknown actor and mismatched workspace before any admission (11.562091ms)
+✔ public SDK adapter replaces one extension and requires explicit host admission without invoking it at install (28.267776ms)
+✖ eight fixture identities: actual HTTP + native/faux early reuse, lease handoff, failure/correction and next output (1442.424832ms)
+✔ actual SDK input delivery replays accepted request without duplicate admission (59.724436ms)
+✔ lost accepted response is reconciled from public durable receipt (26.717401ms)
+✔ changed approved payload with correct new digest cannot reuse an accepted request after reopen (19.972571ms)
+✔ existing external request without approved binding or with write type is not certified as input delivery (36.600609ms)
+✔ missing policy, wrong exact session, edited input and denial fail closed (15.570443ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 20
+ℹ fail 9
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 31101.274672
+
+✖ failing tests:
+
+test at tests/delm-durable.test.mjs:69:1
+✖ real 1.4 SQLite + faux model: exact dependency wake in same conversation; unrelated events ignored (831.124552ms)
+  SessionFailed: Session failed after a storage error; close and reopen it
+      at #assertHealthy (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:666:19)
+      at HarnessImpl.assertUsable (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:660:28)
+      at HarnessImpl.snapshot (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:191:14)
+      at Object.doc (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-durable.test.mjs:45:26)
+      at TestContext.<anonymous> (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-durable.test.mjs:85:27)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    [cause]: Error: CHECK constraint failed: status IN ('pending', 'running', 'waiting', 'completing', 'terminal')
+        at file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:74:33
+        at NodeSqliteTransaction.runOperation (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:101:16)
+        at NodeSqliteTransaction.run (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:73:21)
+        at SqliteStorage.applyTableWrite (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:585:32)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:115:17
+        at async file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:116:32
+        at async SqliteStorage.commit (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:107:21)
+        at async #call (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:789:22)
+        at async #runCommit (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:535:19) {
+      code: 'ERR_SQLITE_ERROR',
+      errcode: 275,
+      errstr: 'constraint failed'
+    }
+  }
+
+test at tests/delm-durable.test.mjs:99:1
+✖ ready at arm, invalid dependency, cross-conversation and cancellation (612.638856ms)
+  SessionFailed: Session failed after a storage error; close and reopen it
+      at #assertHealthy (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:666:19)
+      at HarnessImpl.assertUsable (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:660:28)
+      at HarnessImpl.snapshot (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:191:14)
+      at Object.doc (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-durable.test.mjs:45:26)
+      at TestContext.<anonymous> (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-durable.test.mjs:114:27)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    [cause]: Error: CHECK constraint failed: status IN ('pending', 'running', 'waiting', 'completing', 'terminal')
+        at file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:74:33
+        at NodeSqliteTransaction.runOperation (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:101:16)
+        at NodeSqliteTransaction.run (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:73:21)
+        at SqliteStorage.applyTableWrite (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:585:32)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:115:17
+        at async file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:116:32
+        at async SqliteStorage.commit (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:107:21)
+        at async #call (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:789:22)
+        at async #runCommit (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:535:19) {
+      code: 'ERR_SQLITE_ERROR',
+      errcode: 275,
+      errstr: 'constraint failed'
+    }
+  }
+
+test at tests/delm-durable.test.mjs:136:1
+✖ temporary SQLite writer lock keeps the native wait armed and wakes after unlock (1178.353408ms)
+  SessionFailed: Session failed after a storage error; close and reopen it
+      at #assertHealthy (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:666:19)
+      at HarnessImpl.assertUsable (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:660:28)
+      at HarnessImpl.snapshot (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:191:14)
+      at Object.doc (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-durable.test.mjs:45:26)
+      at file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-durable.test.mjs:147:38
+      at until (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-durable.test.mjs:18:17)
+      at async TestContext.<anonymous> (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-durable.test.mjs:147:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    [cause]: Error: CHECK constraint failed: status IN ('pending', 'running', 'waiting', 'completing', 'terminal')
+        at file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:74:33
+        at NodeSqliteTransaction.runOperation (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:101:16)
+        at NodeSqliteTransaction.run (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:73:21)
+        at SqliteStorage.applyTableWrite (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:585:32)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:115:17
+        at async file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:116:32
+        at async SqliteStorage.commit (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:107:21)
+        at async #call (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:789:22)
+        at async #runCommit (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:535:19) {
+      code: 'ERR_SQLITE_ERROR',
+      errcode: 275,
+      errstr: 'constraint failed'
+    }
+  }
+
+test at tests/delm-durable.test.mjs:152:1
+✖ trusted admission denial does not submit a wake (569.328615ms)
+  SessionFailed: Session failed after a storage error; close and reopen it
+      at #assertHealthy (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:666:19)
+      at HarnessImpl.assertUsable (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:660:28)
+      at HarnessImpl.snapshot (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:191:14)
+      at Object.doc (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-durable.test.mjs:45:26)
+      at file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-durable.test.mjs:156:38
+      at until (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-durable.test.mjs:18:17)
+      at async TestContext.<anonymous> (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-durable.test.mjs:156:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    [cause]: Error: CHECK constraint failed: status IN ('pending', 'running', 'waiting', 'completing', 'terminal')
+        at file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:74:33
+        at NodeSqliteTransaction.runOperation (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:101:16)
+        at NodeSqliteTransaction.run (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:73:21)
+        at SqliteStorage.applyTableWrite (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:585:32)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:115:17
+        at async file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:116:32
+        at async SqliteStorage.commit (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:107:21)
+        at async #call (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:789:22)
+        at async #runCommit (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:535:19) {
+      code: 'ERR_SQLITE_ERROR',
+      errcode: 275,
+      errstr: 'constraint failed'
+    }
+  }
+
+test at tests/delm-first-slice.test.mjs:23:1
+✖ first slice: real native + faux consumer resumes on early output, not producer remainder; delta wake (1221.349814ms)
+  SessionFailed: Session failed after a storage error; close and reopen it
+      at #assertHealthy (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:666:19)
+      at HarnessImpl.assertUsable (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:660:28)
+      at HarnessImpl.snapshot (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:191:14)
+      at doc (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-first-slice.test.mjs:51:28)
+      at TestContext.<anonymous> (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-first-slice.test.mjs:60:25)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    [cause]: Error: CHECK constraint failed: status IN ('pending', 'running', 'waiting', 'completing', 'terminal')
+        at file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:74:33
+        at NodeSqliteTransaction.runOperation (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:101:16)
+        at NodeSqliteTransaction.run (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:73:21)
+        at SqliteStorage.applyTableWrite (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:585:32)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:115:17
+        at async file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:116:32
+        at async SqliteStorage.commit (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:107:21)
+        at async #call (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:789:22)
+        at async #runCommit (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:535:19) {
+      code: 'ERR_SQLITE_ERROR',
+      errcode: 275,
+      errstr: 'constraint failed'
+    }
+  }
+
+test at tests/delm-native-v2.test.mjs:316:1
+✖ new claimable work wakes 4/8-identity HTTP + Native/faux fixtures; FACT and unready work do not (1347.435345ms)
+  SessionFailed: Session failed after a storage error; close and reopen it
+      at #assertHealthy (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:666:19)
+      at HarnessImpl.assertUsable (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:660:28)
+      at HarnessImpl.snapshot (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:191:14)
+      at Object.doc (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-native-v2.test.mjs:82:26)
+      at file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-native-v2.test.mjs:333:40
+      at until (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-native-v2.test.mjs:18:17)
+      at async TestContext.<anonymous> (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-native-v2.test.mjs:333:7)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    [cause]: Error: CHECK constraint failed: status IN ('pending', 'running', 'waiting', 'completing', 'terminal')
+        at file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:74:33
+        at NodeSqliteTransaction.runOperation (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:101:16)
+        at NodeSqliteTransaction.run (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:73:21)
+        at SqliteStorage.applyTableWrite (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:585:32)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:115:17
+        at async file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:116:32
+        at async SqliteStorage.commit (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:107:21)
+        at async #call (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:789:22)
+        at async #runCommit (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:535:19) {
+      code: 'ERR_SQLITE_ERROR',
+      errcode: 275,
+      errstr: 'constraint failed'
+    }
+  }
+
+test at tests/delm-native-v2.test.mjs:349:1
+✖ work rechecks a competing claim during admission and resumes only on later available work (1268.359622ms)
+  SessionFailed: Session failed after a storage error; close and reopen it
+      at #assertHealthy (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:666:19)
+      at HarnessImpl.assertUsable (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:660:28)
+      at HarnessImpl.snapshot (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:191:14)
+      at Object.doc (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-native-v2.test.mjs:82:26)
+      at TestContext.<anonymous> (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-native-v2.test.mjs:363:27)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    [cause]: Error: CHECK constraint failed: status IN ('pending', 'running', 'waiting', 'completing', 'terminal')
+        at file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:74:33
+        at NodeSqliteTransaction.runOperation (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:101:16)
+        at NodeSqliteTransaction.run (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:73:21)
+        at SqliteStorage.applyTableWrite (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:585:32)
+        at async file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:115:17
+        at async file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:116:32
+        at async SqliteStorage.commit (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:107:21)
+        at async #call (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:789:22)
+        at async #runCommit (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:535:19) {
+      code: 'ERR_SQLITE_ERROR',
+      errcode: 275,
+      errstr: 'constraint failed'
+    }
+  }
+
+test at tests/delm-native-v2.test.mjs:401:1
+✖ unrelated FACT is ignored; linked FAIL and explicit ended producer cause reevaluation, never ready (1115.338624ms)
+  SessionFailed: Session failed after a storage error; close and reopen it
+      at #assertHealthy (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:666:19)
+      at HarnessImpl.assertUsable (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:660:28)
+      at HarnessImpl.snapshot (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:191:14)
+      at Object.doc (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-native-v2.test.mjs:82:26)
+      at file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-native-v2.test.mjs:409:38
+      at until (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-native-v2.test.mjs:18:17)
+      at async TestContext.<anonymous> (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-native-v2.test.mjs:409:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    [cause]: Error: CHECK constraint failed: status IN ('pending', 'running', 'waiting', 'completing', 'terminal')
+        at file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:74:33
+        at NodeSqliteTransaction.runOperation (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:101:16)
+        at NodeSqliteTransaction.run (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:73:21)
+        at SqliteStorage.applyTableWrite (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:585:32)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:115:17
+        at async file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:116:32
+        at async SqliteStorage.commit (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:107:21)
+        at async #call (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:789:22)
+        at async #runCommit (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:535:19) {
+      code: 'ERR_SQLITE_ERROR',
+      errcode: 275,
+      errstr: 'constraint failed'
+    }
+  }
+
+test at tests/delm-remaining-integration.test.mjs:24:1
+✖ eight fixture identities: actual HTTP + native/faux early reuse, lease handoff, failure/correction and next output (1442.424832ms)
+  SessionFailed: Session failed after a storage error; close and reopen it
+      at #assertHealthy (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:666:19)
+      at HarnessImpl.assertUsable (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:660:28)
+      at HarnessImpl.snapshot (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:191:14)
+      at doc (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-remaining-integration.test.mjs:47:28)
+      at file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-remaining-integration.test.mjs:86:36
+      at until (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-remaining-integration.test.mjs:18:17)
+      at async TestContext.<anonymous> (file://<SANDBOX>/installed/versions/942d10bc780ceb06da40ec7ff6e612e203dea222028a362a8388276f97800e96/tests/delm-remaining-integration.test.mjs:86:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    [cause]: Error: CHECK constraint failed: status IN ('pending', 'running', 'waiting', 'completing', 'terminal')
+        at file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:74:33
+        at NodeSqliteTransaction.runOperation (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:101:16)
+        at NodeSqliteTransaction.run (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:73:21)
+        at SqliteStorage.applyTableWrite (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:585:32)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:115:17
+        at async file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/node.js:116:32
+        at async SqliteStorage.commit (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/storage/sqlite/storage.js:107:21)
+        at async #call (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:789:22)
+        at async #runCommit (file://<PUBLIC_DEPENDENCIES>/@earendil-works/pi-durable/dist/session/session.js:535:19) {
+      code: 'ERR_SQLITE_ERROR',
+      errcode: 275,
+      errstr: 'constraint failed'
+    }
+  }
