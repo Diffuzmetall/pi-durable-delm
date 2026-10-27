@@ -1,0 +1,40 @@
+✔ native registry refuses missing binding; no importer starts services (2.354172ms)
+✔ native SDK admission delivers same-conversation wake without an author-private policy (902.069715ms)
+✔ real SDK SQLite + faux model: exact dependency wake in same conversation; unrelated events ignored (1247.908436ms)
+✔ ready at arm, invalid dependency, cross-conversation and cancellation (702.557162ms)
+✔ reopen persisted native watch, same request identity, no duplicate wake after second reopen (633.65043ms)
+✔ temporary SQLite writer lock keeps the native wait armed and wakes after unlock (1251.061448ms)
+✔ trusted admission denial does not submit a wake (567.873017ms)
+✔ first slice: real native + faux consumer resumes on early output, not producer remainder; delta wake (1601.937112ms)
+✔ canonical Python/JS conformance includes full task replacements, legacy and sticky resolution (106.031362ms)
+✔ compact ready and reevaluate messages bound Unicode reasons/IDs without truncating replay identity (1.430639ms)
+✔ compact reference for large persisted receipt stays unread until explicit CLI replay/read/ack (15960.479763ms)
+ℹ wake_utf8_bytes=461 persisted_receipt_utf8_bytes=578058 queue_tasks=71
+✔ real HTTP snapshot -> native denial -> reopen/retry -> submit -> ack retains unread and stable identity (2203.740106ms)
+✔ accepted compact reference survives lost submit response/reopen/retry without autoACK or duplicate input (1967.246335ms)
+✔ legacy accepted full-inline: submit-before-ack transport loss retries without duplicate continuation or admission (2326.342405ms)
+✔ final dispatch is cancel-fenced and persists a FAIL arriving during trusted admission as reevaluation (1321.10565ms)
+✔ available-work predicate does not change exact dependencies or let unrelated FAIL stop independent work (1.345039ms)
+✔ work returns immediately for existing work, rejects busy actors/mixed modes and preserves single active wait (1049.626282ms)
+✔ new claimable work wakes 4/8-identity HTTP + Native/faux fixtures; FACT and unready work do not (4483.823859ms)
+✔ work rechecks a competing claim during admission and resumes only on later available work (1851.685886ms)
+✔ work wait accepts direct handoff and survives accepted-response loss/reopen without duplicate input (1234.315621ms)
+✔ unrelated FACT is ignored; linked FAIL and explicit ended producer cause reevaluation, never ready (1302.01275ms)
+✔ actual installed loader refreshes JS adapter AND transitive JS implementation (477.448638ms)
+✔ public SDK adapter refuses unknown actor and mismatched workspace before any admission (18.859205ms)
+✔ public SDK adapter preserves host policy across reload with native or additional admission (38.848706ms)
+✔ eight fixture identities: actual HTTP + native/faux early reuse, lease handoff, failure/correction and next output (12134.303629ms)
+✔ actual SDK input delivery replays accepted request without duplicate admission (85.556198ms)
+✔ lost accepted response is reconciled from public durable receipt (45.610861ms)
+✔ changed approved payload with correct new digest cannot reuse an accepted request after reopen (22.505867ms)
+✔ existing external request without approved binding or with write type is not certified as input delivery (21.229016ms)
+✔ actual native SDK admission does not require a private extra host policy (18.966543ms)
+✔ invalid extra policy, wrong exact session, edited input and real extra denial fail closed (24.531956ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 35111.608933

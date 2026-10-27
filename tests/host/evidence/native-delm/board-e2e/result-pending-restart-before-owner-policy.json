@@ -1,0 +1,82 @@
+{
+  "actualNativeActors": [
+    {
+      "actor": "alice",
+      "identity": {
+        "sessionId": "a8d96ebf-d8b8-4b44-accd-a6e4e7bfa523",
+        "sessionPath": "<SANDBOX>/native-board-sessions/a8d96ebf-d8b8-4b44-accd-a6e4e7bfa523/session.sqlite",
+        "workspace": "<SANDBOX>/project",
+        "conversationId": 1,
+        "instanceId": "533b6ef1-988a-4276-8dcb-ca0230afb3ec"
+      }
+    },
+    {
+      "actor": "bob",
+      "identity": {
+        "sessionId": "f6bf86a7-50f8-49a8-a394-f5aee4756f83",
+        "sessionPath": "<SANDBOX>/native-board-sessions/f6bf86a7-50f8-49a8-a394-f5aee4756f83/session.sqlite",
+        "workspace": "<SANDBOX>/project",
+        "conversationId": 1,
+        "instanceId": "aa93c063-0bc3-40d6-8c1b-6078cf7f0a46"
+      }
+    }
+  ],
+  "actualBoundActorTools": true,
+  "claimResultEventWakeReadAck": true,
+  "exactPartialObservationMs": 400,
+  "replayReturnedSameAcceptance": true,
+  "changedApprovedPayloadRejected": true,
+  "changedTypeRejected": true,
+  "wrongSessionWorkspaceInstanceRejected": true,
+  "actorRebindingRejected": true,
+  "stoppedInputRejected": true,
+  "resumeDidNotSubmitEditor": true,
+  "waitReceipt": {
+    "receipt_id": "79311bea84e84762b9679e78243220fa",
+    "request_id": "delm-wake:16",
+    "actor": "bob",
+    "from_sequence": 0,
+    "to_sequence": 6,
+    "full": true
+  },
+  "constructedHarness": false,
+  "exactIdentityAndPendingWaitPreservedAcrossServerRestart": true,
+  "note": "Bound E2E+pending restart; available-work/reload/uninstall and inherited policy still separate",
+  "pending_restart_arm": {
+    "phase": "arm",
+    "actualNativeActors": [
+      {
+        "actor": "alice",
+        "identity": {
+          "sessionId": "a8d96ebf-d8b8-4b44-accd-a6e4e7bfa523",
+          "sessionPath": "<SANDBOX>/native-board-sessions/a8d96ebf-d8b8-4b44-accd-a6e4e7bfa523/session.sqlite",
+          "workspace": "<SANDBOX>/project",
+          "conversationId": 1,
+          "instanceId": "533b6ef1-988a-4276-8dcb-ca0230afb3ec"
+        }
+      },
+      {
+        "actor": "bob",
+        "identity": {
+          "sessionId": "f6bf86a7-50f8-49a8-a394-f5aee4756f83",
+          "sessionPath": "<SANDBOX>/native-board-sessions/f6bf86a7-50f8-49a8-a394-f5aee4756f83/session.sqlite",
+          "workspace": "<SANDBOX>/project",
+          "conversationId": 1,
+          "instanceId": "aa93c063-0bc3-40d6-8c1b-6078cf7f0a46"
+        }
+      }
+    ],
+    "persistedWait": "2829ef36e94a29838724db7fcda7475da199446bda8729c64e47a8f882b22a99"
+  },
+  "deterministic_http_requests": 9,
+  "model_route_counts": {
+    "NATIVE_BOB_WAIT_TWO": 2,
+    "NATIVE_ALICE_FIRST": 2,
+    "NATIVE_BOB_SECOND": 2,
+    "wake": 3
+  },
+  "live_model_calls": 0,
+  "native_sigint_exit": 0,
+  "dependency_owners_prebound": true,
+  "claim_replay_via_actual_native_bash": true
+}

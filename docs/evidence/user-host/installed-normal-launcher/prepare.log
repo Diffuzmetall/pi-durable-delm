@@ -1,0 +1,47 @@
+{
+  "run": "<SANDBOX>/cl-42a640/run",
+  "actors": [
+    "alice",
+    "bob"
+  ],
+  "prepared": true,
+  "server_started": false,
+  "native_launch": "not-started",
+  "inputs": {
+    "prompt": {
+      "original": "<SANDBOX>/cl-42a640/approved.txt",
+      "captured": "<SANDBOX>/cl-42a640/run/inputs/approved-prompt.txt",
+      "sha256": "7df74acc491bc284e83f920625f7a073b0f07b3d9e2e84320bd231228ce41768"
+    },
+    "plan": {
+      "original": "<SANDBOX>/cl-42a640/p/Plan.md",
+      "captured": "<SANDBOX>/cl-42a640/run/inputs/approved-plan.md",
+      "sha256": "e8e28cf4f89668c14ef3a0ce9c568aa6f518ec10c8bf8bfa9bbb2830da9ee876"
+    },
+    "global_agents": {
+      "original": "<SANDBOX>/cl-42a640/GlobalAgents.md",
+      "captured": "<SANDBOX>/cl-42a640/run/inputs/global-agents.md",
+      "sha256": "cca68d018a562bf8b534f27e39934bc55fb96aa98584f76def36ccc4680ba049"
+    },
+    "project_agents": {
+      "original": "<SANDBOX>/cl-42a640/p/AGENTS.md",
+      "captured": "<SANDBOX>/cl-42a640/run/inputs/project-agents.md",
+      "sha256": "d7b57cdd58dc1a6428f26658c75b9a7b2bcc0a61dd96c5a62afd34c057d9f624"
+    },
+    "references": []
+  },
+  "manual_core_commands": {
+    "server": [
+      "/usr/bin/python3",
+      "<SANDBOX>/launcher-payload/versions/4c7441af5851b13daa7dc43397256217a182f8242afef8e068704966f6b5178d/scripts/delm_local.py",
+      "serve",
+      "<SANDBOX>/cl-42a640/run"
+    ],
+    "observer": [
+      "/usr/bin/python3",
+      "<SANDBOX>/launcher-payload/versions/4c7441af5851b13daa7dc43397256217a182f8242afef8e068704966f6b5178d/scripts/delm_board.py",
+      "<SANDBOX>/cl-42a640/run",
+      "--observe"
+    ]
+  }
+}

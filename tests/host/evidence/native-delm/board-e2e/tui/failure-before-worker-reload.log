@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "<TARGET>/tests/host/smoke_native_board.py", line 161, in check_editor
+    after=terminal.wait_screen(lambda s:scenario["uiDraft"] in s and "NATIVE_WAKE_ACKED" in s)
+  File "<TARGET>/tests/host/smoke_native_draft.py", line 55, in wait_screen
+    raise AssertionError("Actual Native screen condition timed out; see tui-transcript.log")
+AssertionError: Actual Native screen condition timed out; see tui-transcript.log

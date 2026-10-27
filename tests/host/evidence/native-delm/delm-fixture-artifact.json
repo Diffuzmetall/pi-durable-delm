@@ -1,0 +1,34 @@
+{
+  "product_sha256": {
+    "extensions/delm/session-facet.js": "d31cbff5a4004f6e4e2f8bbca201e09e728ac7e03bd27c76897e3177fe70d9bb",
+    "extensions/delm/control.js": "bd0c09a57258fef364e7f99635fc74c1112e95ae851cad299eef83702e2873b0",
+    "extensions/delm/index.js": "a158db254c6fa2ac9ae529e5f8a827b44d892544e71c29aea9f55139e7871f79",
+    "extensions/delm/protocol.js": "4a538bb850c9b285c6de9920f99397519b3a7cd464bc629b462807aa9fd1b4cd",
+    "skills/delm/Tools/NativeInput.mjs": "90f6945797956a18ca22377ab1db726e9f82de0394934a7edfb24ddc3fcc2d3f"
+  },
+  "producer_handoff_sequence": 650,
+  "loader_metadata": {
+    "name": "pi-durable-delm",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "license": "MIT",
+    "peerDependencies": {
+      "@earendil-works/pi-durable": "1.0.2",
+      "@earendil-works/pi-ai": "1.0.2",
+      "@earendil-works/chord": "1.0.2",
+      "@earendil-works/pi-coding-agent": "1.0.2"
+    },
+    "chord": {
+      "facets": {
+        "session": "./extensions/delm/session-facet.js",
+        "tui": false
+      },
+      "external": [
+        "@earendil-works/pi-coding-agent/experimental/plugin"
+      ]
+    }
+  },
+  "actual_published_package_install": "NOT_YET_TESTED; fixture metadata only",
+  "api_patch_sha256": "3460016c2130e2286ccd59c522b4318a2c13b0ad034dbb09f4e31776b23098ae"
+}

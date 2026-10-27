@@ -1,0 +1,339 @@
+{
+  "schema": 2,
+  "verdict": "LOCAL_ARTIFACT_COMPONENT_PASS_INSTALLED_NATIVE_CHECK_SEPARATE",
+  "archive_sha256": "4c7441af5851b13daa7dc43397256217a182f8242afef8e068704966f6b5178d",
+  "files": 268,
+  "runtime_hashes": {
+    "extensions/delm/control.js": "bd0c09a57258fef364e7f99635fc74c1112e95ae851cad299eef83702e2873b0",
+    "extensions/delm/session-facet.js": "63056e6a2c53dc1720fa698505b9301e585817a18ae68e534dea59e1799b218a",
+    "extensions/delm/public-host-api.patch": "3460016c2130e2286ccd59c522b4318a2c13b0ad034dbb09f4e31776b23098ae",
+    "skills/delm/Tools/NativeControl.mjs": "31f4c5b6902317e1fef53a4d2da9a069154ed6499f9fcc64ba138255d0e85388",
+    "LICENSES/pi-native.txt": "0457f5bcec3b3b211605dfb5d1a49042fd638f3686a410fe099c24a25af13c48",
+    "package.json": "16991086d844cfb81270436290b359bd5b9a61d729bb619e081f4f33e23c791b",
+    "vendor/DeLM/board/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/DeLM/board/shared_context.py": "abe10eb86a5c6326e250ecf56db603346688530b45c4fac472ce77d9e5dc8661",
+    "vendor/DeLM/board/protected_board.py": "859244453060416f190cafbaf34a47e127d875fe53b679d34950f8aa3c116058",
+    "vendor/DeLM/board/context_client.py": "4d379cd1ca9aec87438a61d0fc878024b34f4d4af52096f33ff5f1c0fcb8e766",
+    "vendor/DeLM/runtime/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/DeLM/runtime/containers.py": "8f0caab23910145417eeeb7800019168554f2d83cb19a4bdb80cc76cacca487f",
+    "vendor/DeLM/LICENSE": "ef348c33d9ae6c089675ce57e1a8834cf465c6bfe5c4347404b596371213de66",
+    "scripts/delm_local.py": "3f84de2ba727fc9f7a2c0d7a685ec87502d8524a95c1e85edc6398050fa5e672",
+    "scripts/delm_domain.py": "5da54ffc3e39e4a162d0b851e008d80fa7675adef44cce613a98d0f39854179a",
+    "scripts/delm_delivery.py": "8957d4a4d0b37b2b32070bb0770db0f0f524cdf0687088126907a79da97c4f80",
+    "scripts/delm_leases.py": "0b310a13af0139b3f75ebaf430363e9432a69b150db955b17d5f5cb46a0f977e",
+    "scripts/delm_board.py": "9c5bfc5f545be7eb8a63df14d68892a03a780c7e45dd03c4fa4be604a22382be",
+    "prompts/delm-worker.md": "5b827ed0a203b500df9209a775f7b48a1475c26af2e26eda68658c495959f956",
+    "extensions/delm/index.js": "a158db254c6fa2ac9ae529e5f8a827b44d892544e71c29aea9f55139e7871f79",
+    "extensions/delm/index.mjs": "f334734a2fd7a0cbe11104ecf1d6f2944cb24c869c935ad41e6300839f5dbaeb",
+    "extensions/delm/protocol.js": "4a538bb850c9b285c6de9920f99397519b3a7cd464bc629b462807aa9fd1b4cd",
+    "bin/delm": "00b4342d6d32be4c5c7aa0acbde3c39a93fd333ed3807fb7ca55901c37449744",
+    "packaging/install.py": "3cf0445c86dbf53df5643df52448650918e082d0455378e1c9b601c1097e80ef",
+    "skills/delm/SKILL.md": "7fa22982cada5803e8f33bb2b4e57141f24919d8e1903a702e310df18951dadd",
+    "skills/delm/TaskPlanning.md": "1af03db2e4aaeeea6ab6e03edc2b153b669cd3375916ac52be4e07d422a8467b",
+    "skills/delm/Tools/NativeInput.mjs": "90f6945797956a18ca22377ab1db726e9f82de0394934a7edfb24ddc3fcc2d3f",
+    "skills/delm/Tools/Run.help.md": "008eea21cffdc4c700b4611c23a4619b24c0d7b02390ad60b463b2a62070b754",
+    "skills/delm/Tools/Run.py": "52fd087fded71d7166815c65c4f24ab2c2e9337786aa8b036592172a6c0f1ee3",
+    "skills/delm/WorkerAddendum.md": "2ca7830e9b326896edba6465f54bec9cae636615cfe0584a96e64a71d4798d7c",
+    "skills/delm/Workflows/Launch.md": "867abd6dce208ec5d3135baf70fcba8cd6bc46046e53089dcc1e32f6d0b4cef5",
+    "skills/delm/Workflows/Prepare.md": "57ebb89d7d0fdc76064ec0ca82c51dc9344e8b6d57aaa91029978658de6915ab",
+    "skills/delm/Workflows/Recover.md": "86e2e9158e153c49124f7a14ee1a0b3e1fdc1d3b05e43f0a6c1c861f66175901",
+    "skills/delm/Workflows/Resume.md": "7b2be15d2f0a69df1109a81a9f1f43a5957216c7d49555d2b9082a3e2f05a197"
+  },
+  "environment": {
+    "python": "3.13.7",
+    "platform": "Linux",
+    "architecture": "x86_64",
+    "node": "v24.19.0",
+    "public_dependencies": {
+      "@earendil-works/pi-durable": "1.0.2",
+      "@earendil-works/pi-ai": "1.0.2",
+      "@earendil-works/chord": "1.0.2",
+      "@earendil-works/pi-client": "1.0.2"
+    },
+    "ordinary_pi": "1.4.0",
+    "dependency_manifests": {
+      "@earendil-works/pi-durable": {
+        "manifest": "<PUBLIC_DEPENDENCIES>/packages/durable/package.json",
+        "public_test_source": true
+      },
+      "@earendil-works/pi-ai": {
+        "manifest": "<PUBLIC_DEPENDENCIES>/packages/ai/package.json",
+        "public_test_source": true
+      },
+      "@earendil-works/chord": {
+        "manifest": "<PUBLIC_DEPENDENCIES>/packages/chord/package.json",
+        "public_test_source": true
+      },
+      "@earendil-works/pi-client": {
+        "manifest": "<PUBLIC_DEPENDENCIES>/packages/client/package.json",
+        "public_test_source": true
+      }
+    }
+  },
+  "checks": [
+    {
+      "check": "install",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true,
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "<SANDBOX>/install.py",
+        "install",
+        "/tmp/delm-host05-envelope-t6jueaow/candidate.tgz",
+        "--prefix",
+        "<SANDBOX>/installed"
+      ]
+    },
+    {
+      "check": "repeat-install",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true,
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "<SANDBOX>/install.py",
+        "install",
+        "/tmp/delm-host05-envelope-t6jueaow/candidate.tgz",
+        "--prefix",
+        "<SANDBOX>/installed"
+      ]
+    },
+    {
+      "check": "installed-bin",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true,
+      "argv": [
+        "<SANDBOX>/installed/versions/4c7441af5851b13daa7dc43397256217a182f8242afef8e068704966f6b5178d/bin/delm",
+        "--help"
+      ]
+    },
+    {
+      "check": "python",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true,
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ]
+    },
+    {
+      "check": "packaging",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true,
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/packaging",
+        "-v"
+      ]
+    },
+    {
+      "check": "launcher-python",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true,
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/launcher",
+        "-v"
+      ]
+    },
+    {
+      "check": "demo",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true,
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "examples/slugify",
+        "-v"
+      ]
+    },
+    {
+      "check": "demo-cli",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true,
+      "argv": [
+        "/usr/bin/python3",
+        "examples/slugify/slugify.py",
+        "Привет, мир!"
+      ]
+    },
+    {
+      "check": "native-sdk-faux",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true,
+      "argv": [
+        "node",
+        "--import",
+        "<SANDBOX>/installed/versions/4c7441af5851b13daa7dc43397256217a182f8242afef8e068704966f6b5178d/tests/host/public-dependencies.mjs",
+        "--import",
+        "<PUBLIC_DEPENDENCIES>/packages/coding-agent/src/experimental/source-resolver.ts",
+        "--test",
+        "tests/delm-durable.test.mjs",
+        "tests/delm-reload.test.mjs",
+        "tests/delm-first-slice.test.mjs",
+        "tests/delm-native-v2.test.mjs",
+        "tests/delm-remaining-integration.test.mjs",
+        "tests/launcher/input-sdk.test.mjs"
+      ]
+    },
+    {
+      "check": "skill-discovery",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true,
+      "argv": [
+        "node",
+        "--experimental-import-meta-resolve",
+        "--input-type=module",
+        "-e",
+        "const entry=import.meta.resolve('@earendil-works/pi-coding-agent',\"file://<PUBLIC_SKILL_PROBE>\");const {loadSkillsFromDir}=await import(entry);const r=loadSkillsFromDir({dir:'./skills/delm',source:'artifact-acceptance'});if(r.skills.length!==1||r.skills[0].name!=='delm'||r.diagnostics.length)throw Error(JSON.stringify(r));console.log('ordinary Pi skill parser: delm discovered; NOT Native host discovery');"
+      ]
+    },
+    {
+      "check": "import-closure",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true,
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-c",
+        "import sys,pathlib;sys.path.insert(0,'scripts');import delm_local,delm_domain,delm_delivery,delm_leases;root=pathlib.Path.cwd();mods=[m for n,m in sys.modules.items() if n.startswith(('delm_','board','runtime')) and getattr(m,'__file__',None)];assert mods;assert all(pathlib.Path(m.__file__).resolve().is_relative_to(root) for m in mods);print('import closure entirely inside installed payload:',len(mods),'modules')"
+      ]
+    },
+    {
+      "check": "update",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true,
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "<SANDBOX>/install.py",
+        "install",
+        "<SANDBOX>/doc-update.tgz",
+        "--prefix",
+        "<SANDBOX>/installed"
+      ]
+    },
+    {
+      "check": "rollback",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true,
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "<SANDBOX>/install.py",
+        "rollback",
+        "--prefix",
+        "<SANDBOX>/installed"
+      ]
+    },
+    {
+      "check": "refuse-edited-update",
+      "exit_code": 1,
+      "expected": 1,
+      "passed": true,
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "<SANDBOX>/install.py",
+        "install",
+        "<SANDBOX>/doc-update.tgz",
+        "--prefix",
+        "<SANDBOX>/installed"
+      ]
+    },
+    {
+      "check": "uninstall",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true,
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "<SANDBOX>/install.py",
+        "uninstall",
+        "--prefix",
+        "<SANDBOX>/installed"
+      ]
+    },
+    {
+      "check": "node-version",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true,
+      "argv": [
+        "node",
+        "--version"
+      ]
+    }
+  ],
+  "private_root_hits": [],
+  "negative_test_guard_literals": [
+    "tests/launcher/test_launcher.py"
+  ],
+  "source_imports": {
+    "product_checkout": false,
+    "public_sdk_test_source": true
+  },
+  "real_model_calls": 0,
+  "log_hashes": {
+    "install.log": "6b6e28627ef704ebbda44c4877af69b2a1017d7caea840b6a6e5642df9aa950d",
+    "skill-discovery.log": "878b70f0df0bbe0f2f2acb7eb68d75bf2bc7b9c417b7bdb6af09f2a7d8b5c777",
+    "python.log": "1371f5a09024c79de612a1ffd0d98896985039280019c3d3f43d307f697411a6",
+    "demo-cli.log": "34ef2cee32cda0eb022f85b1fc5309821452c8a6232ca3ef006bd27e51730edd",
+    "packlist-source.log": "23a84eb39a8f34e44525dd042dcf145750074b960fa44dede1585e33e5e2a3a8",
+    "packaging.log": "091db123cce1aee85f98ad08adc7595c73b61a2e6b35d3047897a6894561af94",
+    "uninstall.log": "541613ad8eb8311b018e7285e51d0c4d874bba9b23112ac82399b40af0206b4f",
+    "launcher-python.log": "8355912c6b77fa2b0ed4cfdd584608a2aa511f90971319e62aaf31968fe1def4",
+    "repeat-install.log": "78f32c4c7a65547e1a09d5fdd406db46602cceec0daeddec59219dd9885235f2",
+    "node-version.log": "b7677d3ec37ee1897ba07dc2cfe8292fe421c9ac93396cca5bbece486d1a2a41",
+    "refuse-edited-update.log": "cf177437c9343085947e49d3665cb618617908795999b889e468c31225da1033",
+    "update.log": "5fb2856d34c71aa86f4e347a40266d734ba67560a758f9075f9a93512dd209cf",
+    "import-closure.log": "1897949a08a1472e28881985a9870748ec31b93a791e6ea2f25164988a557869",
+    "demo.log": "44a2fb2be0d9075486d6871b07ca9fee5300e26a4264b1e85d40443762f2f994",
+    "rollback.log": "ce8f97ce755fb128eb0c4c54650d24c2cf51360c8ab6a8a9024f3a33615b360f",
+    "native-sdk-faux.log": "6ec1ed258d4a77098e164d8cc0ba68633ad00df182c03c1077108cc440c647d1",
+    "installed-bin.log": "c51fbcb2b8cacc04e4ec8e9c8ca56fc67c302c572f63abf7dab83998df151b2c",
+    "packaging-old-buildrule-missing.log": "879d6d14348512ab1f1b8d7590f9704b0d1a82871946386b3ab9b43f53eaa597"
+  },
+  "limits": [
+    "ordinary Pi skill parsing is not stock Native registry/protected-admission discovery",
+    "Native SDK/faux is not live model or editor draft verification",
+    "payload rollback tested; actual downgrade to older Native work-unaware runtime NOT_TESTED",
+    "product import closure is installed payload; explicitly selected public SDK source may supply TEST platform dependencies",
+    "existing public Node dependencies supplied explicitly; none installed"
+  ]
+}

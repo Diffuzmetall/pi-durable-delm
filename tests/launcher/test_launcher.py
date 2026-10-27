@@ -48,7 +48,7 @@ class LauncherTest(unittest.TestCase):
             run = Path(result["run"])
             self.assertEqual(len(result["actors"]), count)
             self.assertFalse(result["server_started"])
-            self.assertEqual(result["native_launch"], "BLOCKED")
+            self.assertEqual(result["native_launch"], "not-started")
             self.assertFalse((run / "endpoint.json").exists())
             self.assertEqual((run / "launch.json").stat().st_mode & 0o777, 0o600)
             state = launcher.load(run)
@@ -62,7 +62,8 @@ class LauncherTest(unittest.TestCase):
                 self.assertTrue(bootstrap.startswith(record["marker"]))
                 self.assertIn("COMPLETELY", bootstrap)
                 self.assertIn(str(self.global_agents), bootstrap)
-                self.assertIn(str(self.plan), bootstrap)
+                self.assertIn(str(run / "inputs/approved-plan.md"), bootstrap)
+                self.assertIn(f"Authorized plan: {run / 'inputs/approved-plan.md'}.", (run / actor / "START.md").read_text())
                 self.assertEqual(record["prompt"], "not-sent")
                 self.assertIsNone(record["session"])
             self.assertIn("The original task remains authoritative", (run / "WORKER.md").read_text())
@@ -97,7 +98,7 @@ class LauncherTest(unittest.TestCase):
             result = subprocess.run([sys.executable, str(SCRIPT), "--config", str(self.base / "missing-config"),
                                      action, "--run-dir", str(self.base / "run")], capture_output=True, text=True)
             self.assertNotEqual(result.returncode, 0)
-            self.assertIn("BLOCKED: no verified public Native", result.stderr)
+            self.assertIn("BLOCKED: no configured compatible existing Native", result.stderr)
             self.assertEqual(manifest.read_bytes(), before)
             self.assertFalse((self.base / "run/endpoint.json").exists())
 
@@ -107,7 +108,8 @@ class LauncherTest(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
         caps = json.loads(result.stdout)
         self.assertTrue(caps["python_core"])
-        self.assertEqual(caps["native_launch"], "BLOCKED")
+        self.assertEqual(caps["native_launch"], "requires-existing-compatible-native")
+        self.assertFalse(caps["installs_or_starts_native_host"])
         result = subprocess.run([sys.executable, str(SCRIPT), "status", "--run-dir", str(self.base / "absent")],
                                 capture_output=True, text=True)
         self.assertNotEqual(result.returncode, 0)

@@ -1,0 +1,37 @@
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 60638)
+Traceback (most recent call last):
+  File "/usr/lib/python3.13/socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/http/server.py", line 436, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/http/server.py", line 424, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "<SANDBOX>/payload/versions/4c7441af5851b13daa7dc43397256217a182f8242afef8e068704966f6b5178d/tests/host/deterministic_provider.py", line 54, in do_POST
+    self.wfile.write(("data: " + json.dumps(value) + "\n\n").encode())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socketserver.py", line 845, in write
+    self._sock.sendall(b)
+    ~~~~~~~~~~~~~~~~~~^^^
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+Traceback (most recent call last):
+  File "<HARNESS>/tests/acceptance/check_installed_lifecycle.py", line 136, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "<HARNESS>/tests/acceptance/check_installed_lifecycle.py", line 97, in main
+    with h:disabled=probe(h,'disable')
+                    ~~~~~^^^^^^^^^^^^^
+  File "<HARNESS>/tests/acceptance/check_installed_lifecycle.py", line 82, in probe
+    assert result.returncode==0,'Installed lifecycle '+mode+' failed; see evidence'
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: Installed lifecycle disable failed; see evidence

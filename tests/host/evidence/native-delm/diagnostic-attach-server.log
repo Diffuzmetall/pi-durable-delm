@@ -1,0 +1,4 @@
+Server: 72057f51-cba0-46d4-b404-52568334de41
+Socket: <SANDBOX>/home/.pi/server/72057f51-cba0-46d4-b404-52568334de41.sock
+Radius: not connected; local only
+[DEBUG-native-cap-worker] Session worker failed: Could not load facet bundle entry pi-durable-delm/session: Facet bundle entry pi-durable-delm/session has a facet with an invalid ID

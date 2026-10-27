@@ -1,0 +1,12 @@
+Location-only redaction; original failed probe retained.
+Traceback (most recent call last):
+  File "<PACKAGE_ROOT>/tests/launcher/real_native_control.py", line 132, in <module>
+    main()
+    ~~~~^^
+  File "<PACKAGE_ROOT>/tests/launcher/real_native_control.py", line 84, in main
+    with host:
+         ^^^^
+  File "<PACKAGE_ROOT>/tests/host/native_process.py", line 59, in __enter__
+    raise RuntimeError("Native CLI startup failed: " + self.redact(self.transcript.decode(errors="replace")))
+RuntimeError: Native CLI startup failed: Error: connect EINVAL <SANDBOX>/carol-launcher-65745a63/home/.pi/server/control-053ea2a7-f4b6-4f11-83cb-340a71a697ef.sock - Local (undefined:undefined)
+

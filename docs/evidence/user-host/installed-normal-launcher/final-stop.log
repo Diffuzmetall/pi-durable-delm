@@ -1,0 +1,15 @@
+{
+  "run": "<SANDBOX>/cl-42a640/run",
+  "action": "stop",
+  "results": {
+    "alice": {
+      "stopped": true,
+      "waits": []
+    },
+    "bob": {
+      "stopped": true,
+      "waits": []
+    }
+  },
+  "drafts": "not inspected or submitted"
+}

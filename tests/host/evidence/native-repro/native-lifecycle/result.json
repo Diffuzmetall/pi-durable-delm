@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "public_host": "Native Pi Durable experimental server",
+  "version": "1.0.2",
+  "revision": "cd32f7725fdbddbaecdff5b1e68491563394e0ca",
+  "source_modified": false,
+  "same_server_identity_after_restart": true,
+  "exact_sessions_and_histories_preserved": true,
+  "other_actor_history_leak": false,
+  "model_reenqueue_on_restart": false,
+  "official_sigint_exit": 0,
+  "deterministic_http_requests": 2,
+  "live_model_calls": 0,
+  "phases": [
+    {
+      "phase": "create",
+      "sessions": [
+        {
+          "actor": 0,
+          "sessionId": "faba2a9a-de68-4d71-bb02-934a539e042b",
+          "ownHistory": true,
+          "otherActorHistory": false,
+          "actualWorkerPluginActivated": true
+        },
+        {
+          "actor": 1,
+          "sessionId": "233c503a-fb00-4669-8704-1c2b412de99e",
+          "ownHistory": true,
+          "otherActorHistory": false,
+          "actualWorkerPluginActivated": true
+        }
+      ],
+      "directSqliteAccess": false,
+      "mockedHost": false
+    },
+    {
+      "phase": "resume",
+      "sessions": [
+        {
+          "actor": 0,
+          "sessionId": "faba2a9a-de68-4d71-bb02-934a539e042b",
+          "ownHistory": true,
+          "otherActorHistory": false,
+          "actualWorkerPluginActivated": true
+        },
+        {
+          "actor": 1,
+          "sessionId": "233c503a-fb00-4669-8704-1c2b412de99e",
+          "ownHistory": true,
+          "otherActorHistory": false,
+          "actualWorkerPluginActivated": true
+        }
+      ],
+      "directSqliteAccess": false,
+      "mockedHost": false
+    }
+  ],
+  "delm_plugin": "NOT_YET_TESTED",
+  "editor_draft": "NOT_YET_TESTED"
+}

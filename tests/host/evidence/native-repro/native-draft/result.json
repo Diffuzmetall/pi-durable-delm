@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "host": "Actual public Native CLI server AND client TUI",
+  "version": "1.0.2",
+  "revision": "cd32f7725fdbddbaecdff5b1e68491563394e0ca",
+  "source_modified": false,
+  "terminal": "real OS PTY; upstream VirtualTerminal/xterm decodes actual bytes",
+  "draft_visible_before": true,
+  "actual_external_prompt_completed": true,
+  "draft_visible_after": true,
+  "draft_absent_from_both_real_histories": true,
+  "editor_enter_sent": false,
+  "deterministic_model_http_requests": 3,
+  "live_model_calls": 0,
+  "native_server_exit": 0,
+  "native_tui_exit": 0,
+  "delm_plugin": "NOT_YET_TESTED",
+  "phases": [
+    {
+      "phase": "create",
+      "sessions": [
+        {
+          "actor": 0,
+          "sessionId": "3db26016-c864-439a-a1b1-19dadfe8603a",
+          "ownHistory": true,
+          "otherActorHistory": false,
+          "actualWorkerPluginActivated": true
+        },
+        {
+          "actor": 1,
+          "sessionId": "33d4b7b8-6914-4970-9551-3453ff1e65f3",
+          "ownHistory": true,
+          "otherActorHistory": false,
+          "actualWorkerPluginActivated": true
+        }
+      ],
+      "directSqliteAccess": false,
+      "mockedHost": false
+    },
+    {
+      "phase": "wake",
+      "sessions": [
+        {
+          "actor": 0,
+          "sessionId": "3db26016-c864-439a-a1b1-19dadfe8603a",
+          "ownHistory": true,
+          "otherActorHistory": false,
+          "actualWorkerPluginActivated": true
+        }
+      ],
+      "directSqliteAccess": false,
+      "mockedHost": false
+    },
+    {
+      "phase": "resume",
+      "sessions": [
+        {
+          "actor": 0,
+          "sessionId": "3db26016-c864-439a-a1b1-19dadfe8603a",
+          "ownHistory": true,
+          "otherActorHistory": false,
+          "actualWorkerPluginActivated": true
+        },
+        {
+          "actor": 1,
+          "sessionId": "33d4b7b8-6914-4970-9551-3453ff1e65f3",
+          "ownHistory": true,
+          "otherActorHistory": false,
+          "actualWorkerPluginActivated": true
+        }
+      ],
+      "directSqliteAccess": false,
+      "mockedHost": false
+    }
+  ]
+}

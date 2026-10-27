@@ -20,6 +20,12 @@ https://github.com/Decentralized-LM/delm-agent-plugin . Исследованны
 
 Его идеи explicit run identity, early useful output, ownership fencing, meaningful events и checkpoint recovery сопоставлены с нашей реализацией. Его private worktrees, macOS/server ownership, Codex hooks и Rust-команды не заявляются реализованными здесь. Rust runtime и архив плагина не поставляются; verbatim reference code при дополнительном включении требует полной license и отдельной записи manifest.
 
+## Публичный Native host и минимальный API-патч
+
+Источник: https://github.com/earendil-works/pi/tree/cd32f7725fdbddbaecdff5b1e68491563394e0ca , публичная версия v1.0.2. Минимальный diff в `extensions/delm/public-host-api.patch` использует source context этого commit и добавляет явно локальную capability к существующему владельцу Native sessions. Полный original MIT notice, включая `Copyright (c) 2025 Mario Zechner`, сохранён в `LICENSES/pi-native.txt`.
+
+Весь Native host и его настройки не поставляются. Применение к разрешённой изолированной source-копии и результаты её тестов отмечаются отдельно от непатченного baseline; это не скрытый fork автора и не обещание API в любой опубликованной версии Pi. SDK/Chord остаются отдельно установленными публичными зависимостями. Новая Native-интеграция и её реальные host-проверки находятся в разработке; историческая DeLM SDK/faux-приёмка не является доказательством нового сценария.
+
 ## Наши адаптации
 
 Python domain/delivery/leases, read-only observer, Native integration, переносимый skill/launcher и packaging основаны на локальной адаптации delm-test. По явному решению владельца новые авторские части опубликованы под MIT в https://github.com/Diffuzmetall/pi-durable-delm ; полный текст — `LICENSE`. Это отдельное разрешение, не автоматическое наследование лицензии upstream. Production Native host gate остаётся открытым.

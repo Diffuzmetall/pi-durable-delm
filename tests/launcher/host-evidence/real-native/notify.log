@@ -1,0 +1,13 @@
+{
+  "run": "<SANDBOX>/cl-da18c8/run",
+  "action": "notify",
+  "results": {
+    "alice": {
+      "accepted": true,
+      "replay": false,
+      "requestId": "delm-notify:9950e006ecf4420783f452fffea366d3:alice:97565a336bf2a62d62f13627e261c38311b5fb5117ba00e162a5cc9e8bd96463",
+      "conversationId": 1
+    }
+  },
+  "drafts": "not inspected or submitted"
+}

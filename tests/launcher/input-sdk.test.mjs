@@ -97,11 +97,24 @@ test('existing external request without approved binding or with write type is n
   } finally { await f.close(); }
 });
 
-test('missing policy, wrong exact session, edited input and denial fail closed', async () => {
+test('actual native SDK admission does not require a private extra host policy', async () => {
+  const f = await fixture();
+  try {
+    const deliver = createNativeInput({ host: f.host, conversation: f.root, session: f.session,
+      expectedSession: f.session });
+    assert.equal((await deliver(f.input, context)).accepted, true);
+    await f.reopen();
+    const reopened = createNativeInput({ host: f.host, conversation: f.root, session: f.session,
+      expectedSession: f.session });
+    assert.equal((await reopened(f.input, context)).replay, true);
+  } finally { await f.close(); }
+});
+
+test('invalid extra policy, wrong exact session, edited input and real extra denial fail closed', async () => {
   const f = await fixture();
   try {
     const binding = { host: f.host, conversation: f.root, session: f.session, expectedSession: f.session };
-    assert.throws(() => createNativeInput(binding), /admission/);
+    assert.throws(() => createNativeInput({ ...binding, admitInput: true }), /admission/);
     assert.throws(() => createNativeInput({ ...binding, expectedSession: join(f.session, '..'), admitInput: async () => {} }), /session mismatch/);
     const deliver = createNativeInput({ ...binding, admitInput: async () => { throw Error('fixture denied'); } });
     await assert.rejects(deliver({ ...f.input, text: 'changed' }, context), /fingerprint/);

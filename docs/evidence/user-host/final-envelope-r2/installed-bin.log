@@ -1,0 +1,9 @@
+usage: delm_local.py [-h] {init,serve,context,worker} ...
+
+Local DeLM with 2/4/8 fixture identities; isolated or shared workspace.
+
+positional arguments:
+  {init,serve,context,worker}
+
+options:
+  -h, --help            show this help message and exit

@@ -1,0 +1,104 @@
+--- a/packages/coding-agent/src/experimental/services/worker.ts
++++ b/packages/coding-agent/src/experimental/services/worker.ts
+@@ -4,6 +4,7 @@
+ 	createRemoteServiceEndpoint,
+ 	createStaticFacetLoader,
+ 	defineFacet,
++	defineService,
+ 	type FacetHost,
+ 	type FacetLoader,
+ 	type JsonValue,
+@@ -12,7 +13,7 @@
+ 	type ServiceProviderUpdate,
+ } from "@earendil-works/chord";
+ import { BACKGROUND_CONTEXT } from "@earendil-works/chord/context";
+-import type { Conversation, Harness } from "@earendil-works/pi-durable";
++import type { Conversation, Harness, Registry } from "@earendil-works/pi-durable";
+ import type { ModelRuntime } from "../../core/model-runtime.ts";
+ import type { SettingsManager } from "../../core/settings-manager.ts";
+ import { AgentController } from "./agent-controller.ts";
+@@ -21,8 +22,19 @@
+ import { SessionPlugins } from "./plugins.ts";
+ import { createTranscriptServiceFacet } from "./transcript-provider.ts";
+ 
++/** Local-only capability for admitted session facets. Never expose over the service wire. */
++export interface DurableSessionOwner {
++	readonly apiVersion: 1;
++	readonly registry: Registry;
++	readonly harness: Harness;
++	readonly conversation: Conversation;
++	readonly binding: { readonly sessionId: string; readonly workspace: string; readonly sessionPath: string };
++}
++export const DurableSession = defineService<{ get(context: Context): Promise<DurableSessionOwner> }>("pi.durable-session", { local: true });
++
+ export interface SessionWorkerRuntime {
+ 	readonly harness: Harness;
++	readonly nativeRuntime?: DurableSessionOwner;
+ 	/** The root conversation the services expose. */
+ 	readonly conversation: Conversation;
+ 	readonly modelRuntime?: ModelRuntime;
+@@ -50,6 +62,7 @@
+ 
+ export async function createSessionWorkerServices(options: {
+ 	readonly harness: Harness;
++	readonly nativeRuntime?: DurableSessionOwner;
+ 	readonly conversation: Conversation;
+ 	readonly modelRuntime: ModelRuntime | undefined;
+ 	readonly settingsManager?: SettingsManager;
+@@ -60,6 +73,7 @@
+ 		id: "@pi/agent-controller-runtime",
+ 		setup(env) {
+ 			env.provide(AgentController, createAgentController(options.harness, options.conversation));
++			if (options.nativeRuntime) env.provide(DurableSession, { get: async () => options.nativeRuntime! });
+ 		},
+ 	});
+ 	let reloadPlugins = (): Promise<void> => Promise.reject(new Error("Session plugins are not ready"));
+@@ -122,6 +136,7 @@
+ 
+ 	return {
+ 		invoke(call, scope, context) {
++			if (call.serviceId === DurableSession.id) throw new Error("DurableSession is local-only; remote access denied");
+ 			const key = serviceScopeKey(scope);
+ 			let entry = endpoints.get(key);
+ 			if (entry === undefined) {
+--- a/packages/coding-agent/src/experimental/session-worker.ts
++++ b/packages/coding-agent/src/experimental/session-worker.ts
+@@ -528,6 +528,7 @@
+ 		taskGraph = await runtime.harness.taskGraph(TODO_CONTEXT);
+ 		services = await createSessionWorkerServices({
+ 			harness: runtime.harness,
++			nativeRuntime: runtime.nativeRuntime,
+ 			conversation: runtime.conversation,
+ 			modelRuntime: runtime.modelRuntime,
+ 			settingsManager: runtime.settingsManager,
+@@ -781,11 +782,12 @@
+ 	const envs = new ExecutionEnvs(cwd);
+ 	let harness: Harness | undefined;
+ 	try {
++		const registry = createCodingRegistry(settingsManager, cwd);
+ 		harness = await Harness.open(
+ 			await openNodeSqliteStorage(databasePath),
+ 			{
+ 				models: modelRuntime,
+-				registry: createCodingRegistry(settingsManager, cwd),
++				registry,
+ 				settings: createHarnessSettings(settingsManager),
+ 				env: envs.env,
+ 				onReport: (error) => console.error(error),
+@@ -809,6 +811,8 @@
+ 			},
+ 		});
+ 		return {
++			nativeRuntime: { apiVersion: 1, registry, harness, conversation,
++				binding: Object.freeze({ sessionId: options.metadata.id, workspace: cwd, sessionPath: databasePath }) },
+ 			harness,
+ 			conversation,
+ 			modelRuntime,
+--- a/packages/coding-agent/src/experimental/plugin.ts
++++ b/packages/coding-agent/src/experimental/plugin.ts
+@@ -14,3 +14,5 @@
+ 	type SlashCommandRunResult,
+ 	SlashCommands,
+ } from "./services/slash-commands.ts";
++
++export { DurableSession, type DurableSessionOwner } from "./services/worker.ts";

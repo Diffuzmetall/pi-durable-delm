@@ -1,0 +1,22 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'owner-policy-v1'
+- 'owner-policy-v2'
+                 ^
+
+    at file://<TARGET>/tests/host/probe_native_board.mjs:86:10
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'owner-policy-v1',
+  expected: 'owner-policy-v2',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

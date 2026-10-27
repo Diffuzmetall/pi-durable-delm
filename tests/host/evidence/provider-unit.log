@@ -1,0 +1,8 @@
+test_cannot_fabricate_a_tool_missing_from_host (test_provider.ModelFixtureTest.test_cannot_fabricate_a_tool_missing_from_host) ... ok
+test_default_is_plain_ack_and_model_endpoint_is_local (test_provider.ModelFixtureTest.test_default_is_plain_ack_and_model_endpoint_is_local) ... ok
+test_scripted_tool_is_sent_only_when_actual_host_advertises_it (test_provider.ModelFixtureTest.test_scripted_tool_is_sent_only_when_actual_host_advertises_it) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 1.523s
+
+OK

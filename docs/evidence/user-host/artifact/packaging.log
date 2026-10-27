@@ -1,0 +1,15 @@
+test_actor_authority_points_to_frozen_bytes_not_mutable_source (test_approved_plan.ApprovedPlanTest.test_actor_authority_points_to_frozen_bytes_not_mutable_source) ... ok
+test_missing_plan_refused_before_run_creation (test_approved_plan.ApprovedPlanTest.test_missing_plan_refused_before_run_creation) ... ok
+test_no_plan_keeps_legacy_task_only_behavior (test_approved_plan.ApprovedPlanTest.test_no_plan_keeps_legacy_task_only_behavior) ... ok
+test_python_caches_excluded_under_explicit_files_directories (test_packlist.PacklistTest.test_python_caches_excluded_under_explicit_files_directories) ... skipped 'Source-build rules intentionally absent from npm payload; archive cache scan is a separate check'
+test_manifest_and_runtime_provenance_are_complete (test_payload.PayloadTest.test_manifest_and_runtime_provenance_are_complete) ... ok
+test_modified_and_untracked_files_are_not_overwritten_or_deleted (test_payload.PayloadTest.test_modified_and_untracked_files_are_not_overwritten_or_deleted) ... ok
+test_repeat_update_rollback_and_default_data_preservation (test_payload.PayloadTest.test_repeat_update_rollback_and_default_data_preservation) ... ok
+test_unrelated_current_and_versions_symlink_refused (test_payload.PayloadTest.test_unrelated_current_and_versions_symlink_refused) ... ok
+test_untrusted_archive_traversal_and_links_refused_without_activation (test_payload.PayloadTest.test_untrusted_archive_traversal_and_links_refused_without_activation) ... ok
+test_plain_python_and_bound_cli_allow_safe_update_and_removal (test_runtime_clean.RuntimeCleanTest.test_plain_python_and_bound_cli_allow_safe_update_and_removal) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 1.205s
+
+OK (skipped=1)

@@ -1,0 +1,12 @@
+test_actor_session_collision_and_retarget_are_refused_before_rpc (test_native_ledger.NativeLedger.test_actor_session_collision_and_retarget_are_refused_before_rpc) ... ok
+test_concurrent_launch_is_refused_without_rpc_or_manifest_mutation (test_native_ledger.NativeLedger.test_concurrent_launch_is_refused_without_rpc_or_manifest_mutation) ... ok
+test_missing_identity_never_creates_replacement_on_resume (test_native_ledger.NativeLedger.test_missing_identity_never_creates_replacement_on_resume) ... ok
+test_notification_key_cannot_acknowledge_different_approved_payload (test_native_ledger.NativeLedger.test_notification_key_cannot_acknowledge_different_approved_payload) ... ok
+test_response_loss_keeps_pending_and_same_request_and_actor_ids (test_native_ledger.NativeLedger.test_response_loss_keeps_pending_and_same_request_and_actor_ids) ... ok
+test_resume_and_stop_have_no_input_and_stop_can_clean_damaged_captures (test_native_ledger.NativeLedger.test_resume_and_stop_have_no_input_and_stop_can_clean_damaged_captures) ... ok
+test_start_reserves_all_ids_and_identity_before_input_and_reuses_exact_ids (test_native_ledger.NativeLedger.test_start_reserves_all_ids_and_identity_before_input_and_reuses_exact_ids) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.990s
+
+OK

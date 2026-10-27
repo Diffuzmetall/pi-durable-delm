@@ -1,0 +1,38 @@
+ Server: 251a7df4-95c9-43b4-9336-61959ae88c6b                                                                           
+ Session: 3db26016-c864-439a-a1b1-19dadfe8603a                                                                          
+
+                                                                                                                        
+ native-lifecycle-0-a07e2649-30df-4027-8e1e-fc6a0631c8b4                                                                
+                                                                                                                        
+
+ HOST_FIXTURE_ACK                                                                                                       
+
+                                                                                                                        
+ NATIVE_EXTERNAL_WAKE_NOT_EDITOR                                                                                        
+                                                                                                                        
+
+ NATIVE_DRAFT_WAKE_ACK                                                                                                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ UNSENT_NATIVE_EDITOR_DRAFT_731                                                                                         
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ fixture/deterministic · thinking:off · 5 entries · /model · /thinking · /compact · /reload                             

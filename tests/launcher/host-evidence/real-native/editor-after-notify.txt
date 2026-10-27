@@ -1,0 +1,38 @@
+ Server: d912c10b-3ef3-4150-af26-eda1e8917ce3                                                                           
+ Session: 44164641-091c-580b-91ae-7051828064a7                                                                          
+
+                                                                                                                        
+ [delm-bootstrap:9950e006ecf4420783f452fffea366d3:alice]                                                                
+ Read COMPLETELY global and project AGENTS plus applicable ancestor/subdirectory rules:                                 
+ <SANDBOX>/cl-da18c8/GlobalAgents.md, <SANDBOX>/cl-da18c8/p/AGENTS.md.        
+ Continue paged reads to the end.                                                                                       
+ Read <SANDBOX>/cl-da18c8/run/alice/START.md,                                                      
+ <SANDBOX>/cl-da18c8/run/WORKER.md,                                                                
+ <SANDBOX>/cl-da18c8/run/inputs/approved-plan.md, and preserved approved inputs                    
+ <SANDBOX>/cl-da18c8/run/inputs. The original request, not a task summary, remains authoritative.  
+ Read a fresh actor-bound snapshot, inspect its view, then explicitly ACK. Establish verified DONE, owners, unresolved  
+ FAIL and remaining acceptance; BOOT is not proof of instruction compliance.                                            
+ Create/claim complementary authorized outputs; publish useful early contracts; one unfinished claim. Use only context  
+ and delm_wait, not Mail/Beads/new models.                                                                              
+                                                                                                                        
+
+ HOST_FIXTURE_ACK                                                                                                       
+
+                                                                                                                        
+ NATIVE_LAUNCHER_UPDATE approved exact original text                                                                    
+                                                                                                                        
+
+ NATIVE_LAUNCHER_NOTIFY_ACK                                                                                             
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ UNSENT_LAUNCHER_DRAFT_731                                                                                              
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ fixture/deterministic · thinking:off · 5 entries · /model · /thinking · /compact · /reload                             

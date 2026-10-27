@@ -1,0 +1,85 @@
+{
+  "protocol": 1,
+  "service": "delm.control",
+  "localCapability": "pi.durable-session",
+  "localCapabilityApi": 1,
+  "entry": "session",
+  "facet": "delm.native-session",
+  "export": "default facet array",
+  "identity": [
+    "sessionId",
+    "sessionPath",
+    "workspace",
+    "conversationId",
+    "instanceId"
+  ],
+  "methods": {
+    "identity": {
+      "request": [],
+      "response": [
+        "protocol",
+        "build",
+        "identity",
+        "binding",
+        "stopped"
+      ]
+    },
+    "bind": {
+      "request": [
+        "identity",
+        "run",
+        "actor"
+      ],
+      "response": [
+        "bound",
+        "identity",
+        "run",
+        "actor"
+      ]
+    },
+    "input": {
+      "request": [
+        "identity",
+        "type=input",
+        "requestId",
+        "text",
+        "expectedSha256"
+      ],
+      "response": [
+        "accepted",
+        "replay",
+        "requestId",
+        "conversationId"
+      ]
+    },
+    "status": {
+      "request": [
+        "identity"
+      ],
+      "response": [
+        "waits",
+        "stopped"
+      ]
+    },
+    "resume": {
+      "request": [
+        "identity"
+      ],
+      "response": [
+        "resumed"
+      ],
+      "submitsInput": false
+    },
+    "stop": {
+      "request": [
+        "identity"
+      ],
+      "response": [
+        "stopped",
+        "waits"
+      ],
+      "deletesHistory": false
+    }
+  },
+  "errors": "Any RPC exception is not acceptance. Preserve intent and reconcile the same exact session/request; never recreate or silently replace payload."
+}

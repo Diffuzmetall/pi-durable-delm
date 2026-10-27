@@ -1,0 +1,13 @@
+{
+  "run": "<SANDBOX>/cl-da18c8/run",
+  "action": "resume",
+  "results": {
+    "alice": {
+      "resumed": true
+    },
+    "bob": {
+      "resumed": true
+    }
+  },
+  "drafts": "not inspected or submitted"
+}

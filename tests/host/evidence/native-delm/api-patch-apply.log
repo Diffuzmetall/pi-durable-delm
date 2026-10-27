@@ -1,0 +1,3 @@
+patching file packages/coding-agent/src/experimental/services/worker.ts
+patching file packages/coding-agent/src/experimental/session-worker.ts
+patching file packages/coding-agent/src/experimental/plugin.ts

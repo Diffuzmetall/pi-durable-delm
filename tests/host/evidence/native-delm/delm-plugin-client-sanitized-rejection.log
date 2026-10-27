@@ -1,0 +1,36 @@
+[DEBUG-native-cap] 0 create
+[DEBUG-native-cap] 0 attach
+[DEBUG-native-cap] 0 control-ready
+[DEBUG-native-cap] 0 identity
+[DEBUG-native-cap] 0 identity-ok
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /binding mismatch/. Input:
+
+'ServerError: Internal server error'
+
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file://<TARGET>/tests/host/probe_native_delm.mjs:43:7 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: ServerError: Internal server error
+      at #handleMessage (file://<SANDBOX>/upstream/packages/client/src/client.ts:339:19)
+      at Object.onMessage (file://<SANDBOX>/upstream/packages/client/src/client.ts:88:47)
+      at #handleMessage (file://<SANDBOX>/upstream/packages/client/src/connection.ts:212:17)
+      at #handleData (file://<SANDBOX>/upstream/packages/client/src/connection.ts:159:23)
+      at Object.onData (file://<SANDBOX>/upstream/packages/client/src/connection.ts:81:39)
+      at Socket.<anonymous> (file://<SANDBOX>/upstream/packages/client/src/unix.ts:133:28)
+      at Socket.emit (node:events:509:28)
+      at addChunk (node:internal/streams/readable:563:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:514:3)
+      at Readable.push (node:internal/streams/readable:394:5) {
+    code: 'internal_error'
+  },
+  expected: /binding mismatch/,
+  operator: 'rejects',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

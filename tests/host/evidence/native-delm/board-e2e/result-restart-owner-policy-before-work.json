@@ -1,0 +1,93 @@
+{
+  "actualNativeActors": [
+    {
+      "actor": "alice",
+      "identity": {
+        "sessionId": "44062d09-cc0d-4a07-80bd-e280a40ed30a",
+        "sessionPath": "<SANDBOX>/native-board-sessions/44062d09-cc0d-4a07-80bd-e280a40ed30a/session.sqlite",
+        "workspace": "<SANDBOX>/project",
+        "conversationId": 1,
+        "instanceId": "f1651eed-38a3-46a8-84bc-f239df30cb97"
+      }
+    },
+    {
+      "actor": "bob",
+      "identity": {
+        "sessionId": "e78c72fc-65c0-4e6a-a422-42a89a307ff7",
+        "sessionPath": "<SANDBOX>/native-board-sessions/e78c72fc-65c0-4e6a-a422-42a89a307ff7/session.sqlite",
+        "workspace": "<SANDBOX>/project",
+        "conversationId": 1,
+        "instanceId": "187c707c-3fa7-49f1-a14a-1b0f0da31555"
+      }
+    }
+  ],
+  "actualBoundActorTools": true,
+  "claimResultEventWakeReadAck": true,
+  "exactPartialObservationMs": 400,
+  "replayReturnedSameAcceptance": true,
+  "changedApprovedPayloadRejected": true,
+  "changedTypeRejected": true,
+  "wrongSessionWorkspaceInstanceRejected": true,
+  "actorRebindingRejected": true,
+  "stoppedInputRejected": true,
+  "resumeDidNotSubmitEditor": true,
+  "waitReceipt": {
+    "receipt_id": "12c384761a73473691cfcd6e59815605",
+    "request_id": "delm-wake:16",
+    "actor": "bob",
+    "from_sequence": 0,
+    "to_sequence": 6,
+    "full": true
+  },
+  "constructedHarness": false,
+  "exactIdentityAndPendingWaitPreservedAcrossServerRestart": true,
+  "actualExistingOwnerBeforeToolGuardPreserved": true,
+  "note": "Bound E2E+pending restart+actual owner policy; available-work/reload/uninstall still separate",
+  "pending_restart_arm": {
+    "phase": "arm",
+    "actualNativeActors": [
+      {
+        "actor": "alice",
+        "identity": {
+          "sessionId": "44062d09-cc0d-4a07-80bd-e280a40ed30a",
+          "sessionPath": "<SANDBOX>/native-board-sessions/44062d09-cc0d-4a07-80bd-e280a40ed30a/session.sqlite",
+          "workspace": "<SANDBOX>/project",
+          "conversationId": 1,
+          "instanceId": "f1651eed-38a3-46a8-84bc-f239df30cb97"
+        }
+      },
+      {
+        "actor": "bob",
+        "identity": {
+          "sessionId": "e78c72fc-65c0-4e6a-a422-42a89a307ff7",
+          "sessionPath": "<SANDBOX>/native-board-sessions/e78c72fc-65c0-4e6a-a422-42a89a307ff7/session.sqlite",
+          "workspace": "<SANDBOX>/project",
+          "conversationId": 1,
+          "instanceId": "187c707c-3fa7-49f1-a14a-1b0f0da31555"
+        }
+      }
+    ],
+    "persistedWait": "2829ef36e94a29838724db7fcda7475da199446bda8729c64e47a8f882b22a99"
+  },
+  "deterministic_http_requests": 11,
+  "model_route_counts": {
+    "NATIVE_BOB_WAIT_TWO": 2,
+    "NATIVE_ALICE_FIRST": 2,
+    "NATIVE_BOB_SECOND": 2,
+    "wake": 3,
+    "NATIVE_OWNER_GUARD_PROBE": 2
+  },
+  "live_model_calls": 0,
+  "native_sigint_exit": 0,
+  "dependency_owners_prebound": true,
+  "claim_replay_via_actual_native_bash": true,
+  "product_sha256": {
+    "package.json": "932da348f89d19dcd11c19cdb6a3cea165dd73eab3fba1beef9b9b361f0b50ec",
+    "extensions/delm/session-facet.js": "63056e6a2c53dc1720fa698505b9301e585817a18ae68e534dea59e1799b218a",
+    "extensions/delm/control.js": "bd0c09a57258fef364e7f99635fc74c1112e95ae851cad299eef83702e2873b0",
+    "extensions/delm/index.js": "a158db254c6fa2ac9ae529e5f8a827b44d892544e71c29aea9f55139e7871f79",
+    "extensions/delm/protocol.js": "4a538bb850c9b285c6de9920f99397519b3a7cd464bc629b462807aa9fd1b4cd",
+    "skills/delm/Tools/NativeInput.mjs": "90f6945797956a18ca22377ab1db726e9f82de0394934a7edfb24ddc3fcc2d3f"
+  },
+  "policy_fixture_only": true
+}

@@ -13,6 +13,7 @@ import time
 from http.server import ThreadingHTTPServer
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.dont_write_bytecode = True  # CLI use must not dirty immutable installed version trees.
 sys.path.insert(0, str(ROOT / "vendor" / "DeLM"))
 from board import context_client as client
 from board.protected_board import ProtectedBoard
@@ -98,6 +99,7 @@ def initialize(run, source, task, n=2, shared_workspace=None, plan=None):
             raise ValueError("--plan is only supported with --shared-workspace")
         if not plan.is_file():
             raise ValueError("--plan must name an existing authorized plan file")
+    approved_plan = plan.read_bytes() if plan is not None else None
     profile = (ROOT / "prompts" / "delm-worker.md").read_bytes() if shared_workspace is not None else None
     if shared_workspace is not None:
         if not shared_workspace.is_dir():
@@ -116,6 +118,11 @@ def initialize(run, source, task, n=2, shared_workspace=None, plan=None):
                 raise ValueError(f"remove credentials/cache/config from curated source: {path}")
     run.mkdir(parents=True, exist_ok=False)
     run.chmod(0o700)
+    frozen_plan = run / "inputs" / "approved-plan.md"
+    if approved_plan is not None:
+        frozen_plan.parent.mkdir(mode=0o700)
+        frozen_plan.write_bytes(approved_plan)
+        frozen_plan.chmod(0o600)
     if shared_workspace is None:
         shutil.copytree(source, run / "baseline")
     actors = ROSTER[:n]
@@ -141,7 +148,8 @@ def initialize(run, source, task, n=2, shared_workspace=None, plan=None):
         executable.write_text(f'#!/bin/sh\nexec {command} "$@"\n')
         executable.chmod(0o700)
         if shared_workspace is not None:
-            plan_instruction = (f"Authorized plan: {plan}. Read it completely.\n" if plan else
+            plan_instruction = (f"Authorized plan: {frozen_plan}. Read it completely.\n"
+                                f"Original plan source (provenance only): {plan}.\n" if plan else
                                 "No separate plan supplied: only the task below is authorized.\n")
             (home / "START.md").write_text(
                 f"# DeLM peer {actor}\n\nProfile: {WORKER_PROFILE}\n"
@@ -182,7 +190,7 @@ def initialize(run, source, task, n=2, shared_workspace=None, plan=None):
             "text in executable shell/Python heredocs. On a guard denial inspect its exact reason; "
             "do not disable rules, request bypass, or execute a denied command through another transport.\n"
         )
-    print(f"Initialized {run}; start: python3 scripts/delm_local.py serve {shlex.quote(str(run))}")
+    print(f"Initialized {run}; start: {shlex.quote(sys.executable)} {shlex.quote(str(Path(__file__).resolve()))} serve {shlex.quote(str(run))}")
 
 
 def board(run):

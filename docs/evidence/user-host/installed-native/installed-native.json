@@ -1,0 +1,137 @@
+{
+  "schema": 1,
+  "verdict": "INSTALLED_NATIVE_CORE_AND_NATIVE_SKILL_PROMPT_PASS",
+  "archive_sha256": "4c7441af5851b13daa7dc43397256217a182f8242afef8e068704966f6b5178d",
+  "runtime_assets": 34,
+  "runtime_assets_verified": true,
+  "actual_native_case": "core/board-e2e/result.json",
+  "normal_native_skill_discovery": "project-local .pi/skills/delm symlink before first model request",
+  "actual_model_request_skill_observations": [
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "fee3625522ca08904c7a78467914e5ee4147114d6dbf82e3a7616d0d07757c78"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "fee3625522ca08904c7a78467914e5ee4147114d6dbf82e3a7616d0d07757c78"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "21f08de5ad26a43531e0d2ece413c24f75f2e1049fdd4b396caed511a9407766"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "21f08de5ad26a43531e0d2ece413c24f75f2e1049fdd4b396caed511a9407766"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "fee3625522ca08904c7a78467914e5ee4147114d6dbf82e3a7616d0d07757c78"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "fee3625522ca08904c7a78467914e5ee4147114d6dbf82e3a7616d0d07757c78"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "fee3625522ca08904c7a78467914e5ee4147114d6dbf82e3a7616d0d07757c78"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "fee3625522ca08904c7a78467914e5ee4147114d6dbf82e3a7616d0d07757c78"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "fee3625522ca08904c7a78467914e5ee4147114d6dbf82e3a7616d0d07757c78"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "fee3625522ca08904c7a78467914e5ee4147114d6dbf82e3a7616d0d07757c78"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "fee3625522ca08904c7a78467914e5ee4147114d6dbf82e3a7616d0d07757c78"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "21f08de5ad26a43531e0d2ece413c24f75f2e1049fdd4b396caed511a9407766"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "21f08de5ad26a43531e0d2ece413c24f75f2e1049fdd4b396caed511a9407766"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "fee3625522ca08904c7a78467914e5ee4147114d6dbf82e3a7616d0d07757c78"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "fee3625522ca08904c7a78467914e5ee4147114d6dbf82e3a7616d0d07757c78"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "fee3625522ca08904c7a78467914e5ee4147114d6dbf82e3a7616d0d07757c78"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "fee3625522ca08904c7a78467914e5ee4147114d6dbf82e3a7616d0d07757c78"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "fee3625522ca08904c7a78467914e5ee4147114d6dbf82e3a7616d0d07757c78"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "fee3625522ca08904c7a78467914e5ee4147114d6dbf82e3a7616d0d07757c78"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "fee3625522ca08904c7a78467914e5ee4147114d6dbf82e3a7616d0d07757c78"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "21f08de5ad26a43531e0d2ece413c24f75f2e1049fdd4b396caed511a9407766"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "21f08de5ad26a43531e0d2ece413c24f75f2e1049fdd4b396caed511a9407766"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "fee3625522ca08904c7a78467914e5ee4147114d6dbf82e3a7616d0d07757c78"
+    },
+    {
+      "skill": "delm",
+      "location": "<TEST_FIXTURE>/w/.pi/skills/delm/SKILL.md",
+      "system_sha256": "fee3625522ca08904c7a78467914e5ee4147114d6dbf82e3a7616d0d07757c78"
+    }
+  ],
+  "host_source_shipped": false,
+  "fake_host_or_discovery_or_admission": false,
+  "live_model_calls": 0,
+  "limits": [
+    "This stage does not yet cover fresh claim competition, pending/committed control.stop or disable/uninstall"
+  ]
+}

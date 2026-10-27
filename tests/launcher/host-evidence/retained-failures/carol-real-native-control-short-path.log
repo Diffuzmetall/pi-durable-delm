@@ -1,0 +1,13 @@
+Location-only redaction; original failed probe retained.
+Traceback (most recent call last):
+  File "<PACKAGE_ROOT>/tests/launcher/real_native_control.py", line 133, in <module>
+    main()
+    ~~~~^^
+  File "<PACKAGE_ROOT>/tests/launcher/real_native_control.py", line 87, in main
+    cli(start, "start")
+    ~~~^^^^^^^^^^^^^^^^
+  File "<PACKAGE_ROOT>/tests/launcher/real_native_control.py", line 64, in cli
+    assert (result.returncode == 0) == success, label + ": " + host.redact(result.stderr)[-2000:]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: start: Native control failed: write EPIPE
+

@@ -1,0 +1,6 @@
+test_python_caches_excluded_under_explicit_files_directories (test_packlist.PacklistTest.test_python_caches_excluded_under_explicit_files_directories) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.607s
+
+OK

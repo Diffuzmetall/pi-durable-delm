@@ -1,0 +1,19 @@
+{
+  "run": "<SANDBOX>/cl-42a640/run",
+  "action": "start",
+  "results": {
+    "alice": {
+      "accepted": true,
+      "replay": true,
+      "requestId": "delm-bootstrap:ecc2ff2b4c2f41689a00717313834edf:alice",
+      "conversationId": 1
+    },
+    "bob": {
+      "accepted": true,
+      "replay": false,
+      "requestId": "delm-bootstrap:ecc2ff2b4c2f41689a00717313834edf:bob",
+      "conversationId": 1
+    }
+  },
+  "drafts": "not inspected or submitted"
+}

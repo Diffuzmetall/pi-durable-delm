@@ -39,7 +39,7 @@ test('public SDK adapter refuses unknown actor and mismatched workspace before a
   } finally { await rm(dir, { recursive: true, force: true }); }
 });
 
-test('public SDK adapter replaces one extension and requires explicit host admission without invoking it at install', async () => {
+test('public SDK adapter preserves host policy across reload with native or additional admission', async () => {
   const dir = await mkdtemp(join(tmpdir(), 'delm-factory-'));
   try {
     await writeFile(join(dir, 'config.json'), JSON.stringify({ workspace: process.cwd(), actors: { bob: {} } }));
@@ -52,7 +52,7 @@ test('public SDK adapter replaces one extension and requires explicit host admis
     let registry = base;
     for (let revision = 0; revision < 2; revision++) {
       const factory = await loader().import(adapter, { default: true });
-      assert.throws(() => factory(registry), /explicit host trusted admission capability/);
+      registry = await factory(registry);
       registry = await factory(registry, admitInput);
       const tools = registry.snapshot().tools().filter(x => x.tool.name === 'delm_wait');
       assert.equal(tools.length, 1);

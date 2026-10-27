@@ -1,0 +1,24 @@
+{
+  "task": "a2c89c645d0b4cf89618cb977151d4d1",
+  "contract": "HOST-03 / delm.control protocol 1 / existing Native owner only",
+  "status": "SELF_VERIFIED; independent installed-artifact milestone remains separate",
+  "checks": {
+    "launcher_python": {"passed": 21, "failed": 0, "exit": 0, "log": "host-evidence/launcher-final.log"},
+    "input_sdk_faux_retained": {"passed": 6, "exit": 0, "log": "host-evidence/native-input-policy.log", "scope": "unchanged input helper regression, not host acceptance"},
+    "actual_existing_native": {
+      "exit": 0,
+      "result": "host-evidence/real-native/result.json",
+      "host": "official public Native 1.0.2 cd32f7725fdbddbaecdff5b1e68491563394e0ca",
+      "variant": "explicit three-file minimal local API patch; no other upstream source changes",
+      "product_host_source_flag": false,
+      "client": "external public pi-client/Chord only, matching 1.0.2 peers supplied by test-only source resolver",
+      "coverage": ["two exact run/actor sessions, actual own bootstrap history and no cross-actor bootstrap", "actual accepted Native receipt lost at caller then reconciled as same-ID replay", "duplicate start has no extra model input", "changed approved notify under same ID refuses", "missing already-identified session refuses without creating replacement", "actual Native server restart preserves exact session/path/workspace/root/instance identity", "resume submits no dummy input", "actual bound stop acknowledgement and idle", "actual Native CLI TUI in OS PTY keeps unsent draft before/after PRODUCT notify", "unsent draft absent from BOTH real histories, no editor Enter"],
+      "deterministic_model_http_requests": 3,
+      "live_model_calls": 0,
+      "replaced_host_or_harness": false
+    },
+    "canonical_hygiene": {"exit": 0, "violations": 0, "identityScan": "unconfigured", "log": "host-evidence/hygiene-final.json", "limitation": "Zero configured identity patterns is not a personal-data cleanliness certificate; nested symlink/binary coverage also limited"}
+  },
+  "preserved_failures": ["initial unit fixture method/Namespace naming error (7 failed fixtures, then affected7 corrected)", "long private HOME Unix control/backend socket path and EPIPE also reproduced with official client; fixed test-only path and full108byte endpoint check", "Chord subscriptions require use() before ready(); production client corrected and actual host scenario passed"],
+  "limits": ["not unmodified-stock/all-host compatibility", "required local capability/API patch is separate explicit upstream prerequisite, not a bundled Native host or automatic rebuild", "no Native installation/startup by product; only existing owner connections and chosen team sessions", "no live provider spending, global/author host/session/config changes or publication", "self-verification is not independent HOST-05 final acceptance"]
+}

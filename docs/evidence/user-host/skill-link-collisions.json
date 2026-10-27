@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "verdict": "DOCUMENTED_ATOMIC_SKILL_LINK_PASS",
+  "docs_same_command": true,
+  "command": [
+    "python3",
+    "-c",
+    "import sys; from pathlib import Path; Path(sys.argv[2]).symlink_to(sys.argv[1], target_is_directory=True)",
+    "$PACKAGE/skills/delm",
+    "$PROJECT/.pi/skills/delm"
+  ],
+  "checks": [
+    {
+      "case": "absent",
+      "exit_code": 0,
+      "refused": false,
+      "prior_tree_preserved": false,
+      "nested_link_created": false
+    },
+    {
+      "case": "file",
+      "exit_code": 1,
+      "refused": true,
+      "prior_tree_preserved": true,
+      "nested_link_created": false
+    },
+    {
+      "case": "directory",
+      "exit_code": 1,
+      "refused": true,
+      "prior_tree_preserved": true,
+      "nested_link_created": false
+    },
+    {
+      "case": "symlink",
+      "exit_code": 1,
+      "refused": true,
+      "prior_tree_preserved": true,
+      "nested_link_created": false
+    },
+    {
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "refused": true,
+      "prior_tree_preserved": true,
+      "nested_link_created": false
+    }
+  ],
+  "live_model_calls": 0
+}

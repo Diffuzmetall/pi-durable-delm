@@ -1,0 +1,29 @@
+{
+  "publicHost": true,
+  "officialPluginLoadedInActualWorkers": true,
+  "actors": [
+    {
+      "actor": 0,
+      "sessionId": "319a95ab-093a-4273-9902-64fc59f8a89d",
+      "pluginGreet": true,
+      "activationCount": 1,
+      "modelAnswer": "HOST_FIXTURE_ACK"
+    },
+    {
+      "actor": 1,
+      "sessionId": "1e47c957-b5ea-4b6e-bbfd-f7292ce21c03",
+      "pluginGreet": true,
+      "activationCount": 1,
+      "modelAnswer": "HOST_FIXTURE_ACK"
+    }
+  ],
+  "replacedHarness": false,
+  "mockedAdmissionOrDiscovery": false,
+  "liveModelCalls": 0,
+  "model_http_requests": 2,
+  "revision": "cd32f7725fdbddbaecdff5b1e68491563394e0ca",
+  "replacedHost": false,
+  "modifiedHostSource": false,
+  "deLMPlugin": "NOT_YET_TESTED",
+  "officialServerExitCode": 0
+}

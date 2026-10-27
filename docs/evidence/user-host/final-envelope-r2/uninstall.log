@@ -1,0 +1,10 @@
+{
+  "status": "uninstalled",
+  "removed": [
+    "<SANDBOX>/installed/versions/799e2d781801bca37c7f3db389f7c9f4641919a998dc4375e08aef762095b126"
+  ],
+  "retained": [
+    "<SANDBOX>/installed/versions/3d8cf3898bf786eab6eef326acbf30469513c74fca8ec3dea9253d86a8d6c46e"
+  ],
+  "native_registered": false
+}

@@ -1,0 +1,9 @@
+Location-only redaction; original failed probe retained.
+Traceback (most recent call last):
+  File "<PACKAGE_ROOT>/tests/launcher/real_native_control.py", line 138, in <module>
+    main()
+    ~~~~^^
+  File "<PACKAGE_ROOT>/tests/launcher/real_native_control.py", line 34, in main
+    assert len(os.fsencode(longest_endpoint)) < 108, "Fixture Unix backend socket path is too long"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Fixture Unix backend socket path is too long

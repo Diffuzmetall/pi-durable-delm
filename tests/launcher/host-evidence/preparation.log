@@ -1,0 +1,17 @@
+test_all_approved_captures_and_bootstraps_are_verified_without_original_reads (test_host_preparation.PreparedInputIntegrity.test_all_approved_captures_and_bootstraps_are_verified_without_original_reads) ... ok
+test_capture_symlink_is_refused_even_for_identical_bytes (test_host_preparation.PreparedInputIntegrity.test_capture_symlink_is_refused_even_for_identical_bytes) ... ok
+test_changed_actual_bootstrap_is_not_certified_as_prepared (test_host_preparation.PreparedInputIntegrity.test_changed_actual_bootstrap_is_not_certified_as_prepared) ... ok
+test_each_changed_capture_and_reference_refuses_control_reconciliation (test_host_preparation.PreparedInputIntegrity.test_each_changed_capture_and_reference_refuses_control_reconciliation) ... ok
+test_manifest_path_escape_and_malformed_bindings_fail_closed (test_host_preparation.PreparedInputIntegrity.test_manifest_path_escape_and_malformed_bindings_fail_closed) ... ok
+test_blocked_native_commands_spawn_nothing_preserve_state (test_launcher.LauncherTest.test_blocked_native_commands_spawn_nothing_preserve_state) ... ok
+test_capabilities_help_and_missing_manifest_without_service (test_launcher.LauncherTest.test_capabilities_help_and_missing_manifest_without_service) ... ok
+test_no_private_config_or_root_override (test_launcher.LauncherTest.test_no_private_config_or_root_override) ... ok
+test_portable_skill_structure_and_workflows (test_launcher.LauncherTest.test_portable_skill_structure_and_workflows) ... ok
+test_prepare_2_4_8_exact_inputs_and_no_launch (test_launcher.LauncherTest.test_prepare_2_4_8_exact_inputs_and_no_launch) ... ok
+test_readonly_status_with_real_board_http (test_launcher.LauncherTest.test_readonly_status_with_real_board_http) ... ok
+test_required_instructions_and_existing_run_preserved (test_launcher.LauncherTest.test_required_instructions_and_existing_run_preserved) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 2.367s
+
+OK

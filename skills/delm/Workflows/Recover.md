@@ -2,29 +2,28 @@
 
 ## Preserve and diagnose
 
-Read the exact run manifest, current board owners/epochs, saved Native request receipts and the user's approved plan. No direct Native SQL writes, lock stealing, broad process kills or healthy-service restarts. The public-host control gate remains explicit; `stop --run-dir RUN` fails closed rather than abandoning active writers while claiming success.
+Read the exact launch ledger, approved plan, fresh board owners/epochs and saved native request receipts. No direct Native SQL, lock stealing, broad process kills or healthy-owner restart. A partial control result, idle process or closed window is not completed work.
 
-| Observation | Required boundary/evidence |
+| Observation | Boundary/evidence |
 |---|---|
-| Notification accepted, body unread | Replay the original snapshot request, read the saved view, explicitly ACK that receipt; pending survives reopen |
-| Initial submit response lost | Reconcile the original request ID/approved-input digest in the exact conversation; missing proof is uncertain, not permission to resend |
-| Relevant FAIL/correction or owner epoch changed | Inspect linked evidence; reevaluation is not successful readiness |
-| Producer idle/turn ended/lease expired | No proof of writer death; obtain explicit lifecycle/checkpoint evidence before fenced salvage |
-| Backend unreachable | Preserve board and attached bodies; diagnose the existing service owner before operator recovery |
-| Existing work appears | On a verified v4+ tool a free actor may use `delm_wait(action=work,reason=...)`, without items; read/ACK the hint then claim atomically |
-
-Named waits retain ALL-DONE for exact IDs; a work hint assigns nothing. Do not add model polling, a substitute agent or another task store. A busy actor finishes or checkpoints/releases ownership first. If the original plan is complete, finish rather than wait for optional scope.
-
-## Rollback and stopping
-
-Before downgrade from work-capable code to an older exact-only build, drain/cancel waiting/failed work watchers through the current supported tool and reconcile accepted deliveries. Older code may treat empty items as vacuously ready. Never erase history to hide this boundary. Board backup includes both context and attached bodies; Native lifecycle/backup belongs to its existing owner.
-
-For manual core service operation, use the owning foreground terminal's normal shutdown, preserve the private run, then verify actual process exit and endpoint unavailability. This is not a Native crew stop. The launcher supplies no unverified stop/abort orchestration; obtain a supported operator path for each exact participant, preserving drafts and incomplete results. Mark stopped/partial/blocked honestly.
+| Compact reference received, body unread | Replay its original snapshot request, inspect the saved view and explicitly ACK that receipt |
+| Accepted response lost | Reconcile the same request ID/SHA/type in the saved exact Native session; do not create another input/team |
+| Changed approval, session/instance or missing saved session | Refuse; retain data and establish the intended exact identity before continuing |
+| Relevant FAIL/correction or owner epoch changed | Inspect linked evidence; reevaluation is not ALL-DONE readiness |
+| Producer idle or advisory lease expired | No proof of writer death; require actual lifecycle/checkpoint evidence |
+| Damaged approved input files | Diagnose without sending them; exact bound `stop` remains available for cleanup |
+| Unsupported host/client peer | Report the exact missing public capability/version; never install a private host or no-op guard |
 
 ## Intent-to-Flag Mapping
 
-| Intent | Tool |
+| Intent | Command |
 |---|---|
-| Read existing manifest and bounded board health | `python3 Tools/Run.py status --run-dir RUN` |
-| Check available versus missing capabilities | `python3 Tools/Run.py capabilities` |
-| Automatic crew stop/recovery | currently BLOCKED; no hidden fallback |
+| Read-only state/integrity inspection | `python3 Tools/Run.py status --run-dir RUN` |
+| Stop exact bound roots and owned watchers, wait for idle | `python3 Tools/Run.py stop --run-dir RUN` |
+| Re-enable the same sessions with no model input | `python3 Tools/Run.py resume --run-dir RUN` |
+| Reconcile original first input | retry unchanged `start` on the same RUN/owner |
+| Reconcile an approved update | retry `notify` with the same file bytes and request ID |
+
+The launcher does not stop the board or Native server, remove projects/history or touch editor drafts. Preserve incomplete claims/results and stop those separate services only through their actual owner's normal lifecycle. Backend recovery uses `serve` on the SAME RUN, not `init`.
+
+Before a work-capable runtime downgrade, drain/cancel work waiters and reconcile accepted deliveries through the current supported tool, then backup both board databases and Native-owned state. Never erase history to conceal old-runtime incompatibility. Exact waits require every named DONE; available-work hints reserve nothing. Complete the authorized plan rather than waiting for optional work.

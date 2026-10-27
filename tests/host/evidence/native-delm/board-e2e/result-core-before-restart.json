@@ -1,0 +1,55 @@
+{
+  "actualNativeActors": [
+    {
+      "actor": "alice",
+      "identity": {
+        "sessionId": "333ffbbb-2b56-47e9-8182-5792c974606a",
+        "sessionPath": "<SANDBOX>/native-board-sessions/333ffbbb-2b56-47e9-8182-5792c974606a/session.sqlite",
+        "workspace": "<SANDBOX>/project",
+        "conversationId": 1,
+        "instanceId": "7606e7b3-8e9a-4a43-ae42-9a2fc01d9143"
+      }
+    },
+    {
+      "actor": "bob",
+      "identity": {
+        "sessionId": "2c8071a9-296d-48c5-b313-634c7ee90445",
+        "sessionPath": "<SANDBOX>/native-board-sessions/2c8071a9-296d-48c5-b313-634c7ee90445/session.sqlite",
+        "workspace": "<SANDBOX>/project",
+        "conversationId": 1,
+        "instanceId": "a451ad36-c2c0-4f11-a97a-25264e4f89fa"
+      }
+    }
+  ],
+  "actualBoundActorTools": true,
+  "claimResultEventWakeReadAck": true,
+  "exactPartialObservationMs": 400,
+  "replayReturnedSameAcceptance": true,
+  "changedApprovedPayloadRejected": true,
+  "changedTypeRejected": true,
+  "wrongSessionWorkspaceInstanceRejected": true,
+  "actorRebindingRejected": true,
+  "stoppedInputRejected": true,
+  "resumeDidNotSubmitEditor": true,
+  "waitReceipt": {
+    "receipt_id": "ed68689bc795452489af41dd12955fd3",
+    "request_id": "delm-wake:16",
+    "actor": "bob",
+    "from_sequence": 0,
+    "to_sequence": 6,
+    "full": true
+  },
+  "constructedHarness": false,
+  "note": "Bound E2E only; available-work/restart/reload/uninstall and inherited policy still separate",
+  "deterministic_http_requests": 9,
+  "model_route_counts": {
+    "NATIVE_BOB_WAIT_TWO": 2,
+    "NATIVE_ALICE_FIRST": 2,
+    "NATIVE_BOB_SECOND": 2,
+    "wake": 3
+  },
+  "live_model_calls": 0,
+  "native_sigint_exit": 0,
+  "dependency_owners_prebound": true,
+  "claim_replay_via_actual_native_bash": true
+}

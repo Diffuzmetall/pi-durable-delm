@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "public_host": "Pi Pocket",
+  "version": "0.14.0",
+  "revision": "e5456a832d47e7154faf04320dd7602ae5051bf7",
+  "sdk": "1.1.0",
+  "source_unmodified": true,
+  "replacedHarness": false,
+  "mocked_host_discovery_or_admission": false,
+  "dropin_initially_disabled": true,
+  "owner_enable": true,
+  "unauthenticated_api": 401,
+  "same_workspace": true,
+  "sessions": [
+    {
+      "actor": 0,
+      "session": 3,
+      "actual_clock_tool": true,
+      "model_answer": "HOST_FIXTURE_ACK"
+    },
+    {
+      "actor": 1,
+      "session": 23,
+      "actual_clock_tool": true,
+      "model_answer": "HOST_FIXTURE_ACK"
+    }
+  ],
+  "deterministic_http_requests": 4,
+  "live_model_calls": 0,
+  "deLM_plugin": "NOT_YET_TESTED"
+}

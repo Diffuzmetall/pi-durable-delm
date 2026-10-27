@@ -1,6 +1,26 @@
 # Локальная готовность к поставке
 
-## Решение
+## Текущее решение после HOST-05
+
+**Локальная поставка DeLM для совместимого существующего Native принята независимо Alice и Carol.** HOST-05 завершён по их фактическим решениям 744 и 751; старый blanket-block на частную admission capability не применяется к явному проверенному API 1. Это **не** объявление совместимости неизменённого stock Native, обычного Pi или Pocket.
+
+- Канонический принятый архив: `dist/pi-durable-delm-0.1.0-host05-r2.tgz`, SHA-256 `3d8cf3898bf786eab6eef326acbf30469513c74fca8ec3dea9253d86a8d6c46e`, 352 файла.
+- Внешний `dist/HOST05-final-manifest.json` фиксирует полный состав, 34 неизменённых runtime assets, 13 проверенных source files, 96 evidence files и обе реальные независимые рецензии. Архив и проверенные файлы не изменялись после принятия; этот последующий readiness-summary живёт в исходном дереве, **не** меняет байты принятого архива и не переименовывает его старые отчёты.
+- Реальный установленный Native: 39 HTTP-запросов к детерминированной модели, 0 живых LLM; общий результат двух workers, exact/work/read/ACK, свежая конкуренция claims, cancel → DONE без нового wake, pending/accepted-generation stop, сохранённые guards, restart/reload/OS PTY draft, Native skill в 24 настоящих system prompt, публичный launcher и удаление с сохранением проекта, доски и бесед.
+- Принятый r2 прошёл 16 фактических installed-artifact команд: Python core 48, launcher 21, SDK/input 31 PASS; packaging 9 PASS и 1 обоснованный build-only SKIP, source packlist отдельно PASS; полный payload update/rollback/refusal/uninstall и privacy/import-closure проверки PASS. Совпадение всех 34 runtime bytes связывает эти данные с неизменным установленным Native-кандидатом; дорогостоящие Native сценарии не запускались заново ради doc-only поправки.
+- Точная приёмка и пределы: [user-host-acceptance.md](docs/user-host-acceptance.md). Пользовательские команды: [README](README.md), [operations](docs/operations.md). Установщик ставит только DeLM, `native_registered:false`; Native, модели и их настройки принадлежат пользователю.
+
+**Условие совместимости:** существующий session-facet loader и локальный `DurableSession` API 1. Проверен публичный Native v1.0.2 с отдельной явной минимальной трёхфайловой поправкой; публичный source применялся только во внешних disposable TEST fixtures. Не поставляются host/framework, новый Harness, приватная установка, credentials или Native DB. Обычному launcher source checkout не нужен; отсутствие API — ясный отказ, не автоматическая сборка или замена host.
+
+Полный состав архива, лицензии и публичные peers проверены; реальные RUN/config/token/SQLite, caches, node_modules, research/media и личные беседы не включены. Это ограниченный audit, не универсальный сертификат отсутствия любых секретов. Обе независимые рецензии приняли исправленную атомарную инструкцию установки skill: пять случаев коллизии сохраняют пользовательские файлы, каталоги и symlinks.
+
+Владелец ранее выбрал публичный `Diffuzmetall/pi-durable-delm` и MIT. Эти исторические решения не дают нового разрешения на commit, push, npm publish, GitHub Release, deployment, модификацию пользовательского host или платные модели. В текущем milestone они **не выполнялись**. Публикация release и живые модели — отдельные действия с отдельной авторизацией.
+
+## Историческое решение до HOST-работ
+
+Ниже сохранён исходный extraction/publication readiness record. Его 90-test counts, старые архивы и blanket production gate — история, **не текущий verdict HOST-05**. Они не подменяют принятую выше совместимую Native-поставку; обещание поддержки любого stock host по-прежнему отсутствует.
+
+### Прежнее решение
 
 **Исходники подготовлены к разрешённой владельцем публичной публикации в [Diffuzmetall/pi-durable-delm](https://github.com/Diffuzmetall/pi-durable-delm) под MIT.** Автономный payload и приёмочная документация готовы. Полный production-релиз Native **BLOCKED**: не подтверждён публичный host-контракт protected admission, discovery Durable registry adapter и управления точными сессиями. Выдавать локальную установку файлов за решение этого ограничения нельзя.
 

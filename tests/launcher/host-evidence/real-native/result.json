@@ -1,0 +1,37 @@
+{
+  "actual_existing_native": true,
+  "source_variant": "explicit three-file public API patch",
+  "product_launcher": true,
+  "public_client_libraries_only": true,
+  "product_host_source_flag": false,
+  "exact_two_sessions": true,
+  "duplicate_start_no_extra_input": true,
+  "actual_accepted_response_loss_reconciled": true,
+  "changed_notify_refused": true,
+  "missing_recorded_session_not_recreated": true,
+  "restart_exact_instances": true,
+  "resume_without_input": true,
+  "stop_confirmed": true,
+  "deterministic_http_requests": 3,
+  "live_model_calls": 0,
+  "editor_draft": "ACTUAL Native CLI OS PTY: unsent draft retained during product notify; absent from both histories; no editor Enter",
+  "observed": {
+    "actualNativeHistory": true,
+    "results": [
+      {
+        "actor": "alice",
+        "exactSession": "44164641-091c-580b-91ae-7051828064a7",
+        "ownBootstrapObserved": true,
+        "noOtherActorBootstrap": true,
+        "approvedUpdateObserved": false
+      },
+      {
+        "actor": "bob",
+        "exactSession": "bec8fe34-d32a-5555-9871-08010c1fb368",
+        "ownBootstrapObserved": true,
+        "noOtherActorBootstrap": true,
+        "approvedUpdateObserved": false
+      }
+    ]
+  }
+}

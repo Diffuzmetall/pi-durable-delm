@@ -1,0 +1,15 @@
+{
+  "ok": true,
+  "exitCode": 0,
+  "skipped": false,
+  "identityScan": "unconfigured",
+  "policyPatternCount": 0,
+  "totalViolations": 0,
+  "allowedHits": 0,
+  "vendoredDeps": [],
+  "findings": [],
+  "limitations": [
+    "An unconfigured identity policy is NOT evidence of personal-data cleanliness.",
+    "Nested symlinks and binary contents are not followed by ripgrep; this gate does not certify those contents."
+  ]
+}

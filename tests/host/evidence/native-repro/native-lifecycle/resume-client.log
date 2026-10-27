@@ -1,0 +1,1 @@
+{"phase":"resume","sessions":[{"actor":0,"sessionId":"faba2a9a-de68-4d71-bb02-934a539e042b","ownHistory":true,"otherActorHistory":false,"actualWorkerPluginActivated":true},{"actor":1,"sessionId":"233c503a-fb00-4669-8704-1c2b412de99e","ownHistory":true,"otherActorHistory":false,"actualWorkerPluginActivated":true}],"directSqliteAccess":false,"mockedHost":false}

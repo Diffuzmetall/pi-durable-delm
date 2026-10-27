@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "verdict": "INSTALLED_NATIVE_FRESH_CLAIM_STOP_AND_REMOVE_PASS",
+  "archive_sha256": "4c7441af5851b13daa7dc43397256217a182f8242afef8e068704966f6b5178d",
+  "exercise": {
+    "freshTaskId": "f5070ff22f084aaa98422a5185304999",
+    "freshClaimWinner": "bob",
+    "pendingControlStopCancelled": true,
+    "stopAfterActualDispatchCommitted": true,
+    "inflightGenerationAbortedBeforeModelReply": true,
+    "unreadReceiptNotAutoAcked": true,
+    "actualIdentities": [
+      {
+        "actor": "alice",
+        "identity": {
+          "sessionId": "ce2ab573-e272-4e65-806c-6f50c9b90701",
+          "sessionPath": "<SANDBOX>/native-board-sessions/ce2ab573-e272-4e65-806c-6f50c9b90701/session.sqlite",
+          "workspace": "<SANDBOX>/w",
+          "conversationId": 1,
+          "instanceId": "a0dfd124-637b-4582-8e6c-f9de16411c75"
+        }
+      },
+      {
+        "actor": "bob",
+        "identity": {
+          "sessionId": "93ee8a59-2e9b-477d-8639-25d32803663a",
+          "sessionPath": "<SANDBOX>/native-board-sessions/93ee8a59-2e9b-477d-8639-25d32803663a/session.sqlite",
+          "workspace": "<SANDBOX>/w",
+          "conversationId": 1,
+          "instanceId": "b90f4b9e-430a-49c4-8345-1766977ffd88"
+        }
+      }
+    ],
+    "directNativeSqlAccess": false
+  },
+  "race_outcomes": {
+    "alice": false,
+    "bob": true
+  },
+  "model_requests_exercise": 9,
+  "model_requests_after_remove": 1,
+  "actual_profiles_disabled": {
+    "selectedProfilesExcludeDeLM": true,
+    "existingPolicyPreserved": true,
+    "sessions": [
+      "ce2ab573-e272-4e65-806c-6f50c9b90701",
+      "93ee8a59-2e9b-477d-8639-25d32803663a"
+    ]
+  },
+  "uninstall": {
+    "status": "uninstalled",
+    "removed": [
+      "<SANDBOX>/payload/versions/4c7441af5851b13daa7dc43397256217a182f8242afef8e068704966f6b5178d"
+    ],
+    "retained": [],
+    "native_registered": false
+  },
+  "after_remove": {
+    "sameSessionsAndPriorNativeHistories": true,
+    "normalNativeWorksAfterDeLMRemove": true,
+    "sharedProjectResultPreserved": true,
+    "freshClaimHistoriesAlsoPreserved": true
+  },
+  "model_response_held_until_real_stop_returned": true,
+  "unread_receipt_not_autoacked": true,
+  "current_link_removed": true,
+  "project_skill_link_only_exact_owned_link_removed": true,
+  "preserved_board_file_hashes": {
+    "context-bodies.sqlite": "339114ed6a9098d3851e52de0ca628856110c7feb7ca804b373f9aa382a52d7a",
+    "context.sqlite": "2d21c2990455ce9598764af3d93e2a3b937389d6c6c11506ca85e22c83338a77"
+  },
+  "managed_version_removed": true,
+  "native_framework_modified_or_removed": false,
+  "live_model_calls": 0
+}

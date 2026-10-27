@@ -1,0 +1,38 @@
+ Server: ace71ac2-e155-4410-9df5-afc23290cced                                                                           
+ Session: 7b760812-62f2-4ba6-8cc2-aee64ef96d68                                                                          
+
+                                                                                                                        
+ NATIVE_BOB_WAIT_TWO                                                                                                    
+                                                                                                                        
+
+                                                                                                                        
+ delm_wait                                                                                                              
+                                                                                                                        
+ {                                                                                                                      
+   "action": "wait",                                                                                                    
+   "items": [                                                                                                           
+     "f2cb594bc6344025be61becd7a4e61fe",                                                                                
+     "5417d06263a945a6b592ae6d33aad170"                                                                                 
+   ],                                                                                                                   
+   "reason": "wait for BOTH stable owned outputs"                                                                       
+ }                                                                                                                      
+ {"build":"20261027-native-phases-v3","result":{"items":["f2cb594bc6344025be61becd7a4e61fe","5417d06263a945a6b592ae6d33 
+ aad170"],"sequence":4,"id":"2829ef36e94a29838724db7fcda7475da199446bda8729c64e47a8f882b22a99","taskId":16,"state":"wai 
+ ting","reason":"wait for BOTH stable owned                                                                             
+ outputs","dependencies":{"f2cb594bc6344025be61becd7a4e61fe":{"owner":"alice","generation":1},"5417d06263a945a6b592ae6d 
+ 33aad170":{"owner":"bob","generation":1}}}}                                                                            
+                                                                                                                        
+
+ NATIVE_WAIT_ARMED                                                                                                      
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ UNSENT_DELM_EVENT_DRAFT_731                                                                                            
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ fixture/deterministic · thinking:off · 5 entries · /model · /thinking · /compact · /reload                             

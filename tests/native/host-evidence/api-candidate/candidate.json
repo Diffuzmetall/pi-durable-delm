@@ -1,0 +1,54 @@
+{
+  "status": "API_CANDIDATE_NOT_HOST_ACCEPTANCE",
+  "upstream": "https://github.com/earendil-works/pi",
+  "commit": "cd32f7725fdbddbaecdff5b1e68491563394e0ca",
+  "preimages": {
+    "packages/coding-agent/src/experimental/services/worker.ts": "6364e4d016f501b9fe7e0e842e01922cb3a1a299437e05cef35d5d26d80f354d",
+    "packages/coding-agent/src/experimental/session-worker.ts": "29a3f0695bd929f7c49f99d690d1bb91b9e60a9a2d06ed6a1ad44e1d81ca081a",
+    "packages/coding-agent/src/experimental/plugin.ts": "df052d4f35fe49399566199c4efbd7812f6b1acc77cd131c4844db41fedbd977"
+  },
+  "members": {
+    "chord-facets.json": "9e272bc6943826b5905228c4630919971f666188e92450cb0ac6da8053757f0d",
+    "control-abi.json": "fcf2003161f2ab921c829dda8fd2d52821c236453d6eafa661fb90fde178e5e1",
+    "facet-3f3af1ecebbd-RCUTUHFM.cjs": "e1eb55eebe3a15b91e66be7835b1ed9e08d982cbd981dba51e1784c9e3148d45",
+    "facet-3f3af1ecebbd-RCUTUHFM.cjs.map": "cc108e4b4c23867f9a57c3be39a55287721bb853378d5c148497881ccc5411b4",
+    "public-host-api.patch": "3460016c2130e2286ccd59c522b4318a2c13b0ad034dbb09f4e31776b23098ae"
+  },
+  "runtime": {
+    "extensions/delm/index.js": "a158db254c6fa2ac9ae529e5f8a827b44d892544e71c29aea9f55139e7871f79",
+    "extensions/delm/protocol.js": "4a538bb850c9b285c6de9920f99397519b3a7cd464bc629b462807aa9fd1b4cd",
+    "extensions/delm/session-facet.js": "63056e6a2c53dc1720fa698505b9301e585817a18ae68e534dea59e1799b218a",
+    "extensions/delm/control.js": "bd0c09a57258fef364e7f99635fc74c1112e95ae851cad299eef83702e2873b0",
+    "skills/delm/Tools/NativeInput.mjs": "90f6945797956a18ca22377ab1db726e9f82de0394934a7edfb24ddc3fcc2d3f",
+    "package.json": "2b828a3ab3449dbb8307b9c9a7f6482baeb7cb71ee5a4811b05dbf212b5c8854"
+  },
+  "manifest": {
+    "format": "chord.facet-bundle",
+    "formatVersion": 2,
+    "plugin": {
+      "id": "pi-durable-delm",
+      "version": "0.1.0"
+    },
+    "entries": {
+      "session": {
+        "file": "facet-3f3af1ecebbd-RCUTUHFM.cjs",
+        "integrity": "sha256-4etV7r46FbkeZr54NbHtngjZgsvZgdulHheEyeMUjUU=",
+        "externalImports": [
+          "@earendil-works/chord",
+          "@earendil-works/chord/context",
+          "@earendil-works/pi-ai",
+          "@earendil-works/pi-coding-agent/experimental/plugin",
+          "@earendil-works/pi-durable",
+          "node:child_process",
+          "node:crypto",
+          "node:fs",
+          "node:fs/promises",
+          "node:path",
+          "node:sqlite",
+          "node:util"
+        ],
+        "sourceMap": "facet-3f3af1ecebbd-RCUTUHFM.cjs.map"
+      }
+    }
+  }
+}

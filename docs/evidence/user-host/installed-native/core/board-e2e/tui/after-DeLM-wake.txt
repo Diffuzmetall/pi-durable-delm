@@ -1,0 +1,38 @@
+ if w.exists():                                                                                                         
+  t=json.loads(w.read_text())                                                                                           
+  q=next(x for x in s['"'"'view'"'"']['"'"'queue'"'"'] if x['"'"'id'"'"']==t['"'"'id'"'"'])                             
+  assert q['"'"'state'"'"']=='"'"'open'"'"' and q['"'"'owner'"'"'] is None                                              
+ a=d(dict(op='"'"'ack'"'"',request_id=r['"'"'request_id'"'"']+'"'"':ack'"'"',receipt_id=r['"'"'receipt_id'"'"']))       
+ assert a['"'"'acked_sequence'"'"']==s['"'"'to_sequence'"'"']                                                           
+ assert not                                                                                                             
+ d(dict(op='"'"'pending'"'"',request_id='"'"'pending-after-ack-wake-exact:delm-wake:16'"'"'))['"'"'receipts'"'"']       
+ print(json.dumps(dict(actualSnapshotRead=True,actualExplicitAck=True,receipt_id=r['"'"'receipt_id'"'"'])))             
+ '                                                                                                                      
+                                                                                                                        
+ {"actualSnapshotRead": true, "actualExplicitAck": true, "receipt_id": "f23f3e427af741488f38b0e7b0a741d2"}              
+                                                                                                                        
+ Took 0.8s                                                                                                              
+                                                                                                                        
+
+                                                                                                                        
+ delm_wait                                                                                                              
+                                                                                                                        
+ {                                                                                                                      
+   "action": "status"                                                                                                   
+ }                                                                                                                      
+ {"build":"20261027-native-phases-v3","result":[{"items":["50c14da37ce84727a0b6f13d1992cc58","7a2c9d9c0c524e5ab77e204e8 
+ 2adb9c5"],"sequence":4,"id":"2829ef36e94a29838724db7fcda7475da199446bda8729c64e47a8f882b22a99","taskId":16,"state":"se 
+ nt","reason":"wait for BOTH stable owned                                                                               
+ outputs","dependencies":{"50c14da37ce84727a0b6f13d1992cc58":{"owner":"alice","generation":1},"7a2c9d9c0c524e5ab77e204e 
+ 82adb9c5":{"owner":"bob","generation":1}},"receipt":{"receipt_id":"f23f3e427af741488f38b0e7b0a741d2","request_id":"del 
+ m-wake:16","actor":"bob","from_sequence":0,"to_sequence":6,"full":true},"trigger":{"kind":"ready","reason":"all exact  
+ dependencies are                                                                                                       
+ done"},"dispatchCommitted":true,"deliveryMode":"reference-v1","requestId":"delm-wake:16","acked":true,"deliveryState": 
+ "acked"}]}                                                                                                             
+                                                                                                                        
+
+ NATIVE_WAKE_ACKED                                                                                                      
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ UNSENT_DELM_EVENT_DRAFT_731                                                                                            
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ fixture/deterministic · thinking:off · 15 entries · /model · /thinking · /compact · /reload                            

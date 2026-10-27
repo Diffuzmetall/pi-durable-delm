@@ -1,0 +1,14 @@
+✔ actual SDK input delivery replays accepted request without duplicate admission (124.869511ms)
+✔ lost accepted response is reconciled from public durable receipt (29.979105ms)
+✔ changed approved payload with correct new digest cannot reuse an accepted request after reopen (21.033359ms)
+✔ existing external request without approved binding or with write type is not certified as input delivery (25.917358ms)
+✔ actual native SDK admission does not require a private extra host policy (26.999643ms)
+✔ invalid extra policy, wrong exact session, edited input and real extra denial fail closed (15.30986ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 847.477873

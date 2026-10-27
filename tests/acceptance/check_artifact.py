@@ -32,21 +32,25 @@ def main():
     env = {"PATH": os.pathsep.join(p for p in os.environ["PATH"].split(os.pathsep)
                                   if "delm-runs" not in p),
            "HOME": str(home), "PYTHONDONTWRITEBYTECODE": "1", "LANG": "C.UTF-8",
-           "TERM": "xterm-256color", "TMPDIR": str(sandbox)}
+           "TERM": "xterm-256color", "TMPDIR": str(sandbox), "PI_OFFLINE": "1", "PI_TELEMETRY": "0"}
     if os.environ.get("DELM_TEST_NODE_MODULES"):
         env["DELM_TEST_NODE_MODULES"] = os.environ["DELM_TEST_NODE_MODULES"]
     checks = []
 
     def redact(value):
         text = str(value).replace(str(sandbox), "<SANDBOX>")
+        if os.environ.get("DELM_TEST_PI_MODULES"):
+            probe_uri = (Path(os.environ["DELM_TEST_PI_MODULES"]).resolve().parent / "__public_skill_probe__.mjs").as_uri()
+            text = text.replace(probe_uri, "file://<PUBLIC_SKILL_PROBE>")
         roots = env.get("DELM_TEST_NODE_MODULES", "").split(os.pathsep)
         roots.append(os.environ.get("DELM_TEST_PI_MODULES", ""))
+        roots.append(os.environ.get("DELM_TEST_NATIVE_SOURCE", ""))
         for dependency_root in filter(None, roots):
             text = text.replace(str(Path(dependency_root).resolve()), "<PUBLIC_DEPENDENCIES>")
         return text
 
-    def command(label, argv, cwd=sandbox, expected=0):
-        result = subprocess.run(argv, cwd=cwd, env=env, text=True,
+    def command(label, argv, cwd=sandbox, expected=0, extra_env=None):
+        result = subprocess.run(argv, cwd=cwd, env=env | (extra_env or {}), text=True,
                                 stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=180)
         text = redact(result.stdout)
         (evidence / (label + ".log")).write_text(text)
@@ -67,12 +71,20 @@ def main():
                 or Path(name).name.lower() == "config.json"]
     # Negative assertions are deny-list literals, not dependencies on those directories.
     home_path = re.compile(rb"/home/[A-Za-z0-9._-]+/")
+    def unmasked(line):
+        # Only an explicitly redacted sandbox path may contain a nested home/.pi subtree.
+        return re.sub(rb"<SANDBOX>/[A-Za-z0-9._%+@~/-]+", b"<REDACTED_PATH>", line)
+    assert home_path.search(unmasked(b"/" + b"home/example/private"))
+    assert not home_path.search(unmasked(b"<SANDBOX>/child/home/.pi/server"))
+    assert home_path.search(unmasked(b"<SANDBOX>/child; /" + b"home/example/private"))
+    assert home_path.search(unmasked(b"<SANDBOX>/child,/" + b"home/example/private"))
+    assert home_path.search(unmasked(b"<SANDBOX>/child=/" + b"home/example/private"))
     private_lane = re.compile(rb"(?:host|extensions)-lane/")
     guard_literals = [name for name, body in payload.items()
-                      if any(b"assertNotIn(" in line and home_path.search(line) for line in body.splitlines())]
+                      if any(b"assertNotIn(" in line and home_path.search(unmasked(line)) for line in body.splitlines())]
     private_hits = [name for name, body in payload.items()
-                    if any((home_path.search(line) and b"assertNotIn(" not in line)
-                           or private_lane.search(line)
+                    if any((home_path.search(unmasked(line)) and b"assertNotIn(" not in line)
+                           or private_lane.search(unmasked(line))
                            for line in body.splitlines())]
     assert not private_hits, f"private installation roots in artifact: {private_hits}"
     provenance = json.loads(payload["provenance.json"])
@@ -91,13 +103,22 @@ def main():
     assert root.is_relative_to(prefix)
     assert all(sha((root / name).read_bytes()) == sha(body) for name, body in payload.items())
     dependency_roots = [Path(p) for p in env.get("DELM_TEST_NODE_MODULES", "").split(os.pathsep) if p]
-    dependency_versions = {}
+    dependency_versions, dependency_locations = {}, {}
+    source_peer = {"@earendil-works/pi-client":"client", "@earendil-works/pi-durable":"durable",
+                   "@earendil-works/pi-ai":"ai", "@earendil-works/chord":"chord"}
     for peer, expected in metadata["peerDependencies"].items():
-        manifest = next((p / peer / "package.json" for p in [root / "node_modules", *dependency_roots]
-                         if (p / peer / "package.json").is_file()), None)
-        assert manifest, f"Install the declared public dependency yourself before this check: {peer}"
+        allowed = expected.split(" || ")
+        assert all(re.fullmatch(r"\d+\.\d+\.\d+", version) for version in allowed), expected
+        manifests = [p / peer / "package.json" for p in [root / "node_modules", *dependency_roots]]
+        source_manifest = None
+        if peer in source_peer and os.environ.get("DELM_TEST_NATIVE_SOURCE"):
+            source_manifest = Path(os.environ["DELM_TEST_NATIVE_SOURCE"]) / "packages" / source_peer[peer] / "package.json"
+            manifests.insert(0, source_manifest)
+        manifest = next((p for p in manifests if p.is_file() and json.loads(p.read_text())["version"] in allowed), None)
+        assert manifest, f"Missing compatible declared PUBLIC test dependency {peer} {expected}; no installation attempted"
         dependency_versions[peer] = json.loads(manifest.read_text())["version"]
-        assert dependency_versions[peer] == expected, f"Wrong prerequisite {peer}: {dependency_versions[peer]}, expected {expected}"
+        dependency_locations[peer] = dict(manifest=redact(manifest), public_test_source=manifest==source_manifest)
+
     repeat = json.loads(command("repeat-install", manager + ["install", str(archive), "--prefix", str(prefix)]))
     assert repeat["status"] == "unchanged"
     command("installed-bin", [str(root / "bin/delm"), "--help"])
@@ -109,7 +130,13 @@ def main():
     node_files = ["tests/delm-durable.test.mjs", "tests/delm-reload.test.mjs", "tests/delm-first-slice.test.mjs",
                   "tests/delm-native-v2.test.mjs", "tests/delm-remaining-integration.test.mjs",
                   "tests/launcher/input-sdk.test.mjs"]
-    command("native-sdk-faux", ["node", "--import", "./tests/native/sdk-loader.mjs", "--test", *node_files], root)
+    if os.environ.get("DELM_TEST_NATIVE_SOURCE"):
+        source_resolver = Path(os.environ["DELM_TEST_NATIVE_SOURCE"]) / "packages/coding-agent/src/experimental/source-resolver.ts"
+        command("native-sdk-faux", ["node", "--import", str(root / "tests/host/public-dependencies.mjs"),
+                "--import", str(source_resolver), "--test", *node_files], root,
+                extra_env={"DELM_HOST_DEPENDENCY_ROOTS": env.get("DELM_TEST_NODE_MODULES", "")})
+    else:
+        command("native-sdk-faux", ["node", "--import", "./tests/native/sdk-loader.mjs", "--test", *node_files], root)
     # Ordinary Pi and Durable SDK may use different dependency trees; do not mix them with a hook.
     pi_modules = Path(os.environ.get("DELM_TEST_PI_MODULES", str(root / "node_modules"))).resolve()
     pi_parent = (pi_modules.parent / "__public_skill_probe__.mjs").as_uri()
@@ -150,23 +177,24 @@ def main():
     assert str(root) in removed["retained"]
     assert (root / "user-notes.txt").read_text() == "unmanaged edits must survive"
     assert (retained / "history.txt").read_text() == "unmanaged history must survive"
-    report = dict(schema=1, verdict="LOCAL_ARTIFACT_PASS_PRODUCTION_NATIVE_BLOCKED",
+    report = dict(schema=2, verdict="LOCAL_ARTIFACT_COMPONENT_PASS_INSTALLED_NATIVE_CHECK_SEPARATE",
                   archive_sha256=sha(archive.read_bytes()), files=len(payload),
                   runtime_hashes={e["target"]: e["packaged_sha256"] for e in provenance["files"]},
                   environment=dict(python=platform.python_version(), platform=platform.system(), architecture=platform.machine(),
                                    node=command("node-version", ["node", "--version"]).strip(), public_dependencies=dependency_versions,
-                                   ordinary_pi=json.loads((pi_modules / "@earendil-works/pi-coding-agent/package.json").read_text())["version"]),
+                                   ordinary_pi=json.loads((pi_modules / "@earendil-works/pi-coding-agent/package.json").read_text())["version"],
+                                   dependency_manifests=dependency_locations),
                   checks=checks, private_root_hits=private_hits, negative_test_guard_literals=guard_literals,
-                  source_imports=False, real_model_calls=0,
+                  source_imports=dict(product_checkout=False, public_sdk_test_source=bool(os.environ.get("DELM_TEST_NATIVE_SOURCE"))), real_model_calls=0,
                   log_hashes={p.name: sha(p.read_bytes()) for p in evidence.glob("*.log")},
                   limits=["ordinary Pi skill parsing is not stock Native registry/protected-admission discovery",
                           "Native SDK/faux is not live model or editor draft verification",
                           "payload rollback tested; actual downgrade to older Native work-unaware runtime NOT_TESTED",
-                          "source checkout remains on filesystem but is absent from environment/import closure",
+                          "product import closure is installed payload; explicitly selected public SDK source may supply TEST platform dependencies", 
                           "existing public Node dependencies supplied explicitly; none installed"])
     (evidence / "acceptance.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps(dict(verdict=report["verdict"], archive_sha256=report["archive_sha256"],
-                          checks=len(checks), evidence=str(evidence), sandbox=str(sandbox))))
+                          checks=len(checks), evidence=str(evidence), sandbox=str(sandbox), installed_root=str(root))))
 
 
 if __name__ == "__main__":

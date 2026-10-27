@@ -1,0 +1,8 @@
+test_never_launches_source_outside_disposable_fixture (test_native_fixture.NativeFixtureSafety.test_never_launches_source_outside_disposable_fixture) ... ok
+test_never_opens_sessions_outside_disposable_fixture (test_native_fixture.NativeFixtureSafety.test_never_opens_sessions_outside_disposable_fixture) ... ok
+test_unmodified_baseline_rejects_changed_source (test_native_fixture.NativeFixtureSafety.test_unmodified_baseline_rejects_changed_source) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.008s
+
+OK

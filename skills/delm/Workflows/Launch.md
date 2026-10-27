@@ -1,24 +1,20 @@
 # Launch
 
-## Outcome and safety boundary
+## Outcome and boundary
 
-A real launch would use the user's authenticated Native, a separate board service, exact participant sessions, protected first-input admission and a read-only observer. Tern is optional UI and must never be installed implicitly. Closing a viewer must not stop the board. File generation is not launch or instruction compliance.
+A prepared DeLM run connects to the user's **existing compatible Native owner**. The bundled board is a separate service; exact team sessions are created/bound through official Native management, with original approved input accepted under a durable request ID. Process setup, input acceptance, instruction reading, first useful claim and completion are different claims.
 
-**The current public package does not have a verified stock-Native launch/control API.** `start` fails closed before spawning any process. Do not restore the author's private socket protocol, use terminal keystrokes as admission, supply a no-op guard, instantiate a replacement host, or substitute the test fixture. This is a material capability gate, not an invitation to drop protection.
+The package does not install/start Durable, copy private host code, create another Harness or read auth/settings. Verify the actual host's public loader and `delm.control` protocol 1 / local DurableSession capability first. The separate minimal API patch is an explicit compatibility prerequisite for the tested Native variant, not a hidden rebuild or proof every installed host supports it. See package `docs/native-compatibility.md`.
 
 ## Intent-to-Flag Mapping
 
-| Intent | Tool |
+| Intent | Command |
 |---|---|
-| Inspect actual package capabilities | `python3 Tools/Run.py capabilities` |
-| Attempt automatic prepared launch | `python3 Tools/Run.py start --run-dir RUN` → explicit BLOCKED |
-| Use the independent board core | run the bundled `scripts/delm_local.py serve RUN` command emitted by prepare |
-| Inspect an already running board | bundled `scripts/delm_board.py RUN --observe` |
+| Offline declared capabilities | `python3 Tools/Run.py capabilities` |
+| Start the prepared team on an existing host | `python3 Tools/Run.py start --run-dir RUN --socket NATIVE_UUID_SOCKET` |
+| Address one existing actor | add `--actor NAME` |
+| Start/observe only the board | use the `serve` / `--observe` argv emitted by prepare |
 
-Read package `docs/native-compatibility.md` for the exact missing host contract and `Tools/Run.help.md` for available commands. Core/demo operation does not require Tern or a Native model. Automatic launch must remain unclaimed until the operator supplies a verified public integration; merely setting a configuration boolean cannot satisfy it.
+The Native server must already load the DeLM facet in the approved workspace; the prepared board must be reachable. Matching public client peers resolve from the installed environment. No source checkout is normally required; the optional source-resolver flag is advanced test dependency resolution only.
 
-## Existing-host SDK input component
-
-`Tools/NativeInput.mjs` accepts an existing public SDK host/root handle, current and recorded session paths, and a real host admission capability. It validates the approved input fingerprint, checks the existing conversation's saved request receipt, and submits only under the same stable request identity. It owns no host or database. Tests demonstrate actual SDK/faux duplicate/lost-response reconciliation and denial, not production-host discovery or live models.
-
-A genuine launch report distinguishes process setup, protected accepted input, observed full instruction reads, first useful claim, completed result and actual service health. Preserve drafts, accepted request IDs and pending receipts on partial failure. Do not repeatedly invoke a blocked or uncertain start.
+IDs are reserved before RPC. Actual session/instance/workspace identity is saved before bind/input; stop on mismatch, partial activation or uncertain response without creating a new team. Retry unchanged input with its original ID after reconciliation. Do not bypass guards or grant model spending merely because a command exists. Drafts remain in the user's editor; the launcher never submits or clears them. [Run help](../Tools/Run.help.md) owns the full command and uncertainty contract.

@@ -1,0 +1,4 @@
+{
+  "error": "detail must be nonempty text <= 8192 characters",
+  "code": "INVALID"
+}

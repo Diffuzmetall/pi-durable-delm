@@ -1,0 +1,9 @@
+{
+  "package_root": "<PACKAGE_ROOT>",
+  "python_core": true,
+  "prepare": true,
+  "tern_available": true,
+  "native_launch": "BLOCKED",
+  "reason": "BLOCKED: no verified public Native host launch/control capability. Do not substitute private RPC, a faux host or unguarded submit. See docs/native-compatibility.md; preparation and Python CLI remain usable.",
+  "sdk_input_component": "Tools/NativeInput.mjs uses actual Native owner submit + exact-session binding; extra host policy optional"
+}

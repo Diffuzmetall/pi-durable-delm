@@ -1,0 +1,51 @@
+{
+  "run": "<SANDBOX>/cl-da18c8/run",
+  "actors": {
+    "alice": {
+      "prompt": "accepted",
+      "session": "44164641-091c-580b-91ae-7051828064a7",
+      "bootstrap_sha256": "741f21bc23eadd362ea85dbc48c499c821b3241867ccca0b55894c2ab94157b0",
+      "marker": "[delm-bootstrap:9950e006ecf4420783f452fffea366d3:alice]",
+      "identity": {
+        "sessionId": "44164641-091c-580b-91ae-7051828064a7",
+        "sessionPath": "<SANDBOX>/cl-da18c8/sessions/44164641-091c-580b-91ae-7051828064a7/session.sqlite",
+        "workspace": "<SANDBOX>/cl-da18c8/p",
+        "conversationId": 1,
+        "instanceId": "1b282dc5-069e-4263-aa02-86f0ab23901d"
+      },
+      "stopped": false
+    },
+    "bob": {
+      "prompt": "accepted",
+      "session": "bec8fe34-d32a-5555-9871-08010c1fb368",
+      "bootstrap_sha256": "c9c27085a825b70d05468cf1a513aa68870254bc27028d0fb6d7907dc82c98bb",
+      "marker": "[delm-bootstrap:9950e006ecf4420783f452fffea366d3:bob]",
+      "identity": {
+        "sessionId": "bec8fe34-d32a-5555-9871-08010c1fb368",
+        "sessionPath": "<SANDBOX>/cl-da18c8/sessions/bec8fe34-d32a-5555-9871-08010c1fb368/session.sqlite",
+        "workspace": "<SANDBOX>/cl-da18c8/p",
+        "conversationId": 1,
+        "instanceId": "b982efa7-2504-41dc-b685-835d1de0e6ce"
+      },
+      "stopped": false
+    }
+  },
+  "native_launch": "controlled",
+  "board_reachable": true,
+  "approved_inputs_verified": true,
+  "drafts": "not inspected or submitted",
+  "host_gate": "BLOCKED: no configured compatible existing Native host. Requires delm.control protocol 1 and the explicit local DurableSession capability; this package never installs or starts a Native host.",
+  "sequence": 0,
+  "tasks": 0,
+  "blockers": 0,
+  "native_sessions": {
+    "alice": {
+      "waits": [],
+      "stopped": false
+    },
+    "bob": {
+      "waits": [],
+      "stopped": false
+    }
+  }
+}

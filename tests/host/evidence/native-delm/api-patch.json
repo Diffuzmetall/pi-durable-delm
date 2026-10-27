@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "source_revision": "cd32f7725fdbddbaecdff5b1e68491563394e0ca",
+  "source_variant": "patched public Native; NOT unmodified stock",
+  "patch": "extensions/delm/public-host-api.patch",
+  "patch_sha256": "3460016c2130e2286ccd59c522b4318a2c13b0ad034dbb09f4e31776b23098ae",
+  "producer_handoff_sequence": 650,
+  "user_decision_sequence": 639,
+  "new_harness": false,
+  "author_installation_modified": false,
+  "preimages": {
+    "packages/coding-agent/src/experimental/plugin.ts": "df052d4f35fe49399566199c4efbd7812f6b1acc77cd131c4844db41fedbd977",
+    "packages/coding-agent/src/experimental/services/worker.ts": "6364e4d016f501b9fe7e0e842e01922cb3a1a299437e05cef35d5d26d80f354d",
+    "packages/coding-agent/src/experimental/session-worker.ts": "29a3f0695bd929f7c49f99d690d1bb91b9e60a9a2d06ed6a1ad44e1d81ca081a"
+  },
+  "postimages": {
+    "packages/coding-agent/src/experimental/plugin.ts": "d34c213df5239551f639496347b86c0522a017b9f90455f6d3a94113b6c3dd23",
+    "packages/coding-agent/src/experimental/services/worker.ts": "a2a48f359868e6a240e32b866cdb12f9de4fb2da44b9089b8571cf1e8e350ac8",
+    "packages/coding-agent/src/experimental/session-worker.ts": "bdf44da4eeff40d9d542bd50b62679fb496f9b35192174203c5433ae3d172a57"
+  }
+}

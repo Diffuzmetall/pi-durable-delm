@@ -39,16 +39,20 @@ class PayloadTest(unittest.TestCase):
         self.assertEqual(metadata["pi"], dict(extensions=[], skills=["./skills/delm"], prompts=[], themes=[]))
         self.assertTrue(metadata["private"])
         self.assertEqual(metadata["license"], "MIT")
+        self.assertEqual(metadata["chord"]["facets"]["session"], "extensions/delm/session-facet.js")
+        self.assertIn("@earendil-works/pi-coding-agent/experimental/plugin", metadata["chord"]["external"])
+        self.assertEqual(metadata["peerDependencies"]["@earendil-works/pi-client"], "1.0.2")
+        self.assertNotIn("@earendil-works/pi-coding-agent", metadata.get("dependencies", {}))
         self.assertTrue((ROOT / "LICENSE").read_text().startswith("MIT License\n"))
         inventory = json.loads((ROOT / "provenance.json").read_text())["files"]
         recorded = {entry["target"] for entry in inventory}
         for entry in inventory:
             with self.subTest(path=entry["target"]):
                 self.assertEqual(manager.digest((ROOT / entry["target"]).read_bytes()), entry["packaged_sha256"])
-        runtime = {"package.json", "bin/delm", "packaging/install.py"}
-        for directory in ("scripts", "vendor/DeLM", "prompts", "extensions/delm", "skills/delm"):
+        runtime = {"package.json", "bin/delm", "LICENSES/pi-native.txt"}
+        for directory in ("scripts", "vendor", "prompts", "extensions/delm", "skills/delm", "packaging"):
             runtime.update(p.relative_to(ROOT).as_posix() for p in (ROOT / directory).rglob("*")
-                           if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc")
+                           if p.is_file() and p.name != ".npmignore" and "__pycache__" not in p.parts and p.suffix != ".pyc")
         self.assertEqual(recorded, runtime)
 
     def test_repeat_update_rollback_and_default_data_preservation(self):

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1120" viewBox="0 0 1600 1120" role="img" aria-labelledby="title desc">
+<title id="title">Как работает DeLM для Pi Durable</title>
+<desc id="desc">Пользователь утверждает запрос и план. Скилл и launcher готовят отдельные сессии существующего Native. Агенты работают в одном проекте и публикуют результаты через actor CLI на общей Python-доске. После всех требуемых DONE расширение delm_wait возобновляет нужную сессию. Участник читает сохранённый snapshot и явно подтверждает ACK. Native, модели, авторизация и guards остаются у пользователя; нужен Native API 1.</desc>
+<defs>
+ <marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M1 1 11 6 1 11Z" fill="#00796B"/></marker>
+ <marker id="purple-arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M1 1 11 6 1 11Z" fill="#4A148C"/></marker>
+ <style>
+  text{font-family:'DejaVu Sans',Arial,sans-serif;fill:#202222} .heading{font-family:Georgia,'DejaVu Serif',serif;font-style:italic;font-size:62px;font-weight:bold} .label{font-size:26px;font-weight:700;letter-spacing:1px}.body{font-size:22px}.small{font-size:20px}.caption{font-size:21px;font-style:italic}.card{fill:white;stroke:#252728;stroke-width:3}.flow{fill:none;stroke:#00796B;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}.wake{fill:none;stroke:#4A148C;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#purple-arrow)}
+ </style>
+</defs>
+<rect width="1600" height="1120" fill="#EAE9DF"/>
+<text x="60" y="90" class="heading">Как работает DeLM</text>
+<text x="63" y="135" class="body">Несколько сессий · общая доска · один результат</text>
+<rect x="1230" y="58" width="310" height="48" rx="24" fill="#4A148C"/>
+<text x="1385" y="90" text-anchor="middle" style="fill:white;font-size:22px;font-weight:bold">DeLM × Pi Durable</text>
+
+<rect class="card" x="60" y="205" width="350" height="100" rx="18"/>
+<text x="235" y="249" text-anchor="middle" class="label">ПОЛЬЗОВАТЕЛЬ</text>
+<text x="235" y="282" text-anchor="middle" class="small">Утверждает задачу и границы</text>
+<path class="flow" d="M430 255H570"/>
+<text x="500" y="231" text-anchor="middle" class="small">запрос + план</text>
+<rect class="card" x="590" y="187" width="650" height="120" rx="18"/>
+<rect x="590" y="187" width="8" height="120" rx="4" fill="#4A148C"/>
+<text x="915" y="237" text-anchor="middle" class="label">СКИЛЛ + LAUNCHER</text>
+<text x="915" y="275" text-anchor="middle" class="body">Роли · инструкции · точные session IDs</text>
+<path class="flow" d="M800 317V345"/>
+
+<rect x="60" y="365" width="980" height="425" rx="24" fill="#F6F5F0" stroke="#252728" stroke-width="3"/>
+<text x="93" y="410" class="label">ВАШ СУЩЕСТВУЮЩИЙ NATIVE</text>
+<text x="1010" y="407" text-anchor="end" class="small" style="fill:#4A148C;font-weight:bold">2 / 4 / 8 сессий</text>
+<rect class="card" x="100" y="445" width="350" height="120" rx="16"/>
+<text x="275" y="492" text-anchor="middle" class="label">АГЕНТ A</text>
+<text x="275" y="531" text-anchor="middle" class="body">Своя сессия + actor CLI</text>
+<rect class="card" x="620" y="445" width="350" height="120" rx="16"/>
+<text x="795" y="492" text-anchor="middle" class="label">АГЕНТ B</text>
+<text x="795" y="531" text-anchor="middle" class="body">Своя сессия + actor CLI</text>
+<path d="M455 505H520V600H1010" fill="none" stroke="#00796B" stroke-width="3" stroke-linecap="round"/>
+<path d="M975 505H1010V600" fill="none" stroke="#00796B" stroke-width="3" stroke-linecap="round"/>
+<path class="flow" d="M1010 600H1110"/>
+<text x="1040" y="568" text-anchor="middle" class="small" style="fill:#00796B;font-weight:bold">actor CLI</text>
+<text x="550" y="768" text-anchor="middle" class="body">Ваши модели, авторизация и guards</text>
+<rect x="330" y="660" width="420" height="80" rx="14" fill="white" stroke="#4A148C" stroke-width="3"/>
+<text x="540" y="692" text-anchor="middle" class="label" style="fill:#4A148C;font-size:24px">DeLM EXTENSION</text>
+<text x="540" y="723" text-anchor="middle" class="small">delm_wait · существующий scheduler</text>
+<path class="wake" d="M650 650V620H795V581"/>
+<text x="658" y="648" class="small" style="fill:#4A148C">продолжить сессию B</text>
+
+<rect class="card" x="1130" y="415" width="410" height="285" rx="20"/>
+<rect x="1130" y="415" width="410" height="8" rx="4" fill="#00796B"/>
+<text x="1335" y="467" text-anchor="middle" class="label" style="font-size:25px">ОБЩАЯ ДОСКА DeLM</text>
+<text x="1335" y="507" text-anchor="middle" class="body">Задачи · зависимости</text>
+<text x="1335" y="540" text-anchor="middle" class="body">Публикации · результаты</text>
+<rect x="1170" y="565" width="330" height="59" rx="12" fill="#EAF4EF"/>
+<text x="1335" y="603" text-anchor="middle" style="fill:#00796B;font-size:24px;font-weight:bold">claim → работа → DONE</text>
+<text x="1335" y="662" text-anchor="middle" class="body">Python HTTP + SQLite</text>
+<path class="wake" d="M1335 716V820H800V705H768"/>
+<text x="1125" y="853" text-anchor="middle" class="caption" style="fill:#4A148C;font-weight:bold">событие: все нужные DONE</text>
+
+<path class="flow" d="M360 802V883"/>
+<text x="387" y="852" class="caption" style="fill:#00796B">Оба агента читают и пишут</text>
+<rect class="card" x="60" y="905" width="1480" height="100" rx="18"/>
+<text x="800" y="946" text-anchor="middle" class="label">ОБЩИЙ ПРОЕКТ</text>
+<text x="800" y="981" text-anchor="middle" class="body">Одна рабочая папка · исходники · проверенный результат</text>
+<rect x="60" y="1030" width="1480" height="45" rx="12" fill="#FFFFFF"/>
+<text x="800" y="1061" text-anchor="middle" style="font-size:24px;font-weight:bold;fill:#4A148C">УВЕДОМЛЕНИЕ → SNAPSHOT → ЧТЕНИЕ → ACK</text>
+<text x="800" y="1106" text-anchor="middle" class="small">Native API 1 обязателен · без отдельного runtime · без модельного polling</text>
+</svg>

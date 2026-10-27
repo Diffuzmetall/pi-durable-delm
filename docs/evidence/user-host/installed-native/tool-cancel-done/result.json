@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "verdict": "ORIGINAL_TOOL_CANCEL_THEN_ACTUAL_NATIVE_DONE_PASS",
+  "archive_sha256": "4c7441af5851b13daa7dc43397256217a182f8242afef8e068704966f6b5178d",
+  "result": {
+    "originalToolCancelledWait": "3ed24c5909f0a9ae204c71a19aa34dc144ee7702fbaafc936a10aee5ef3e063f",
+    "dependency": "dc3e002c78464e4a958a11f2997e4c75",
+    "actualNativeProducerCompleted": true,
+    "dependencyDONE": true,
+    "cancelledStatePersistedAfterDONE": true,
+    "samePriorIdentitiesAfterReinstall": true
+  },
+  "actual_producer_http_requests": 2,
+  "consumer_wake_http_requests": 0,
+  "live_model_calls": 0,
+  "bounded_post_done_observation_ms": 500,
+  "existing_native_data_reused_after_reinstall": true
+}

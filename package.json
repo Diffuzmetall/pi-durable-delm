@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
-  "description": "Shared-checkout DeLM board, CLI and Native SDK components; production Native host integration gated",
+  "description": "Shared-checkout DeLM board and Native Durable session plugin with an explicit minimal public host API patch",
   "repository": {"type": "git", "url": "https://github.com/Diffuzmetall/pi-durable-delm.git"},
   "type": "module",
   "pi": {"extensions": [], "skills": ["./skills/delm"], "prompts": [], "themes": []},
@@ -11,7 +11,8 @@
   "engines": {"node": ">=22.19.0"},
   "bin": {"delm": "bin/delm"},
   "exports": {".": "./extensions/delm/index.js", "./protocol": "./extensions/delm/protocol.js", "./package.json": "./package.json"},
-  "peerDependencies": {"@earendil-works/pi-durable": "1.4.0", "@earendil-works/pi-ai": "1.4.0", "@earendil-works/chord": "1.4.0"},
-  "files": ["bin/", "scripts/", "vendor/DeLM/", "prompts/", "extensions/delm/", "skills/delm/", "packaging/", "tests/", "examples/", "docs/", "LICENSE", "UPSTREAM.md", "THIRD_PARTY_NOTICES.md", "provenance.json", "parity.json", "release-readiness.md"],
+  "chord": {"facets": {"session": "extensions/delm/session-facet.js"}, "external": ["@earendil-works/pi-coding-agent/experimental/plugin"]},
+  "peerDependencies": {"@earendil-works/pi-durable": "1.0.2 || 1.4.0", "@earendil-works/pi-ai": "1.0.2 || 1.4.0", "@earendil-works/chord": "1.0.2 || 1.4.0", "@earendil-works/pi-client": "1.0.2"},
+  "files": ["bin/", "scripts/", "vendor/DeLM/", "LICENSES/", "prompts/", "extensions/delm/", "skills/delm/", "packaging/", "tests/", "examples/", "docs/", "LICENSE", "UPSTREAM.md", "THIRD_PARTY_NOTICES.md", "provenance.json", "parity.json", "release-readiness.md"],
   "scripts": {"test:python": "python3 -B -m unittest discover -s tests -v", "test:packaging": "python3 -B -m unittest discover -s tests/packaging -v"}
 }

@@ -20,7 +20,7 @@ async function until(check) {
     await new Promise(resolve => setTimeout(resolve, 15));
   }
 }
-async function fixture() {
+async function fixture({ nativeAdmission = false } = {}) {
   const directory = await mkdtemp(join(tmpdir(), 'delm-native-'));
   const source = join(directory, 'source'), run = join(directory, 'board');
   await mkdir(source); await writeFile(join(source, 'sample.txt'), 'baseline');
@@ -31,9 +31,9 @@ async function fixture() {
   const faux = fauxProvider(), models = createModels(); models.setProvider(faux.provider);
   const registry = createRegistry(), admissions = [];
   let deny = false;
-  registry.install(createDelmWait({ run, actor: 'bob', admitInput: async (_conversation, id) => {
+  registry.install(createDelmWait({ run, actor: 'bob', ...(!nativeAdmission ? { admitInput: async (_conversation, id) => {
     admissions.push(id); if (deny) throw Error('revoked');
-  } }));
+  } } : {}) }));
   const path = join(directory, 'native.sqlite');
   let host, root;
   async function open() {
@@ -62,11 +62,25 @@ async function fixture() {
   };
 }
 
-test('native registry fails closed without trusted admission; no importer starts services', () => {
-  assert.throws(() => install(createRegistry(), {}), /trusted admission/);
+test('native registry refuses missing binding; no importer starts services', () => {
+  assert.throws(() => install(createRegistry(), {}), /binding requires run and actor/);
 });
 
-test('real 1.4 SQLite + faux model: exact dependency wake in same conversation; unrelated events ignored', async () => {
+test('native SDK admission delivers same-conversation wake without an author-private policy', async () => {
+  const f = await fixture({ nativeAdmission: true });
+  try {
+    const entry = await f.arm();
+    f.faux.setResponses([fauxAssistantMessage('native admitted wake')]);
+    f.done();
+    await until(async () => (await f.doc()).waits[entry.id].state === 'sent');
+    const accepted = await f.host.commit(tx => tx.submissionByRequest(f.root.id, wakeRequestId(entry.taskId)), context);
+    assert.equal(accepted.conversationId, f.root.id);
+    assert.equal(accepted.type, 'input');
+    assert.equal(f.admissions.length, 0);
+  } finally { await f.close(); }
+});
+
+test('real SDK SQLite + faux model: exact dependency wake in same conversation; unrelated events ignored', async () => {
   const f = await fixture();
   try {
     const entry = await f.arm();

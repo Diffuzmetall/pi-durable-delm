@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "scope": "HOST04 genuine public host environment only; DeLM product HOST05 not yet accepted",
+  "files": {
+    "tests/host/probe_public_client.mjs": "0f7df349f5bfe932fc2d9c65af0345d2871b927c541477980928df7aa898beae",
+    "tests/host/pocket_process.py": "02554e7b76d1c4b43ed2aa073fcede36c849bcd93d2eb12494076bdc7aeaf8e8",
+    "tests/host/provision_pocket.py": "8f89ffacc890f264816bcf99d150d2d760a1a67cc94cb805ed72f8301db50688",
+    "tests/host/deterministic_provider.py": "08e1bfd26409c0d12353e33afe7bd9f0327e36ad634c78924430553bbf34a70d",
+    "tests/host/smoke_pocket.py": "8e5920eea4552d50130ff5e2c459677da1f1535b1f1d35ccb8a9c201895e7a23",
+    "tests/host/public-dependencies.mjs": "a3cee343888b035d5a7a559ab25290f5d256b97fb1b4bf1e8bc6d7c8a03b79ff",
+    "tests/host/test_provider.py": "f1e017b5d03417af5043502a4b2756f9d08e7c3285c7d95af9884af35b8176e5",
+    "tests/host/provision_public_host.py": "855f7d536e103c1318f65fee0cd50bdf24bd20d529a9a69636980f7f2c17517d",
+    "tests/host/smoke_public_server.py": "6834fb44065375193e74929a59d3b28edc8e03390edc8fc645bb032095cc683d",
+    "tests/host/evidence/public-host-smoke.json": "001200f284d82f06f876e171d80c58dbef40891e062623b8923389cd8a638bea",
+    "tests/host/evidence/public-host-discovery.json": "305bcdb25d147b13c596cc552f3d646c611bc25f20780e6543b0074e63b1df34",
+    "tests/host/evidence/public-server-plugin-build.log": "38815094badc4381b9347739a913b8c527eec01b94edb44518cabaa91a9af34b",
+    "tests/host/evidence/provider-unit.log": "e7f67b2ea3fec5495b800556331d14d47900d6d3d442132a362d1a75bfd315d9",
+    "tests/host/evidence/public-host-help-unhydrated.log": "df2eb8bee965312f2512da2a2cdf3b86c59715476406c4c0e66a19edd685962d",
+    "tests/host/evidence/pocket-real-process.log": "34ed59e3bce1e48e358cf983d580ec5805f069357fadebe07668bbac9ec048e7",
+    "tests/host/evidence/public-client-smoke.log": "a6334a9a66b93ffb74dd38bfa9d46a27b13a089a7b419753ab8012bc394363af",
+    "tests/host/evidence/catalog-validation.log": "443f62294520e519de39ff3828c6f73416df13205637ffbf104c02a496c660d2",
+    "tests/host/evidence/public-server-deterministic.log": "347b684770608793c5bdf75e5a0a4940539925d6bf56e8e1248f84f3f9868556",
+    "tests/host/evidence/public-host-help.log": "9ef64d211f142d560e936328a4b245ff06572b85271eb26f9f2569c322839bec",
+    "tests/host/evidence/pocket-source.json": "774043dd66ad46ebf29de2f4a6d60781ee5e36c984b3d0cc85fa90208eca67e7",
+    "tests/host/evidence/public-server-start.log": "0b2ebef2e863c044f6a71ec0fed7c8e9ca5e944e03b81119b7179fcae4d426d3",
+    "tests/host/evidence/pocket-deterministic-smoke.json": "0782cef5776f1d63d1ecf68304283feca7727cddc8e6b5a55742a9616091ae2d",
+    "tests/host/evidence/pocket-cli-start.log": "fc7bb2c0d064b51ee5cc1ec16e2a761f054775dc22e7b4ec9258880615bef213",
+    "tests/host/evidence/public-server-start-inherited-loader.log": "852672e98d1bee8d674aa1c54c495aa28eb97f939231cb7d73f67702d033e68d",
+    "tests/host/evidence/native-repro/public-host-discovery.json": "fe16528c74437c4b0734f3286778fd91b20966a321d47670228969471f7951df",
+    "tests/host/evidence/native-repro/public-cli-version.log": "9fd28642d3aca191e5c7fc2383cfd6fabb2aac8743f029dabb8989ac584e31bc",
+    "docs/clean-host-verification.md": "f41e1940ddfef77e5f4be22359a9a1c167e1e1f632c41c102866b74fbd7668ef"
+  }
+}

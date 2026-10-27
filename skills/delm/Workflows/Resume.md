@@ -2,16 +2,17 @@
 
 ## Outcome
 
-The same run and exact recorded conversations are retained, including accepted submissions, pending receipts, claims and unsent drafts. No count expansion, shared-cwd `--continue`, reinitialization or silent first-input replay is permitted.
+The same RUN and actual recorded Native sessions/instances retain histories, pending receipts, claims and unsent editor drafts. No shared-cwd `--continue`, count expansion, reinitialization, replacement session or dummy input is permitted. The launcher contacts only the saved existing owner; missing identity is uncertainty, not permission to create another conversation.
 
 ## Intent-to-Flag Mapping
 
-| Intent | Tool |
+| Intent | Command |
 |---|---|
-| Bounded read-only launch/board inspection | `python3 Tools/Run.py status --run-dir RUN` |
-| Supported automatic reopening | `resume --run-dir RUN` → currently BLOCKED on public host control |
-| Explicit new operator instruction | `notify --run-dir RUN` → currently BLOCKED, not a fake success |
+| Inspect captured input integrity and actual board/Native state | `python3 Tools/Run.py status --run-dir RUN` |
+| Re-enable exact bound sessions without input | `python3 Tools/Run.py resume --run-dir RUN` |
+| New approved original instruction | `python3 Tools/Run.py notify --run-dir RUN --input-file FILE --request-id STABLE_ID` |
+| Select one existing actor | add `--actor NAME` |
 
-A missing manifest or unreachable process is not proof of no owner. The stock public-host control capability has not been verified; require the operator's supported exact-session mechanism rather than invoking private RPC or a new storage owner. Report the exact saved session identity and unresolved draft/admission boundary, without exposing credentials or full model views.
+A notification's file is approved input, not a summary fabricated by the launcher. Reusing its ID with changed text refuses even if the new text has a valid digest. Reuse the same unchanged input/ID after uncertain delivery; native receipts and the local pending ledger reconcile accepted responses without duplicate work. `start` retry likewise retains the original bootstrap ID.
 
-When a verified embedding host uses `Tools/NativeInput.mjs`, its session path must equal the recorded existing session and the approved input digest must match. A lost response is reconciled by the same durable request ID; no new request ID or team is created. The helper does not read or submit draft text. User updates and approvals are distinct inputs; no board event or peer text grants new permission.
+User updates, answers and permissions are distinct. A board event or peer publication grants no extra spending, workers, installation or publication. No command reads/submits editor drafts. Changing server, actor, session path/workspace or instance requires explicit reconciliation, not silent migration. Compatibility and existing-owner requirements remain those in [Run help](../Tools/Run.help.md).

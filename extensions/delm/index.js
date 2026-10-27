@@ -6,15 +6,17 @@ import { projectEvents, waitTrigger, domainCommand } from './protocol.js';
 export { projectEvents, waitTrigger } from './protocol.js';
 import { Type } from '@earendil-works/pi-ai';
 import { createRegistry, defineDoc, defineExtension, defineTask, defineTool, section,
-  ROOT_CONVERSATION_ID } from '@earendil-works/pi-durable';
+  ROOT_CONVERSATION_ID, ToolTask } from '@earendil-works/pi-durable';
+const outputField = { 1: 'content', 2: 'output' }[ToolTask.definition.version];
+if (!outputField) throw Error(`Unsupported DeLM native tool protocol ${ToolTask.definition.version}`);
 
 export const DelmWaitDoc = defineDoc({ kind: 'delm.waits', version: 1, scope: 'conversation',
   history: 'latest', fork: 'initial', checkpointWhen: () => false, initial: () => ({ waits: {} }) });
 const finished = { status: 'terminal', outcome: { status: 'completed', result: null } };
-export const DELM_BUILD = '20261027-public-sdk-gated-v1';
+export const DELM_BUILD = '20261027-native-phases-v3';
 export const wakeRequestId = taskId => `delm-wake:${taskId}`;
 export const boardBusy = error => [5, 6].includes(Number(error?.errcode) & 255) || /database (?:is )?(?:locked|busy)/i.test(String(error?.message));
-const retryWatch = runtime => ({ status: 'sleeping', until: runtime.now() + 250, checkpoint: { phase: 'watch' } });
+const retryWatch = () => ({ status: 'running', checkpoint: { phase: 'backoff' } });
 const receiptReference = receipt => Object.fromEntries(['receipt_id', 'request_id', 'actor', 'from_sequence', 'to_sequence', 'full']
   .map(key => [key, receipt[key]]));
 const waitStatus = entry => JSON.parse(JSON.stringify({ ...entry, ...(entry.receipt ? { receipt: receiptReference(entry.receipt) } : {}) }));
@@ -78,7 +80,7 @@ export function boardChange(run, signal, timeoutMs = 2000) {
 }
 
 export function createDelmWait({ run, actor, admitInput }) {
-  if (typeof admitInput !== 'function') throw Error('DeLM requires trusted native input admission');
+  if (admitInput !== undefined && typeof admitInput !== 'function') throw Error('Additional host admission policy must be a function');
   run = realpathSync(run);
   const config = JSON.parse(readFileSync(join(run, 'config.json'), 'utf8'));
   if (!Object.hasOwn(config.actors, actor)) throw Error('Unknown bound DeLM actor');
@@ -102,9 +104,9 @@ export function createDelmWait({ run, actor, admitInput }) {
         if (trigger(entry, snapshot)) return runtime.commit(() => ({ status: 'running', checkpoint: { phase: 'send' } }), context);
         await changed.promise;
         context.abortSignal?.throwIfAborted();
-        // A same-phase running commit is not durable progress in native 1.4.
-        // Yield through its scheduler (no model call), then re-read after the invalidation.
-        await runtime.commit(() => ({ status: 'sleeping', until: runtime.now() + 1, checkpoint: { phase: 'watch' } }), context);
+        // A distinct committed phase is progress on both older public hosts and 1.4.
+        // The file watcher above waits without a model call; recheck never polls a model.
+        await runtime.commit(() => ({ status: 'running', checkpoint: { phase: 'recheck' } }), context);
       } catch (error) {
         context.abortSignal?.throwIfAborted();
         if (boardBusy(error)) return runtime.commit(() => retryWatch(runtime), context);
@@ -114,6 +116,13 @@ export function createDelmWait({ run, actor, admitInput }) {
           return finished;
         }, context);
       } finally { changed?.close(); }
+    },
+    recheck: (_record, runtime, context) => runtime.commit(() => ({ status: 'running', checkpoint: { phase: 'watch' } }), context),
+    backoff: async (_record, runtime, context) => {
+      const changed = boardChange(run, context.abortSignal, 250);
+      try { await changed.promise; context.abortSignal?.throwIfAborted(); }
+      finally { changed.close(); }
+      return runtime.commit(() => ({ status: 'running', checkpoint: { phase: 'watch' } }), context);
     },
     send: async (record, runtime, context) => {
       const id = record.input.id;
@@ -145,7 +154,7 @@ export function createDelmWait({ run, actor, admitInput }) {
         }
         const conversation = await runtime.conversation(runtime.conversationId, context);
         if (!conversation) throw Error('Bound native conversation unavailable');
-        try { await admitInput(conversation, requestId, context); }
+        try { if (admitInput) await admitInput(conversation, requestId, context); }
         catch (error) {
           context.abortSignal?.throwIfAborted();
           return runtime.commit(async tx => {
@@ -297,7 +306,9 @@ export function createDelmWait({ run, actor, admitInput }) {
         doc.waits[id] = entry;
         return JSON.parse(JSON.stringify(entry));
       }, context);
-      return { output: [{ type: 'text', text: JSON.stringify({ build: DELM_BUILD, result }) }], structuredOutput: { result, build: DELM_BUILD } };
+      const output = [{ type: 'text', text: JSON.stringify({ build: DELM_BUILD, result }) }];
+      // Use only the actual SDK's channel: no shadow copy bypassing a host redactor.
+      return { [outputField]: output, structuredOutput: { result, build: DELM_BUILD } };
     },
   });
   return defineExtension({ name: 'delm', tools: [tool], tasks: [task], sections: [section('delm', () => workerProfile === undefined
@@ -305,11 +316,13 @@ export function createDelmWait({ run, actor, admitInput }) {
     : `You are DeLM peer ${actor}; board state is ${run}. Your bound START is ${join(run, actor, 'START.md')}. The following is this run's frozen WORKER.md contract:\n\n${workerProfile}`)] });
 }
 
-/** Public SDK registry adapter. Host integration must supply its real admission policy.
- * Constructs no Harness/storage owner; missing capability is a hard error, not permission. */
+/** Install into an existing host registry, retaining its hooks and execution environment.
+ * Durable submit is native admission. Hosts with additional input policy supply admitInput;
+ * absence does not install an approval stub or disable the native host's guards. */
 export default function install(base, options = {}) {
-  if (typeof options.admitInput !== 'function')
-    throw Error('DeLM requires an explicit host trusted admission capability (admitInput); stock Native host integration is not verified');
+  if (typeof options.run !== 'string' || typeof options.actor !== 'string')
+    throw Error('DeLM host binding requires run and actor');
+  if (typeof base?.snapshot !== 'function') throw Error('DeLM needs a Durable registry, not ordinary Pi ExtensionAPI');
   const config = JSON.parse(readFileSync(join(options.run, 'config.json'), 'utf8'));
   const workspace = config.workspace ?? join(options.run, options.actor, 'workspace');
   if (realpathSync(process.cwd()) !== realpathSync(workspace)) throw Error('DeLM adapter belongs to another workspace');

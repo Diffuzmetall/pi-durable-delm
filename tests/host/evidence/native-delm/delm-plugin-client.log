@@ -1,0 +1,11 @@
+{"actors":[{"actor":0,"sessionId":"72051610-cc12-456b-b9c1-a3d68854520f","identity":{"sessionId":"72051610-cc12-456b-b9c1-a3d68854520f","sessionPath":"<SANDBOX>/native-sessions/72051610-cc12-456b-b9c1-a3d68854520f/session.sqlite","workspace":"<SANDBOX>/project","conversationId":1,"instanceId":"454244f0-73a5-4056-afd8-7d97468c4b44"},"actualDeLMFacet":true,"remoteOwnerCapabilityDeniedByServer":true,"unboundControlRejected":true,"originalNativeControllerUsable":true},{"actor":1,"sessionId":"d43f445c-17a7-4db7-9e57-03ed09c9e49d","identity":{"sessionId":"d43f445c-17a7-4db7-9e57-03ed09c9e49d","sessionPath":"<SANDBOX>/native-sessions/d43f445c-17a7-4db7-9e57-03ed09c9e49d/session.sqlite","workspace":"<SANDBOX>/project","conversationId":1,"instanceId":"134222ed-381d-47f8-927f-fd0968f67250"},"actualDeLMFacet":true,"remoteOwnerCapabilityDeniedByServer":true,"unboundControlRejected":true,"originalNativeControllerUsable":true}],"model":"deterministic localhost HTTP","constructedHarness":false,"fakeHostOrDiscoveryOrAdmission":false,"boundDeLMBoardFlow":"NOT_YET_TESTED"}
+[DEBUG-native-cap] 0 create
+[DEBUG-native-cap] 0 attach
+[DEBUG-native-cap] 0 control-ready
+[DEBUG-native-cap] 0 identity
+[DEBUG-native-cap] 0 identity-ok
+[DEBUG-native-cap] 1 create
+[DEBUG-native-cap] 1 attach
+[DEBUG-native-cap] 1 control-ready
+[DEBUG-native-cap] 1 identity
+[DEBUG-native-cap] 1 identity-ok

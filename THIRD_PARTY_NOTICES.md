@@ -12,7 +12,7 @@ Paper/site/repository references are documented in `UPSTREAM.md`. No paper PDF, 
 
 ## Native SDK / platform
 
-The extension uses the user's separately installed Native SDK through documented public capabilities. No private host, provider credentials or platform source is redistributed. Actual required versions and admission capabilities must be verified in `docs/native-compatibility.md`; no hidden author environment or fake production admission is permitted.
+The extension uses the user's separately installed Native SDK. The minimal public API patch in `extensions/delm/public-host-api.patch` contains source context derived from public Pi v1.0.2, commit `cd32f7725fdbddbaecdff5b1e68491563394e0ca`: https://github.com/earendil-works/pi/tree/cd32f7725fdbddbaecdff5b1e68491563394e0ca . That source is MIT, Copyright (c) 2025 Mario Zechner; its full original notice and permission text are included verbatim in `LICENSES/pi-native.txt`. No complete platform host, private controller, provider credentials or author installation is bundled. The patch is an explicit compatibility requirement, not a claim that an unpatched host already exposes the new API. Actual required versions, local-only capability and retained guards must be verified in `docs/native-compatibility.md`; no hidden author environment or fake production admission is permitted.
 
 ## Local adaptation: MIT by owner authorization
 

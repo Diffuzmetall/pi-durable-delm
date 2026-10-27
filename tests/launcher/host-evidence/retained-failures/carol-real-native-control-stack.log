@@ -1,0 +1,21 @@
+Location-only redaction; original failed probe retained.
+Traceback (most recent call last):
+  File "<PACKAGE_ROOT>/tests/launcher/real_native_control.py", line 133, in <module>
+    main()
+    ~~~~^^
+  File "<PACKAGE_ROOT>/tests/launcher/real_native_control.py", line 87, in main
+    cli(start, "start")
+    ~~~^^^^^^^^^^^^^^^^
+  File "<PACKAGE_ROOT>/tests/launcher/real_native_control.py", line 64, in cli
+    assert (result.returncode == 0) == success, label + ": " + host.redact(result.stderr)[-2000:]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: start: Native control failed: DisconnectedError: write EPIPE
+    at toDisconnectedError (file://<SANDBOX>/upstream/packages/client/src/errors.ts:33:54)
+    at Object.onError (file://<SANDBOX>/upstream/packages/client/src/connection.ts:86:49)
+    at Socket.<anonymous> (file://<SANDBOX>/upstream/packages/client/src/unix.ts:141:28)
+    at Object.onceWrapper (node:events:631:26)
+    at Socket.emit (node:events:509:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+

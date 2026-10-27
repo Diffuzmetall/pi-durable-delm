@@ -1,0 +1,11 @@
+test_never_launches_source_outside_disposable_fixture (test_native_fixture.NativeFixtureSafety.test_never_launches_source_outside_disposable_fixture) ... ok
+test_never_opens_sessions_outside_disposable_fixture (test_native_fixture.NativeFixtureSafety.test_never_opens_sessions_outside_disposable_fixture) ... ok
+test_unmodified_baseline_rejects_changed_source (test_native_fixture.NativeFixtureSafety.test_unmodified_baseline_rejects_changed_source) ... ok
+test_cannot_fabricate_a_tool_missing_from_host (test_provider.ModelFixtureTest.test_cannot_fabricate_a_tool_missing_from_host) ... ok
+test_default_is_plain_ack_and_model_endpoint_is_local (test_provider.ModelFixtureTest.test_default_is_plain_ack_and_model_endpoint_is_local) ... ok
+test_scripted_tool_is_sent_only_when_actual_host_advertises_it (test_provider.ModelFixtureTest.test_scripted_tool_is_sent_only_when_actual_host_advertises_it) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 1.535s
+
+OK

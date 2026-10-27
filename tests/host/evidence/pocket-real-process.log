@@ -1,0 +1,15 @@
+  Starting Pi Pocket (This device only)…
+
+  π Pi Pocket  ● running
+
+  Access   This device only · other devices cannot connect
+  Open     http://127.0.0.1:32917
+  Folder   <SANDBOX>/project
+  Data     <SANDBOX>/data
+
+  Only this machine can connect. Use --access lan, cloudflare, or tailscale to let other devices in.
+
+  Sign in  http://127.0.0.1:32917/login?token=<REDACTED>
+
+[info] Owner turned fixture-clock on.
+  Stopping Pi Pocket…
