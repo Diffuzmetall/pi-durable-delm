@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "<TARGET>/docs/evidence/native14/acceptance/run-installed.py", line 216, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "<TARGET>/docs/evidence/native14/acceptance/run-installed.py", line 179, in main
+    ui_until(b'READONLY');ui_until(b'VISIBLE_FINAL_NOTE');assert b'OWNER' in raw and b'RECENT FACT / FAIL' in raw
+    ~~~~~~~~^^^^^^^^^^^^^
+  File "<TARGET>/docs/evidence/native14/acceptance/run-installed.py", line 176, in ui_until
+    assert ui.poll() is None and time.monotonic()<end,'Interactive BOARD missing '+repr(marker)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Interactive BOARD missing b'READONLY'

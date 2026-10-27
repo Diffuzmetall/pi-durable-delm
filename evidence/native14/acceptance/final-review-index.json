@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "verdict": "PASS_LOCAL_CURRENT_INSTALLED_NATIVE14_WITH_EXPLICIT_CORRECTION",
+  "task": "f12a77054a1e44d89fedce21e9507abc",
+  "archive": {
+    "path": "dist/pi-durable-delm-0.1.0-native14-candidate-v2.tgz",
+    "sha256": "830e43da3e6119fad22507d29db7da0de94fa80817442b26ce4298ca323e7480",
+    "regularFiles": 449,
+    "runtimeAssets": 37,
+    "exactHashes": "dist/N14-candidate-v2-manifest.json"
+  },
+  "frozenInputs": [
+    {
+      "path": "evidence/native14/acceptance/candidate.json",
+      "sha256": "a8ffbcc6abeeba2834bc4cedff0b037e0a26a0c8275bbf1b693dc3fd25cd167f",
+      "files": 66,
+      "status": "PRESERVED_UNCHANGED; original negative-removal inference superseded below"
+    },
+    {
+      "path": "evidence/native14/acceptance/postremove-supplement-candidate.json",
+      "sha256": "1d1f0867646f4c0c28fb6690d536333b56f7bbd6bc350d93c7ef2bedfb98a885",
+      "files": 15,
+      "status": "ACCEPTED_APPEND_ONLY_CORRECTION"
+    }
+  ],
+  "independentReviews": [
+    {
+      "actor": "alice",
+      "task": "49f635937fd045c285de94225c38b79c",
+      "doneSequence": 914,
+      "path": "evidence/native14/packaging/n14-final-independent-review.md",
+      "sha256": "154adfacb3f754b87f8fd78fb96f6d50072088dd744496ec0b6886ea2dae83b1",
+      "verdict": "BOUNDED_PASS_ACCEPTED",
+      "scope": "Actual final fixture/source/evidence, real policy delegation and corrected effective-catalogue claim; all81 input hashes and hard negative witness checks"
+    },
+    {
+      "actor": "carol",
+      "task": "aef4046f38b846a5a75e8ea35c34a036",
+      "doneSequence": 906,
+      "path": "evidence/native14/launcher/n14-final-ui-review.md",
+      "sha256": "6c74dc58422cebbdb5027f11df32b5b2f147034d8f0311f1701041721efdf2ec",
+      "verdict": "ACCEPTED",
+      "scope": "Actual shipped curses evidence, read-only observer/backend survival, ordinary-terminal setup and independently accepted post-removal correction"
+    }
+  ],
+  "measurementCorrection": {
+    "finding": "4876b0eea5f84a0fb474b29e427101ab",
+    "reviewerAuthorResolutionSequence": 905,
+    "originalUnsupportedClaim": "lifecycle-result.json removedSkillAbsentActualNativePrompt:true without a required post-removal observation",
+    "originalClaimStatus": "RETRACTED_AND_SUPERSEDED; successful assistant reply is not witness success",
+    "authoritativeSupplement": "evidence/native14/acceptance/postremove-supplement.md",
+    "actualWitness": "evidence/native14/acceptance/postremove-current-prompt-result.json",
+    "hardGate": "evidence/native14/acceptance/postremove-hard-gate-result.json",
+    "acceptedClaim": "Installed SDK1.4 system-delta replay reports no EFFECTIVE CURRENT DeLM skill or delm_wait tool. Historical catalogue remains preserved; actual later skills:null and delm:null deltas remove it.",
+    "requiredMeasurementCount": 1,
+    "matchedActualModelRequests": 1,
+    "hardRejectedNegativeCases": 5
+  },
+  "execution": {
+    "actualInstalledEntrypointAndSDK": "PASS; original current Native main/loader/controller and SDK1.4.0, no host clone/patch/new Harness",
+    "exactInstalled449AndRuntime37": "PASS",
+    "twoProductOpenedOrdinaryTerminalActors": "PASS; Tern absent from scoped PATH, zero manager exec",
+    "approvedInputReplayExactPendingReopen": "PASS",
+    "actualNativeBashClaimSharedResultDone": "PASS",
+    "actualWakeSnapshotReadExplicitAck": "PASS",
+    "toolCancelThenDoneSilentConsumer": "PASS",
+    "realAdmissionThenStopDeniedLateDelivery": "PASS; named scheduling barrier after original genuine admission, no policy-result substitution",
+    "typePayloadInstanceFencesAndResume": "PASS",
+    "syntheticDraftAndPriorMessagePreservation": "PASS; only recorded fixture drafts cleared during normal cleanup",
+    "sameShippedInteractiveCursesBoard": "PASS; detail, End scroll, notes, search, resize and quit",
+    "observerReadOnlyAndBackendOwnersSurviveQuit": "PASS; board bytes and unread actor receipt unchanged",
+    "repeatInstallUpdateRollbackRemove": "PASS",
+    "originalNativeSameConversationAfterRemoval": "PASS",
+    "effectiveCurrentSkillAndToolAbsentAfterRemoval": "PASS_ONLY_WITH_ACCEPTED_SUPPLEMENT",
+    "offlineOneGithubUrlReadingMapAndRealCli": "PASS_OFFLINE_SCOPE",
+    "liveTeamBuildReload": "NOT_TESTED_NOT_PERFORMED",
+    "liveModelQualityOrExternalProviderCalls": "NOT_TESTED_NOT_PERFORMED",
+    "publicGithubFetchFreshMachineAgentSetup": "NOT_TESTED",
+    "publication": "NOT_PERFORMED_BY_THIS_GATE; separate conditional Alice task d83909a5bd964dadbd73d0d6eb642866"
+  },
+  "counts": {
+    "cleanPipelineFauxRequests": 17,
+    "boundedCorrectionFauxRequests": 2,
+    "finalProofIncludingCorrectionFauxRequests": 19,
+    "earlierDisclosedAttemptFauxRequests": 17,
+    "totalAcceptanceFauxRequests": 36,
+    "liveOrPaidModelRequests": 0,
+    "externalInetConnections": 0,
+    "cleanPipelineOwnExactBoardLoopbackConnections": 11,
+    "supplementInetConnections": 0
+  },
+  "reproduction": {
+    "cleanPipeline": "docs/native14-acceptance.md commands and evidence/native14/acceptance/final-pipeline.log reproduce the installed product flow. The old lifecycle negative-prompt flag MUST NOT be used without the correction.",
+    "correctedPostRemovalGate": "After the pipeline removes the package, measure-postremove.py uses the same private locator/session and the installed SDK replay observer; postremove_witness.validate hard-checks the actual record before PASS.",
+    "privateAreaNote": "Drivers intentionally allocate fresh owned areas and refuse an existing phase directory; do not concurrently reuse the private locator. Supplemental final phase already executed is retained; a deliberate reproduction must select its own fresh phase directory, not overwrite history.",
+    "noAdditionalRunsRequiredForThisVerdict": true
+  },
+  "preservationAndLimits": [
+    "Actual user auth/settings/personal skills and active four-actor conversations/drafts were not changed.",
+    "Native storage was accessed only through its existing SDK/controller; Python board files in disposable fixtures are distinct from Native SQL.",
+    "Original81 frozen input files, runtime37, exact449 archive and Native entrypoint inputs remain unchanged; this index and peer reports are append-only external acceptance artifacts.",
+    "No publication receipt or universal compatibility, arbitrary host, migration, live-model quality, or current loaded-team-build claim follows from this local PASS.",
+    "The earlier public1.0.2 HOST05 proof remains historical and is not substituted for current1.4 acceptance."
+  ]
+}

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "<PACKAGE>/tests/native14-host-integration.py", line 128, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "<PACKAGE>/tests/native14-host-integration.py", line 95, in main
+    status=rpc(bc2,'status',identity=bi2);assert status['ok'],status
+  File "<PACKAGE>/tests/native14-adapter-host.py", line 25, in rpc
+    while b'\n' not in data:
+             ^^^^^^^^^^^^^^^
+TimeoutError: timed out

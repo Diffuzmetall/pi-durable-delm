@@ -167,7 +167,7 @@ def initialize(run, source, task, n=2, shared_workspace=None, plan=None):
             (home / "START.md").chmod(0o600)
             adapter = home / "delm-adapter.js"
             adapter.write_text(
-                f"import install from {json.dumps(str(ROOT / 'extensions' / 'delm' / 'index.js'))};\n"
+                f"import install from {json.dumps(str(ROOT / 'extensions' / 'delm' / 'native14.js'))};\n"
                 f"export default base => install(base, {{ run: {json.dumps(str(run))}, "
                 f"actor: {json.dumps(actor)} }});\n"
             )

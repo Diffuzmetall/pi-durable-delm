@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "<TARGET>/evidence/native14/acceptance/after-remove.py", line 27, in <module>
+    view=h.latest_view();assert view['session']['id']==identity['sessionId'] and view['conversation']['id']==identity['conversationId']==1
+                                                                                 ~~~~~~~~~~~~~~~~~~~~^^^^^^
+KeyError: 'id'

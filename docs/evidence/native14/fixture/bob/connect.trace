@@ -1,0 +1,21 @@
+3170602 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3170602 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3170602 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3170602 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3170604 +++ exited with 0 +++
+3170603 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3170604, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+3170603 +++ exited with 0 +++
+3170602 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3170603, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+3170876 +++ exited with 0 +++
+3170602 --- SIGWINCH {si_signo=SIGWINCH, si_code=SI_USER, si_pid=3170602, si_uid=1000} ---
+3170609 +++ exited with 0 +++
+3170608 +++ exited with 0 +++
+3170605 +++ exited with 0 +++
+3170606 +++ exited with 0 +++
+3170607 +++ exited with 0 +++
+3170913 +++ exited with 0 +++
+3170914 +++ exited with 0 +++
+3170915 +++ exited with 0 +++
+3170916 +++ exited with 0 +++
+3170610 +++ exited with 0 +++
+3170602 +++ exited with 0 +++

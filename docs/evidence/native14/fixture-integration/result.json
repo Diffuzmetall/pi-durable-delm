@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "verdict": "ACTUAL_NATIVE14_BOARD_REOPEN_WAKE_READACK_PASS",
+  "actualMain": true,
+  "modelSubstitutionOnly": true,
+  "modelCalls": 9,
+  "liveModelCalls": 0,
+  "inetConnects": 9,
+  "externalInetConnects": 0,
+  "onlyOwnedLoopbackBoardConnections": true,
+  "actualNativeBashClaimAndResult": true,
+  "existingTrustedDCGBoundarySelected": true,
+  "pendingWaitSurvivesExactReopen": true,
+  "sameWaitAndNativeInstance": true,
+  "sameApprovedInputReplayedWithoutModel": true,
+  "actualBoardEventWake": true,
+  "actualSnapshotReadAndExplicitACK": true,
+  "statusSentAcked": true,
+  "sharedResult": true,
+  "stopResumeWithoutExtraInput": true,
+  "productHashes": {
+    "extensions/delm/native14.js": "7052b87286b22ba057627df8b32955778f23c7c22f63a697dc8e20e2c05dbbb5",
+    "extensions/delm/native14-owner.js": "5e8f133b70a4273c012c8e1f0eae37d221a0958a86c26aaa9421ad43d045c245",
+    "extensions/delm/index.js": "c31922d070384a38659498a7f01d42ea861ee912f86411669b9240908b80f11b",
+    "extensions/delm/protocol.js": "4a538bb850c9b285c6de9920f99397519b3a7cd464bc629b462807aa9fd1b4cd",
+    "skills/delm/Tools/NativeInput.mjs": "90f6945797956a18ca22377ab1db726e9f82de0394934a7edfb24ddc3fcc2d3f",
+    "scripts/delm_local.py": "af22210423bff735906ec36314e79186b395ee3f5073d0af33592bc151b75250",
+    "scripts/delm_domain.py": "5da54ffc3e39e4a162d0b851e008d80fa7675adef44cce613a98d0f39854179a",
+    "scripts/delm_delivery.py": "8957d4a4d0b37b2b32070bb0770db0f0f524cdf0687088126907a79da97c4f80"
+  },
+  "currentLiveBuild": "NOT_TESTED",
+  "finalInstalledPackage": "NOT_TESTED"
+}

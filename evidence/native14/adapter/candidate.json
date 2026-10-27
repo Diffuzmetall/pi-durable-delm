@@ -1,0 +1,35 @@
+{
+  "schema":1,
+  "verdict":"CURRENT_NATIVE14_ADAPTER_SELF_VERIFIED_FINAL_ACCEPTANCE_PENDING",
+  "protocol":"delm.native14.control.v1",
+  "actual_sdk":"1.4.0",
+  "actual_host_model_calls":4,
+  "live_model_calls":0,
+  "external_inet_connects":0,
+  "private_board_loopback_connects":3,
+  "deduplicated_scoped_sdk_checks_passed":37,
+  "production_hashes":{
+    "extensions/delm/native14.js":"7052b87286b22ba057627df8b32955778f23c7c22f63a697dc8e20e2c05dbbb5",
+    "extensions/delm/native14-owner.js":"5e8f133b70a4273c012c8e1f0eae37d221a0958a86c26aaa9421ad43d045c245",
+    "extensions/delm/index.js":"c31922d070384a38659498a7f01d42ea861ee912f86411669b9240908b80f11b",
+    "skills/delm/Tools/NativeInput.mjs":"90f6945797956a18ca22377ab1db726e9f82de0394934a7edfb24ddc3fcc2d3f"
+  },
+  "test_hashes":{
+    "tests/native14-adapter.test.mjs":"2c1735c6c0335b83cd2cecf2b3debe6828bf76c5193c21c006b5c812702f536a",
+    "tests/native14-adapter-control.test.mjs":"124243dd6134ff28a447565fac2cebd05ef2bc698b6bec81ec61d57313c76b52",
+    "tests/native14-adapter-host.py":"2ad558a3f3a9584da2cd93f7ffd1996f5be87c30a0ef3678882a305dcc045838"
+  },
+  "contract_and_evidence_hashes":{
+    "docs/native14-contract.md":"fc377b9230bd63bbd46153572c35b62b935c4041fc4538eef02c61151985cbf5",
+    "docs/evidence/native14/abi/identity.json":"9d689614f42b7b847eda97d7ed71dc9b3423251bf8dd518cd30a889eed675d6b",
+    "evidence/native14/adapter/control-abi.json":"ea3f009b61dbfb00c210689f474b542ad68a4ec5ab47124ae91695183f38f06a",
+    "evidence/native14/adapter/verification.json":"957ab4a4ede379429634c46ace9fa94bc83eb7bd7eac8cdb7a395bf72502b13f",
+    "evidence/native14/adapter/actual-host-result.json":"d8c1a6e8f3a48fd5b319d0f2cc35a4340ecddc5058c414187b9bf572842876db"
+  },
+  "limits":[
+    "Actual installed entrypoint/root/controller tested in disposable sessions; current live team processes were not reloaded",
+    "Only model responses substituted; no copied/patched Native, production Harness construction, direct Native SQL or personal config/auth access",
+    "37 SDK checks correlate several final targeted runs, not a fabricated single green batch; earlier environment/setup failures disclosed",
+    "Final package/launcher/TUI acceptance remains independent N14-ACCEPT; historical public1.0.2 HOST05 is not evidence here"
+  ]
+}

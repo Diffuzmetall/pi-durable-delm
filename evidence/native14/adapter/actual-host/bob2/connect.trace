@@ -1,0 +1,30 @@
+3242493 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3242493 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3242493 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3242493 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3242502 +++ exited with 0 +++
+3242501 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3242502, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+3242501 +++ exited with 0 +++
+3242493 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3242501, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+3242598 +++ exited with 0 +++
+3242493 --- SIGWINCH {si_signo=SIGWINCH, si_code=SI_USER, si_pid=3242493, si_uid=1000} ---
+3242983 connect(3, {sa_family=AF_INET, sin_port=htons(38257), sin_addr=inet_addr("127.0.0.1")}, 16) = -1 EINPROGRESS (Operation now in progress)
+3242983 +++ exited with 0 +++
+3242493 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3242983, si_uid=1000, si_status=0, si_utime=11 /* 0.11 s */, si_stime=6 /* 0.06 s */} ---
+3243044 connect(3, {sa_family=AF_INET, sin_port=htons(38257), sin_addr=inet_addr("127.0.0.1")}, 16) = -1 EINPROGRESS (Operation now in progress)
+3243044 +++ exited with 0 +++
+3242493 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3243044, si_uid=1000, si_status=0, si_utime=12 /* 0.12 s */, si_stime=6 /* 0.06 s */} ---
+3243047 connect(3, {sa_family=AF_INET, sin_port=htons(38257), sin_addr=inet_addr("127.0.0.1")}, 16) = -1 EINPROGRESS (Operation now in progress)
+3243047 +++ exited with 0 +++
+3242493 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3243047, si_uid=1000, si_status=0, si_utime=13 /* 0.13 s */, si_stime=5 /* 0.05 s */} ---
+3242507 +++ exited with 0 +++
+3242504 +++ exited with 0 +++
+3242503 +++ exited with 0 +++
+3242505 +++ exited with 0 +++
+3242506 +++ exited with 0 +++
+3242612 +++ exited with 0 +++
+3242614 +++ exited with 0 +++
+3242611 +++ exited with 0 +++
+3242613 +++ exited with 0 +++
+3242508 +++ exited with 0 +++
+3242493 +++ exited with 0 +++

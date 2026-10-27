@@ -1,0 +1,89 @@
+{
+  "verdict": "PASS",
+  "measurementCount": 1,
+  "modelCalls": 1,
+  "liveModelCalls": 0,
+  "event": "postremove_current_prompt_measured",
+  "systemMessages": 2,
+  "historicalDelmSkill": true,
+  "currentDelmSkill": false,
+  "currentDelmWaitTool": false,
+  "currentTools": [
+    "read",
+    "write",
+    "edit",
+    "bash",
+    "web_search",
+    "web_fetch",
+    "batch_web_fetch",
+    "context7_resolve_library_id",
+    "context7_query_docs",
+    "search_history",
+    "google_search",
+    "generate_image",
+    "schedule",
+    "watch_pr",
+    "repo_watch",
+    "contact_supervisor",
+    "subagent_supervisor",
+    "subagent_send_many",
+    "subagent_models",
+    "subagent",
+    "subagent_stop",
+    "subagent_release_hold",
+    "goal"
+  ],
+  "systemDeltaSections": [
+    {
+      "preamble": {
+        "length": 169,
+        "delm": false
+      },
+      "tools": {
+        "length": 339,
+        "delm": false
+      },
+      "rules": {
+        "length": 839,
+        "delm": false
+      },
+      "docs": {
+        "length": 1442,
+        "delm": false
+      },
+      "project_context": {
+        "length": 246,
+        "delm": false
+      },
+      "skills": {
+        "length": 913,
+        "delm": true
+      },
+      "cwd": {
+        "length": 39,
+        "delm": false
+      },
+      "web_tools": {
+        "length": 317,
+        "delm": false
+      },
+      "context7-guidance": {
+        "length": 365,
+        "delm": false
+      },
+      "schedules": {
+        "length": 149,
+        "delm": false
+      },
+      "delm": {
+        "length": 13885,
+        "delm": false
+      }
+    },
+    {
+      "skills": null,
+      "delm": null
+    }
+  ],
+  "sdkReplay": "@earendil-works/pi-ai/utils/transcript getCurrentSystemPrompt/getCurrentTools; installed1.4.0"
+}

@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "verdict": "POSTREMOVE_EFFECTIVE_PROMPT_CORRECTION_READY_FOR_INDEPENDENT_REVIEW",
+  "baseManifestSha256": "a8ffbcc6abeeba2834bc4cedff0b037e0a26a0c8275bbf1b693dc3fd25cd167f",
+  "base66FilesUnchanged": true,
+  "archiveSha256": "830e43da3e6119fad22507d29db7da0de94fa80817442b26ce4298ca323e7480",
+  "finding": "4876b0eea5f84a0fb474b29e427101ab",
+  "files": {
+    "evidence/native14/acceptance/measure-postremove.py": "4b5625b88787fb40bb621661aa7747d3ea11daac7d9f5eb0aae1e21aa50146c1",
+    "evidence/native14/acceptance/postremove-current-prompt-result.json": "8c7a8c608d4b0d8350f95d13079778dcb7beb94988c5ee0f416e484eac4f0af9",
+    "evidence/native14/acceptance/postremove-hard-gate-result.json": "765a4197bb489f16774344d8de1e5b02a9c16261488c0aa095b8782eb97ff8d0",
+    "evidence/native14/acceptance/postremove-measure-connect.trace.txt": "ed8e23c615d0494015275c06657cdc6a10e35643c936c38d885ecc90c70ed53a",
+    "evidence/native14/acceptance/postremove-measure-final-connect.trace.txt": "84ace73a4ce82a65d540a51cb62e1ce0bf5fcc5edcdc8994d5c28f7b2f1cd0c4",
+    "evidence/native14/acceptance/postremove-measure-final-model-events.jsonl.txt": "a11407873956c7a8ceddeb6ec9f81eac81d18cfd6a3276282e7fb1ac15c7887d",
+    "evidence/native14/acceptance/postremove-measure-final-terminal.bin.txt": "065bf0182556e026233fc1753d1c7d18af92919c6d4807be59fc081f3de28fa3",
+    "evidence/native14/acceptance/postremove-measure-model-events.jsonl.txt": "72ad2977c6cf107163ba765c2a5284d885c89b48fcd230294fdee2c52c3c0e4b",
+    "evidence/native14/acceptance/postremove-measure-observer.mjs": "64e669b5b1109263a28cbeecc1116b656aafe24c98f082cd378961a3a92b6827",
+    "evidence/native14/acceptance/postremove-measure-terminal.bin.txt": "c21bfab292240422531060c1535b1fac357e2da08ba8ad8c32d743eb5150494c",
+    "evidence/native14/acceptance/postremove-measurement.json": "335bee3667d710ecb8fcb277e65aff97b7a9b9a95ebf2358add26cf741528259",
+    "evidence/native14/acceptance/postremove-supplement.md": "1025de3772eb6f732e3526ff0b84a42185f74868061bfe0ca9f4c455047b1590",
+    "evidence/native14/acceptance/postremove_witness.py": "354caa1b6317d9282b17d4726daa69f30bd4106b1e28cf14a1b06e329a7b44d2",
+    "evidence/native14/acceptance/preliminary-postremove-content-only.json": "082d2d1d9a9cd85c9d5566b82758d861f4456e6bc27a8cdd2885fc2215cec750",
+    "evidence/native14/acceptance/preliminary-postremove-observer.mjs": "f90fe796c3494b6459c397ad757bd4f9d2ae18f2a6b02295b5446591723716af"
+  },
+  "supplementalFauxRequests": 2,
+  "liveModelRequests": 0,
+  "externalInetConnections": 0,
+  "hardNegativeCasesRejected": 5,
+  "effectiveCurrentSkillAbsent": true,
+  "effectiveDelmWaitToolAbsent": true,
+  "historicalMessagesPreserved": true,
+  "peerVerdict": "PENDING"
+}

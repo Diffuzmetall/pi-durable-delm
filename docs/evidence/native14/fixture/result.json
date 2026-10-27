@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "verdict": "ACTUAL_INSTALLED_NATIVE14_BASELINE_FIXTURE_PASS",
+  "actualInstalledLauncher": true,
+  "actualMain": true,
+  "actualGlobalRuntime": true,
+  "sdkVersion": "1.4.0",
+  "hostCloneOrPatch": false,
+  "newHarnessByFixture": false,
+  "modelSubstitutionOnly": true,
+  "actualNativeSessions": [
+    {
+      "actor": "alice",
+      "identity": {
+        "id": "1793125823181-75447841-31fc-4576-a4cd-a7e9866d79ff",
+        "directory": "<FIXTURE>/alice/home/.pi/agent/experimental/durable-sessions/02272ed680e548bc9457ed5d/1793125823181-75447841-31fc-4576-a4cd-a7e9866d79ff",
+        "cwd": "<FIXTURE>/work"
+      },
+      "realOwnerAdmission": true,
+      "wrongWorkspaceAndForeignConversationDenied": true,
+      "draftPreservedDuringActualInput": true,
+      "draftAbsentHistory": true,
+      "exactSessionReopenNoModelInput": true
+    },
+    {
+      "actor": "bob",
+      "identity": {
+        "id": "1793125848993-3efa40e9-3adc-4840-b964-7bfbf6ebd229",
+        "directory": "<FIXTURE>/bob/home/.pi/agent/experimental/durable-sessions/02272ed680e548bc9457ed5d/1793125848993-3efa40e9-3adc-4840-b964-7bfbf6ebd229",
+        "cwd": "<FIXTURE>/work"
+      },
+      "realOwnerAdmission": true,
+      "wrongWorkspaceAndForeignConversationDenied": true,
+      "draftPreservedDuringActualInput": true,
+      "draftAbsentHistory": true,
+      "exactSessionReopenNoModelInput": true
+    }
+  ],
+  "modelCalls": 3,
+  "liveModelCalls": 0,
+  "inetConnects": 0,
+  "actualNativeReadToolResultVerified": true,
+  "driverHashes": {
+    "native14-host.py": "e0a32c495de148ddee944bb1cc4e6233bc0c4b83106acf2df7c0d8739547487e",
+    "native14-host-model.mjs": "0b9b2e4b36af5f2ff52f7e26e1152ac6ba9d059dec3be0c6dfa0b496ef816f8a",
+    "native14-host-observer.mjs": "1c7ccc209e1723f1efab98ac07afe69a82c6af4fba4e6e50c68b78bd6bbfa774"
+  },
+  "entrypointHashes": {
+    "launcher": "ed3d0087e88b8bb40182ac715dbda2344dd58c539e6b07753daa84cebc9c1d6b",
+    "actualLauncher": "7dc36d56b2be0a59ad2a0f850100ac7ceb966cf1c6b536611e8710ffa8369e3b",
+    "globalRuntime": "1ffcdd486de309d9827b0b75c46113688d7d762f2d44a0a92f65fd4ff48b8e00",
+    "main": "b5dcb4446384f88b38804fa0fc050dc8a2f2ecc7de9f8c1efe764a3e229aecf4",
+    "modelRuntime": "de28a51492788e7f5f4d6f20a57fa8b08e32fd9e766a365211b54a3f3959a177",
+    "runtime": "94bd14a66a92e9b77c4f8222a8494fd0817c67f4aa784c37b38917606810b383",
+    "registryLoader": "cc49977f453dba8a0e9d613fbafc561c0f6c30461204f94227cf85d2a97bccc0",
+    "sharedServer": "ed613f080bde00f201b67fbc4226b0798400fb9d32d7eca4f119026f15bea83f",
+    "sharedCommands": "a8868ca5ce61aa321cb31f238bc5ac51dec62c25803f45262aadc0ded3dc45aa",
+    "globalHost": "b37bde401c9547866b7113a883012b5820974a588eebf0077162f12b008d0f62",
+    "localHostAdapter": "a0b0c9d209a8916b35927212294ac7cf676a275ca443426f49aac009807a7d39",
+    "hindsightController": "8e9e0a9882b52f4798639765dcbc26d73876c301f161d1b1c14b64a533839928"
+  },
+  "entrypointPaths": {
+    "launcher": "<OPERATOR_HOME>/.local/bin/pi-durable",
+    "actualLauncher": "<INSTALLED_HOST_LANE>/pi-durable",
+    "globalRuntime": "<INSTALLED_HOST_LANE>/global-runtime.mjs",
+    "main": "<INSTALLED_HOST_LANE>/host/packages/coding-agent/src/experimental/durable/main.ts",
+    "modelRuntime": "<INSTALLED_HOST_LANE>/host/packages/coding-agent/src/core/model-runtime.ts",
+    "extensions": "<INSTALLED_EXTENSIONS>",
+    "lane": "<INSTALLED_HOST_LANE>",
+    "runtime": "<INSTALLED_HOST_LANE>/host/packages/coding-agent/src/experimental/durable/runtime.ts",
+    "registryLoader": "<INSTALLED_HOST_LANE>/host/.pi/extensions/durable-reload/index.ts",
+    "sharedServer": "<INSTALLED_HOST_LANE>/host/packages/coding-agent/src/experimental/durable/shared-server.ts",
+    "sharedCommands": "<INSTALLED_HOST_LANE>/host/packages/coding-agent/src/experimental/durable/shared-commands.ts",
+    "globalHost": "<INSTALLED_EXTENSIONS>/packages/local-host/src/global.ts",
+    "localHostAdapter": "<INSTALLED_EXTENSIONS>/packages/local-host/src/adapter.ts",
+    "hindsightController": "<INSTALLED_EXTENSIONS>/packages/hindsight/src/index.mjs"
+  },
+  "fixtureProfile": {
+    "memoryDisabled": true,
+    "codexDefault": false,
+    "mcp": false
+  },
+  "currentLiveBuild": "NOT_TESTED",
+  "deLMFinalAdapterIntegration": "NOT_TESTED",
+  "stableRequestIDSocketPrompt": "NOT_PROVIDED_BY_STOCK_SOCKET"
+}

@@ -1,0 +1,86 @@
+{
+  "verdict": "ACTUAL_CURRENT_NATIVE14_ADAPTER_SELF_CHECK_PASS",
+  "actualInstalledEntrypoint": true,
+  "actualTrustedOwnerAdmission": true,
+  "privateEndpointInsideExistingOwner": true,
+  "hostModified": false,
+  "fixtureConstructedHarness": false,
+  "modelSubstitutionOnly": true,
+  "modelCalls": 4,
+  "liveModelCalls": 0,
+  "externalInetConnects": 0,
+  "boardLoopbackConnects": 3,
+  "sessions": [
+    {
+      "protocol": "delm.native14.control.v1",
+      "sdkVersion": "1.4.0",
+      "run": "<FIXTURE>/run",
+      "actor": "alice",
+      "workspace": "<FIXTURE>/work",
+      "sessionPath": "<FIXTURE>/alice1/home/.pi/agent/experimental/durable-sessions/14609adea462f2d4738a174b/1793127386174-f2a1a315-9dbf-4da0-89be-258ce9f95c58/session.sqlite",
+      "sessionId": "1793127386174-f2a1a315-9dbf-4da0-89be-258ce9f95c58",
+      "conversationId": 1,
+      "instanceId": "0de4e64a-673b-46d6-9c51-95e2416c8ee3"
+    },
+    {
+      "protocol": "delm.native14.control.v1",
+      "sdkVersion": "1.4.0",
+      "run": "<FIXTURE>/run",
+      "actor": "bob",
+      "workspace": "<FIXTURE>/work",
+      "sessionPath": "<FIXTURE>/bob1/home/.pi/agent/experimental/durable-sessions/14609adea462f2d4738a174b/1793127414143-308a0a11-20af-4111-acd9-95fac3ff9c7e/session.sqlite",
+      "sessionId": "1793127414143-308a0a11-20af-4111-acd9-95fac3ff9c7e",
+      "conversationId": 1,
+      "instanceId": "f2c18ff7-d4a7-4312-bce6-86e57e995af2"
+    }
+  ],
+  "checks": [
+    {
+      "actor": "alice",
+      "exactNativeSessionAndInstance": true,
+      "realTrustedStableAdmission": true,
+      "replayWithoutExtraModel": true,
+      "changedPayloadTypeAndIdentityRejected": true,
+      "stopResumeNoInput": true,
+      "pendingWaitReopenAndActualWake": false,
+      "twoCleanQuits": true
+    },
+    {
+      "actor": "bob",
+      "exactNativeSessionAndInstance": true,
+      "realTrustedStableAdmission": true,
+      "replayWithoutExtraModel": true,
+      "changedPayloadTypeAndIdentityRejected": true,
+      "stopResumeNoInput": true,
+      "pendingWaitReopenAndActualWake": true,
+      "twoCleanQuits": true
+    }
+  ],
+  "installedHashesUnchanged": {
+    "launcher": "ed3d0087e88b8bb40182ac715dbda2344dd58c539e6b07753daa84cebc9c1d6b",
+    "actualLauncher": "7dc36d56b2be0a59ad2a0f850100ac7ceb966cf1c6b536611e8710ffa8369e3b",
+    "globalRuntime": "1ffcdd486de309d9827b0b75c46113688d7d762f2d44a0a92f65fd4ff48b8e00",
+    "main": "b5dcb4446384f88b38804fa0fc050dc8a2f2ecc7de9f8c1efe764a3e229aecf4",
+    "modelRuntime": "de28a51492788e7f5f4d6f20a57fa8b08e32fd9e766a365211b54a3f3959a177",
+    "runtime": "94bd14a66a92e9b77c4f8222a8494fd0817c67f4aa784c37b38917606810b383",
+    "registryLoader": "cc49977f453dba8a0e9d613fbafc561c0f6c30461204f94227cf85d2a97bccc0",
+    "sharedServer": "ed613f080bde00f201b67fbc4226b0798400fb9d32d7eca4f119026f15bea83f",
+    "sharedCommands": "a8868ca5ce61aa321cb31f238bc5ac51dec62c25803f45262aadc0ded3dc45aa",
+    "globalHost": "b37bde401c9547866b7113a883012b5820974a588eebf0077162f12b008d0f62",
+    "localHostAdapter": "a0b0c9d209a8916b35927212294ac7cf676a275ca443426f49aac009807a7d39",
+    "hindsightController": "8e9e0a9882b52f4798639765dcbc26d73876c301f161d1b1c14b64a533839928"
+  },
+  "actualNativeWaitTool": true,
+  "pendingWaitSameIdentityAcrossReopen": true,
+  "actualNativeWakeAfterBoardDone": true,
+  "actorCLIReadAckByFixture": true,
+  "statusReconciledActualBoardAck": true,
+  "currentLiveBuild": "NOT_RELOADED_NOT_TESTED",
+  "finalPackageAndLauncher": "SEPARATE_N14_ACCEPT",
+  "productHashes": {
+    "extensions/delm/native14.js": "7052b87286b22ba057627df8b32955778f23c7c22f63a697dc8e20e2c05dbbb5",
+    "extensions/delm/native14-owner.js": "5e8f133b70a4273c012c8e1f0eae37d221a0958a86c26aaa9421ad43d045c245",
+    "extensions/delm/index.js": "c31922d070384a38659498a7f01d42ea861ee912f86411669b9240908b80f11b",
+    "skills/delm/Tools/NativeInput.mjs": "90f6945797956a18ca22377ab1db726e9f82de0394934a7edfb24ddc3fcc2d3f"
+  }
+}

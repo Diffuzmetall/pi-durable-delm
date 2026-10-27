@@ -1,78 +1,70 @@
 # DeLM для Pi Durable
 
-**Несколько агентов, общая доска, один проект и один результат.** DeLM помогает разделить работу между агентами и передавать готовые результаты без ручного копирования ответов между чатами.
+**Несколько агентов, общая доска, один проект и один результат.** Агенты делят работу, публикуют готовые результаты и продолжают нужные беседы по событиям доски — без ручного переноса ответов между чатами.
 
-В пакете три основные части: Python-доска задач, расширение для Native Pi Durable и скилл подготовки команды. **Сам Durable, модели и авторизация не входят в поставку:** используются ваша установка и её сессии.
+Пакет содержит Python-доску, расширение, переносимый скилл и терминальный TUI **DeLM BOARD**. Сам Durable, модели и авторизация не поставляются: используются ваша установка и её настройки. Агенты открываются в обычных терминалах; определённый менеджер окон не нужен.
 
-> **Статус совместимости.** Интеграция проверена на настоящем Native v1.0.2 с явным минимальным патчем трёх файлов, который добавляет локальный `DurableSession` API 1. Ни одна неизменённая stock-версия Native пока не объявлена совместимой. Обычный Pi CLI, один SDK или Pocket не заменяют этот интерфейс. [Что требуется от Native →](docs/native-compatibility.md)
+> **Совместимость:** текущий путь использует registry loader установленного Native 1.4 и его реальный trusted admission. Он проверяется на фактическом Native, а не на подменном host. Компонентные сценарии уже пройдены; итоговая приёмка установленного пакета ещё не завершена. Совпадение версии SDK само по себе не означает совместимость. [Точный контракт](docs/native14-contract.md).
 
-## Зачем это нужно
+## Настройка агентом по ссылке на GitHub
 
-Допустим, нужно добавить Unicode-slugify: один агент пишет функцию, второй проверяет кириллицу, пробелы и пустой ввод. Оба работают в одном проекте. Автор реализации публикует результат на доске; ожидающий агент получает событие в свою беседу, читает результат и продолжает проверку.
-
-Для небольшого изменения одного агента обычно достаточно. DeLM полезен, когда есть действительно независимые направления: например, контракт данных, реализация, интерфейс и интеграционные тесты.
-
-| Подход | Как передаётся работа |
-|---|---|
-| Один агент | Последовательно в одной беседе, без командной координации |
-| Несколько отдельных чатов | Пользователь вручную переносит ответы и следит за состоянием |
-| DeLM | Агенты читают общую доску, берут задачи и ждут конкретные результаты; пользователь получает общий итог |
-
-Скилл помогает выбрать **2, 4 или 8** участников по полезным направлениям, а не по числу файлов. Восемь участников требуют отдельного разрешения и ресурсов: тест с восемью искусственными identities не доказывает работу восьми живых моделей.
-
-## Как всё работает
-
-![Схема DeLM: отдельные сессии существующего Native, общая Python-доска, одна рабочая папка и подтверждение чтения snapshot](docs/images/delm-architecture.svg)
-
-[Открыть PNG](docs/images/delm-architecture.png) · [Редактируемый SVG](docs/images/delm-architecture.svg)
+Передайте своему кодирующему агенту ссылку и запрос:
 
 ```text
-Пользователь → утверждённый запрос и план
-                         ↓
-                 скилл delm + launcher
-                         ↓
-            отдельные точные сессии Native
-             агент A               агент B
-                ↕                     ↕
-             actor CLI → общая доска ← actor CLI
-                          ↓ событие
-                    Native delm_wait
-                          ↓
-                  нужная беседа продолжена
-                          ↓
-            snapshot → чтение → явный ACK
-                          ↓
-                 один проверенный результат
+Настрой DeLM из https://github.com/Diffuzmetall/pi-durable-delm
+для моего текущего проекта и уже установленного Pi Durable.
+Прочитай prompts/setup-delm.md и docs/agent-setup.md, затем выполни настройку.
+Подключи скилл и расширение, открой поставляемый TUI DeLM BOARD.
+Сохрани мои модели, авторизацию, настройки, guards и существующие беседы.
+Без отдельного согласия не запускай платные модели. Подтверди, что реально работает;
+при несовместимости назови blocker, не устанавливай другой Durable.
 ```
 
-1. **Подготовка.** Скилл читает разрешённые правила и готовый план, выбирает участников и сохраняет исходные инструкции в приватном каталоге запуска — `RUN`.
-2. **Запуск.** Python backend обслуживает доску. Launcher подключается к явно указанному socket уже работающего Native, сохраняет точные session IDs и передаёт каждому его исходный input.
-3. **Работа.** Участник читает доску, выигрывает атомарный `claim` и пишет только в согласованных пределах. Одновременно он может держать одну незавершённую задачу.
-4. **Ранние результаты.** Готовый контракт или другой полезный output можно завершить отдельно, пока его автор продолжает остальную реализацию.
-5. **Ожидание.** `delm_wait` ждёт все названные задачи в состоянии DONE либо подсказывает доступную работу. Событие доски возобновляет нужную сессию без модельного опроса.
-6. **Подтверждение.** Короткое уведомление — только ссылка. Агент получает сохранённый snapshot, читает его и явно подтверждает ACK. Доставка уведомления сама по себе не означает чтения.
+**[Полный готовый промпт](prompts/setup-delm.md)** · **[Карта настройки для агента](docs/agent-setup.md)**
 
-Доска владеет задачами, событиями и receipts. Native по-прежнему владеет беседами, моделями, scheduler и guards. Расширение использует существующие объекты Native: не создаёт второй Harness и не пишет напрямую в его SQLite.
+Агент проверяет настоящий Native, устанавливает только DeLM, подключает скилл и расширение, выдаёт команды открытия агентов и проверяет результат. Если проект, план и разрешённый запуск уже заданы, новое интервью не нужно. Права доступа, число участников и расходы не угадываются.
 
-## Что нужно перед запуском
+## Что делает DeLM
 
-- Python 3.10+ со stdlib `sqlite3`; `curses` нужен для терминального observer.
-- POSIX-система и Node ≥22.19.0 для Native-интеграции.
-- Уже установленный Native с session-facet loader и локальным `DurableSession` API 1.
-- Публичные библиотеки из [`package.json`](package.json): Durable/AI/Chord `1.0.2 || 1.4.0` и `@earendil-works/pi-client` 1.0.2. Разрешение peers настраивает ваша среда; установщик payload зависимости не скачивает. Не смешивайте физические SDK разных версий.
-- Утверждённый план и разрешение на запуск выбранных моделей. Tern необязателен.
+| Без общей доски | С DeLM |
+|---|---|
+| Ответы переносят между отдельными чатами | Агенты читают общие задачи и связанные результаты |
+| Владение задачей согласуют вручную | Атомарный claim с revision/generation fencing |
+| Потребитель ждёт всю работу автора | Полезный ранний output завершается отдельно |
+| Кто-то опрашивает агента «готово?» | Native watcher продолжает нужную беседу по событию |
+| Доставку легко спутать с прочтением | Сохранённый snapshot → чтение → явный ACK |
 
-### Что означает Native API 1
+Для маленького последовательного изменения достаточно одного агента. Команда полезна при независимых направлениях: например, контракт, реализация и интеграционные тесты. Поддерживаются roster 2/4/8; восемь fixture-identities не доказывают работу восьми живых моделей и не разрешают расходы.
 
-Это локальная точка подключения расширения к **существующей** сессии: её registry, conversation и движку выполнения. Внешним RPC-клиентам доступ к этим объектам запрещён.
+## Как всё связано
 
-В проверенном публичном Native этого интерфейса изначально нет. Отдельный [`public-host-api.patch`](extensions/delm/public-host-api.patch) показывает минимальное изменение для точной версии. Патч не применяется автоматически, чужая рабочая установка не пересобирается. Без совместимого API интеграция не поддерживается; Python-ядро можно попробовать независимо.
+![DeLM: существующий Native, точные сессии, actor CLI, общая доска и snapshot/read/ACK](docs/images/delm-architecture.svg)
 
-[Точный API-контракт](docs/native-compatibility.md) · [Подключение к существующему Native](docs/operations.md#подключить-к-существующему-native)
+[PNG](docs/images/delm-architecture.png) · [Редактируемый SVG](docs/images/delm-architecture.svg)
+
+```text
+Утверждённый запрос и план → скилл + launcher → точные Native sessions
+                                                     ↕
+                                        actor CLI → Python-доска
+                                                     ↓ событие
+                                            Native delm_wait
+                                                     ↓
+                                        snapshot → чтение → ACK
+```
+
+Доска владеет задачами, событиями и receipts. Native владеет беседами, моделями, scheduler и guards. Расширение работает внутри существующего владельца Native, использует его реальный admission и приватный Unix control socket; не создаёт второй Harness и не пишет напрямую в Native SQLite. Обычный shared `prompt` нельзя повторять как stable-ID input: его transport ID не обеспечивает эту гарантию.
+
+## Требования
+
+- POSIX-система, Python 3.10+ со stdlib `sqlite3`; для TUI — `curses` и интерактивный терминал.
+- Уже установленный Native 1.4 с совместимым registry loader, реальным trusted admission и его matching SDK. Для текущего пути нужен Node ≥22.19.0; не смешивайте физические SDK разных версий.
+- Разрешённый workspace, утверждённые инструкции и план. Живой запуск команды требует отдельного разрешения на модели и участников.
+
+Установщик payload не скачивает зависимости и не меняет Native. При несовместимости агент сообщает точную причину; другой Durable или патч чужого host не служат автоматическим исправлением. Исторические Chord/session-facet assets сохранены отдельно, но не являются текущим способом подключения.
 
 ## Получить и установить пакет
 
-GitHub-репозиторий содержит исходники; npm publish и готовый GitHub Release здесь не подразумеваются. Для локальной сборки нужен уже установленный npm:
+Исходники доступны на GitHub; npm publish и готовый GitHub Release не подразумеваются. В новом каталоге:
 
 ```bash
 git clone https://github.com/Diffuzmetall/pi-durable-delm.git
@@ -82,9 +74,7 @@ npm pack --ignore-scripts --pack-destination "$OUT"
 export ARCHIVE="$OUT/pi-durable-delm-0.1.0.tgz"
 ```
 
-Команда `npm pack` не устанавливает зависимости и не публикует пакет. Если архив уже получен, задайте `ARCHIVE` его абсолютным путём. Перед выполнением кода проверьте происхождение и содержимое архива.
-
-Первая установка в пустой временный каталог:
+`npm pack` не устанавливает зависимости и не публикует пакет. Проверьте происхождение, commit и содержимое архива до исполнения его кода. Для пробы установите в пустой временный prefix:
 
 ```bash
 export SANDBOX="$(mktemp -d)"
@@ -96,11 +86,9 @@ export PACKAGE="$PREFIX/current"
 "$PACKAGE/bin/delm" --help
 ```
 
-Ожидается JSON `status:installed`; повтор установки того же архива возвращает `unchanged`. Поле `native_registered:false` означает, что установлен только DeLM payload — Native ещё не подключён. Для постоянной установки выберите собственный стабильный `PREFIX`; временный каталог выше нужен для пробы.
+Ожидается `status:installed`; повтор того же архива возвращает `unchanged`. `native_registered:false` означает именно установку payload, не загрузку расширения. Для постоянного использования выберите свой стабильный `PREFIX`.
 
-## Попробовать без моделей
-
-Этот пример запускает только настоящую Python-доску и CLI. Native и разрешение на модели не нужны.
+## Попробовать доску без моделей
 
 ```bash
 export DEMO="$(mktemp -d)"
@@ -111,16 +99,18 @@ export RUN="$DEMO/run"
 "$PACKAGE/bin/delm" serve "$RUN"
 ```
 
-Backend работает в foreground: оставьте терминал открытым. Во втором терминале задайте `RUN` тем же путём и выполните:
+Backend остаётся в foreground. Во втором терминале с тем же `RUN`:
 
 ```bash
 "$RUN/alice/bin/context" domain '{"op":"projection"}'
 python3 "$PACKAGE/scripts/delm_board.py" "$RUN" --observe
 ```
 
-Projection показывает roster и очередь; observer отображает задачи и журнал. `q` закрывает только observer, Ctrl+C в первом терминале останавливает backend. Не запускайте повторный `init` ради продолжения: используйте `serve` прежнего RUN.
+**TUI входит в пакет:** тот же экран `DeLM BOARD | READ ONLY` с AGENTS, TASKS и FACT/FAIL. Стрелки или `j`/`k` выбирают строку, Enter открывает детали, Tab переключает задачи/заметки, `/` ищет, `l` переводит фокус в журнал, `q` закрывает только observer. Он не перезапускает сервер/агентов и не читает/ACK-ает сообщения за модель.
 
-Небольшой пример готового результата:
+Для текстового smoke есть `--once`; он не заменяет проверку интерактивного TUI. Backend останавливается через Ctrl+C в его терминале. Не делайте повторный `init` ради продолжения — используйте прежний RUN.
+
+Небольшой независимый пример:
 
 ```bash
 python3 -B -m unittest discover -s "$PACKAGE/examples/slugify" -v
@@ -128,12 +118,9 @@ python3 "$PACKAGE/examples/slugify/slugify.py" 'Привет, мир!'
 # привет-мир
 ```
 
-## Подключить скилл и Native extension
+## Подключить скилл
 
-Это **два разных подключения**:
-
-- **Extension:** добавьте корень `$PACKAGE` к существующему набору session plugins вашего Native через его штатный loader. Сохраните остальные plugins и guards. Launcher наследует выбранный профиль, а не заменяет его одним DeLM.
-- **Скилл:** подключите `$PACKAGE/skills/delm` штатным project-local способом до создания workers. Ниже `PROJECT` — существующий разрешённый проект:
+Задайте `PROJECT` как существующий разрешённый workspace. Подключение project-local:
 
 ```bash
 mkdir -p "$PROJECT/.pi/skills"
@@ -141,109 +128,99 @@ python3 -c 'import sys; from pathlib import Path; Path(sys.argv[2]).symlink_to(s
   "$PACKAGE/skills/delm" "$PROJECT/.pi/skills/delm"
 ```
 
-При существующем файле, каталоге или ссылке команда откажет с `FileExistsError`, не заменит запись и не создаст вложенную ссылку. Не удаляйте чужой скилл ради установки. Native кэширует skills в worker; для уже загруженного worker используйте поддержанный lifecycle, не dummy input.
+Если запись уже существует, команда откажет, не заменяя файл/каталог/ссылку и не создавая вложенную ссылку. Не удаляйте чужой скилл. Обнаружение скилла Native проверяется отдельно: существующий worker мог закэшировать список.
 
-Обычное поле `pi.skills` и парсер Pi не доказывают обнаружение скилла Native. Аналогично Durable adapter нельзя передать обычному Pi ExtensionAPI. [Подробный порядок подключения](docs/operations.md#подключить-к-существующему-native).
+Registry-расширение подключает actor launcher при `open`. Его не нужно передавать обычному Pi ExtensionAPI или регистрировать как старый Chord session facet. Существующие plugins и guards сохраняются.
 
-## Запустить команду по своему плану
+## Запустить агентов в обычных терминалах
 
-Задайте абсолютные разрешённые пути:
-
-- `PROJECT` — существующий проект с `AGENTS.md` и `PLAN.md`;
-- `APPROVED_PROMPT` — файл с исходным утверждённым запросом;
-- `GLOBAL_AGENTS` — действительно существующий разрешённый файл глобальных правил;
-- `NEW_RUN` — новый приватный каталог вне проекта;
-- `NATIVE_SOCKET` — точный Unix socket уже работающего совместимого Native в нужном workspace.
+Задайте разрешённые абсолютные пути `PROJECT`, `PLAN`, `APPROVED_PROMPT`, `GLOBAL_AGENTS` и новый приватный `RUN` вне проекта. `GLOBAL_AGENTS` — существующий разрешённый файл правил, не личный config/auth.
 
 ```bash
 python3 "$PACKAGE/skills/delm/Tools/Run.py" prepare \
-  --workspace "$PROJECT" --plan "$PROJECT/PLAN.md" \
-  --prompt-file "$APPROVED_PROMPT" --global-agents "$GLOBAL_AGENTS" \
-  --agents 2 --run-dir "$NEW_RUN"
-python3 "$PACKAGE/skills/delm/Tools/Run.py" status --run-dir "$NEW_RUN"
+  --workspace "$PROJECT" --plan "$PLAN" --prompt-file "$APPROVED_PROMPT" \
+  --global-agents "$GLOBAL_AGENTS" --agents 2 --run-dir "$RUN"
 ```
 
-`prepare` читает и сохраняет inputs, создаёт actor bindings и печатает команды backend/observer. **Ни сервисы, ни модели ещё не запущены.** Готовый план используется без нового интервью; отсутствие правил или права чтения нельзя подменить фиктивным «прочитал».
+`prepare` сохраняет inputs и печатает команды backend, observer и `native_open_commands` для каждого actor. Процессы Native и модели ещё не запускаются.
 
-Запустите напечатанную команду `serve` в отдельном терминале. Затем, если extension подключён, API совместим и модели разрешены:
+1. Запустите напечатанную команду `serve` в одном терминале.
+2. Откройте каждого actor в отдельном обычном интерактивном терминале:
 
 ```bash
-python3 "$PACKAGE/skills/delm/Tools/Run.py" start --run-dir "$NEW_RUN" --socket "$NATIVE_SOCKET"
-python3 "$PACKAGE/skills/delm/Tools/Run.py" status --run-dir "$NEW_RUN"
-python3 "$PACKAGE/scripts/delm_board.py" "$NEW_RUN" --observe
+python3 "$PACKAGE/skills/delm/Tools/Run.py" open --run-dir "$RUN" --actor alice
+python3 "$PACKAGE/skills/delm/Tools/Run.py" open --run-dir "$RUN" --actor bob
 ```
 
-`start` создаёт ровно выбранные сессии и доставляет каждому его исходный input. Повтор сверяет прежние request IDs; пропавшая сохранённая сессия не заменяется новой молча. Проверьте общий результат в проекте и доказательства на доске.
+`open` исполняет установленный `pi-durable` с фиксированными run/actor/adapter и свежим приватным endpoint. При необходимости `--native-executable FILE` указывает уже установленный executable. Launcher не задаёт другую модель, thinking, auth или глобальные настройки.
 
-| Команда launcher | Назначение |
-|---|---|
-| `capabilities` | Показать требования и возможности инструмента; не заменяет проверку работающего Native |
-| `prepare` | Зафиксировать план, запрос, references и инструкции без запуска |
-| `start` | Подключиться к существующему Native и передать исходные inputs |
-| `status` | Прочитать состояние запуска и доски |
-| `resume` | Возобновить те же сессии без dummy input |
-| `notify` | Доставить новый явно утверждённый текст со стабильным request ID |
-| `stop` | Остановить собственные wakers и точные беседы, не удаляя историю |
+3. После готовности actor endpoints, при уже разрешённом model launch, в терминале настройки:
 
 ```bash
-python3 "$PACKAGE/skills/delm/Tools/Run.py" resume --run-dir "$NEW_RUN"
-python3 "$PACKAGE/skills/delm/Tools/Run.py" notify --run-dir "$NEW_RUN" \
+python3 "$PACKAGE/skills/delm/Tools/Run.py" start --run-dir "$RUN"
+python3 "$PACKAGE/skills/delm/Tools/Run.py" status --run-dir "$RUN"
+python3 "$PACKAGE/scripts/delm_board.py" "$RUN" --observe
+```
+
+`start` подключается к уже открытым actors, записывает их настоящие identities и доставляет утверждённые inputs; **не создаёт окна или workers**. При неготовом endpoint повторите тот же start после его готовности, а не создавайте новый RUN. Процесс Native открыт — ещё не значит, что input принят.
+
+## Продолжение, уведомление и остановка
+
+```bash
+python3 "$PACKAGE/skills/delm/Tools/Run.py" notify --run-dir "$RUN" \
   --actor alice --input-file "$APPROVED_UPDATE" --request-id approved-update-001
-python3 "$PACKAGE/skills/delm/Tools/Run.py" stop --run-dir "$NEW_RUN"
+python3 "$PACKAGE/skills/delm/Tools/Run.py" stop --run-dir "$RUN"
+python3 "$PACKAGE/skills/delm/Tools/Run.py" resume --run-dir "$RUN"
 ```
 
-`APPROVED_UPDATE` — разрешённый файл нового указания. После неопределённой доставки повторяют **тот же ID с теми же байтами**, а не создают другой run. Общий `--continue` по рабочей папке недопустим: он может выбрать чужую беседу. Launcher не читает и не отправляет editor draft. [Полная справка команд](skills/delm/Tools/Run.help.md).
+`notify` требует новый утверждённый текст. При потере ответа повторяют **тот же ID и те же байты**; изменённый replay отвергается. Launcher не читает, не очищает и не отправляет editor draft.
 
-## Где лежат данные и как остановить работу
+`stop` останавливает собственные waiters и работу точных roots, не убивая терминалы и не удаляя историю. `resume` снимает stopped без dummy input. Остановка backend и выход из observer — отдельные действия.
 
-| Место | Содержимое |
+Если Native действительно вышел, повторите прежнюю actor-команду `open`: она использует записанную точную `--session`, не общий `--continue`. Пока процесс жив, используйте его существующий терминал; второй владелец той же сессии запрещён. Не снимайте lock и не обещайте фоновую работу после закрытия обычного терминала. Потерянная identity незавершённого открытия требует reconciliation, не слепого повторного запуска.
+
+[Полная справка](skills/delm/Tools/Run.help.md) · [Текущие операции](docs/native14-operations.md)
+
+## Данные, update и удаление
+
+| Место | Данные |
 |---|---|
-| Установленный пакет | Python, extension, skill, templates, vendor/license, tests и demo |
-| Проект пользователя | Общие исходники и результат работы |
-| Приватный RUN вне проекта | Задачи, события, receipts, frozen instructions, tokens и launch metadata |
-| Собственное хранилище Native | Беседы, принятые inputs и scheduler |
+| Пакет | Код, скилл, prompts, TUI, tests и лицензии |
+| Workspace | Общие исходники и результаты |
+| Приватный RUN | Board, inputs, receipts, tokens и launch metadata |
+| Хранилище Native | Беседы, принятые inputs, scheduler и guards |
 
-Доска логически одна, но backup включает **`context.sqlite` и `context-bodies.sqlite`**. Не публикуйте RUN, `config.json`, токены, Native SQLite или личные беседы.
+Backup доски включает **`context.sqlite` и `context-bodies.sqlite`**. Не публикуйте RUN, токены, Native SQLite или личные беседы. Readiness требует всех точных DONE; FAIL/correction — повод переоценить, не успешная готовность. Файловые leases advisory, не OS-lock; TTL не доказывает смерть writer.
 
-Остановка состоит из трёх действий: `Run.py stop`, выход из observer, остановка backend через Ctrl+C. Закрытое окно не доказывает остановку writers. `stop` может прервать генерацию, но не отменяет факт уже принятого input и не ACK-ает непрочитанный snapshot. Внешние shell-процессы проверяйте отдельно.
-
-Перед удалением остановите работу, отключите только DeLM в неактивных Native sessions, сохраните остальные guards и уберите только созданную вами skill symlink с проверенным target. Затем используйте сохранённый bootstrap:
+Перед удалением остановите собственную работу, закройте observer/backend и отключите только DeLM при безопасном lifecycle Native. Сохраните другие plugins/guards, проверьте target своей skill symlink и уберите только её. Затем:
 
 ```bash
 python3 "$SANDBOX/bootstrap/package/packaging/install.py" uninstall --prefix "$PREFIX"
 ```
 
-Установщик сохраняет RUN, беседы и пользовательские изменения; изменённые version trees перечисляет в `retained`. Update и rollback требуют чистых управляемых файлов. **Перед downgrade к версии без work отмените или восстановите work-watchers в новой версии:** старая может принять пустой список задач за «все DONE». [Backup, update, rollback и удаление](docs/operations.md).
+Изменённые или неизвестные version trees сохраняются в `retained`; RUN, проект и Native sessions не удаляются. Update — `install` другого проверенного архива; rollback — `rollback --prefix "$PREFIX"`. Они требуют чистых управляемых деревьев и согласованного lifecycle активных watchers. [Подробности payload lifecycle](docs/operations.md).
 
-## Если что-то не работает
+## Диагностика и доказательства
 
-| Симптом | Что делать |
+| Симптом | Что проверить |
 |---|---|
-| Нет `DurableSession` API 1 или session loader | Проверить совместимость у владельца Native; не устанавливать другой host автоматически |
-| Не разрешается public Node peer | Проверить библиотеки и их версии в вашей среде; payload installer их не скачивает |
-| Второй backend не запускается | Найти действующего владельца `server.lock`; не удалять lock вслепую |
-| Ошибка `STALE` при изменении задачи | Перечитать revision/generation и owner; не обходить fence |
-| Нет пробуждения или receipt остаётся pending | Проверить все точные DONE, связанные FAIL и фактические snapshot/read/ACK |
-| `FileExistsError` при установке скилла | Проверить существующий файл/каталог/ссылку; не перезаписывать чужой entry |
+| Нет trusted admission/совместимого registry | Контракт фактического Native; не подменять host или policy |
+| Actor endpoint не готов | Правильные RUN/actor, работающий `open`, private socket и первую ошибку Native |
+| Другой процесс владеет сессией | Вернуться к его терминалу; не удалять lock и не создавать замену |
+| `STALE` / scope / approval mismatch | Прочитать текущие identities/revision/generation и сверить сохранённые bytes |
+| Не пришёл wake / receipt pending | Все точные DONE, relevant FAIL и реальный snapshot/read/ACK |
+| Skill symlink уже существует | Проверить владельца и target, не перезаписывать чужое |
 
-В bug report приложите версии, OS, artifact hash, точную команду, exit code и маленький фиктивный пример. Не отправляйте secrets, реальный RUN или conversation dump. [Безопасная диагностика](docs/operations.md#безопасный-bug-report).
+Bug report: commit/version, OS, artifact hash, точная команда, exit code и маленький синтетический пример — без secrets и дампов бесед.
 
-## Проверки и границы
+Текущие реальные Native1.4 проверки различают model-only faux и настоящие owner/tools/guards/storage/board: [baseline](docs/native14-fixture.md), [интеграция доски/reopen/readACK](docs/evidence/native14/fixture-integration/result.json), [запуск без менеджера терминалов](docs/native14-packaging.md#actual-no-multiplexer-runtime-proof), [упаковка](docs/native14-packaging.md). Финальный установленный candidate и интерактивный TUI принимаются отдельно; одного PASS компонента для всего продукта недостаточно.
 
-Установленная поставка прошла два независимых review и реальные Native-сценарии с **39 запросами к детерминированной localhost-модели; живых LLM-вызовов — 0**. Сам Native, transport, tools, guards, storage и доска настоящие. Проверены точное ожидание/readACK, доступная работа, конкурирующие claims, отсутствие пробуждения после cancel и последующего DONE, restart/reload, editor draft, pending/committed stop и удаление с сохранением данных.
-
-Отдельно проверены core Python — 48 тестов, launcher — 21, установочные сценарии и SDK/faux. Это не обещание ускорения, качества моделей или поддержки любого Native. Полный отчёт отделяет fake-model, SDK и реальный host: [приёмка](docs/user-host-acceptance.md), [provenance](provenance.json), [parity](parity.json). [Архивный manifest принятого r2](docs/evidence/user-host/accepted-r2-manifest.json) сохраняет hash той поставки и оба независимых вердикта; это снимок проверенного архива, не manifest последующих редакций README.
-
-- Файловая и ресурсная бронь **advisory**, не OS-lock; TTL не доказывает смерть writer.
-- Work wake — только hint: он не назначает owner и не резервирует задачу.
-- Native без указанного API, ordinary Pi, Pocket и Windows не объявлены поддержанными.
-- Живые модели, восемь живых агентов и произвольные будущие миграции данных не проверялись.
-- Проверенные source snapshots Native — внешние тестовые fixtures, не содержимое пакета и не обязательная установка другого Durable.
+Исторические [HOST05](docs/user-host-acceptance.md) и [принятый r2 manifest](docs/evidence/user-host/accepted-r2-manifest.json) относятся к другому публичному host 1.0.2 с API-патчем. Они сохранены, но не доказывают совместимость текущего 1.4. Живые модели, восемь живых агентов, Windows и произвольные будущие миграции не объявлены проверенными.
 
 ## Происхождение и лицензия
 
-Основа — исследование [Decentralized Multi-Agent Systems with Shared Context](https://arxiv.org/abs/2606.10662v3), Mao et al., и [Python DeLM](https://github.com/yuzhenmao/DeLM), commit `66617616e708758f91624e5cc03659732b82f6a6`. Это наша адаптация для Native Pi Durable, **не официальный продукт авторов исследования**. Результаты статьи не переносятся в обещания этого пакета.
+Основа — [Decentralized Multi-Agent Systems with Shared Context](https://arxiv.org/abs/2606.10662v3), Mao et al., и [Python DeLM](https://github.com/yuzhenmao/DeLM), commit `66617616e708758f91624e5cc03659732b82f6a6`. Это адаптация для Native Pi Durable, не официальный продукт авторов исследования. Результаты статьи не превращаются в обещания ускорения или качества моделей.
 
-Наш код распространяется под [MIT](LICENSE). Полный [MIT notice исходного DeLM](vendor/DeLM/LICENSE) и [notice для контекста API-патча Native](LICENSES/pi-native.txt) сохранены. Отдельный [delm-agent-plugin](https://github.com/Decentralized-LM/delm-agent-plugin) — другой продукт; его Rust runtime и private-worktree архитектура сюда не включены.
+Наш код — [MIT](LICENSE). [Исходный DeLM MIT notice](vendor/DeLM/LICENSE), [Native notice для исторического API-патча](LICENSES/pi-native.txt) и [THIRD_PARTY_NOTICES](THIRD_PARTY_NOTICES.md) сохранены. Другой [delm-agent-plugin](https://github.com/Decentralized-LM/delm-agent-plugin) и его Rust runtime/private-worktree архитектура не поставляются.
 
-[Архитектура](docs/architecture.md) · [Эксплуатация](docs/operations.md) · [Контракт доски](docs/DeLM-domain-protocol.md) · [Native delivery](docs/DeLM-native-protocol.md) · [UPSTREAM](UPSTREAM.md) · [THIRD_PARTY_NOTICES](THIRD_PARTY_NOTICES.md)
+[Архитектура](docs/architecture.md) · [Контракт доски](docs/DeLM-domain-protocol.md) · [Настройка агентом](docs/agent-setup.md) · [UPSTREAM](UPSTREAM.md) · [Provenance](provenance.json)

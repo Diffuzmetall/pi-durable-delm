@@ -1,0 +1,27 @@
+3472168 execve("<OPERATOR_HOME>/.local/bin/pi-durable", ["<OPERATOR_HOME>/.local/bin/pi-durab"..., "--no-mcp", "--session", "<FIXTURE>/alice/home/.p"..., "--listen", "<FIXTURE>/postremove-me"...], 0x7ffe5f09ede0 /* 20 vars */) = 0
+3472168 execve("<FIXTURE>/bin/bash", ["bash", "<OPERATOR_HOME>/.local/bin/pi-durab"..., "--no-mcp", "--session", "<FIXTURE>/alice/home/.p"..., "--listen", "<FIXTURE>/postremove-me"...], 0x7ffd552da7d0 /* 20 vars */) = 0
+3472168 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3472168 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3472168 execve("<OPERATOR_HOME>/Projects/master/experiments/pi-durable-1.4-upgrade/host-lane/pi-durable", ["<OPERATOR_HOME>/Projects/master/exp"..., "--no-mcp", "--session", "<FIXTURE>/alice/home/.p"..., "--listen", "<FIXTURE>/postremove-me"...], 0x5b516854ca50 /* 22 vars */) = 0
+3472168 execve("<FIXTURE>/bin/bash", ["bash", "<OPERATOR_HOME>/Projects/master/exp"..., "--no-mcp", "--session", "<FIXTURE>/alice/home/.p"..., "--listen", "<FIXTURE>/postremove-me"...], 0x7ffd7c45df70 /* 22 vars */) = 0
+3472168 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3472168 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3472170 execve("<FIXTURE>/bin/dirname", ["dirname", "--", "<OPERATOR_HOME>/Projects/master/exp"...], 0x61ce1d124a80 /* 23 vars */) = 0
+3472170 +++ exited with 0 +++
+3472169 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3472170, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+3472169 +++ exited with 0 +++
+3472168 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3472169, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+3472168 execve("<FIXTURE>/bin/node", ["node", "--import", "<OPERATOR_HOME>/Projects/master/exp"..., "<OPERATOR_HOME>/Projects/master/exp"..., "--extension", "<OPERATOR_HOME>/Projects/master/exp"..., "--no-mcp", "--session", "<FIXTURE>/alice/home/.p"..., "--listen", "<FIXTURE>/postremove-me"...], 0x61ce1d12bab0 /* 25 vars */) = 0
+3472279 +++ exited with 0 +++
+3472168 --- SIGWINCH {si_signo=SIGWINCH, si_code=SI_USER, si_pid=3472168, si_uid=1000} ---
+3472173 +++ exited with 0 +++
+3472175 +++ exited with 0 +++
+3472172 +++ exited with 0 +++
+3472171 +++ exited with 0 +++
+3472174 +++ exited with 0 +++
+3472335 +++ exited with 0 +++
+3472332 +++ exited with 0 +++
+3472334 +++ exited with 0 +++
+3472333 +++ exited with 0 +++
+3472177 +++ exited with 0 +++
+3472168 +++ exited with 0 +++

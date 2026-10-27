@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "<TARGET>/evidence/native14/acceptance/lifecycle.py", line 52, in <module>
+    assert h.request('attach',workspacePath=str(project))['success']
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+AssertionError

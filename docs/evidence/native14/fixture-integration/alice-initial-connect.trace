@@ -1,0 +1,45 @@
+3248217 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3248217 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3248217 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3248217 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3248219 +++ exited with 0 +++
+3248218 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3248219, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+3248218 +++ exited with 0 +++
+3248217 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3248218, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+3248311 +++ exited with 0 +++
+3248217 --- SIGWINCH {si_signo=SIGWINCH, si_code=SI_USER, si_pid=3248217, si_uid=1000} ---
+3248720 +++ exited with 0 +++
+3248721 +++ exited with 0 +++
+3248723 +++ exited with 0 +++
+3248693 +++ exited with 0 +++
+3248217 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3248693, si_uid=1000, si_status=0, si_utime=8 /* 0.08 s */, si_stime=10 /* 0.10 s */} ---
+3248746 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3248746 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3248748 connect(3, {sa_family=AF_INET, sin_port=htons(43643), sin_addr=inet_addr("127.0.0.1")}, 16) = -1 EINPROGRESS (Operation now in progress)
+3248748 +++ exited with 0 +++
+3248746 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3248748, si_uid=1000, si_status=0, si_utime=12 /* 0.12 s */, si_stime=4 /* 0.04 s */} ---
+3248746 +++ exited with 0 +++
+3248217 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3248746, si_uid=1000, si_status=0, si_utime=3 /* 0.03 s */, si_stime=3 /* 0.03 s */} ---
+3249763 +++ exited with 0 +++
+3249764 +++ exited with 0 +++
+3249765 +++ exited with 0 +++
+3249761 +++ exited with 0 +++
+3248217 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3249761, si_uid=1000, si_status=0, si_utime=7 /* 0.07 s */, si_stime=10 /* 0.10 s */} ---
+3249768 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3249768 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3249772 connect(3, {sa_family=AF_INET, sin_port=htons(43643), sin_addr=inet_addr("127.0.0.1")}, 16) = -1 EINPROGRESS (Operation now in progress)
+3249772 +++ exited with 0 +++
+3249768 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3249772, si_uid=1000, si_status=0, si_utime=11 /* 0.11 s */, si_stime=5 /* 0.05 s */} ---
+3249768 +++ exited with 0 +++
+3248217 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3249768, si_uid=1000, si_status=0, si_utime=4 /* 0.04 s */, si_stime=2 /* 0.02 s */} ---
+3248224 +++ exited with 0 +++
+3248222 +++ exited with 0 +++
+3248223 +++ exited with 0 +++
+3248221 +++ exited with 0 +++
+3248220 +++ exited with 0 +++
+3248383 +++ exited with 0 +++
+3248381 +++ exited with 0 +++
+3248382 +++ exited with 0 +++
+3248380 +++ exited with 0 +++
+3248225 +++ exited with 0 +++
+3248217 +++ exited with 0 +++

@@ -1,0 +1,30 @@
+3420543 execve("/usr/bin/python3", ["/usr/bin/python3", "-B", "<FIXTURE>/payload/versi"..., "open", "--run-dir", "<FIXTURE>/run", "--actor", "bob", "--native-executable", "<OPERATOR_HOME>/.local/bin/pi-durab"...], 0x7ffd9c934470 /* 20 vars */) = 0
+3420543 execve("<OPERATOR_HOME>/.local/bin/pi-durable", ["<OPERATOR_HOME>/.local/bin/pi-durab"..., "--no-mcp", "--extension", "<FIXTURE>/run/bob/delm-"...], 0x73573a2d5790 /* 20 vars */) = 0
+3420543 execve("<FIXTURE>/run/bob/bin/bash", ["bash", "<OPERATOR_HOME>/.local/bin/pi-durab"..., "--no-mcp", "--extension", "<FIXTURE>/run/bob/delm-"...], 0x7ffc3c5ed7e0 /* 20 vars */) = -1 ENOENT (No such file or directory)
+3420543 execve("<FIXTURE>/bin/bash", ["bash", "<OPERATOR_HOME>/.local/bin/pi-durab"..., "--no-mcp", "--extension", "<FIXTURE>/run/bob/delm-"...], 0x7ffc3c5ed7e0 /* 20 vars */) = 0
+3420543 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3420543 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3420543 execve("<INSTALLED_HOST_LANE>/pi-durable", ["<OPERATOR_HOME>/Projects/master/exp"..., "--no-mcp", "--extension", "<FIXTURE>/run/bob/delm-"...], 0x5f29fc9519f0 /* 22 vars */) = 0
+3420543 execve("<FIXTURE>/run/bob/bin/bash", ["bash", "<OPERATOR_HOME>/Projects/master/exp"..., "--no-mcp", "--extension", "<FIXTURE>/run/bob/delm-"...], 0x7ffe9307c530 /* 22 vars */) = -1 ENOENT (No such file or directory)
+3420543 execve("<FIXTURE>/bin/bash", ["bash", "<OPERATOR_HOME>/Projects/master/exp"..., "--no-mcp", "--extension", "<FIXTURE>/run/bob/delm-"...], 0x7ffe9307c530 /* 22 vars */) = 0
+3420543 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3420543 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3420547 execve("<FIXTURE>/bin/dirname", ["dirname", "--", "<OPERATOR_HOME>/Projects/master/exp"...], 0x63b2dfd5fa20 /* 23 vars */) = 0
+3420547 +++ exited with 0 +++
+3420546 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3420547, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+3420546 +++ exited with 0 +++
+3420543 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3420546, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+3420543 execve("<FIXTURE>/bin/node", ["node", "--import", "<OPERATOR_HOME>/Projects/master/exp"..., "<OPERATOR_HOME>/Projects/master/exp"..., "--extension", "<OPERATOR_HOME>/Projects/master/exp"..., "--no-mcp", "--extension", "<FIXTURE>/run/bob/delm-"...], 0x63b2dfd66270 /* 25 vars */) = 0
+3420696 +++ exited with 0 +++
+3420543 --- SIGWINCH {si_signo=SIGWINCH, si_code=SI_USER, si_pid=3420543, si_uid=1000} ---
+3420551 +++ exited with 0 +++
+3420550 +++ exited with 0 +++
+3420552 +++ exited with 0 +++
+3420549 +++ exited with 0 +++
+3420548 +++ exited with 0 +++
+3420722 +++ exited with 0 +++
+3420724 +++ exited with 0 +++
+3420723 +++ exited with 0 +++
+3420725 +++ exited with 0 +++
+3420553 +++ exited with 0 +++
+3420543 +++ exited with 0 +++

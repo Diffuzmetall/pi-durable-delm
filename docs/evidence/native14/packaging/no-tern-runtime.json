@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "verdict": "ACTUAL_NATIVE14_DELM_NO_TERN_PASS",
+  "ternDiscoverable": false,
+  "multiplexerEnvironment": false,
+  "multiplexerExecAttempts": [],
+  "actualInstalledNative": true,
+  "actualDeLMRegistry": true,
+  "realBoard": true,
+  "stableApprovedInput": true,
+  "sameRequestReplay": true,
+  "exactDoneWake": true,
+  "nativeCleanExit": true,
+  "modelCalls": 3,
+  "liveModelCalls": 0,
+  "loopbackBoardConnects": 1,
+  "unexpectedInetConnects": 0,
+  "executableBasenames": [
+    "bash",
+    "context",
+    "dirname",
+    "node",
+    "pi-durable",
+    "python3"
+  ],
+  "productionHashes": {
+    "extensions/delm/native14.js": "7052b87286b22ba057627df8b32955778f23c7c22f63a697dc8e20e2c05dbbb5",
+    "extensions/delm/native14-owner.js": "5e8f133b70a4273c012c8e1f0eae37d221a0958a86c26aaa9421ad43d045c245",
+    "extensions/delm/index.js": "c31922d070384a38659498a7f01d42ea861ee912f86411669b9240908b80f11b",
+    "extensions/delm/protocol.js": "4a538bb850c9b285c6de9920f99397519b3a7cd464bc629b462807aa9fd1b4cd"
+  },
+  "testDriverSha256": "ccdea19a8bf945b46203d231ea64350241720e60329f07d75d5162b4c36e0f9b",
+  "personalSessionsChanged": false,
+  "finalLauncherEndToEnd": "NOT_TESTED_BY_THIS_COMPONENT_PROBE"
+}

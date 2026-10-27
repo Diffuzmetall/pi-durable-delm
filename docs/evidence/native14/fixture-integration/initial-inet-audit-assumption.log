@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "<PACKAGE>/tests/native14-host-integration.py", line 136, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "<PACKAGE>/tests/native14-host-integration.py", line 114, in main
+    assert all(not re.search(r'connect\(.*AF_INET6?[, ]',h.trace.read_text()) for h in hosts),'Unexpected INET'
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Unexpected INET

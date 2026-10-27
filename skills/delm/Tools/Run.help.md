@@ -1,59 +1,62 @@
-# Run: connect DeLM to an existing Native owner
+# Run: use the existing Native 1.4 in ordinary terminals
 
-The package supplies the plugin, Python board and client—not Durable itself. It never installs/starts/rebuilds a Native host, reads credentials or opens Native SQLite. Models, settings and conversations belong to the existing user host. Tern is optional.
+Requires the existing `pi-durable` executable, matching SDK1.4 registry loader and genuine host admission controller. The package never installs Durable, constructs another Harness, writes Native SQL or changes models/auth/settings. Current protocol: `delm.native14.control.v1`; see package `docs/native14-contract.md` and `evidence/native14/adapter/control-abi.json`.
 
-## Prerequisites
-
-The existing compatible Native host must already load the package's session facet through its public Chord loader and expose `delm.control` protocol 1 / the local-only `DurableSession` capability. Tested Native variant: public 1.0.2 pinned in `docs/native-compatibility.md`, with the explicit separate three-file API patch. This is **not** an unmodified-stock or universal-host compatibility claim. Applying a source patch/rebuilding a test host is not represented as easy plugin installation.
-
-Normal control imports external public `@earendil-works/pi-client` (tested 1.0.2), its `/unix` export, and matching Chord libraries. No framework code is bundled. Missing peers or host capability must be resolved at that actual boundary, never by copying a private host or supplying an allow-all policy.
-
-## Commands
-
-Paths resolve from the installed skill, not an author checkout. Replace uppercase placeholders with actual authorized paths; do not send test input to personal conversations.
+## Prepare without models
 
 ```sh
-python3 Tools/Run.py capabilities
-python3 Tools/Run.py prepare --workspace PROJECT --plan PLAN --prompt-file APPROVED_PROMPT --global-agents GLOBAL_AGENTS --agents 2 --run-dir NEW_RUN
-python3 Tools/Run.py status --run-dir NEW_RUN
+python3 "$PACKAGE/skills/delm/Tools/Run.py" prepare --workspace "$PROJECT" --plan "$PLAN" --prompt-file "$APPROVED_PROMPT" --global-agents "$GLOBAL_AGENTS" --agents 2 --run-dir "$RUN"
 ```
 
-`prepare` preserves approved prompt/rules/references once, including prompt CRLF bytes. Bundled init freezes the approved plan before START generation; bootstrap and manifest point at that exact frozen plan. Original source paths are provenance, not a new task authority. RUN stays outside PROJECT; existing RUN is never initialized over. No conversation dump is captured. Missing instructions are errors, not false reading receipts.
+RUN must be new and outside PROJECT. Prompt/plan/rules/references are frozen byte-for-byte with hashes; no Native process or model starts. Use only the authorized roster. The JSON result emits actual packaged board/observer argv and a `native_open_commands` argv for every actor; no terminal manager is required.
 
-Start the emitted bundled board `scripts/delm_local.py serve RUN` in its own foreground terminal. The existing Native server must already be running in the approved workspace with the DeLM facet loaded. Then:
+## Ordinary terminal lifecycle
+
+Run the board in one terminal:
 
 ```sh
-python3 Tools/Run.py start --run-dir RUN --socket NATIVE_UUID_SOCKET
-python3 Tools/Run.py status --run-dir RUN
-python3 Tools/Run.py resume --run-dir RUN
-python3 Tools/Run.py notify --run-dir RUN --actor alice --input-file APPROVED_UPDATE --request-id UPDATE_ID
-python3 Tools/Run.py stop --run-dir RUN
+python3 "$PACKAGE/scripts/delm_local.py" serve "$RUN"
 ```
 
-`--actor NAME` selects one existing actor; omission addresses the already prepared roster. It never changes count. Native controls never start the board or host. `stop` aborts only exact bound roots and their own waiters, waits for idle and preserves history; it does not declare the user's task complete or stop the board/server. End those services separately through their actual owner's normal lifecycle.
+Run each emitted `open` command in a separate ordinary foreground terminal, for example:
 
-`--host-source SOURCE` is an **optional advanced test/source-backed dependency resolver** for an already existing host. It does not fetch, copy, build, start or install anything. Normal installed matching client peers do not require this flag or a source checkout.
-
-## Exact identities and uncertainty
-
-A per-RUN advisory `flock` serializes launcher changes. Stable UUID5 session IDs are saved before creating anything through official SessionManagement. Actual server ID, session ID/path, workspace, root and persistent instance ID are saved before bind/input. A changed instance, actor collision, retargeted server or missing previously identified session refuses rather than creating a replacement. Native service binding is immutable for run/actor. The client retains its per-call attachment fence and existing host guards.
-
-Original bootstrap and notification requests are saved with approved bytes, SHA-256, type and pending/accepted status before RPC. Native independently persists request-to-fingerprint binding. If a response is lost, retry the same `start` or `notify` ID with unchanged text; actual accepted receipts replay without duplicate admission/work. A new digest does not authorize changing an existing request. Inspect pending state rather than generating another ID/team. `resume` sends no dummy or first-input replay.
-
-`status` verifies captured prompt/plan/rules/references and actor bootstrap bytes, then probes actual board/Native state. Unknown or changed input/path escapes require reconciliation. Partial/unavailable Native sessions are reported individually. `stop` can clean up the exact known sessions even when approved input files were damaged; it submits none of those bytes. No operation reads/writes/submits editor text.
-
-## Configuration and input component
-
-Optional `--config FILE` before the action (or `DELM_CONFIG`) accepts only:
-
-```json
-{"runs_root":"<private-runs-directory>","global_agents":"<global-instruction-file>"}
+```sh
+python3 "$PACKAGE/skills/delm/Tools/Run.py" open --run-dir "$RUN" --actor alice
+python3 "$PACKAGE/skills/delm/Tools/Run.py" open --run-dir "$RUN" --actor bob
 ```
 
-No personal config/auth file is inferred. Default runs root is per-user `~/.local/state/pi-durable-delm/runs`.
+`open` execs the **existing** Native, with a trusted actor-local registry adapter containing fixed run/actor and a fresh private control socket. It requires an interactive terminal. `--native-executable FILE` selects an already installed executable; default is PATH `pi-durable`. No model/thinking/auth/settings flags are injected. Opening a process is not approved input acceptance.
 
-`NativeInput.mjs` is an existing-owner component: `createNativeInput({host,conversation,session,expectedSession,admitInput?})`. It requires root/exact path binding and stable approved SHA/type/request identity. Matching native receipts reconcile response loss/reopen; changed, unbound or different-type accepted requests refuse. Normal Native admission uses the existing guarded `Conversation.submit`; a supplied **additional real** host policy is optional and its denial remains enforced. Equal arbitrary path strings do not prove identity—the real control facet derives handles/metadata from its local existing owner.
+From the setup/control terminal, after the actor endpoints are ready:
 
-## Evidence boundaries
+```sh
+python3 "$PACKAGE/skills/delm/Tools/Run.py" start --run-dir "$RUN"
+python3 "$PACKAGE/skills/delm/Tools/Run.py" status --run-dir "$RUN"
+python3 "$PACKAGE/skills/delm/Tools/Run.py" notify --run-dir "$RUN" --actor alice --input-file "$APPROVED_UPDATE" --request-id UPDATE_ID
+python3 "$PACKAGE/skills/delm/Tools/Run.py" stop --run-dir "$RUN"
+python3 "$PACKAGE/skills/delm/Tools/Run.py" resume --run-dir "$RUN"
+```
 
-New launcher evidence is under `tests/launcher/host-evidence/`. Bookkeeping units are not host mocks presented as acceptance. Actual Native tests use an independent real official host with only the declared API patch, localhost deterministic model provider, official server/client/SQLite/scheduler and real OS PTY. They distinguish accepted input, observed own transcript, unchanged replay, true instance preservation and editor safety. No live-model/spend claim is made. Final installed-artifact acceptance remains a separate milestone.
+`--actor NAME` selects one already prepared actor. `start` does not spawn workers: it records each endpoint's actual full identity before delivering its frozen bootstrap. Missing/not-ready endpoints refuse; retry the same start after actual readiness, not with another run or input ID.
+
+`stop` reconciles exact root/waiters through their owning Native; it does not kill the terminal/process or remove history. `resume` clears stopped state without any input. After a Native process exits, use that actor's **same open command**: it reopens only the recorded existing session through `--session`. It does not use `--continue` or create a replacement. A still-live recorded process refuses a second open; use its existing terminal. An earlier launch whose identity was never recorded requires explicit reconciliation, not blind respawn.
+
+## Read-only DeLM BOARD
+
+```sh
+python3 "$PACKAGE/scripts/delm_board.py" "$RUN" --observe
+```
+
+This is the shipped read-only terminal board. It neither reads/ACKs receipts for agents nor restarts services/actors. Open it in any ordinary terminal. Terminal placement is outside DeLM.
+
+## Identity, approved input and uncertainty
+
+Private socket parent must be canonical user-owned 0700; socket must be user-owned 0600. A transport correlation ID is separate from the permanent approved input ID. Full fixed run/actor/workspace/root, physical session path/session ID and persistent instance must match. Root1 alone is not a session identity. Historical API1 manifests refuse rather than migrate silently.
+
+The launch attempt is saved before Native exec. Approved input/type/SHA and pending status are saved before RPC. Native independently verifies/records approval and invokes genuine admission with the same request ID before SDK submit. Lost acceptance responses reconcile that same ID and bytes; changed replay refuses even with a matching new hash. Status and resume send no dummy input. No editor draft is inspected, cleared or submitted.
+
+Current reload is idle-only, including background tasks; exact-session process reopen is distinct. No old Chord socket, public1.0.2 patch, shared `prompt` retry or author source checkout is required or substituted.
+
+## Configuration and evidence
+
+Optional `--config FILE` / `DELM_CONFIG` accepts only `runs_root` and `global_agents`; no private config/auth is inferred. Default runs root: `~/.local/state/pi-durable-delm/runs`. Native input helper is `NativeInput.mjs`; its generic unit admission spies are not real host-policy proof. Current source/unit evidence is under `evidence/native14/launcher/`; actual current-entrypoint/installed package acceptance remains separately verified. Historical HOST05 is not Native14 evidence.

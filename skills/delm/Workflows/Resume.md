@@ -2,17 +2,15 @@
 
 ## Outcome
 
-The same RUN and actual recorded Native sessions/instances retain histories, pending receipts, claims and unsent editor drafts. No shared-cwd `--continue`, count expansion, reinitialization, replacement session or dummy input is permitted. The launcher contacts only the saved existing owner; missing identity is uncertainty, not permission to create another conversation.
+Continue the same RUN and exact recorded sessions with histories, claims, pending receipts and unsent drafts intact. No count expansion, reinitialization, replacement session, shared-cwd `--continue` or dummy input.
 
-## Intent-to-Flag Mapping
+## Tool contract
 
-| Intent | Command |
-|---|---|
-| Inspect captured input integrity and actual board/Native state | `python3 Tools/Run.py status --run-dir RUN` |
-| Re-enable exact bound sessions without input | `python3 Tools/Run.py resume --run-dir RUN` |
-| New approved original instruction | `python3 Tools/Run.py notify --run-dir RUN --input-file FILE --request-id STABLE_ID` |
-| Select one existing actor | add `--actor NAME` |
+- Inspect: `python3 Tools/Run.py status --run-dir RUN`.
+- Clear an explicitly stopped live owner without input: `python3 Tools/Run.py resume --run-dir RUN`, optionally `--actor NAME`.
+- After its Native process exits, run the same emitted foreground `open --run-dir RUN --actor NAME` command in an ordinary terminal. It uses only the recorded existing `--session`. This is process reopen, not the input-free resume RPC.
+- Approved update: `python3 Tools/Run.py notify --run-dir RUN --actor NAME --input-file FILE --request-id STABLE_ID`.
 
-A notification's file is approved input, not a summary fabricated by the launcher. Reusing its ID with changed text refuses even if the new text has a valid digest. Reuse the same unchanged input/ID after uncertain delivery; native receipts and the local pending ledger reconcile accepted responses without duplicate work. `start` retry likewise retains the original bootstrap ID.
+A still-live recorded process refuses another open; use its existing terminal/endpoint. An unrecorded attempted launch or missing recorded physical session needs explicit reconciliation, not automatic discovery or replacement. New socket per process generation retains the same persistent Native identity.
 
-User updates, answers and permissions are distinct. A board event or peer publication grants no extra spending, workers, installation or publication. No command reads/submits editor drafts. Changing server, actor, session path/workspace or instance requires explicit reconciliation, not silent migration. Compatibility and existing-owner requirements remain those in [Run help](../Tools/Run.help.md).
+Notifications bind original bytes/type/SHA to the stable ID. A changed replay refuses; an ambiguous accepted response reuses unchanged input/ID. Registry adapters and genuine admission remain installed; no model/auth/settings or draft change occurs. Exact reopen can resume previously authorized pending Native work; verify that authority before reopening. Reload requires the entire Harness idle, including background watchers. Board/peer messages grant no new spending, workers or install permissions. See [Run help](../Tools/Run.help.md).

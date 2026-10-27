@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "verdict": "EARLY_ACTUAL_NATIVE14_BOARD_INTEGRATION_PASS",
+  "files": {
+    "tests/native14-host-integration.py": "740621d4312561211d9a3bf9ffec15fe42158df5b89c0300bead862edc8f383f",
+    "docs/evidence/native14/fixture-integration/alice-initial-registry-events.jsonl": "94bb5f473c6830b8197d9abfd417fe423f3999402bd274df0c035ab7039dbe61",
+    "docs/evidence/native14/fixture-integration/alice-initial-connect.trace": "07ab0fde27f46e7488ca97b0519eb3376decd4fddc9b932fdb55fd352903d146",
+    "docs/evidence/native14/fixture-integration/bob-initial-connect.trace": "856d70d6334c0a56e66be8fd72b1a20f2a6a2550bc7e65bb5a28ae56ed8b3e4e",
+    "docs/evidence/native14/fixture-integration/bob-reopen-connect.trace": "a6c01047304cc19d19549509c5a02d52d406b111da79ce3f2174d6129cee3e22",
+    "docs/evidence/native14/fixture-integration/initial-blocking-rpc-timeout.log": "23ac8e8d83d95eef34a1df8f09dcab9f4d4d4fce27baeb795b787dd6a2298f09",
+    "docs/evidence/native14/fixture-integration/bob-reopen-model-events.jsonl": "4804dc5af15a67c667ef477eaeea5b2fb343f78eace24459c7a24390bc2eaffc",
+    "docs/evidence/native14/fixture-integration/bob-reopen-registry-events.jsonl": "9296852a0d771e019c9a652f6b6da535ddba050ee6794d1bea97e1e17506d4a6",
+    "docs/evidence/native14/fixture-integration/bob-initial-registry-events.jsonl": "86f39a8a4987e21c897742e178dde937b7905fb57a1f32bbd8ab3696b5157669",
+    "docs/evidence/native14/fixture-integration/board.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/evidence/native14/fixture-integration/result.json": "5ffd6aa631d2de2f6a5ba0e6ef045b7b3d2b9dfeb47c075c57aa39d7e289726c",
+    "docs/evidence/native14/fixture-integration/README.md": "28a2d1646ffe05107171917ef50cb0caabe6da044f51ca97e107329100fc0f49",
+    "docs/evidence/native14/fixture-integration/initial-inet-audit-assumption.log": "c08b9793dbd183cad2d7b7e455b1a144d365dcb3a4951c11ebf84dd0bb2008b5",
+    "docs/evidence/native14/fixture-integration/bob-initial-model-events.jsonl": "c475921111a90a02baa260975a4792f58c37b4b53c47c1eef2d0ce75af7afac7",
+    "docs/evidence/native14/fixture-integration/alice-initial-model-events.jsonl": "a70a03d1ae802efca927279661751f9a43f4a0a02dc634694228fb009467513d"
+  },
+  "modelCalls": 9,
+  "liveModelCalls": 0,
+  "externalInetConnects": 0,
+  "baselineUnchanged": true,
+  "currentLiveBuild": "NOT_TESTED",
+  "finalInstalledPackage": "NOT_TESTED"
+}

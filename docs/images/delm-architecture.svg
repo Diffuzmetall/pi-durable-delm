@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1120" viewBox="0 0 1600 1120" role="img" aria-labelledby="title desc">
 <title id="title">Как работает DeLM для Pi Durable</title>
-<desc id="desc">Пользователь утверждает запрос и план. Скилл и launcher готовят отдельные сессии существующего Native. Агенты работают в одном проекте и публикуют результаты через actor CLI на общей Python-доске. После всех требуемых DONE расширение delm_wait возобновляет нужную сессию. Участник читает сохранённый snapshot и явно подтверждает ACK. Native, модели, авторизация и guards остаются у пользователя; нужен Native API 1.</desc>
+<desc id="desc">Пользователь утверждает запрос и план. Скилл и launcher готовят отдельные сессии существующего Native. Агенты работают в одном проекте и публикуют результаты через actor CLI на общей Python-доске. После всех требуемых DONE расширение delm_wait возобновляет нужную сессию. Участник читает сохранённый snapshot и явно подтверждает ACK. Native, модели, авторизация и guards остаются у пользователя; текущий путь использует registry и настоящий admission установленного Native 1.4.</desc>
 <defs>
  <marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M1 1 11 6 1 11Z" fill="#00796B"/></marker>
  <marker id="purple-arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M1 1 11 6 1 11Z" fill="#4A148C"/></marker>
@@ -63,5 +63,5 @@
 <text x="800" y="981" text-anchor="middle" class="body">Одна рабочая папка · исходники · проверенный результат</text>
 <rect x="60" y="1030" width="1480" height="45" rx="12" fill="#FFFFFF"/>
 <text x="800" y="1061" text-anchor="middle" style="font-size:24px;font-weight:bold;fill:#4A148C">УВЕДОМЛЕНИЕ → SNAPSHOT → ЧТЕНИЕ → ACK</text>
-<text x="800" y="1106" text-anchor="middle" class="small">Native API 1 обязателен · без отдельного runtime · без модельного polling</text>
+<text x="800" y="1106" text-anchor="middle" class="small">Native 1.4: registry + admission · без отдельного runtime · без модельного polling</text>
 </svg>

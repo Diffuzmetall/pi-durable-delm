@@ -154,7 +154,7 @@ export function createDelmWait({ run, actor, admitInput }) {
         }
         const conversation = await runtime.conversation(runtime.conversationId, context);
         if (!conversation) throw Error('Bound native conversation unavailable');
-        try { if (admitInput) await admitInput(conversation, requestId, context); }
+        try { if (admitInput) await admitInput(conversation, requestId, context, runtime); }
         catch (error) {
           context.abortSignal?.throwIfAborted();
           return runtime.commit(async tx => {

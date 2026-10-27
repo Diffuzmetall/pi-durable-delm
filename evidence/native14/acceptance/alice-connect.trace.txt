@@ -1,0 +1,64 @@
+3419926 execve("/usr/bin/python3", ["/usr/bin/python3", "-B", "<FIXTURE>/payload/versi"..., "open", "--run-dir", "<FIXTURE>/run", "--actor", "alice", "--native-executable", "<OPERATOR_HOME>/.local/bin/pi-durab"...], 0x7ffdb24a5490 /* 20 vars */) = 0
+3419926 execve("<OPERATOR_HOME>/.local/bin/pi-durable", ["<OPERATOR_HOME>/.local/bin/pi-durab"..., "--no-mcp", "--extension", "<FIXTURE>/run/alice/del"...], 0x751d0c99d790 /* 20 vars */) = 0
+3419926 execve("<FIXTURE>/run/alice/bin/bash", ["bash", "<OPERATOR_HOME>/.local/bin/pi-durab"..., "--no-mcp", "--extension", "<FIXTURE>/run/alice/del"...], 0x7ffeb9574f00 /* 20 vars */) = -1 ENOENT (No such file or directory)
+3419926 execve("<FIXTURE>/bin/bash", ["bash", "<OPERATOR_HOME>/.local/bin/pi-durab"..., "--no-mcp", "--extension", "<FIXTURE>/run/alice/del"...], 0x7ffeb9574f00 /* 20 vars */) = 0
+3419926 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3419926 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3419926 execve("<INSTALLED_HOST_LANE>/pi-durable", ["<OPERATOR_HOME>/Projects/master/exp"..., "--no-mcp", "--extension", "<FIXTURE>/run/alice/del"...], 0x61f764b56a40 /* 22 vars */) = 0
+3419926 execve("<FIXTURE>/run/alice/bin/bash", ["bash", "<OPERATOR_HOME>/Projects/master/exp"..., "--no-mcp", "--extension", "<FIXTURE>/run/alice/del"...], 0x7ffdebefe2f0 /* 22 vars */) = -1 ENOENT (No such file or directory)
+3419926 execve("<FIXTURE>/bin/bash", ["bash", "<OPERATOR_HOME>/Projects/master/exp"..., "--no-mcp", "--extension", "<FIXTURE>/run/alice/del"...], 0x7ffdebefe2f0 /* 22 vars */) = 0
+3419926 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3419926 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3419928 execve("<FIXTURE>/bin/dirname", ["dirname", "--", "<OPERATOR_HOME>/Projects/master/exp"...], 0x62e900bc2a70 /* 23 vars */) = 0
+3419928 +++ exited with 0 +++
+3419927 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3419928, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+3419927 +++ exited with 0 +++
+3419926 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3419927, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+3419926 execve("<FIXTURE>/bin/node", ["node", "--import", "<OPERATOR_HOME>/Projects/master/exp"..., "<OPERATOR_HOME>/Projects/master/exp"..., "--extension", "<OPERATOR_HOME>/Projects/master/exp"..., "--no-mcp", "--extension", "<FIXTURE>/run/alice/del"...], 0x62e900bc9300 /* 25 vars */) = 0
+3420153 +++ exited with 0 +++
+3419926 --- SIGWINCH {si_signo=SIGWINCH, si_code=SI_USER, si_pid=3419926, si_uid=1000} ---
+3421193 execve("<OPERATOR_HOME>/.local/bin/dcg", ["<OPERATOR_HOME>/.local/bin/dcg", "--robot", "test", "--dialect", "posix", "--enforce-budget", "--stdin"], 0x3f83f710 /* 28 vars */) = 0
+3421196 +++ exited with 0 +++
+3421197 +++ exited with 0 +++
+3421199 +++ exited with 0 +++
+3421193 +++ exited with 0 +++
+3419926 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3421193, si_uid=1000, si_status=0, si_utime=9 /* 0.09 s */, si_stime=12 /* 0.12 s */} ---
+3421203 execve("/bin/bash", ["/bin/bash", "-c", "python3 -B -c 'import json,subpr"...], 0x3f83d640 /* 28 vars */) = 0
+3421203 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3421203 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3421203 execve("<FIXTURE>/bin/python3", ["python3", "-B", "-c", "import json,subprocess\nfrom path"...], 0x5656a603a8d0 /* 29 vars */) = 0
+3421204 execve("<FIXTURE>/run/alice/bin/context", ["<FIXTURE>/run/alice/bin"..., "domain", "{\"op\": \"claim\", \"request_id\": \"f"...], 0x7ffefd96b150 /* 29 vars */) = 0
+3421204 execve("/usr/bin/python3", ["/usr/bin/python3", "<FIXTURE>/payload/versi"..., "context", "<FIXTURE>/run", "alice", "domain", "{\"op\": \"claim\", \"request_id\": \"f"...], 0x647642ef7c20 /* 29 vars */) = 0
+3421204 connect(3, {sa_family=AF_INET, sin_port=htons(38023), sin_addr=inet_addr("127.0.0.1")}, 16) = -1 EINPROGRESS (Operation now in progress)
+3421204 +++ exited with 0 +++
+3421203 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3421204, si_uid=1000, si_status=0, si_utime=14 /* 0.14 s */, si_stime=5 /* 0.05 s */} ---
+3421203 +++ exited with 0 +++
+3419926 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3421203, si_uid=1000, si_status=0, si_utime=4 /* 0.04 s */, si_stime=2 /* 0.02 s */} ---
+3421968 execve("<OPERATOR_HOME>/.local/bin/dcg", ["<OPERATOR_HOME>/.local/bin/dcg", "--robot", "test", "--dialect", "posix", "--enforce-budget", "--stdin"], 0x3f52d080 /* 28 vars */) = 0
+3421971 +++ exited with 0 +++
+3421972 +++ exited with 0 +++
+3421973 +++ exited with 0 +++
+3421968 +++ exited with 0 +++
+3419926 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3421968, si_uid=1000, si_status=0, si_utime=9 /* 0.09 s */, si_stime=13 /* 0.13 s */} ---
+3421978 execve("/bin/bash", ["/bin/bash", "-c", "python3 -B -c 'import json,subpr"...], 0x3ef57940 /* 28 vars */) = 0
+3421978 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3421978 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3421978 execve("<FIXTURE>/bin/python3", ["python3", "-B", "-c", "import json,subprocess\nfrom path"...], 0x61639586b980 /* 29 vars */) = 0
+3421983 execve("<FIXTURE>/run/alice/bin/context", ["<FIXTURE>/run/alice/bin"..., "domain", "{\"op\": \"complete\", \"request_id\":"...], 0x7fff048f19a0 /* 29 vars */) = 0
+3421983 execve("/usr/bin/python3", ["/usr/bin/python3", "<FIXTURE>/payload/versi"..., "context", "<FIXTURE>/run", "alice", "domain", "{\"op\": \"complete\", \"request_id\":"...], 0x5e44a0dc1d38 /* 29 vars */) = 0
+3421983 connect(3, {sa_family=AF_INET, sin_port=htons(38023), sin_addr=inet_addr("127.0.0.1")}, 16) = -1 EINPROGRESS (Operation now in progress)
+3421983 +++ exited with 0 +++
+3421978 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3421983, si_uid=1000, si_status=0, si_utime=15 /* 0.15 s */, si_stime=5 /* 0.05 s */} ---
+3421978 +++ exited with 0 +++
+3419926 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3421978, si_uid=1000, si_status=0, si_utime=4 /* 0.04 s */, si_stime=2 /* 0.02 s */} ---
+3419933 +++ exited with 0 +++
+3419929 +++ exited with 0 +++
+3419932 +++ exited with 0 +++
+3419930 +++ exited with 0 +++
+3419931 +++ exited with 0 +++
+3420169 +++ exited with 0 +++
+3420167 +++ exited with 0 +++
+3420168 +++ exited with 0 +++
+3420170 +++ exited with 0 +++
+3419934 +++ exited with 0 +++
+3419926 +++ exited with 0 +++

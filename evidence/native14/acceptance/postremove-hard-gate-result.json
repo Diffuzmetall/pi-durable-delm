@@ -1,0 +1,10 @@
+{
+  "verdict": "PASS",
+  "actualMeasurementAccepted": true,
+  "negativeCasesHardRejected": 5,
+  "missingRecordRejected": true,
+  "hookErrorRejected": true,
+  "countMismatchRejected": true,
+  "activeSkillRejected": true,
+  "activeWaitToolRejected": true
+}

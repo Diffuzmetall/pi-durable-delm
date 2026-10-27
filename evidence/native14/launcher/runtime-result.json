@@ -1,0 +1,30 @@
+{
+  "verdict": "ACTUAL_NATIVE14_PRODUCT_OPEN_INPUT_REOPEN_PASS",
+  "actualProductOpen": true,
+  "entrypoint": "existing installed pi-durable -> existing global-runtime -> actual experimental/durable/main.ts",
+  "resolvedSDK": {"pi-durable":"1.4.0","pi-ai":"1.4.0","chord":"1.4.0"},
+  "initialAndNotifyFauxModelCalls": 2,
+  "reopenModelCalls": 0,
+  "liveModelCalls": 0,
+  "inetConnectsInitial": 0,
+  "inetConnectsReopen": 0,
+  "replayWithoutExtraModel": true,
+  "ambiguousLauncherAcceptanceRecovered": true,
+  "responseLossMethod": "Test wrapper discards receipt AFTER actual production RPC/Native acceptance; local pending ledger retained, unchanged CLI retry reconciled. No transport proxy or admission replacement.",
+  "changedReplayRefused": true,
+  "stopResumeWithoutInput": true,
+  "syntheticDraftVisibleAfterNotify": true,
+  "exactReopenSameFullIdentity": true,
+  "reopenedBootstrapReplayWithoutModel": true,
+  "hostConstructedByFixture": false,
+  "productionHashes": {
+    "skills/delm/Tools/Run.py":"c30b7ef92421e360fa029bb442ab3638044378997ffdbd57e942c44ec98a52d2",
+    "skills/delm/Tools/NativeControl.mjs":"04b95d97bd9457c664ec3c26002e1619842e89954c67a76b8deb8f330978d559",
+    "extensions/delm/native14.js":"7052b87286b22ba057627df8b32955778f23c7c22f63a697dc8e20e2c05dbbb5",
+    "extensions/delm/native14-owner.js":"5e8f133b70a4273c012c8e1f0eae37d221a0958a86c26aaa9421ad43d045c245",
+    "extensions/delm/index.js":"c31922d070384a38659498a7f01d42ea861ee912f86411669b9240908b80f11b"
+  },
+  "driver": "tests/native14-launch-runtime.py reuses independently reviewed native14-host MODEL-only fixture/environment/PTY methods; no fixture modifications",
+  "evidence": "Final run raw PTY/model/strace files retained in private owned fixture area; exact locator published on bound board, not bundled",
+  "scope": "One focused actor and exact reopen. Full two-actor board/wait/readACK/denial/installed-candidate acceptance belongs to milestone QA. No claim that TARGET bytes are loaded in existing live team conversations or that live private provider/policy E2E ran."
+}

@@ -1,0 +1,6 @@
+{"event":"actual_native_skill_prompt","skillPresent":true,"location":"<FIXTURE>/project/.pi/skills/delm/SKILL.md","draftAbsentModelHistory":true,"systemSha256":"a952c4c92f46d1ab507a171784faddd9e51a7b3def066095da6f769a4a450bb8"}
+{"event":"actual_native_skill_prompt","skillPresent":true,"location":"<FIXTURE>/project/.pi/skills/delm/SKILL.md","draftAbsentModelHistory":true,"systemSha256":"a952c4c92f46d1ab507a171784faddd9e51a7b3def066095da6f769a4a450bb8"}
+{"event":"actual_native_skill_prompt","skillPresent":true,"location":"<FIXTURE>/project/.pi/skills/delm/SKILL.md","draftAbsentModelHistory":true,"systemSha256":"a952c4c92f46d1ab507a171784faddd9e51a7b3def066095da6f769a4a450bb8"}
+{"event":"actual_native_skill_prompt","skillPresent":true,"location":"<FIXTURE>/project/.pi/skills/delm/SKILL.md","draftAbsentModelHistory":true,"systemSha256":"a952c4c92f46d1ab507a171784faddd9e51a7b3def066095da6f769a4a450bb8"}
+{"event":"actual_native_skill_prompt","skillPresent":true,"location":"<FIXTURE>/project/.pi/skills/delm/SKILL.md","draftAbsentModelHistory":true,"systemSha256":"a952c4c92f46d1ab507a171784faddd9e51a7b3def066095da6f769a4a450bb8"}
+{"event":"actual_native_skill_prompt","skillPresent":true,"location":"<FIXTURE>/project/.pi/skills/delm/SKILL.md","draftAbsentModelHistory":true,"systemSha256":"a952c4c92f46d1ab507a171784faddd9e51a7b3def066095da6f769a4a450bb8"}

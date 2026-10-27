@@ -1,0 +1,36 @@
+{
+  "verdict": "PASS",
+  "candidateSha256": "830e43da3e6119fad22507d29db7da0de94fa80817442b26ce4298ca323e7480",
+  "installRepeat": true,
+  "metadataOnlyUpdateSame37Runtime": true,
+  "rollbackExactCandidate": true,
+  "uninstallManagedVersionsOnly": true,
+  "externalBoardWorkspaceAndSyntheticSettingsPreserved": true,
+  "noPersonalSkillOrGlobalRegistration": true,
+  "originalCurrentNativeAfterRemovalSameSessionConversation": true,
+  "priorActualMessagesAndToolResultsPreserved": true,
+  "removedSkillAbsentActualNativePrompt": true,
+  "originalNativeAndSDKInputsUnchanged": true,
+  "oneAdditionalFauxModelCall": true,
+  "liveModelCalls": 0,
+  "oneGithubURLReadingMap": "PASS_OFFLINE_PACKAGED_MAP_AND_REAL_CLI_HELP",
+  "publicGithubFetchOrPublication": "NOT_TESTED_NOT_AUTHORIZED",
+  "operations": [
+    {
+      "action": "install",
+      "status": "unchanged"
+    },
+    {
+      "action": "install",
+      "status": "installed"
+    },
+    {
+      "action": "rollback",
+      "status": "rolled-back"
+    },
+    {
+      "action": "uninstall",
+      "status": "uninstalled"
+    }
+  ]
+}

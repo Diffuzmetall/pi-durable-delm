@@ -1,0 +1,51 @@
+3249256 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3249256 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3249256 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3249256 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3249265 +++ exited with 0 +++
+3249259 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3249265, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+3249259 +++ exited with 0 +++
+3249256 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3249259, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+3249395 +++ exited with 0 +++
+3249256 --- SIGWINCH {si_signo=SIGWINCH, si_code=SI_USER, si_pid=3249256, si_uid=1000} ---
+3249778 connect(3, {sa_family=AF_INET, sin_port=htons(43643), sin_addr=inet_addr("127.0.0.1")}, 16) = -1 EINPROGRESS (Operation now in progress)
+3249778 +++ exited with 0 +++
+3249256 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3249778, si_uid=1000, si_status=0, si_utime=11 /* 0.11 s */, si_stime=5 /* 0.05 s */} ---
+3249803 +++ exited with 0 +++
+3249804 +++ exited with 0 +++
+3249806 +++ exited with 0 +++
+3249801 +++ exited with 0 +++
+3249256 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3249801, si_uid=1000, si_status=0, si_utime=8 /* 0.08 s */, si_stime=11 /* 0.11 s */} ---
+3249835 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3249835 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3249855 connect(3, {sa_family=AF_INET, sin_port=htons(43643), sin_addr=inet_addr("127.0.0.1")}, 16) = -1 EINPROGRESS (Operation now in progress)
+3249855 +++ exited with 0 +++
+3249835 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3249855, si_uid=1000, si_status=0, si_utime=12 /* 0.12 s */, si_stime=4 /* 0.04 s */} ---
+3249859 connect(3, {sa_family=AF_INET, sin_port=htons(43643), sin_addr=inet_addr("127.0.0.1")}, 16) = -1 EINPROGRESS (Operation now in progress)
+3249859 +++ exited with 0 +++
+3249835 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3249859, si_uid=1000, si_status=0, si_utime=13 /* 0.13 s */, si_stime=4 /* 0.04 s */} ---
+3249864 connect(3, {sa_family=AF_INET, sin_port=htons(43643), sin_addr=inet_addr("127.0.0.1")}, 16) = -1 EINPROGRESS (Operation now in progress)
+3249864 +++ exited with 0 +++
+3249835 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3249864, si_uid=1000, si_status=0, si_utime=13 /* 0.13 s */, si_stime=6 /* 0.06 s */} ---
+3249871 connect(3, {sa_family=AF_INET, sin_port=htons(43643), sin_addr=inet_addr("127.0.0.1")}, 16) = -1 EINPROGRESS (Operation now in progress)
+3249871 +++ exited with 0 +++
+3249835 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3249871, si_uid=1000, si_status=0, si_utime=13 /* 0.13 s */, si_stime=5 /* 0.05 s */} ---
+3249835 +++ exited with 0 +++
+3249256 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3249835, si_uid=1000, si_status=0, si_utime=4 /* 0.04 s */, si_stime=4 /* 0.04 s */} ---
+3249904 connect(3, {sa_family=AF_INET, sin_port=htons(43643), sin_addr=inet_addr("127.0.0.1")}, 16) = -1 EINPROGRESS (Operation now in progress)
+3249904 +++ exited with 0 +++
+3249256 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3249904, si_uid=1000, si_status=0, si_utime=11 /* 0.11 s */, si_stime=4 /* 0.04 s */} ---
+3249914 connect(3, {sa_family=AF_INET, sin_port=htons(43643), sin_addr=inet_addr("127.0.0.1")}, 16) = -1 EINPROGRESS (Operation now in progress)
+3249914 +++ exited with 0 +++
+3249256 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3249914, si_uid=1000, si_status=0, si_utime=12 /* 0.12 s */, si_stime=5 /* 0.05 s */} ---
+3249283 +++ exited with 0 +++
+3249281 +++ exited with 0 +++
+3249280 +++ exited with 0 +++
+3249282 +++ exited with 0 +++
+3249279 +++ exited with 0 +++
+3249400 +++ exited with 0 +++
+3249398 +++ exited with 0 +++
+3249397 +++ exited with 0 +++
+3249399 +++ exited with 0 +++
+3249286 +++ exited with 0 +++
+3249256 +++ exited with 0 +++

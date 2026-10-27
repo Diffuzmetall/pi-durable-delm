@@ -1,0 +1,14 @@
+{
+  "verdict": "PASS",
+  "candidateSha256": "830e43da3e6119fad22507d29db7da0de94fa80817442b26ce4298ca323e7480",
+  "installedAfterRemoval": false,
+  "sameOriginalNativeSessionConversationAndPriorActualMessages": true,
+  "actualNativePromptHasNoRemovedSkill": true,
+  "originalNativeAndSDKInputsUnchanged": true,
+  "externalBoardProjectAndSyntheticSettingsPreserved": true,
+  "fixtureHelperOnlyRetainedFromExactArchive": true,
+  "liveModelCalls": 0,
+  "additionalFauxModelCalls": 1,
+  "priorLifecycleStage": "repeat/update-same37/rollback/uninstall/offline-URL-map/help/protected-file assertions passed BEFORE original probe attach used unsupported workspacePath; corrected continuation uses actual cwd/message ABI, no lifecycle repeat",
+  "publicGithubFetchOrPublication": "NOT_TESTED_NOT_AUTHORIZED"
+}

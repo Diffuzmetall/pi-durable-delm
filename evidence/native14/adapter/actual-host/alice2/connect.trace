@@ -1,0 +1,21 @@
+3241159 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3241159 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3241159 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3241159 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3241161 +++ exited with 0 +++
+3241160 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3241161, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+3241160 +++ exited with 0 +++
+3241159 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3241160, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+3241292 +++ exited with 0 +++
+3241159 --- SIGWINCH {si_signo=SIGWINCH, si_code=SI_USER, si_pid=3241159, si_uid=1000} ---
+3241163 +++ exited with 0 +++
+3241164 +++ exited with 0 +++
+3241162 +++ exited with 0 +++
+3241165 +++ exited with 0 +++
+3241166 +++ exited with 0 +++
+3241343 +++ exited with 0 +++
+3241341 +++ exited with 0 +++
+3241344 +++ exited with 0 +++
+3241342 +++ exited with 0 +++
+3241187 +++ exited with 0 +++
+3241159 +++ exited with 0 +++

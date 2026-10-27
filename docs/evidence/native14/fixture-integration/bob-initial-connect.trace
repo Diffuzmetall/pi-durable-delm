@@ -1,0 +1,21 @@
+3248754 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3248754 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3248754 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3248754 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3248756 +++ exited with 0 +++
+3248755 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3248756, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+3248755 +++ exited with 0 +++
+3248754 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3248755, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+3248889 +++ exited with 0 +++
+3248754 --- SIGWINCH {si_signo=SIGWINCH, si_code=SI_USER, si_pid=3248754, si_uid=1000} ---
+3248761 +++ exited with 0 +++
+3248760 +++ exited with 0 +++
+3248758 +++ exited with 0 +++
+3248759 +++ exited with 0 +++
+3248757 +++ exited with 0 +++
+3248901 +++ exited with 0 +++
+3248900 +++ exited with 0 +++
+3248902 +++ exited with 0 +++
+3248899 +++ exited with 0 +++
+3248762 +++ exited with 0 +++
+3248754 +++ exited with 0 +++

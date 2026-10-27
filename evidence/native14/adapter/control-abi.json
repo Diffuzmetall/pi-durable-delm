@@ -1,0 +1,22 @@
+{
+  "protocol": "delm.native14.control.v1",
+  "status": "IMPLEMENTED_SDK5_AND_ACTUAL_NATIVE14_SELF_CHECK_PASS_FINAL_ACCEPTANCE_PENDING",
+  "authorization": "Explicit user approval recorded on board799: minimal private Unix endpoint inside existing Native process only",
+  "installer": "extensions/delm/native14.js default(base,{run,actor,controlSocket})",
+  "controlSocket": "Absolute fresh per-process-generation Unix socket in existing user-owned non-symlink 0700 parent; socket0600; never unlink an existing endpoint",
+  "transport": "One UTF-8 JSON request line and one response line per connection; max1048576 request bytes; no model or editor transport",
+  "request": {"id":"caller transport correlation string, max256; separate from stable input requestId","method":"identity|input|status|stop|resume"},
+  "success": {"id":"same transport id","ok":true,"result":"method result"},
+  "failure": {"id":"same transport id when valid","ok":false,"error":{"code":"INVALID_REQUEST|SCOPE_MISMATCH|STOPPED|NOT_READY|CONTROL_ERROR","message":"bounded diagnostic, never approved input body"}},
+  "identity": {"protocol":"delm.native14.control.v1","sdkVersion":"1.4.0","run":"canonical fixed run","actor":"fixed actor","workspace":"canonical fixed workspace","sessionPath":"canonical existing session.sqlite","sessionId":"basename of real Native session directory","conversationId":1,"instanceId":"native-document persistent UUID, retained on exact reopen"},
+  "methods": {
+    "identity": {"request":"{id,method:identity}","result":"{identity,stopped,build}"},
+    "input": {"request":"{id,method:input,identity,type:input,requestId,text,expectedSha256}","result":"{accepted:true,replay:boolean,requestId,conversationId}","boundary":"Verify full identity/type/SHA; native approval ledger; actual controller.admit with SAME stable requestId; check stopped/workspace again after admission; same-ID native submit. Never retry plain shared prompt."},
+    "status": {"request":"{id,method:status,identity}","result":"{identity,stopped,waits:[existing core waitStatus]}","boundary":"Uses actual existing core status reconciliation with board pending; no model input or editor access"},
+    "stop": {"request":"{id,method:stop,identity}","result":"{identity,stopped:true,waits:[aborted waiter identities]}","boundary":"Mark stopped first, abort/wait actual owned watchers, abort/wait exact root; preserve Native history, stable approvals and unread board receipts"},
+    "resume": {"request":"{id,method:resume,identity}","result":"{identity,resumed:true}","boundary":"Clear stopped only, with exact identity/effective workspace; no dummy input or draft submission"}
+  },
+  "startup": "Compose existing trusted controller.bind/close, preserve original owner lifecycle. Wait for successful real bind before wake admission; attach to already-owned Harness/root only. Missing/broken admission never falls back. Endpoint failure disables DeLM control, not original Native owner policy.",
+  "reload": "Reuse same owner/control endpoint on idle registry reload, update handler/tool reference; pending tasks require cancel/drain before current-host reload. On process restart supply fresh private socket but SAME recorded Native session identity; no socket deletion guessing.",
+  "limits": ["Not an existing stock shared-host command or old Chord API", "No standalone server/service/host/Harness/storage owner", "No paid/live-model execution or installed host/global config mutation", "Actual current Native adapter self-check passed with real owner and four faux responses; final independent package/launcher/TUI acceptance remains pending"]
+}

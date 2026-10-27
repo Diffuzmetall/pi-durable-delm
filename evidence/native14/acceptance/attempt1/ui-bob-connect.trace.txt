@@ -1,0 +1,30 @@
+3390978 execve("/usr/bin/python3", ["/usr/bin/python3", "-B", "<FIXTURE>/payload/versi"..., "open", "--run-dir", "<FIXTURE>/run", "--actor", "bob", "--native-executable", "<OPERATOR_HOME>/.local/bin/pi-durab"...], 0x7ffeafa0b260 /* 20 vars */) = 0
+3390978 execve("<OPERATOR_HOME>/.local/bin/pi-durable", ["<OPERATOR_HOME>/.local/bin/pi-durab"..., "--no-mcp", "--extension", "<FIXTURE>/run/bob/delm-"..., "--session", "<FIXTURE>/bob/home/.pi/"...], 0x7040085a5790 /* 20 vars */) = 0
+3390978 execve("<FIXTURE>/run/bob/bin/bash", ["bash", "<OPERATOR_HOME>/.local/bin/pi-durab"..., "--no-mcp", "--extension", "<FIXTURE>/run/bob/delm-"..., "--session", "<FIXTURE>/bob/home/.pi/"...], 0x7ffc3d7009b0 /* 20 vars */) = -1 ENOENT (No such file or directory)
+3390978 execve("<FIXTURE>/bin/bash", ["bash", "<OPERATOR_HOME>/.local/bin/pi-durab"..., "--no-mcp", "--extension", "<FIXTURE>/run/bob/delm-"..., "--session", "<FIXTURE>/bob/home/.pi/"...], 0x7ffc3d7009b0 /* 20 vars */) = 0
+3390978 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3390978 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3390978 execve("<OPERATOR_HOME>/Projects/master/experiments/pi-durable-1.4-upgrade/host-lane/pi-durable", ["<OPERATOR_HOME>/Projects/master/exp"..., "--no-mcp", "--extension", "<FIXTURE>/run/bob/delm-"..., "--session", "<FIXTURE>/bob/home/.pi/"...], 0x589f3032aa40 /* 22 vars */) = 0
+3390978 execve("<FIXTURE>/run/bob/bin/bash", ["bash", "<OPERATOR_HOME>/Projects/master/exp"..., "--no-mcp", "--extension", "<FIXTURE>/run/bob/delm-"..., "--session", "<FIXTURE>/bob/home/.pi/"...], 0x7ffe63a0d7e0 /* 22 vars */) = -1 ENOENT (No such file or directory)
+3390978 execve("<FIXTURE>/bin/bash", ["bash", "<OPERATOR_HOME>/Projects/master/exp"..., "--no-mcp", "--extension", "<FIXTURE>/run/bob/delm-"..., "--session", "<FIXTURE>/bob/home/.pi/"...], 0x7ffe63a0d7e0 /* 22 vars */) = 0
+3390978 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3390978 connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+3391010 execve("<FIXTURE>/bin/dirname", ["dirname", "--", "<OPERATOR_HOME>/Projects/master/exp"...], 0x625915bbaa70 /* 23 vars */) = 0
+3391010 +++ exited with 0 +++
+3391009 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3391010, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+3391009 +++ exited with 0 +++
+3390978 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3391009, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+3390978 execve("<FIXTURE>/bin/node", ["node", "--import", "<OPERATOR_HOME>/Projects/master/exp"..., "<OPERATOR_HOME>/Projects/master/exp"..., "--extension", "<OPERATOR_HOME>/Projects/master/exp"..., "--no-mcp", "--extension", "<FIXTURE>/run/bob/delm-"..., "--session", "<FIXTURE>/bob/home/.pi/"...], 0x625915bc1ab0 /* 25 vars */) = 0
+3391174 +++ exited with 0 +++
+3390978 --- SIGWINCH {si_signo=SIGWINCH, si_code=SI_USER, si_pid=3390978, si_uid=1000} ---
+3391021 +++ exited with 0 +++
+3391022 +++ exited with 0 +++
+3391018 +++ exited with 0 +++
+3391019 +++ exited with 0 +++
+3391020 +++ exited with 0 +++
+3391205 +++ exited with 0 +++
+3391207 +++ exited with 0 +++
+3391206 +++ exited with 0 +++
+3391204 +++ exited with 0 +++
+3391030 +++ exited with 0 +++
+3390978 +++ exited with 0 +++

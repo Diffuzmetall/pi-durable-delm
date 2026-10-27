@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "verdict": "N14_ADAPTER_IMPLEMENTED_AND_SELF_VERIFIED_NOT_FINAL_PACKAGE_ACCEPTANCE",
+  "sdk": "Actual installed global-runtime selected published 1.4.0 modules",
+  "focused_checks": {"tests":5,"passed":5,"failed":0,"skipped":0,"scope":"real SDK1.4/SQLite and endpoint, test-only controller/model doubles; not actual host policy"},
+  "retained_sdk_checks": {
+    "unique_passed_across_final_targeted_runs":37,
+    "one_unified_green_run_claimed":false,
+    "initial_broad_run":{"passed":30,"failed":2},
+    "resolved_failures":[
+      {"failure":"Reload test environment omitted existing Jiti node_modules root","repair":"Added existing HOST_SOURCE/node_modules test resolver root only; actual SDK still pinned through global-runtime","targeted_tests":3,"passed":3},
+      {"failure":"Large-receipt fixture encountered a transient shared Python entry SyntaxError while peer source was being edited","repair":"Did not edit peer file; read-only current source compile passed, reran only failed large-receipt case after source settled","targeted_tests":1,"passed":1,"wake_utf8_bytes":461,"persisted_receipt_utf8_bytes":578058,"queue_tasks":71}
+    ],
+    "deduplication":"Initial thirty passes include two Native14 cases repeated after their source changed; final five focused checks replace those two and add three control cases, plus four repaired generic checks: 30-2+5+4=37"
+  },
+  "implementation_diagnosis":[
+    "First fixture wrongly claimed two unfinished tasks for one actor; corrected setup to Alice/Bob without changing domain ownership rules",
+    "TaskRuntime.conversation is not the full Harness conversation handle; calling agent failed. Passed actual TaskRuntime as an optional fourth admission argument, and used fresh AgentDoc snapshots before/after real admission. Existing three-argument policies remain compatible",
+    "Temporary diagnostic logging removed before final tests and actual-host execution",
+    "New board-wake fixture initially forbade every INET connect as baseline did; actual board CLI requires loopback HTTP. Final trace permits only generated board IPv4 loopback and exact port, rejects other hosts/ports, and records three such connects; zero external connects"
+  ],
+  "actual_host_result":"evidence/native14/adapter/actual-host-result.json",
+  "actual_host":{"same_installed_launcher_main_loader":true,"real_existing_hindsight_admission":true,"actual_native_wait_tool":true,"two_owner_created_sessions":true,"same_pending_wait_and_instance_across_reopen":true,"actual_wake_after_board_done":true,"saved_snapshot_read_ack":"real actor CLI invoked by fixture, not claimed Native-model Bash","status_reconciled_board_ack":true,"model_calls":4,"live_model_calls":0,"external_inet_connects":0,"board_loopback_connects":3,"native_quits":4,"installed_input_hashes_unchanged":true,"new_harness_or_host_by_production_code":false},
+  "current_live_build":"NOT_RELOADED_NOT_TESTED; existing team sessions still import SOURCE",
+  "remaining":"Final independent N14-ACCEPT verifies final launcher/package/TUI/agent-onboarding bytes, inherited policy negatives and full lifecycle. No historical 1.0.2 proof transfer.",
+  "permissions":"Explicit user799 approved only private endpoint inside existing Native process. No standalone host/service, extra model agent, paid/live model, source/global/auth/host/NativeSQL mutation, dependency install or new commit/push.",
+  "reproduce":{
+    "focused":"node --import HOST_LANE/global-runtime.mjs --test tests/native14-adapter.test.mjs tests/native14-adapter-control.test.mjs",
+    "actual":"python3 -B tests/native14-adapter-host.py",
+    "module_proof":"docs/evidence/native14/abi/identity.json"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "verdict": "PASS",
+  "candidateSha256": "830e43da3e6119fad22507d29db7da0de94fa80817442b26ce4298ca323e7480",
+  "sameInstalledRunAsRuntime16": true,
+  "plainPTYNoTern": true,
+  "exactTwoNativeReopenNoModels": true,
+  "interactiveCursesKeys": [
+    "detail",
+    "End scroll",
+    "escape",
+    "notes",
+    "search no matches",
+    "escape clear",
+    "resize warning",
+    "quit"
+  ],
+  "readOnlyBoardBytesStable": true,
+  "actorPendingReceiptUnchanged": true,
+  "backendAndBothNativeOwnersAliveAfterQuit": true,
+  "stopClean": true,
+  "additionalModelCalls": 0,
+  "liveModelCalls": 0
+}

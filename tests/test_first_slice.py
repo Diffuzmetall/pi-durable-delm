@@ -46,7 +46,7 @@ class FirstSliceTest(unittest.TestCase):
             self.assertNotIn("existing master branch", start)
             self.assertIn(actor, adapter)
             self.assertIn(str(self.run), adapter)
-            self.assertIn("extensions/delm/index.js", adapter)
+            self.assertIn("extensions/delm/native14.js", adapter)
             self.assertNotIn("token", adapter.lower())
             self.assertFalse((home / "workspace").exists())
             self.assertEqual(local.workspace_path(self.run, actor), self.workspace)

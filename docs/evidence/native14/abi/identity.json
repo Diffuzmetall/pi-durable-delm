@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "scope": "Actual installed current Native1.4 source inspection and import resolution only",
+  "old_host05_acceptance_applies": false,
+  "host_started": false,
+  "live_model_calls": 0,
+  "installed_files_modified": false,
+  "native_sql_read_or_written": false,
+  "target_adapter_loaded_in_current_conversation": "NOT_PROVEN; running actor imports SOURCE",
+  "module_probe": {
+    "preload": "HOST_LANE/global-runtime.mjs",
+    "modules": [
+      {"name":"@earendil-works/pi-durable","version":"1.4.0","resolved":"file://${HOST_LANE}/node_modules/@earendil-works/pi-durable/dist/index.js"},
+      {"name":"@earendil-works/pi-ai","version":"1.4.0","resolved":"file://${HOST_LANE}/node_modules/@earendil-works/pi-ai/dist/index.js"},
+      {"name":"@earendil-works/chord","version":"1.4.0","resolved":"file://${HOST_LANE}/node_modules/@earendil-works/chord/dist/index.js"}
+    ]
+  },
+  "hashes": {
+    "USER_LAUNCHER":"ed3d0087e88b8bb40182ac715dbda2344dd58c539e6b07753daa84cebc9c1d6b",
+    "HOST_LANE/pi-durable":"7dc36d56b2be0a59ad2a0f850100ac7ceb966cf1c6b536611e8710ffa8369e3b",
+    "HOST_LANE/global-runtime.mjs":"1ffcdd486de309d9827b0b75c46113688d7d762f2d44a0a92f65fd4ff48b8e00",
+    "RUN/bob/delm-adapter.js":"5d41a9811f07afdc845f366ae1e11f097d124b6359681bd08451c02606b93da1",
+    "SOURCE/extensions/delm/index.js":"7fbe0325378a86b797ad27a52149e8b426cb7067bcedcaab6b3ce0f6feed2c9e",
+    "HOST_SOURCE/durable/main.ts":"b5dcb4446384f88b38804fa0fc050dc8a2f2ecc7de9f8c1efe764a3e229aecf4",
+    "HOST_SOURCE/durable/runtime.ts":"94bd14a66a92e9b77c4f8222a8494fd0817c67f4aa784c37b38917606810b383",
+    "HOST_SOURCE/durable/shared-server.ts":"ed613f080bde00f201b67fbc4226b0798400fb9d32d7eca4f119026f15bea83f",
+    "HOST_SOURCE/durable/shared-commands.ts":"a8868ca5ce61aa321cb31f238bc5ac51dec62c25803f45262aadc0ded3dc45aa",
+    "HOST_SOURCE/durable/sessions.ts":"464d331ff4d67dc9f98490e2dc48e781ab9e029935366ddcddaf42ce9a4a8bbf",
+    "HOST_SOURCE/durable/hindsight/adapter.mjs":"86a30867e01cf0399dfb61a42c2c63d72a80c7a6e607e8e50c0a95ddc9cc1da1",
+    "HOST_SOURCE/durable/hindsight/index.mjs":"6052a5181d73a362ff27eb6fe1fa4d77bf6c249186ec1b82d23b3f2b0f184422",
+    "EXTENSION_LANE/packages/hindsight/src/index.mjs":"8e9e0a9882b52f4798639765dcbc26d73876c301f161d1b1c14b64a533839928"
+  },
+  "observed_abi": {
+    "registry_loader":"default (baseRegistry) => registry with snapshot and subscribe; Jiti virtual SDK modules",
+    "admission":"existing Symbol.for('pi.durable.hindsight.controller').admit(conversation, stableRequestId, context)",
+    "owner_lifecycle":"existing controller.bind receives native Harness/session, storage, original session directory, context after open/root",
+    "exact_session":"--session existing-directory-or-session.sqlite, canonical current-workspace partition, native process lock",
+    "reload":"globally idle only; active sleeping watcher prevents reload, prior registry retained on failure",
+    "shared_prompt_id":"transport correlation only; runtime.submitTo allocates a new random ID. Selected global Hindsight accepts that fourth argument, unlike the built-in source variant; shared RPC still ignores caller-approved stable ID",
+    "selected_controller":"EXTENSION_LANE/packages/hindsight/src/index.mjs installed by global local-host adapter, not necessarily built-in HOST_SOURCE/durable/hindsight/index.mjs",
+    "approved_hot_input_control":"Missing from shared RPC; separately approved799 and implemented by TARGET Native14 owner endpoint. Actual self-check recorded in evidence/native14/adapter/actual-host-result.json, not this initial source-inspection probe"
+  },
+  "limits": [
+    "Source and module identity is not runtime fixture or live-build acceptance",
+    "Host-specific trusted admission is required for this entry, not a universal public SDK capability",
+    "No secret/config/auth values or private session contents were read or exported",
+    "Referenced addon README is absent in selected host copy; actual reload implementation was inspected directly"
+  ]
+}

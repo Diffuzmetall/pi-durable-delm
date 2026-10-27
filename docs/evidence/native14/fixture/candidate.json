@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "verdict": "USABLE_CURRENT_INSTALLED_NATIVE14_BASELINE_FIXTURE",
+  "files": {
+    "tests/native14-host.py": "e0a32c495de148ddee944bb1cc4e6233bc0c4b83106acf2df7c0d8739547487e",
+    "tests/native14-host-model.mjs": "0b9b2e4b36af5f2ff52f7e26e1152ac6ba9d059dec3be0c6dfa0b496ef816f8a",
+    "tests/native14-host-observer.mjs": "1c7ccc209e1723f1efab98ac07afe69a82c6af4fba4e6e50c68b78bd6bbfa774",
+    "docs/native14-fixture.md": "791a5d3fdce2b56d2ba6bf9b1877f8852911502ffbbbe1e6ac3eb8d9e82a51b4",
+    "docs/evidence/native14/fixture/initial-custom-document-view-assumption.log": "82c4931d24ac8e0baf7bb1822113245109671a2cfc818bbdbf691f22348670ed",
+    "docs/evidence/native14/fixture/result.json": "76d81f4ed5a89988a9255dcbaa41a5ccfe4846485a2b71481c12c658aa2d6e46",
+    "docs/evidence/native14/fixture/alice-reopen/connect.trace": "d0d7280759d693af9d1670a3d924279c988bcb79cf9bcc4070e2fb19330086a3",
+    "docs/evidence/native14/fixture/alice-reopen/registry-events.jsonl": "3b0015d35cfec1b8718ff12a82672eae970bb1327be5672170f8c9ab43fc9e78",
+    "docs/evidence/native14/fixture/alice-reopen/model-events.jsonl": "f207c0f5190be5bdb3b662c1fe02f4461e9b5187a2d9714e6d1995917ed712ac",
+    "docs/evidence/native14/fixture/alice/connect.trace": "8840a3c86182448254c0b0acae3fa28d20aad39b12bd5fcddd9a193920a71997",
+    "docs/evidence/native14/fixture/alice/after-draft.txt": "ddc6edd1ca8f4b780244a4fc35e2b264ee8597742dcc41c5de7216036e120e66",
+    "docs/evidence/native14/fixture/alice/registry-events.jsonl": "4b25ea22bde1d69548ca06aeaaf08942d20592c892deb4ec2d39800ca5c118e1",
+    "docs/evidence/native14/fixture/alice/model-events.jsonl": "0589908ea608202f5b1652aab3f498276d7de82cd359f1c63ff2648fd6541011",
+    "docs/evidence/native14/fixture/bob-reopen/connect.trace": "1db938f7e0fc0d34decfb8488a7ac24aee604f6d3d8126e45b57278a75af1386",
+    "docs/evidence/native14/fixture/bob-reopen/registry-events.jsonl": "4bcd45dfb73efaf7e3d9d7367d2f38fe35eaec5ad84b2de43fcd56a872b851f7",
+    "docs/evidence/native14/fixture/bob-reopen/model-events.jsonl": "67f5d603a4cfef4e6552e53800dc3adb912ebf224767d2ca8568252db1962c38",
+    "docs/evidence/native14/fixture/bob/connect.trace": "d9af5572fa361eb614a8a6ddf5236f060302840f8e3b15d6b2e488f7fa748360",
+    "docs/evidence/native14/fixture/bob/after-draft.txt": "8e60633757fc6d38f660b7b357496485a1000cadb31649cc7ad682b57fe1103e",
+    "docs/evidence/native14/fixture/bob/registry-events.jsonl": "2878c48742b491ece1dcc214dd1100954ddb7b30636eeca4f617f274184e7c64",
+    "docs/evidence/native14/fixture/bob/model-events.jsonl": "15aed9f0480807c16c65ccfdb95c2348c5340a8ef3875eba58fd272b5ba3a0fb"
+  },
+  "nativeModelCalls": 3,
+  "liveModelCalls": 0,
+  "currentLiveBuild": "NOT_TESTED",
+  "deLMFinalIntegration": "NOT_TESTED",
+  "privateLocatorPublished": false
+}

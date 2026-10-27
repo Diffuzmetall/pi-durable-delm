@@ -1,4 +1,20 @@
-# Native compatibility — current HOST implementation
+# Native compatibility — installed Native 1.4
+
+## Current supported integration
+
+The current product uses the user's existing **Native Pi Durable 1.4** process, registry loader and matching published Durable/AI/Chord SDK **1.4.0**. The authoritative interface is [native14-contract.md](native14-contract.md); setup and exact reopening are in [native14-operations.md](native14-operations.md).
+
+`extensions/delm/native14.js` and `native14-owner.js` retain the existing selected owner and genuine trusted admission controller. A private Unix control socket lives inside that same process. It binds actor/run/workspace/session/instance and approved type/text/SHA/stable request ID before delivery. Missing required capabilities must fail, not fall back to another host or an allow-all policy.
+
+This path does **not** require the historical public1.0.2 patch, `pi.durable-session` local service, session-facet loader, `pi-client`1.0.2 transport or terminal multiplexer. It does not ship a host, create another Harness or access Native SQL directly. SDK version alone does not establish host compatibility; the actual entrypoint, loader, controller and lifecycle must match the tested contract.
+
+Local installed checks and two independent peer reviews accepted the exact runtime candidate. See [native14-acceptance.md](native14-acceptance.md) together with the authoritative [final review index](../evidence/native14/acceptance/final-review-index.json). The index supersedes the original unsupported post-removal flag: actual SDK delta replay proves no effective current DeLM skill/tool while historical messages remain. The proof uses 19 final-plus-correction faux requests, 36 including the disclosed earlier attempt, zero live/paid requests. It is not proof of a live-team reload, arbitrary stock host, public fresh-machine onboarding or model quality.
+
+---
+
+# Historical public-host implementation — Native 1.0.2
+
+Everything below records the previous public-host and extraction variants. Its references to a selected/current HOST, optional admission policy, public-client requirements, permissions and unresolved gates are historical statements about those variants, **not the current Native1.4 contract**. Keep the old evidence distinct; do not apply its patch or replace the real current controller based on this archive.
 
 ## Selected host and truthful status
 

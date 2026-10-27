@@ -1,0 +1,10 @@
+{
+  "workflow": "CreateSkill/UpdateSkill",
+  "scope": "TARGET portable skills/delm only; installed skill and globals read-only",
+  "authority_read": ["CreateSkill/SKILL.md", "CreateSkill/Workflows/UpdateSkill.md", "LIFEOS/RULES/PHILOSOPHY.md", "LIFEOS/COMPONENTS/SKILLS.md"],
+  "change": "Current1.4 ordinary-terminal open/private JSON control replaces historical Chord control; approved fingerprints, exact identities and genuine admission remain enforced; shipped read-only board commands explicit", 
+  "version": "No manual skill/OS bump; external lowercase discovery name preserved",
+  "checks": {"local_markdown_links": "PASS", "single_line_description": "PASS", "hygiene_before_exit": 0, "hygiene_after_exit": 0, "violations": 0, "identityScan": "unconfigured"},
+  "limitations": ["Unconfigured identity policy is not a privacy certificate", "No actual1.4 runtime acceptance from these authoring checks", "Global notification/execution-log mutations omitted under current read-only boundary; evidence is task-local"],
+  "status": "UpdateSkill complete: portable CLI/docs source and hygiene verified, actual existing Native1.4 open/input/replay/stop/resume/exact reopen self-probe PASS with only faux models; final installed milestone acceptance remains separate"
+}

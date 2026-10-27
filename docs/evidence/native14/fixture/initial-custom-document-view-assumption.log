@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "<PACKAGE>/tests/native14-host.py", line 200, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "<PACKAGE>/tests/native14-host.py", line 162, in main
+    admission=host.latest_view()['conversation']['docs'].get('hindsight.context',{});assert admission.get('admissions'),'Real owner did not persist context admission'
+                                                                                            ~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: Real owner did not persist context admission

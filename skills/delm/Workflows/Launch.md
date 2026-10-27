@@ -2,19 +2,14 @@
 
 ## Outcome and boundary
 
-A prepared DeLM run connects to the user's **existing compatible Native owner**. The bundled board is a separate service; exact team sessions are created/bound through official Native management, with original approved input accepted under a durable request ID. Process setup, input acceptance, instruction reading, first useful claim and completion are different claims.
+Use the existing Native1.4 executable/registry loader with original models/auth/settings. Preserve exact actor conversations and approved input. Preparation, process opening, input admission, instruction reading and completed work are distinct claims. Package `docs/native14-contract.md` defines the real host-specific ABI; no old Chord facet/API patch or bundled host is required.
 
-The package does not install/start Durable, copy private host code, create another Harness or read auth/settings. Verify the actual host's public loader and `delm.control` protocol 1 / local DurableSession capability first. The separate minimal API patch is an explicit compatibility prerequisite for the tested Native variant, not a hidden rebuild or proof every installed host supports it. See package `docs/native-compatibility.md`.
+## Tool contract
 
-## Intent-to-Flag Mapping
+`prepare` emits `native_open_commands` for the authorized roster and packaged board/observer argv. Start the Python board separately. Run each actor's emitted `open --run-dir RUN --actor NAME` command in an ordinary foreground terminal. No terminal manager is required. The trusted adapter composes `extensions/delm/native14.js` with fixed run/actor/private control socket and genuine host admission.
 
-| Intent | Command |
-|---|---|
-| Offline declared capabilities | `python3 Tools/Run.py capabilities` |
-| Start the prepared team on an existing host | `python3 Tools/Run.py start --run-dir RUN --socket NATIVE_UUID_SOCKET` |
-| Address one existing actor | add `--actor NAME` |
-| Start/observe only the board | use the `serve` / `--observe` argv emitted by prepare |
+Then `python3 Tools/Run.py start --run-dir RUN` records actual endpoint identities before submitting each frozen bootstrap. `--actor NAME` selects one existing actor. It never spawns another process or changes the roster. A not-ready endpoint is a failure to connect, not permission to duplicate a team; retry the same start after readiness.
 
-The Native server must already load the DeLM facet in the approved workspace; the prepared board must be reachable. Matching public client peers resolve from the installed environment. No source checkout is normally required; the optional source-resolver flag is advanced test dependency resolution only.
+A recoverable launch attempt precedes Native exec. Native allocates initial sessions; exact physical path, session ID, root, workspace and instance precede approved input. Root1 is not a unique session identity. A still-live process refuses duplicate open, missing recorded sessions refuse replacement, and uncertain unrecorded launch needs reconciliation.
 
-IDs are reserved before RPC. Actual session/instance/workspace identity is saved before bind/input; stop on mismatch, partial activation or uncertain response without creating a new team. Retry unchanged input with its original ID after reconciliation. Do not bypass guards or grant model spending merely because a command exists. Drafts remain in the user's editor; the launcher never submits or clears them. [Run help](../Tools/Run.help.md) owns the full command and uncertainty contract.
+Input ID/type/SHA persist before real admission/submit. Response loss reconciles the same ID and bytes; no shared-prompt or marker retry. Opening a process may enable pending existing work on exact reopen, so authorization must cover that work. No draft or model/auth/settings change is performed. See [Run help](../Tools/Run.help.md); report source/unit, real current-host fixture and installed-candidate evidence separately.
