@@ -6,7 +6,7 @@ Use the existing Native1.4 executable/registry loader with original models/auth/
 
 ## Tool contract
 
-`prepare` emits `native_open_commands` for the authorized roster and packaged board/observer argv. Start the Python board separately. Run each actor's emitted `open --run-dir RUN --actor NAME` command in an ordinary foreground terminal. No terminal manager is required. The trusted adapter composes `extensions/delm/native14.js` with fixed run/actor/private control socket and genuine host admission.
+`prepare` emits `native_open_commands` for the authorized roster and packaged board/observer argv. Start the Python board separately. Run each actor's emitted `open --run-dir RUN --actor NAME` command in an ordinary foreground terminal. No terminal manager is required. Every actor opens with Native MCP and builtin CodeMode; no MCP-off fallback is admitted. Default startup uses enabled user-configured servers. If project rules restrict them, select Native's existing `open --mcp-server NAME --mcp-tools TOOL[,TOOL...]` profile before opening; the launcher preserves it on reopen without editing global configuration. Verify an actual CodeMode nested tool result, not JavaScript executed through Bash. The trusted adapter composes `extensions/delm/native14.js` with fixed run/actor/private control socket and genuine host admission.
 
 Then `python3 Tools/Run.py start --run-dir RUN` records actual endpoint identities before submitting each frozen bootstrap. `--actor NAME` selects one existing actor. It never spawns another process or changes the roster. A not-ready endpoint is a failure to connect, not permission to duplicate a team; retry the same start after readiness.
 

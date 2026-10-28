@@ -13,6 +13,7 @@ import { createModels } from '@earendil-works/pi-ai/models';
 import { fauxProvider, fauxAssistantMessage } from '@earendil-works/pi-ai/providers/faux';
 import install, { HINDSIGHT_CONTROLLER } from '../extensions/delm/native14.js';
 import { NATIVE14_OWNER } from '../extensions/delm/native14-owner.js';
+import { withFixtureMcp } from './native14-mcp-fixture.mjs';
 
 const digest=text=>createHash('sha256').update(text).digest('hex');
 function rpc(path,request) {
@@ -36,7 +37,7 @@ async function fixture({unsafe=false}={}) {
     controller={binds:0,closes:0,admissions:[],onAdmit:async()=>{},
       async bind(){this.binds++;},async close(){this.closes++;},
       async admit(conversation,id,ctx){this.admissions.push(id);await this.onAdmit(conversation,id,ctx);}};
-    const base=createRegistry();Object.defineProperty(base,HINDSIGHT_CONTROLLER,{value:controller});
+    const base=withFixtureMcp(createRegistry());Object.defineProperty(base,HINDSIGHT_CONTROLLER,{value:controller});
     socket=join(privateDir,`g${++generation}.sock`);
     const options={run,actor:'bob',controlSocket:socket};
     const registry=install(base,options);

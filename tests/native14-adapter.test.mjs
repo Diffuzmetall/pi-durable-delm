@@ -12,6 +12,7 @@ import { fauxProvider, fauxAssistantMessage } from '@earendil-works/pi-ai/provid
 import { Harness, MemoryStorage, createRegistry, defineExtension, hook, ToolTask } from '@earendil-works/pi-durable';
 import install, { HINDSIGHT_CONTROLLER } from '../extensions/delm/native14.js';
 import { DelmWaitDoc, wakeRequestId } from '../extensions/delm/index.js';
+import { withFixtureMcp } from './native14-mcp-fixture.mjs';
 
 const project = new URL('../', import.meta.url).pathname;
 async function until(check) {
@@ -30,6 +31,7 @@ test('current Native entry fails before config IO without the real capability an
     await writeFile(join(directory, 'config.json'), JSON.stringify({workspace:process.cwd(), actors:{bob:{}}}));
     const policy = defineExtension({ name:'existing-owner', hooks:[hook(ToolTask, {beforeTool:() => ({block:'owner denied'})})] });
     base.install(policy);
+    withFixtureMcp(base);
     const controller = {admit:async () => { throw Error('SDK fixture policy'); }};
     Object.defineProperty(base, HINDSIGHT_CONTROLLER, {value:controller, configurable:false, enumerable:false});
     const other = Symbol.for('n14.fixture.owner-capability');
@@ -39,7 +41,7 @@ test('current Native entry fails before config IO without the real capability an
     for (const key of [HINDSIGHT_CONTROLLER, other])
       assert.deepEqual(Object.getOwnPropertyDescriptor(next,key), Object.getOwnPropertyDescriptor(base,key));
     assert.equal(next.snapshot().extension('delm').tools[0].name,'delm_wait');
-    const extensionBase = createRegistry();
+    const extensionBase = withFixtureMcp(createRegistry());
     const hindsight = defineExtension({name:'hindsight'});
     Object.defineProperty(hindsight,HINDSIGHT_CONTROLLER,{value:controller});
     extensionBase.install(hindsight);
@@ -64,7 +66,7 @@ test('current Native entry keeps exact-DONE, effective-cwd denial, trusted denia
       assert.equal(this,controller); assert.ok(ctx);
       this.calls.push(id); if(this.deny) throw Error('SDK fixture trusted policy denied');
     }};
-    const base=createRegistry(); Object.defineProperty(base,HINDSIGHT_CONTROLLER,{value:controller});
+    const base=withFixtureMcp(createRegistry()); Object.defineProperty(base,HINDSIGHT_CONTROLLER,{value:controller});
     // A supplied policy must never override the actual host capability.
     const registry=install(base,{run,actor:'bob',admitInput:async()=>assert.fail('untrusted callback used')});
     const faux=fauxProvider(), models=createModels(); models.setProvider(faux.provider);

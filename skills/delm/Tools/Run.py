@@ -239,6 +239,12 @@ def open_actor(run, args):
         executable = str(path(executable))
         if state.get("native", {}).get("executable", executable) != executable:
             raise ValueError("Existing Native executable changed; reconcile before reopening")
+        profile = record.get("mcp_profile")
+        if args.mcp_server is not None or args.mcp_tools is not None:
+            profile = dict(server=args.mcp_server, tools=args.mcp_tools)
+        if profile is not None and (not isinstance(profile, dict) or set(profile) != {"server", "tools"}
+                or any(not isinstance(value, str) or not value.strip() for value in profile.values())):
+            raise ValueError("An explicit Native MCP profile requires both --mcp-server and --mcp-tools")
         socket_root = str(Path(tempfile.mkdtemp(prefix="delm14-")).resolve())
         endpoint = str(Path(socket_root) / "control.sock")
         options = dict(run=str(run), actor=args.actor, controlSocket=endpoint)
@@ -251,7 +257,10 @@ def open_actor(run, args):
         state["native"] = dict(protocol=PROTOCOL, executable=executable)
         record.update(socket=endpoint, pid=os.getpid(), launch_attempt=uuid.uuid4().hex,
             adapter_sha256=hashlib.sha256(body.encode()).hexdigest())
-        command = [executable, "--no-mcp", "--extension", str(adapter)]
+        command = [executable, "--extension", str(adapter)]
+        if profile is not None:
+            command += ["--mcp-server", profile["server"], "--mcp-tools", profile["tools"]]
+        record["mcp_profile"] = profile
         if session:
             command += ["--session", session]
         record["argv"] = command
@@ -360,6 +369,8 @@ def main():
     opening.add_argument("--run-dir", required=True)
     opening.add_argument("--actor", required=True)
     opening.add_argument("--native-executable", help="Existing executable; default PATH pi-durable")
+    opening.add_argument("--mcp-server", help="Optional existing Native single-server MCP profile; preserved on reopen")
+    opening.add_argument("--mcp-tools", help="Comma-separated tools for --mcp-server; default uses Native configured MCP")
     for name in ("status", "start", "resume", "notify", "stop"):
         action = sub.add_parser(name)
         action.add_argument("--run-dir", required=True)

@@ -47,12 +47,13 @@ def installed_paths(launcher):
 
 class Native14Host:
     """A subprocess/PTY client of Native's owner. Does NOT construct a Harness or touch Native SQL."""
-    def __init__(self,paths,area,workspace,*,session=None,extensions=(),routes=None,antigravity=None):
+    def __init__(self,paths,area,workspace,*,session=None,extensions=(),routes=None,antigravity=None,mcp_servers=None):
         self.paths=paths;self.area=Path(area);self.area.mkdir(mode=0o700)
         self.workspace=Path(workspace);self.home=self.area/'home';self.home.mkdir(mode=0o700)
         agent=self.home/'.pi/agent';agent.mkdir(parents=True,mode=0o700)
         (agent/'settings.json').write_text(json.dumps(dict(defaultProvider='faux',defaultModel='faux-1',
             compaction=dict(enabled=False),providerRetry=dict(maxRetries=0),httpIdleTimeoutMs=0)))
+        (agent/'mcp.json').write_text(json.dumps({'mcpServers': mcp_servers or {}}))
         policy_dir=self.home/'.config/pi-durable/extensions';policy_dir.mkdir(parents=True,mode=0o700)
         for p in (self.home/'.config',self.home/'.config/pi-durable',policy_dir):p.chmod(0o700)
         policy=policy_dir/'native-defaults.json';policy.write_text(json.dumps(dict(schemaVersion=1,
@@ -70,7 +71,7 @@ class Native14Host:
             DELM_NATIVE14_PLAN=str(self.plan),DELM_NATIVE14_OBSERVER_LOG=str(self.observer_log),
             NODE_OPTIONS='--import='+(ROOT/'tests/native14-host-model.mjs').as_uri())
         self.command=['strace','-f','-e','trace=connect','-o',str(self.trace),str(paths['launcher']),
-            '--no-mcp','--listen',str(self.socket_path),'--extension',str(ROOT/'tests/native14-host-observer.mjs')]
+            '--listen',str(self.socket_path),'--extension',str(ROOT/'tests/native14-host-observer.mjs')]
         for p in extensions:self.command+=['--extension',str(p)]
         if session:self.command+=['--session',str(session)]
         self.raw=bytearray();self.frames=[];self.buffer=b'';self.client=None;self.request_id=0;self.process=None
@@ -198,7 +199,7 @@ def main():
         modelSubstitutionOnly=True,actualNativeSessions=results,modelCalls=model_calls,liveModelCalls=0,inetConnects=0,
         actualNativeReadToolResultVerified=True,
         driverHashes={p.name:digest(p) for p in (Path(__file__),ROOT/'tests/native14-host-model.mjs',ROOT/'tests/native14-host-observer.mjs')},
-        entrypointHashes=hashes,entrypointPaths={k:str(v) for k,v in paths.items()},fixtureProfile=dict(memoryDisabled=True,codexDefault=False,mcp=False),
+        entrypointHashes=hashes,entrypointPaths={k:str(v) for k,v in paths.items()},fixtureProfile=dict(memoryDisabled=True,codexDefault=False,mcp='enabled-isolated-config'),
         currentLiveBuild='NOT_TESTED',deLMFinalAdapterIntegration='NOT_TESTED',stableRequestIDSocketPrompt='NOT_PROVIDED_BY_STOCK_SOCKET')
     (evidence/'result.json').write_text(json.dumps(clean(report),indent=2,ensure_ascii=False)+'\n')
     for path in area.rglob('*'):

@@ -12,6 +12,11 @@ export default function installNative14(base, options = {}) {
   const controller = base[HINDSIGHT_CONTROLLER] ?? base.snapshot().extension('hindsight')?.[HINDSIGHT_CONTROLLER];
   if (typeof controller?.admit !== 'function')
     throw Error('DeLM Native1.4 requires the existing trusted Hindsight controller.admit; no fallback');
+  const mcp = base.snapshot().installed().some(extension =>
+    extension.name === 'configured-mcp' || extension.name.startsWith('mcp-codemode-'));
+  if (!mcp) throw Error('DeLM requires MCP-enabled Native; do not start workers with --no-mcp');
+  if (!base.snapshot().tools().some(({ tool }) => tool.name === 'codemode'))
+    throw Error('DeLM requires the installed Native builtin CodeMode tool');
   const workspace = realpathSync(process.cwd());
   let owner;
   const registry = install(base, { ...options, admitInput: async (conversation, requestId, context, runtime) => {

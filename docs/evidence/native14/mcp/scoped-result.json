@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "date": "2026-10-28",
+  "scope": "MCP/CodeMode source update and bounded existing-session smoke; not final installed-artifact acceptance",
+  "sdk_targeted": {"passed": 8, "failed": 0, "skipped": 0, "fresh_review_run": true},
+  "launcher_units": {"passed": 8, "failed": 0, "fresh_review_run": true, "four_actor_profile_checks_are_synthetic": true},
+  "source_checks": {
+    "packaging_passed": 10,
+    "final_provenance_hash_check": {"passed": 1, "records": 37, "changed_runtime_hashes": 7, "worker_source_hash_preserved": true, "historical_acceptance_blocks_unchanged": true, "log_sha256": "4231e316ecc135c72d0bda7085b808506acc3379d0bad8f7930725b171054d10"},
+    "local_markdown_links_checked": 46,
+    "local_markdown_link_errors": 0,
+    "native14_package_docs_passed": 4,
+    "python_core_initial": {"passed": 46, "failed": 2},
+    "python_core_corrected": {"affected_tests_passed": 2, "unchanged_tests_reused": 46, "fix": "Worker prompt explicitly prohibits team Mail and --no-mcp fallback; no test weakened"},
+    "unicode_demo_passed": 1,
+    "skill_hygiene": {"ok": true, "violations": 0, "identityScan": "unconfigured", "policyPatternCount": 0, "privacy_certification": false},
+    "private_log_sha256": {
+      "sdk": "aade41b23540b4d5fbfa2072231ccf8534b4fc9ffbd6c1cf7e2e851c4e7248a3",
+      "launcher": "d508ab99a0c6a06138b3b586fcf0286ed5cb3b405b774fda8d4dfddd04865750",
+      "core_initial_failures_preserved": "273c3736408f1d084ae48ec18a0b50b32b11a63f9e817a78978873036bb72bcc",
+      "core_affected_corrected": "d3a0ed842c99a09e32b4cd7d6ce3a7fb6a14c764df8ae4cb515a87945b8f199c",
+      "packaging": "73bd291f1179b0d1ebf6bf47e0628b00051747bd37666826e8eefe40c4576994",
+      "native14_package_docs": "914e5c15d982cbdb8e343ce0a5169a0ab0b30b323ba7215b0d7d7cf268435a3b",
+      "demo": "94be742c8e80b120cb962f91e182b782ec3cbdd7e2f94ac984c0397641049c1a",
+      "hygiene": "433eadef2a823ea37b575fd0d52a0f131ccc2409899bc0f9eb01a6c4d47687d9"
+    }
+  },
+  "installed_native_faux_probe": {"result": "stdio-probe-result.json", "live_model_calls": 0, "rerun_during_review": false},
+  "live_smoke": {
+    "passed": 3,
+    "authorized": 4,
+    "tools": ["mcp__context_mode__ctx_search", "mcp__context_mode__ctx_stats"],
+    "search": "FAIL_EMPTY_KB; no successful search claimed",
+    "resolution": "The user authorized ctx_stats as the successful read-only MCP smoke; each task has a separate explicit RESOLUTION, preserving the original search failure.",
+    "verification_method": "Read-only Native journal correlation: model assistant codemode toolCall -> parent task -> matching tool result; Script completed, arithmetic 2, own START header, nested read/stats statuses ok, nested task completed. No raw journal content exported.",
+    "result_hash_encoding": "SHA256 of parsed tool-result entry, JSON sort_keys=True, separators=(',', ':'), ensure_ascii=True",
+    "actors": [
+      {"actor": "alice", "assistant_entry": 187, "codemode_task": 188, "result_entry": 195, "stats_task": 194, "arithmetic": 2, "native_read": "PASS", "mcp_stats": "PASS", "nested_calls": [["read", "ok"], ["mcp__context_mode__ctx_stats", "ok"]], "result_sha256": "65b0843be60faa4282e7cd83389c09d3581044c0c3b1617f42800ff9ef296b06"},
+      {"actor": "bob", "assistant_entry": 196, "codemode_task": 197, "result_entry": 204, "stats_task": 203, "arithmetic": 2, "native_read": "PASS", "mcp_stats": "PASS", "nested_calls": [["read", "ok"], ["mcp__context_mode__ctx_stats", "ok"]], "result_sha256": "0e0193dfbb96a00794c672a524ad008e2f508a13edf3436deee8dd27e8927cc3"},
+      {"actor": "carol", "assistant_entry": 220, "codemode_task": 221, "result_entry": 228, "stats_task": 227, "arithmetic": 2, "native_read": "PASS", "mcp_stats": "PASS", "nested_calls": [["read", "ok"], ["mcp__context_mode__ctx_stats", "ok"]], "result_sha256": "4df32a51b385abfcaa609bea7a96c3ea29500000358c72b4d3a0e2787e111cbf"},
+      {"actor": "dave", "status": "NOT_CERTIFIED_IN_THIS_REVIEW", "reason": "Excluded at handoff due to unsent editor draft. Later board notices report operator reopening after old UI/process disappeared; draft restoration remains unverified. No process/session/panel touched by this review; no 4/4 claim."}
+    ]
+  },
+  "limitations": [
+    "No 4/4 live PASS; original old team was not migrated.",
+    "No final installed-artifact acceptance, new release archive or deployment.",
+    "Identity hygiene policy is unconfigured; generic checks are not privacy certification.",
+    "No configs, tokens, SQLite files, screenshots or raw MCP statistics exported."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "verdict": "ACTUAL_NATIVE14_PRODUCT_OPEN_AND_INPUT_PASS",
+  "actualProductOpen": true,
+  "sdkVersion": "1.4.0",
+  "initialAndNotifyModelCalls": 3,
+  "liveModelCalls": 0,
+  "actualMcpConnection": true,
+  "builtinCodemodeReadAndMcpCall": true,
+  "replayWithoutExtraModel": true,
+  "ambiguousLauncherAcceptanceRecovered": true,
+  "changedReplayRefused": true,
+  "stopResumeWithoutInput": true,
+  "syntheticDraftVisibleAfterNotify": true,
+  "hostConstructedByFixture": false,
+  "scope": "One focused actor; full two-actor wait/readACK/guard/install acceptance remains separate",
+  "exactReopenSameFullIdentity": true,
+  "reopenedBootstrapReplayWithoutModel": true,
+  "evidence_origin": "Operator-provided installed-Native probe result inspected during scoped review; not rerun or relabelled as final installed-artifact acceptance.",
+  "redaction": "Only safe result fields retained; no config, credentials, session database, terminal capture or private paths."
+}

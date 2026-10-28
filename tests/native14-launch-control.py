@@ -31,7 +31,7 @@ class LauncherUnits(unittest.TestCase):
         prompt.write_bytes(b"Approved original\r\n")
         self.run = self.base / "run"
         launcher.prepare({}, SimpleNamespace(workspace=str(self.project), global_agents=str(rules),
-            plan=str(plan), prompt_file=str(prompt), reference=[], run_dir=str(self.run), agents=2))
+            plan=str(plan), prompt_file=str(prompt), reference=[], run_dir=str(self.run), agents=4))
         self.state = launcher.load(self.run)
         self.state["native"] = {"protocol": launcher.PROTOCOL}
         self.state["actors"]["alice"]["socket"] = str(self.base / "synthetic.sock")
@@ -89,7 +89,7 @@ class LauncherUnits(unittest.TestCase):
         executable = self.base / "existing-native"
         executable.write_text("#!/bin/sh\nexit 0\n")
         executable.chmod(0o700)
-        args = SimpleNamespace(actor="alice", native_executable=str(executable))
+        args = SimpleNamespace(actor="alice", native_executable=str(executable), mcp_server=None, mcp_tools=None)
         before = os.getcwd()
         def captured_exec(file, argv, env):
             saved = launcher.load(self.run)
@@ -98,7 +98,8 @@ class LauncherUnits(unittest.TestCase):
             self.assertEqual(actor["pid"], os.getpid())
             self.assertEqual(argv, actor["argv"])
             self.assertEqual(file, str(executable))
-            self.assertEqual(argv[1], "--no-mcp")
+            self.assertNotIn("--no-mcp", argv)
+            self.assertEqual(argv[1], "--extension")
             self.assertNotIn("--model", argv)
             self.assertNotIn("--continue", argv)
             self.assertNotIn("--session", argv)
@@ -119,6 +120,52 @@ class LauncherUnits(unittest.TestCase):
                     launcher.open_actor(self.run, args)
         finally:
             os.chdir(before)
+
+    def test_all_four_actors_keep_mcp_profile_on_exact_reopen(self):
+        executable = self.base / "existing-native-mcp"
+        executable.write_text("#!/bin/sh\nexit 0\n")
+        executable.chmod(0o700)
+        before = os.getcwd()
+        for actor in ("alice", "bob", "carol", "dave"):
+            session = self.base / (actor + "-session.sqlite")
+            session.write_text("Synthetic existing session, not a Native database")
+            args = SimpleNamespace(actor=actor, native_executable=str(executable),
+                mcp_server="context-mode", mcp_tools="ctx_search")
+            def captured_exec(file, argv, env):
+                self.assertNotIn("--no-mcp", argv)
+                self.assertEqual(argv[argv.index("--mcp-server") + 1], "context-mode")
+                self.assertEqual(argv[argv.index("--mcp-tools") + 1], "ctx_search")
+                record = launcher.load(self.run)["actors"][actor]
+                self.addCleanup(shutil.rmtree, Path(record["socket"]).parent)
+                if record.get("session"):
+                    self.assertEqual(argv[argv.index("--session") + 1], str(session))
+                raise RuntimeError("Captured MCP exec")
+            try:
+                with patch.object(launcher.sys.stdin, "isatty", return_value=True), \
+                        patch.object(launcher.sys.stdout, "isatty", return_value=True), \
+                        patch.object(launcher.os, "execve", side_effect=captured_exec):
+                    with self.assertRaisesRegex(RuntimeError, "Captured MCP exec"):
+                        launcher.open_actor(self.run, args)
+                    state = launcher.load(self.run)
+                    state["actors"][actor]["session"] = str(session)
+                    launcher.save(self.run, state)
+                    args.mcp_server = args.mcp_tools = None
+                    with patch.object(launcher.os, "kill", side_effect=ProcessLookupError):
+                        with self.assertRaisesRegex(RuntimeError, "Captured MCP exec"):
+                            launcher.open_actor(self.run, args)
+            finally:
+                os.chdir(before)
+
+    def test_incomplete_mcp_profile_refuses_before_launch_attempt(self):
+        args = SimpleNamespace(actor="alice", native_executable=launcher.sys.executable,
+            mcp_server="context-mode", mcp_tools=None)
+        with patch.object(launcher.sys.stdin, "isatty", return_value=True), \
+                patch.object(launcher.sys.stdout, "isatty", return_value=True), \
+                patch.object(launcher.os, "execve") as execute:
+            with self.assertRaisesRegex(ValueError, "requires both"):
+                launcher.open_actor(self.run, args)
+            execute.assert_not_called()
+        self.assertNotIn("launch_attempt", launcher.load(self.run)["actors"]["alice"])
 
     def test_stop_remains_input_free_when_approved_bootstrap_is_damaged(self):
         launcher.record_identity(self.state, "alice", self.identity)
@@ -144,7 +191,7 @@ class LauncherUnits(unittest.TestCase):
                 patch.object(launcher.sys.stdout, "isatty", return_value=True), \
                 patch.object(launcher.os, "execve") as execute:
             with self.assertRaisesRegex(ValueError, "missing"):
-                launcher.open_actor(self.run, SimpleNamespace(actor="alice", native_executable=None))
+                launcher.open_actor(self.run, SimpleNamespace(actor="alice", native_executable=None, mcp_server=None, mcp_tools=None))
             execute.assert_not_called()
 
 

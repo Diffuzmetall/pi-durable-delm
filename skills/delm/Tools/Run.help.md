@@ -25,7 +25,16 @@ python3 "$PACKAGE/skills/delm/Tools/Run.py" open --run-dir "$RUN" --actor alice
 python3 "$PACKAGE/skills/delm/Tools/Run.py" open --run-dir "$RUN" --actor bob
 ```
 
-`open` execs the **existing** Native, with a trusted actor-local registry adapter containing fixed run/actor and a fresh private control socket. It requires an interactive terminal. `--native-executable FILE` selects an already installed executable; default is PATH `pi-durable`. No model/thinking/auth/settings flags are injected. Opening a process is not approved input acceptance.
+`open` execs the **existing** Native with MCP enabled by its ordinary configuration, a trusted actor-local registry adapter containing fixed run/actor and a fresh private control socket. It never passes `--no-mcp`; the production adapter requires an MCP registry and the SDK's builtin CodeMode. Disabled user-configured servers remain disabled. MCP-on does not mean every configured server is healthy: inspect the actual Native MCP status.
+
+If a project prohibits some configured servers, select the existing Native single-server profile before startup:
+
+```sh
+python3 "$PACKAGE/skills/delm/Tools/Run.py" open --run-dir "$RUN" --actor alice \
+  --mcp-server context-mode --mcp-tools ctx_search
+```
+
+This forwards Native's own flags, changes no global configuration and records the selected profile for that actor's exact reopen. Native enforces its explicit-profile tool permissions. Default startup may initialize a configured Mail identity; do not use that default in a project forbidding Mail connections. Never downgrade silently to MCP-off. CodeMode itself is built into the SDK and can call local tools without MCP; this installed Native registers it during MCP initialization. It requires an interactive terminal. `--native-executable FILE` selects an already installed executable; default is PATH `pi-durable`. No model/thinking/auth/settings flags are injected. Opening a process is not approved input acceptance.
 
 From the setup/control terminal, after the actor endpoints are ready:
 

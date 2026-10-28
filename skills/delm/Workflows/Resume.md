@@ -8,7 +8,7 @@ Continue the same RUN and exact recorded sessions with histories, claims, pendin
 
 - Inspect: `python3 Tools/Run.py status --run-dir RUN`.
 - Clear an explicitly stopped live owner without input: `python3 Tools/Run.py resume --run-dir RUN`, optionally `--actor NAME`.
-- After its Native process exits, run the same emitted foreground `open --run-dir RUN --actor NAME` command in an ordinary terminal. It uses only the recorded existing `--session`. This is process reopen, not the input-free resume RPC.
+- After its Native process exits, run the same emitted foreground `open --run-dir RUN --actor NAME` command in an ordinary terminal. Native MCP and builtin CodeMode are mandatory; any recorded explicit MCP profile is reused. Old MCP-off processes do not gain MCP from a source update or `/reload`: review project server restrictions and frozen instructions before a controlled exact-session restart, never silently reconnect forbidden servers. It uses only the recorded existing `--session`. This is process reopen, not the input-free resume RPC.
 - Approved update: `python3 Tools/Run.py notify --run-dir RUN --actor NAME --input-file FILE --request-id STABLE_ID`.
 
 A still-live recorded process refuses another open; use its existing terminal/endpoint. An unrecorded attempted launch or missing recorded physical session needs explicit reconciliation, not automatic discovery or replacement. New socket per process generation retains the same persistent Native identity.

@@ -40,9 +40,16 @@ def main():
     manifest = json.loads((run / "launch.json").read_text())
     marker = manifest["actors"]["alice"]["marker"]
     paths = fixture.installed_paths(args.launcher)
+    proof_file = workspace / "mcp-codemode-proof.txt"
+    proof_file.write_text("N14_NATIVE_READ_OK\n")
+    code = ("text(await tools.read({path:" + json.dumps(str(proof_file)) + "}));"
+            'text(await tools.mcp__fixture__echo({message:"N14_MCP_CODEMODE_OK"}));')
     host = fixture.Native14Host(paths, area / "a", workspace,
-        routes={marker: [{"text": "N14_LAUNCH_BOOT_OK"}], "N14_NOTIFY_APPROVED": [{"text": "N14_LAUNCH_NOTIFY_OK"}]},
-        antigravity=args.antigravity_dir)
+        routes={marker: [{"tool": "codemode", "arguments": {"code": code}},
+                         {"text": "N14_LAUNCH_BOOT_OK", "expectToolText": "N14_MCP_CODEMODE_OK"}],
+                "N14_NOTIFY_APPROVED": [{"text": "N14_LAUNCH_NOTIFY_OK"}]},
+        antigravity=args.antigravity_dir,
+        mcp_servers={"fixture": {"command": sys.executable, "args": [str(ROOT / "tests/native14-mcp-server.py")]}})
     # Same actual launcher/main, entered THROUGH product open; no modified Native or extra Harness.
     host.command = ["strace", "-f", "-e", "trace=connect", "-o", str(host.trace), sys.executable,
         str(TOOL), "open", "--run-dir", str(run), "--actor", "alice", "--native-executable", str(paths["launcher"])]
@@ -110,9 +117,11 @@ def main():
         assert cli("stop")["results"]["alice"]["stopped"] is True
         assert cli("resume")["results"]["alice"]["resumed"] is True
         requests = [event for event in host.model_events() if event.get("event") == "model_request"]
-        assert len(requests) == 2, requests
+        assert len(requests) == 3, requests
+        assert b'N14_NATIVE_READ_OK' in host.raw and b'N14_MCP_CODEMODE_OK' in host.raw
         result = dict(verdict="ACTUAL_NATIVE14_PRODUCT_OPEN_AND_INPUT_PASS", actualProductOpen=True,
-            sdkVersion=identity["sdkVersion"], initialAndNotifyModelCalls=2, liveModelCalls=0,
+            sdkVersion=identity["sdkVersion"], initialAndNotifyModelCalls=3, liveModelCalls=0,
+            actualMcpConnection=True, builtinCodemodeReadAndMcpCall=True,
             replayWithoutExtraModel=True, ambiguousLauncherAcceptanceRecovered=True,
             changedReplayRefused=True, stopResumeWithoutInput=True,
             syntheticDraftVisibleAfterNotify=True, hostConstructedByFixture=False,

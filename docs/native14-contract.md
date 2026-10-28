@@ -26,12 +26,14 @@ The wrapper selects the existing owner-local host adapter. `global-runtime.mjs` 
 The current CLI accepts:
 
 ```text
-pi-durable --no-mcp --extension /ABS/RUN/actor/delm-adapter.mjs
-pi-durable --no-mcp --session /ABS/RECORDED/session.sqlite \
+pi-durable --extension /ABS/RUN/actor/delm-adapter.mjs
+pi-durable --session /ABS/RECORDED/session.sqlite \
   --extension /ABS/RUN/actor/delm-adapter.mjs
 # Optional existing Native observation/control socket:
 # --listen /ABS/PRIVATE_DIRECTORY/native.sock
 ```
+
+Production DeLM now requires Native MCP plus builtin CodeMode and never supplies `--no-mcp`. The default uses enabled user-configured servers; an operator may select Native's existing `--mcp-server NAME --mcp-tools TOOL[,TOOL...]` profile to obey project restrictions. Profile flags persist across exact reopen. Native registers the original SDK CodeMode during MCP startup; this is not an intrinsic MCP dependency of CodeMode. See [MCP/CodeMode policy](mcp-and-codemode.md). Earlier MCP-off fixture evidence below remains historical, not a current launch recipe.
 
 Run from the approved workspace. `--session` selects an **existing** database/session directory in that workspace's own native session partition; it is not a session creation API. Do not substitute `--continue`, which selects the newest session, or reuse the old `SessionManagement.create({id})` ABI. Initial sessions are allocated by the existing owner and must be recorded before approved input.
 
