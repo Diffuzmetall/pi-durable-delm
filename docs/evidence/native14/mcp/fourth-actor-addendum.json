@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "date": "2026-10-28",
+  "scope": "Additional read-only verification of Dave's last approved MCP smoke; documentation-only continuation",
+  "verdict": "FOUR_OF_FOUR_ACTUAL_CODEMODE_NATIVE_READ_MCP_STATS_PASS",
+  "historical_baseline": {
+    "commit": "ad75a505a4a0542f6fb952d127d0b3650eb68093",
+    "result": "scoped-result.json",
+    "sha256": "50bebb69dfa4b55117c5d1282e6eb0a817173d2de993f80d30264a9bc90657e8",
+    "certified_actors": 3,
+    "unchanged": true,
+    "note": "The earlier 3/4 conclusion remains the historical verification boundary of that commit. This addendum supplies the fourth actor's direct proof."
+  },
+  "current_scoped_runtime_result": {"passed": 4, "authorized": 4, "actors": ["alice", "bob", "carol", "dave"], "search_pass_claimed": false},
+  "dave": {
+    "recorded_session_match": true,
+    "verification_method": "Native SQLite mode=ro only: model assistant codemode call -> matching terminal parent/result -> completed nested Native read and actual MCP ctx_stats; matching later snapshot response and separate explicit successful ACK response. No raw private payload exported.",
+    "assistant_entry": 196,
+    "codemode_task": 197,
+    "result_entry": 205,
+    "read_task": 202,
+    "stats_task": 204,
+    "arithmetic": 2,
+    "native_read": "PASS: own START.md, limit=3",
+    "mcp_stats": "PASS: actual nested ctx_stats({}), not tool-name presence",
+    "nested_calls": [["read", "ok"], ["mcp__context_mode__ctx_stats", "ok"]],
+    "nested_task_outcomes": "completed",
+    "mcp_tools": ["mcp__context_mode__ctx_search", "mcp__context_mode__ctx_stats"],
+    "result_sha256": "1873cba971051da8321b89846014041248ffb1e3608679ff06039ee032fe919d",
+    "board_task": "d617a0011eb6495d8e65ff65adc33af6",
+    "board_fact_sequence": 64,
+    "board_done_revision": 65,
+    "final_snapshot": {"request_id": "dave-mcp-final-001", "receipt_id": "a23ebeaa254c4c0f8553700afcea1244", "to_sequence": 65, "assistant_entry": 207, "result_entry": 209, "result_sha256": "5a936175058588d272405d80c6ce1e952137b9848f05fd33f95854e503951b92"},
+    "final_ack": {"request_id": "dave-mcp-final-001-ack", "receipt_id": "a23ebeaa254c4c0f8553700afcea1244", "acked_sequence": 65, "assistant_entry": 211, "result_entry": 213, "result_sha256": "dd1f2c8c778f84cdaf7466af91c5ce9c4dec40072f5ae19c9ef58bf397545fcb"},
+    "result_hash_encoding": "SHA256 of parsed entry, JSON sort_keys=True, separators=(',', ':'), ensure_ascii=True"
+  },
+  "external_close_provenance": "Operator reports old Dave UI and PID already absent before operator action; no operator quit/kill/clear/submit. Operator then reopened the exact recorded session with the approved context-mode profile. This provenance is attributed, not an independently observed close event.",
+  "draft_restoration": "UNKNOWN_NOT_TESTED; separate from CodeMode/MCP success. Draft not read, published, restored or changed by this verification.",
+  "historical_search": "FAIL_EMPTY_KB preserved; successful read-only ctx_stats satisfies the separately approved MCP smoke, not search acceptance.",
+  "final_installed_artifact_acceptance": "PENDING_N14_ACCEPT",
+  "unchanged_scope": "No executable/runtime bytes changed, no repeated core/runtime tests, no new agents/models/probes/servers, no SQLite/process/editor writes, no global configuration changes, no new archive/release/deploy; original old team not migrated."
+}

@@ -1,8 +1,18 @@
 # Scoped MCP/CodeMode review — 2026-10-28
 
-## Result and boundaries
+## Addendum: fourth actor directly verified
 
-**Scoped source/component checks passed; live smoke is 3/4, not 4/4.** Alice, Bob and Carol each executed the actual builtin `codemode`: arithmetic returned `2`, nested Native `read` returned their own START header, and real local stdio MCP `ctx_stats` returned successfully. The original `ctx_search` failed with `Knowledge base is empty — no content has been indexed yet`; it is not a search PASS. The user approved a different read-only MCP check, and separate RESOLUTION publications closed the smoke blockers without deleting that history.
+**Current bounded runtime smoke: 4/4 actual CodeMode / nested Native read / MCP stats PASS.** A separately approved read-only check now confirms Dave's last smoke in the same recorded session. This adds evidence to the initial `ad75a505a4a0542f6fb952d127d0b3650eb68093` publication; it does not rewrite that commit's historical 3/4 conclusion or repeat its tests.
+
+Dave's Native journal correlates the actual model `codemode` call (assistant entry `196`, task `197`) with result entry `205`: arithmetic `2`, own START read (`limit=3`, nested task `202`) and actual `ctx_stats({})` (`204`) succeeded. Both nested calls report `ok` and completed task outcomes. Following FACT `64` and DONE `65`, snapshot result `209` and separate ACK result `213` match the same receipt and sequence `65`. See the [safe fourth-actor evidence](evidence/native14/mcp/fourth-actor-addendum.json) for locators and hashes; no raw journal or account payload is exported.
+
+The operator reports that Dave's old UI and PID were already absent before their action, without operator quit/kill/clear/submit, then the exact recorded session was reopened with the approved profile. That external-close provenance is attributed, not independently observed here. **Draft restoration remains UNKNOWN / NOT_TESTED**, separate from MCP success; this verification did not read, publish, restore or change the draft, process or SQLite. The original empty-KB search FAIL remains historical; no search PASS is claimed. Final installed-artifact acceptance remains **PENDING_N14_ACCEPT**.
+
+Only scoped docs/evidence and additive MCP metadata changed. The original [three-actor evidence](evidence/native14/mcp/scoped-result.json) is byte-for-byte unchanged; no executable bytes changed, runtime/core tests repeated, or new model/agent/probe launched.
+
+## Initial result and boundaries — historical at ad75a505
+
+**Scoped source/component checks passed; live smoke was 3/4, not 4/4 at this initial verification boundary.** Alice, Bob and Carol each executed the actual builtin `codemode`: arithmetic returned `2`, nested Native `read` returned their own START header, and real local stdio MCP `ctx_stats` returned successfully. The original `ctx_search` failed with `Knowledge base is empty — no content has been indexed yet`; it is not a search PASS. The user approved a different read-only MCP check, and separate RESOLUTION publications closed the smoke blockers without deleting that history.
 
 Dave was excluded at handoff because of an unsent editor draft. Later board notices report that his old UI/process disappeared and that the operator reopened the saved session; those notices do not establish draft restoration. This review did not touch his process, input or panel and certifies only the three directly inspected sessions, not 4/4. Draft restoration remains unverified. The original old team was not migrated. Final installed-artifact acceptance remains **PENDING_N14_ACCEPT**; none of the historical archive hashes or acceptance reports were rewritten. No new release archive or deployment was produced (packaging checks used temporary test payloads only).
 
