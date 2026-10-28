@@ -1,4 +1,8 @@
-# Current Pi Durable 1.4 — early ABI contract
+# Current Pi Durable 1.4 — verified integration contract
+
+## Delivery status
+
+**Final local installed acceptance: DONE918; source publication: DONE923.** See the [current status](project-status.md), [task/plan report](delivery-plan.md) and authoritative [final review index](../evidence/native14/acceptance/final-review-index.json). The component observations below retain their original scope and counts; they are not the complete final evidence or proof of a live-team reload.
 
 ## Scope and evidence level
 
@@ -101,4 +105,4 @@ First installation must be selected at process startup with the actor bootstrap;
 
 Current evidence verdict: initial launcher/source/module inspection **PASS**; focused current SDK1.4 adapter/control checks **5/5 PASS**; actual installed-entrypoint adapter self-check **PASS** on two owner-created sessions and their exact reopens, real trusted stable admission, input replay/refusals and stop/resume. An actual Native model called `delm_wait`; its pending waiter survived exact-session restart and resumed the same Bob root after a real board DONE. The fixture then used Bob's actual CLI for saved snapshot/read/ACK, and control status reconciled that ACK. This involved four faux model responses, zero live-model calls, zero external-INET connects and only the generated board's exact loopback HTTP port. CLI read/ACK here is performed by the fixture, not mislabelled as a Native model Bash call. The recorded installed inputs remained byte-identical. Broader scoped SDK checks and their resolved test-only environment/concurrent-source failures are recorded separately in adapter evidence, not hidden as a single green run.
 
-Final package/launcher/board end-to-end acceptance remains N14-ACCEPT. The currently running team still uses its original SOURCE adapter: loaded TARGET bytes in these live sessions are **NOT_TESTED / NOT_RELOADED**. No live-model E2E, installed host modification, Tern/multiplexer requirement or new publication is implied.
+Final package/launcher/board end-to-end acceptance was subsequently completed as N14-ACCEPT, with both independent reviews and the accepted post-removal measurement supplement linked in the final index above. The currently running team still uses its original SOURCE adapter: loaded TARGET bytes in these live sessions are **NOT_TESTED / NOT_RELOADED**. No live-model E2E, installed host modification, Tern/multiplexer requirement or new publication is implied.

@@ -1,5 +1,7 @@
 # Native compatibility — installed Native 1.4
 
+[Current delivery status](project-status.md) · [Completed plan/tasks](delivery-plan.md) · [Developer guide](developer-guide.md) · [Documentation index](index.md)
+
 ## Current supported integration
 
 The current product uses the user's existing **Native Pi Durable 1.4** process, registry loader and matching published Durable/AI/Chord SDK **1.4.0**. The authoritative interface is [native14-contract.md](native14-contract.md); setup and exact reopening are in [native14-operations.md](native14-operations.md).

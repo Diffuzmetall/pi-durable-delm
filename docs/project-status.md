@@ -1,0 +1,57 @@
+# Итоговый статус DeLM
+
+Срез: **28 октября 2026 года**. Подтверждённый опубликованный код: [`efdc331ea2fd46dbac5b910fb15366ded0f4e770`](https://github.com/Diffuzmetall/pi-durable-delm/commit/efdc331ea2fd46dbac5b910fb15366ded0f4e770). Эта расширенная документация — последующее локальное дополнение; её наличие не означает новый push.
+
+## Итог
+
+**Локальный установленный продукт для проверенного Native Pi Durable 1.4 принят и исходники опубликованы.** Работают общая Python-доска, actor CLI, переносимый скилл, launcher обычных терминалов, registry extension и поставляемый `DeLM BOARD`. Это не новый Durable и не универсальная совместимость со всеми host, называющими себя Pi 1.4.
+
+Основание: [финальный индекс](../evidence/native14/acceptance/final-review-index.json), независимые [Alice review](../evidence/native14/packaging/n14-final-independent-review.md) и [Carol UI review](../evidence/native14/launcher/n14-final-ui-review.md). На DeLM-доске итоговая приёмка завершена событием 918, публикация — 923. [Таблица задач и план](delivery-plan.md).
+
+## Что поставлено
+
+| Часть | Статус | Граница |
+|---|---|---|
+| Задачи, зависимости, parent/output, claim, handoff, поколения | Реализовано | Python — единственный task truth; partial не равно DONE |
+| FACT/FAIL/CORRECTION/RESOLUTION | Реализовано | Ошибка связана с результатом; обычный FACT не снимает blocker |
+| Snapshot, replay, pending и ACK | Реализовано | Snapshot хранится до явного подтверждения; viewer не читает за агента |
+| Native exact wait, reevaluation, cancel, recovery | Проверено | Все точные IDs должны быть DONE; изменение ситуации не означает ready |
+| Path/resource leases | Реализовано | Advisory-договорённость, не блокировка произвольного shell ОС |
+| Roster 2/4/8 | Deterministic/faux coverage | Не восемь живых моделей и не benchmark ускорения |
+| Native 1.4 adapter/control | Установленная проверка PASS | Настоящие loader/SDK/controller; без host patch и нового Harness |
+| Скилл и launcher | Проверено | `prepare → serve → open → start`; точное reopening, без dummy input |
+| TUI DeLM BOARD | Независимо принято | Реальные curses PTY, клавиши, детали, поиск, resize и quit |
+| Install/update/rollback/remove | Проверено | Только управляемый payload; чужие данные и Native sessions сохраняются |
+| GitHub onboarding | Карта и CLI проверены локально | Нет независимого fresh-machine agent E2E по публичному URL |
+| GitHub source delivery | Выполнено | Локальный HEAD и удалённый main совпали с коммитом выше |
+
+## Какой candidate действительно проверен
+
+- Неизменный архив `pi-durable-delm-0.1.0-native14-candidate-v2.tgz`: SHA-256 `830e43da3e6119fad22507d29db7da0de94fa80817442b26ce4298ca323e7480`, **449 файлов и 37 runtime assets**.
+- [Исходный manifest](../evidence/native14/acceptance/candidate.json): 66 файлов; [append-only поправка](../evidence/native14/acceptance/postremove-supplement-candidate.json): 15 файлов. Проверены все 81 fingerprints.
+- Чистый installed pipeline: 17 faux-запросов. Ограниченная поправка добавила 2: **19** для финального доказательства с поправкой. Вместе с ранее раскрытой попыткой из 17 запросов — **36**, а не один беспрерывный зелёный прогон.
+- Живых/платных вызовов моделей и внешних INET-соединений в этой приёмке — **0**. Локальные обращения к собственному board endpoint учитываются отдельно.
+- После обновления обзорных документов перед публикацией отдельно прошли 4 package/docs/install/remove теста. Это не повтор всего Native E2E и не новая приёмка изменённого архива.
+
+`dist/` не хранится в Git. Новый `npm pack` из нового дерева, особенно после изменений документации, может иметь другой состав и hash. Нельзя выдавать его за неизменный v2; неизменность 37 runtime assets — более узкое утверждение, чем тождество всего архива.
+
+## Исправленное доказательство удаления
+
+Первоначальный положительный флаг отсутствия удалённого скилла был необоснован: Native hook мог сообщить ошибку мягко, а модель всё равно отвечала. Успешный ответ не доказывал наличие измерения. Старые файлы сохранены, вывод отозван.
+
+[Поправка](../evidence/native14/acceptance/postremove-supplement.md) измеряет **эффективный текущий** prompt и tools штатным SDK replay. Старый каталог остаётся в истории; последующие `skills:null` и `delm:null` удаляют его из текущего состояния. Одна реальная запись сопоставлена одному запросу; внешний hard gate отвергает пять неверных вариантов. Приёмка действительна только с этой поправкой и обеими независимыми рецензиями.
+
+## Что не выполнено и не обещано
+
+- Живая четвёрка не переводилась на TARGET build в рамках N14-приёмки. Историческая активация SOURCE — другое событие и не доказательство новой загрузки.
+- Не запускались восемь живых LLM, model-quality E2E, сравнение скорости, стоимости или качества.
+- Не выполнена независимая настройка свежей машины агентом только по GitHub URL.
+- Не обещаны Windows, любой stock Native/Pocket/ordinary Pi, будущие версии SDK и произвольный downgrade активных watchers.
+- Не опубликованы npm-пакет, GitHub Release assets и deployment; source push не означает эти действия.
+- Нет OS-lock для arbitrary shell, доказательства смерти writer по TTL или общей exactly-once транзакции Python+Native+внешние эффекты.
+
+Это границы проведённой проверки и отдельные возможные работы, а не скрытые выполненные задачи.
+
+## Где продолжать
+
+Пользователь: [руководство](user-guide.md). Разработчик: [компоненты и потоки](developer-guide.md). История исполнения: [план-отчёт](delivery-plan.md). Извлечённый урок: [compound](solutions/workflow-issues/completion-evidence-chain.md). Общая карта: [index](index.md).

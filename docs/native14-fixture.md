@@ -1,6 +1,10 @@
 # Actual installed Pi Durable 1.4 fixture — N14-FIXTURE
 
-## Result and exact scope
+## Current delivery status
+
+Final installed acceptance is complete; see [status](project-status.md), [plan/task report](delivery-plan.md) and the [final review index](../evidence/native14/acceptance/final-review-index.json). This page preserves the earlier baseline driver's scope. Its NOT_TESTED rows apply to that baseline, not to the subsequent completed N14 gate. The live team remains NOT_RELOADED for TARGET.
+
+## Baseline result and exact scope
 
 **PASS: usable isolated baseline driver for the actual installed Native1.4 entrypoint.** This is NOT a clone, an API-patched public1.0.2 host, a replacement main, or a fixture-created Harness. The historical HOST05 result is not evidence for this stage.
 

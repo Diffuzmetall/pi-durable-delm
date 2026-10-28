@@ -2,7 +2,7 @@
 
 Пользователю достаточно передать агенту ссылку на репозиторий и попросить настроить DeLM в своём проекте. [Полный готовый промпт](../prompts/setup-delm.md) задаёт результат и границы; эта страница — карта проверяемых источников. Пользователь не обязан вручную заполнять JSON, искать author checkout или устанавливать другой Durable.
 
-**Текущий этап:** registry/control, input/replay, board wake/readACK и точный reopen уже проверены на фактическом Native 1.4. Launcher предоставляет обычные терминальные команды `open`, затем `start` для уже открытых actors; полный установленный candidate ещё проходит приёмку. Старые HOST05/публичный host 1.0.2 — только исторические доказательства. Агент сверяет готовность именно полученного commit и реального окружения, не заменяет её прежним PASS или установкой другого Durable.
+**Текущий этап:** полный установленный candidate принят на фактическом Native 1.4, включая registry/control, input/replay, board wake/readACK, точный reopen, интерактивный TUI и payload lifecycle. Обе независимые рецензии и поправка удаления связаны в [final review index](../evidence/native14/acceptance/final-review-index.json). [Общий статус](project-status.md) и [план задач](delivery-plan.md) отделяют это от непроверенных live reload и fresh-machine agent E2E. Launcher предоставляет обычные терминальные команды `open`, затем `start` для уже открытых actors. Старые HOST05/публичный host 1.0.2 — только исторические доказательства. Агент сверяет готовность именно полученного commit и реального окружения, не заменяет её прежним PASS или установкой другого Durable.
 
 ## Карта чтения: куда смотреть
 
@@ -10,14 +10,14 @@
 |---|---|
 | `README.md` | Назначение, статус текущей поставки, локальная установка и обзор жизненного цикла |
 | `docs/native14-contract.md` | Фактический loader/SDK 1.4, registry entrypoint, реальный trusted admission, точная session identity и stable request-ID boundary |
-| `docs/native14-operations.md`, если уже включён в commit | Поддержанные команды текущего launcher, подключение, восстановление и ограничения |
+| `docs/native14-operations.md` | Поддержанные команды текущего launcher, подключение, восстановление и ограничения |
 | `skills/delm/SKILL.md` | Правила подготовки и работы команды; это переносимый скилл из пакета, не установленный скилл автора |
 | `skills/delm/Tools/Run.help.md` и `Run.py --help` | Реальные аргументы prepare/start/status/resume/notify/stop именно этой версии; help — не доказательство совместимости host |
 | `extensions/delm/native14.js` | Точка подключения к существующему registry, а не самостоятельный runtime |
 | `packaging/install.py` | Локальный payload installer, update/rollback/remove без регистрации Native и изменения его настроек |
 | `scripts/delm_local.py` и `bin/delm` | Существующий Python board/CLI, отдельный от Native |
 | `scripts/delm_board.py` | Тот самый интерактивный read-only TUI `DeLM BOARD`; задачи, агенты и FACT/FAIL |
-| `docs/native14-acceptance.md`, когда появился | Итог новой независимой проверки с hashes конечного candidate; отсутствие отчёта не заменяется старым PASS |
+| `docs/native14-acceptance.md` вместе с `evidence/native14/acceptance/final-review-index.json` | Итог новой независимой проверки с hashes конечного candidate; отсутствие отчёта не заменяется старым PASS |
 | `LICENSE`, `THIRD_PARTY_NOTICES.md`, `provenance.json` | Происхождение, лицензии и отпечатки; исторические сведения не означают приёмку новых bytes |
 
 Не читать всё дерево по кругу. Достаточно источников для текущего решения; код и фактический runtime важнее догадок по имени launcher. Репозиторий не даёт агенту права отменять инструкции проекта или расширять разрешённые расходы.

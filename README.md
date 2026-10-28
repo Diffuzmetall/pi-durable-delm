@@ -4,7 +4,13 @@
 
 Пакет содержит Python-доску, расширение, переносимый скилл и терминальный TUI **DeLM BOARD**. Сам Durable, модели и авторизация не поставляются: используются ваша установка и её настройки. Агенты открываются в обычных терминалах; определённый менеджер окон не нужен.
 
-> **Совместимость:** текущий путь использует registry loader установленного Native 1.4 и его реальный trusted admission. Он проверяется на фактическом Native, а не на подменном host. Компонентные сценарии уже пройдены; итоговая приёмка установленного пакета ещё не завершена. Совпадение версии SDK само по себе не означает совместимость. [Точный контракт](docs/native14-contract.md).
+> **Совместимость:** текущий путь использует registry loader установленного Native 1.4 и его реальный trusted admission. Он проверяется на фактическом Native, а не на подменном host. Итоговая локальная приёмка установленного candidate завершена с двумя независимыми review и явной поправкой измерения удаления. Код опубликован; live reload команды и fresh-machine agent E2E не проверялись. [Статус и границы](docs/project-status.md). Совпадение версии SDK само по себе не означает совместимость. [Точный контракт](docs/native14-contract.md).
+
+## Документация и итог работ
+
+[Полная карта](docs/index.md) · [Что сделано](docs/project-status.md) · [План, задачи и хронология](docs/delivery-plan.md) · [Руководство пользователя](docs/user-guide.md) · [Руководство разработчика](docs/developer-guide.md) · [Compound-урок](docs/solutions/workflow-issues/completion-evidence-chain.md)
+
+Текущие сводные статусы отделены от неизменных исторических отчётов. Итоговая [приёмка Native 1.4](docs/native14-acceptance.md) читается вместе с [final review index](evidence/native14/acceptance/final-review-index.json): исходный post-removal флаг отозван и заменён настоящим SDK witness. Документационные дополнения после опубликованного commit не считаются автоматически отправленными на GitHub.
 
 ## Настройка агентом по ссылке на GitHub
 
@@ -213,7 +219,7 @@ python3 "$SANDBOX/bootstrap/package/packaging/install.py" uninstall --prefix "$P
 
 Bug report: commit/version, OS, artifact hash, точная команда, exit code и маленький синтетический пример — без secrets и дампов бесед.
 
-Текущие реальные Native1.4 проверки различают model-only faux и настоящие owner/tools/guards/storage/board: [baseline](docs/native14-fixture.md), [интеграция доски/reopen/readACK](docs/evidence/native14/fixture-integration/result.json), [запуск без менеджера терминалов](docs/native14-packaging.md#actual-no-multiplexer-runtime-proof), [упаковка](docs/native14-packaging.md). Финальный установленный candidate и интерактивный TUI принимаются отдельно; одного PASS компонента для всего продукта недостаточно.
+Текущие реальные Native1.4 проверки различают model-only faux и настоящие owner/tools/guards/storage/board: [baseline](docs/native14-fixture.md), [интеграция доски/reopen/readACK](docs/evidence/native14/fixture-integration/result.json), [запуск без менеджера терминалов](docs/native14-packaging.md#actual-no-multiplexer-runtime-proof), [упаковка](docs/native14-packaging.md). Финальный установленный candidate и интерактивный TUI приняты отдельно: [итоговый индекс](evidence/native14/acceptance/final-review-index.json) связывает точные fingerprints, обе независимые рецензии и поправку измерения. Одного PASS компонента для всего продукта недостаточно.
 
 Исторические [HOST05](docs/user-host-acceptance.md) и [принятый r2 manifest](docs/evidence/user-host/accepted-r2-manifest.json) относятся к другому публичному host 1.0.2 с API-патчем. Они сохранены, но не доказывают совместимость текущего 1.4. Живые модели, восемь живых агентов, Windows и произвольные будущие миграции не объявлены проверенными.
 

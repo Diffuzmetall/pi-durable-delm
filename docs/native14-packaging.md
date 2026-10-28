@@ -1,6 +1,6 @@
 # Current Native 1.4 — packaging and onboarding evidence
 
-Status: **FROZEN N14 package candidate — source/package/docs checks PASS; final installed1.4 end-to-end acceptance pending.** This report does not supersede historical HOST05 evidence or imply the current live team loaded these new bytes.
+Status: **Final installed Native1.4 acceptance completed, with two independent reviews and the post-removal correction.** See [current status](project-status.md), [plan/task report](delivery-plan.md) and [authoritative final index](../evidence/native14/acceptance/final-review-index.json). Component check counts below are historical scoped results, not new runs. This report does not supersede historical HOST05 evidence or imply the current live team loaded these new bytes.
 
 ## Current usable output
 
@@ -53,6 +53,6 @@ Bob ADAPTER DONE834 and Carol LAUNCH DONE839 release their final bytes. README n
 
 Fresh source checks: packaging **10 PASS**; current package/docs **4 PASS**. Core ran48 with47PASS and one stale generated-entry assertion; after explicit Dave→Alice file handoff only `tests/test_first_slice.py:49` was updated from `index.js` to `native14.js`. Its focused3 tests then PASS. Together these cover all48 current core tests; this is not represented as one fresh all-green48 run. Failure d137940... was explicitly resolved and the file returned to Dave. No production runtime bytes changed for the repair.
 
-Final archive/privacy/runtime-hash checks and exact candidate handoff are recorded externally with the archive hash, avoiding self-reference. Final installed interactive TUI, two-actor launcher/skill/guard behavior and agent setup remain Dave's N14-ACCEPT gate. A static prompt check, help output, existing team pane or old1.0.2 PASS is not that proof.
+Final archive/privacy/runtime-hash checks and exact candidate handoff are recorded externally with the archive hash, avoiding self-reference. Final installed interactive TUI, two-actor launcher/skill/guard behavior, payload lifecycle and offline setup map subsequently passed Dave's N14-ACCEPT gate with independent Alice/Carol review. Fresh-machine agent setup remains NOT_TESTED. A static prompt check, help output, existing team pane or old1.0.2 PASS is not that proof.
 
 The user explicitly approved only the minimal private Unix extension control endpoint **inside the existing Native process**, with actual admission/exact identity/request-ID/type/SHA/guards retained. No standalone Native host, extra Harness, SQL owner, global configuration change or implicit publication follows from that approval.

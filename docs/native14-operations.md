@@ -1,5 +1,7 @@
 # DeLM with the existing Native 1.4
 
+**Delivery status:** final local installed acceptance completed; source publication completed. See [current status](project-status.md), [plan/tasks](delivery-plan.md), [user guide](user-guide.md) and [final review index](../evidence/native14/acceptance/final-review-index.json). This does not certify a live-team reload or fresh-machine agent setup.
+
 Use the existing installed `pi-durable` and its matching SDK1.4 registry loader. The actual contract is [native14-contract.md](native14-contract.md) and `evidence/native14/adapter/control-abi.json`. No historical public1.0.2 host patch, Chord server, copied runtime, new Harness or Native SQL owner is needed.
 
 ## Ordinary-terminal setup
@@ -40,4 +42,4 @@ Focused fresh actual-run evidence: `evidence/native14/launcher/runtime-result.js
 
 The nine input-component SDK units and seven Python preparation/bookkeeping units remain **unit** evidence, not genuine runtime policy proof. Portable CreateSkill evidence is in the same directory; hygiene reports zero configured violations with `identityScan:unconfigured`, not a privacy certificate.
 
-This is one focused actor plus exact reopen. Full two-actor board/wait/readACK/denial/installed-payload/TUI acceptance is separate milestone QA. The existing live team's loaded bytes/private provider configuration remain unchanged and not tested by this probe; no live-model E2E, host modification, global/auth mutation or publication is authorized/claimed. Historical HOST05 remains historical.
+This is one focused actor plus exact reopen. Full two-actor board/wait/readACK/denial/installed-payload/TUI acceptance subsequently completed in the separate final milestone, with two independent reviews and the accepted current-prompt correction. The existing live team's loaded bytes/private provider configuration remain unchanged and not tested by this probe; this component probe performed no live-model E2E, host modification, global/auth mutation or publication. The later separately authorized source push is recorded in the current status, not inferred from this probe. Historical HOST05 remains historical.
