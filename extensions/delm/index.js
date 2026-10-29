@@ -13,7 +13,7 @@ if (!outputField) throw Error(`Unsupported DeLM native tool protocol ${ToolTask.
 export const DelmWaitDoc = defineDoc({ kind: 'delm.waits', version: 1, scope: 'conversation',
   history: 'latest', fork: 'initial', checkpointWhen: () => false, initial: () => ({ waits: {} }) });
 const finished = { status: 'terminal', outcome: { status: 'completed', result: null } };
-export const DELM_BUILD = '20261027-native-phases-v3';
+export const DELM_BUILD = '20261029-worker-contract-v1';
 export const wakeRequestId = taskId => `delm-wake:${taskId}`;
 export const boardBusy = error => [5, 6].includes(Number(error?.errcode) & 255) || /database (?:is )?(?:locked|busy)/i.test(String(error?.message));
 const retryWatch = () => ({ status: 'running', checkpoint: { phase: 'backoff' } });
@@ -40,6 +40,7 @@ export function wakeMessage(entry, cause) {
       `context domain '${JSON.stringify({ op: 'snapshot', request_id: r.request_id })}'`,
       `context domain '${JSON.stringify({ op: 'ack', request_id: `${r.request_id}:ack`, receipt_id: r.receipt_id })}'`);
   } else lines.push('Run context read for the normal board delta; context read --all only for genuine recovery.');
+  lines.push('Apply the frozen WORKER.md recovery and claim/handoff checkpoints before acting; refresh task facts, not the whole repository.');
   const message = lines.join('\n');
   if (Buffer.byteLength(message, 'utf8') > 2048) throw Error('DeLM wake reference exceeds 2048 UTF8 bytes');
   return message;
@@ -239,7 +240,7 @@ export function createDelmWait({ run, actor, admitInput }) {
     return { status: 'terminal', outcome: { status: 'aborted' } };
   }, context) });
   const tool = defineTool({ name: 'delm_wait',
-    description: 'Wait without model polling in THIS root conversation, then finish the turn. action=work (reason, no items) waits for available work while the bound actor has no unfinished claim; workAvailableNow means inspect/claim now, not DONE or reserved. A later direct handoff also wakes it. action=wait (items, reason) keeps exact dependency semantics: successful ready requires ALL exact tasks DONE. Relevant FAIL/correction/blocked or ended producer wakes for reevaluation, NOT readiness. Compact wake references remain pending until bound CLI snapshot replay/read/explicit ack. status reconciles awaiting-read/acked with board pending. cancel refuses committed dispatch or accepted input, retry recovers failed delivery with the same request identity. No task assignment, permission expansion or new agent. If dependencies are already done, continue now without yielding.',
+    description: 'Before waiting, apply the frozen WORKER.md checkpoint: inspect eligible work and reconcile current ownership, criteria and failures. Wait without model polling in THIS root conversation, then finish the turn. action=work (reason, no items) waits for available work while the bound actor has no unfinished claim; workAvailableNow means inspect/claim now, not DONE or reserved. A later direct handoff also wakes it. action=wait (items, reason) keeps exact dependency semantics: successful ready requires ALL exact tasks DONE. Relevant FAIL/correction/blocked or ended producer wakes for reevaluation, NOT readiness. Compact wake references remain pending until bound CLI snapshot replay/read/explicit ack. status reconciles awaiting-read/acked with board pending. cancel refuses committed dispatch or accepted input, retry recovers failed delivery with the same request identity. No task assignment, permission expansion or new agent. If dependencies are already done, continue now without yielding.',
     parameters: Type.Object({ action: Type.Union([Type.Literal('wait'), Type.Literal('work'), Type.Literal('status'), Type.Literal('cancel'), Type.Literal('retry')]),
       items: Type.Optional(Type.Array(Type.String({ minLength: 1, maxLength: 128 }), { minItems: 1, maxItems: 20, uniqueItems: true })),
       reason: Type.Optional(Type.String({ minLength: 1, maxLength: 1000 })), id: Type.Optional(Type.String({ minLength: 1, maxLength: 128 })) }, { additionalProperties: false }),
