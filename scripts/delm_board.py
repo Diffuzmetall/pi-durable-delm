@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 """DeLM board: interactive read-only observer, or board server with an observer."""
 import argparse
-from collections import Counter
-from contextlib import closing
 import curses
 import json
-from pathlib import Path
 import re
 import shutil
 import sqlite3
@@ -14,6 +11,10 @@ import sys
 import textwrap
 import time
 import unicodedata
+from collections import Counter
+from contextlib import closing
+from pathlib import Path
+from typing import Any
 
 from delm_domain import project_events
 
@@ -141,8 +142,11 @@ def load_board(run):
     for i in range(1, len(events)):
         if events[i][1] < events[i - 1][1]:
             legacy_start = i
-    data = dict(actors=list(config['actors']), workspace=config.get('workspace', 'isolated'),
-                statuses={}, tasks=[], notes=[], waits={}, sequence=events[-1][0] if events else 0)
+    data: dict[str, Any] = {
+        'actors': list(config['actors']), 'workspace': config.get('workspace', 'isolated'),
+        'statuses': {}, 'tasks': [], 'notes': [], 'waits': {},
+        'sequence': events[-1][0] if events else 0,
+    }
     data.update(blockers=projection.get('blockers', []), leases=leases,
                 sessions=projection.get('sessions', []), events=projection.get('events', []))
     times = {}

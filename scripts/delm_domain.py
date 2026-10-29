@@ -1,9 +1,10 @@
 """Canonical local DeLM events and fenced operations; no storage owner of its own."""
-from copy import deepcopy
-from contextlib import contextmanager
 import json
 import threading
 import uuid
+from contextlib import AbstractContextManager, contextmanager
+from copy import deepcopy
+from typing import TYPE_CHECKING, Any, Protocol, cast
 
 
 class DomainError(ValueError):
@@ -12,12 +13,19 @@ class DomainError(ValueError):
         self.code = code
 
 
-def project_events(rows, actors=()):
+def _decode_json(value: str, source: str) -> Any:
+    try:
+        return json.loads(value)
+    except json.JSONDecodeError as error:
+        raise DomainError(f"malformed {source} JSON") from error
+
+
+def project_events(rows, actors=()) -> dict[str, Any]:
     tasks, notes, sessions, statuses, events, attached = {}, [], {}, {}, [], {}
     sequence = 0
     for row in rows:
         row = dict(row)
-        p = json.loads(row["payload"]) if isinstance(row["payload"], str) else deepcopy(row["payload"])
+        p = _decode_json(row["payload"], "event payload") if isinstance(row["payload"], str) else deepcopy(row["payload"])
         actor, kind, seq = row["actor"], row["kind"], row["sequence"]
         sequence = max(sequence, seq)
         if kind == "read":
@@ -55,18 +63,24 @@ def project_events(rows, actors=()):
             note["files"] = attached[note["id"]]
     resolved = {i for n in notes if n.get("type") in ("CORRECTION", "RESOLUTION") for i in n.get("resolves", [])}
     blockers = [n for n in notes if n.get("type") == "FAIL" and n["id"] not in resolved]
-    def dependencies(identity, seen=None):
-        seen = set() if seen is None else seen
-        if identity in seen:
-            return seen
-        seen.add(identity)
-        task = tasks.get(identity, {})
-        for dep in task.get("deps", []) + task.get("outputs", []):
-            dependencies(dep, seen)
-        return seen
+    # Reverse edges let each unresolved blocker visit only its affected tasks.
+    dependents = {}
+    for identity, task in tasks.items():
+        task["blockers"] = []
+        for dependency in task.get("deps", []) + task.get("outputs", []):
+            dependents.setdefault(dependency, []).append(identity)
+    for blocker in blockers:
+        pending = [blocker.get("task"), blocker.get("output"), *blocker.get("related", [])]
+        seen = set()
+        while pending:
+            identity = pending.pop()
+            if identity in seen:
+                continue
+            seen.add(identity)
+            if identity in tasks:
+                tasks[identity]["blockers"].append(blocker)
+            pending.extend(dependents.get(identity, ()))
     for task in tasks.values():
-        relevant = dependencies(task["id"])
-        task["blockers"] = [n for n in blockers if relevant.intersection([n.get("task"), n.get("output"), *n.get("related", [])])]
         task["readiness"] = task["state"] == "open" and not task["blockers"] and all(
             tasks.get(i, {}).get("state") == "done" for i in task.get("deps", []))
     return dict(protocol=2, sequence=sequence, agents=list(actors), queue=list(tasks.values()), notes=notes,
@@ -91,25 +105,71 @@ def strings(value, field):
 
 def validate_graph(tasks):
     visiting, visited = set(), set()
-    def visit(i):
-        if i in visiting:
-            raise DomainError("dependency cycle")
-        if i in visited:
-            return
-        if i not in tasks:
-            raise DomainError(f"unknown dependency {i}", "UNKNOWN")
-        visiting.add(i)
+    for identity in tasks:
+        if identity in visited:
+            continue
+        visiting.add(identity)
         # Completion waits on outputs too; parent is only a metadata back-pointer.
-        for dep in tasks[i].get("deps", []) + tasks[i].get("outputs", []):
-            visit(dep)
-        visiting.remove(i)
-        visited.add(i)
-    for i in tasks:
-        visit(i)
+        stack = [(identity, iter(tasks[identity].get("deps", []) + tasks[identity].get("outputs", [])))]
+        while stack:
+            current, dependencies = stack[-1]
+            try:
+                dependency = next(dependencies)
+            except StopIteration:
+                stack.pop()
+                visiting.remove(current)
+                visited.add(current)
+                continue
+            if dependency in visiting:
+                raise DomainError("dependency cycle")
+            if dependency in visited:
+                continue
+            if dependency not in tasks:
+                raise DomainError(f"unknown dependency {dependency}", "UNKNOWN")
+            visiting.add(dependency)
+            stack.append((dependency, iter(tasks[dependency].get("deps", []) + tasks[dependency].get("outputs", []))))
+
+
+class _BoardBase(Protocol):
+    def connect(self) -> AbstractContextManager[Any]:
+        raise NotImplementedError
+
+    def claim(self, actor: str, item_id: str) -> Any:
+        raise NotImplementedError
+
+    def reserve(self, actor: str, subject: str, detail: str) -> Any:
+        raise NotImplementedError
+
+    def done(self, actor: str, item_id: str, summary: str, files=None, request_id=None) -> Any:
+        raise NotImplementedError
 
 
 class DomainMixin:
     """Methods execute only inside inherited board transactions/auth boundaries."""
+    if TYPE_CHECKING:
+        actors: Any
+        path: Any
+        workspace: Any
+
+        @staticmethod
+        def append(db: Any, actor: str, kind: str, payload: Any) -> int:
+            raise NotImplementedError
+
+        @staticmethod
+        def last_read(db: Any, actor: str) -> int | None:
+            raise NotImplementedError
+
+        @staticmethod
+        def last_sequence(db: Any) -> int:
+            raise NotImplementedError
+
+        def check_actor(self, actor: Any) -> None:
+            raise NotImplementedError
+
+        @staticmethod
+        def fingerprint(args: Any) -> str:
+            raise NotImplementedError
+
     def __init__(self, *args, **kwargs):
         self._transactions = threading.local()
         super().__init__(*args, **kwargs)
@@ -121,14 +181,14 @@ class DomainMixin:
         if current is not None:
             yield current
             return
-        with super().connect() as db:
+        with cast(_BoardBase, super()).connect() as db:
             self._transactions.db = db
             try:
                 yield db
             finally:
                 self._transactions.db = None
 
-    def projection(self, db):
+    def projection(self, db) -> dict[str, Any]:
         result = project_events(db.execute("SELECT sequence,actor,kind,payload FROM events ORDER BY sequence"), self.actors)
         # Optional module read projections must tolerate legacy DBs without their tables.
         try:
@@ -138,15 +198,15 @@ class DomainMixin:
             result["leases"] = []
         return result
 
-    def queue_state(self, db):
+    def queue_state(self, db) -> list[dict[str, Any]]:
         return self.projection(db)["queue"]
 
-    def view(self, db, reader):
+    def view(self, db, reader) -> dict[str, Any]:
         result = self.projection(db)
         result["reader"] = reader
         return result
 
-    def served(self, db, actor, via, full=False):
+    def served(self, db, actor, via, full=False) -> dict[str, Any]:
         # Compatibility read remains legacy consumption; v2 consumers use snapshot/ack.
         result = self.view(db, actor)
         previous = self.last_read(db, actor)
@@ -191,7 +251,7 @@ class DomainMixin:
             if prior:
                 if prior[0] != fingerprint:
                     raise DomainError("request_id reused with changed payload", "CONFLICT")
-                return json.loads(prior[1])
+                return _decode_json(prior[1], "cached domain response")
             projection = self.projection(db)
             tasks = {t["id"]: deepcopy(t) for t in projection["queue"]}
             if op == "snapshot":
@@ -386,7 +446,7 @@ class DomainMixin:
             if task and task.get("domain"):
                 raise DomainError("use domain claim with expected_revision", "STALE")
             self._free(actor, {t["id"]: t for t in self.queue_state(db)}, item_id)
-            return super().claim(actor, item_id)
+            return cast(_BoardBase, super()).claim(actor, item_id)
 
     def reserve(self, actor, subject, detail):
         text(subject, "subject", 512)
@@ -397,11 +457,11 @@ class DomainMixin:
             if matching and matching.get("domain"):
                 raise DomainError("use domain claim with expected_revision", "STALE")
             self._free(actor, {t["id"]: t for t in queue}, matching["id"] if matching else None)
-            return super().reserve(actor, subject, detail)
+            return cast(_BoardBase, super()).reserve(actor, subject, detail)
 
     def done(self, actor, item_id, summary, files=None, request_id=None):
         with self.connect() as db:
             task = next((t for t in self.queue_state(db) if t["id"] == item_id), None)
             if task and task.get("domain"):
                 raise DomainError("use domain complete with generation and revision", "STALE")
-            return super().done(actor, item_id, summary, files, request_id)
+            return cast(_BoardBase, super()).done(actor, item_id, summary, files, request_id)

@@ -1,26 +1,28 @@
 #!/usr/bin/env python3
 """Local DeLM with 2/4/8 fixture identities; isolated or shared workspace."""
 import argparse
-import json
+import importlib
 import io
+import json
 import os
-from pathlib import Path
 import secrets
 import shlex
 import shutil
 import sys
 import time
-from http.server import ThreadingHTTPServer
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from typing import Any, cast
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.dont_write_bytecode = True  # CLI use must not dirty immutable installed version trees.
 sys.path.insert(0, str(ROOT / "vendor" / "DeLM"))
-from board import context_client as client
-from board.protected_board import ProtectedBoard
-from board.shared_context import OriginalReadError
-from runtime.containers import handler
+client = cast(Any, importlib.import_module("board.context_client"))
+ProtectedBoard = importlib.import_module("board.protected_board").ProtectedBoard
+OriginalReadError = importlib.import_module("board.shared_context").OriginalReadError
+handler = importlib.import_module("runtime.containers").handler
 sys.path.insert(0, str(ROOT / "scripts"))
-from delm_domain import DomainMixin, DomainError
+from delm_domain import DomainError, DomainMixin
 
 ACTORS = ("alice", "bob", "carol", "dave")  # S1 compatibility export
 ROSTER = ACTORS + ("eve", "frank", "grace", "heidi")
@@ -126,7 +128,7 @@ def initialize(run, source, task, n=2, shared_workspace=None, plan=None):
     if shared_workspace is None:
         shutil.copytree(source, run / "baseline")
     actors = ROSTER[:n]
-    config = {"actors": {actor: secrets.token_urlsafe(32) for actor in actors}}
+    config: dict[str, Any] = {"actors": {actor: secrets.token_urlsafe(32) for actor in actors}}
     if shared_workspace is not None:
         config["workspace"] = str(shared_workspace)
     (run / "config.json").write_text(json.dumps(config))
@@ -215,7 +217,7 @@ def board(run):
     return context
 
 
-def local_handler(context, identities):
+def local_handler(context, identities) -> type[BaseHTTPRequestHandler]:
     class Handler(handler(context, identities)):
         def do_POST(self):
             actor = identities.get(self.path.removeprefix("/"))
@@ -237,7 +239,7 @@ def local_handler(context, identities):
                     super().do_POST()
             except (ValueError, KeyError, TypeError) as error:
                 self.reply(400, {"error": str(error), "code": getattr(error, "code", "INVALID")})
-    return Handler
+    return cast(type[BaseHTTPRequestHandler], Handler)
 
 
 def serve(run, port):

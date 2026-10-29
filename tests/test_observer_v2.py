@@ -1,25 +1,33 @@
 """Read-only observer conformance against canonical event projection, not a UI reducer."""
-from contextlib import closing
+import importlib
 import json
-from pathlib import Path
 import sqlite3
 import sys
 import tempfile
 import unittest
+from contextlib import closing
+from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
-from delm_board import BoardView, agent_line, load_board, snapshot
-from delm_domain import project_events
+_board = importlib.import_module('delm_board')
+_domain = importlib.import_module('delm_domain')
+BoardView, agent_line, load_board, snapshot = (
+    _board.BoardView, _board.agent_line, _board.load_board, _board.snapshot
+)
+DomainError, project_events, validate_graph = (
+    _domain.DomainError, _domain.project_events, _domain.validate_graph
+)
 
 
 class ObserverV2Test(unittest.TestCase):
     def setUp(self):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
-        self.run = Path(temporary.name)
-        (self.run / 'config.json').write_text(json.dumps({'actors': {'alice': 'secret', 'bob': 'other'}}))
-        with closing(sqlite3.connect(self.run / 'context.sqlite')) as db, db:
+        self.run_dir = Path(temporary.name)
+        (self.run_dir / 'config.json').write_text(json.dumps({'actors': {'alice': 'secret', 'bob': 'other'}}))
+        with closing(sqlite3.connect(self.run_dir / 'context.sqlite')) as db, db:
             db.execute('CREATE TABLE events(sequence INTEGER PRIMARY KEY, time_ns INTEGER, actor TEXT, kind TEXT, payload TEXT)')
             # A pre-existing opaque receipt/cursor must be untouched by observation.
             db.execute('CREATE TABLE observer_preservation(value TEXT)')
@@ -28,7 +36,7 @@ class ObserverV2Test(unittest.TestCase):
 
     def emit(self, kind, payload, actor='alice'):
         sequence = len(self.rows) + 1
-        with closing(sqlite3.connect(self.run / 'context.sqlite')) as db, db:
+        with closing(sqlite3.connect(self.run_dir / 'context.sqlite')) as db, db:
             db.execute('INSERT INTO events VALUES(?,?,?,?,?)', (sequence, sequence, actor, kind, json.dumps(payload)))
         self.rows.append(dict(sequence=sequence, actor=actor, kind=kind, payload=payload))
 
@@ -50,9 +58,9 @@ class ObserverV2Test(unittest.TestCase):
                                     related=['legacy'], output=None, readiness=False, limitations='check needed', resolves=[]))
         for number in range(70):
             self.emit('note', dict(id=f'unrelated-{number}', type='FACT', text='unrelated history', scope='', basis='fixture'))
-        before = (self.run / 'context.sqlite').read_bytes()
-        data = load_board(self.run)
-        canonical = project_events(self.rows, ('alice', 'bob'))
+        before = (self.run_dir / 'context.sqlite').read_bytes()
+        data: Any = load_board(self.run_dir)
+        canonical: Any = project_events(self.rows, ('alice', 'bob'))
         self.assertEqual({task['id']: task['state'] for task in data['tasks']},
                          {task['id']: task['state'] for task in canonical['queue']})
         self.assertEqual(data['blockers'], canonical['blockers'])
@@ -71,13 +79,43 @@ class ObserverV2Test(unittest.TestCase):
         self.assertIn('explicit gate', detail)
         self.assertIn('"deps"', detail)
         self.assertIn('child', detail)
-        text = '\n'.join(snapshot(self.run))
+        text = '\n'.join(snapshot(self.run_dir))
         self.assertIn('UNRESOLVED BLOCKERS (all)', text)
         self.assertIn('explicit linked blocker', text, 'old sticky failure remains visible outside ten-event preview')
         self.assertNotIn('secret', text)
-        self.assertEqual(before, (self.run / 'context.sqlite').read_bytes())
-        with closing(sqlite3.connect(self.run / 'context.sqlite')) as db:
+        self.assertEqual(before, (self.run_dir / 'context.sqlite').read_bytes())
+        with closing(sqlite3.connect(self.run_dir / 'context.sqlite')) as db:
             self.assertEqual(db.execute('SELECT value FROM observer_preservation').fetchone()[0], 'unacked receipt/cursor')
+
+    def test_deep_graph_projection_and_validation_are_stack_safe(self):
+        count = 1500
+        rows: list[dict] = [
+            {'sequence': index + 1, 'actor': 'alice', 'kind': 'task', 'payload': {'task': {
+                'id': f'task-{index}', 'subject': f'Task {index}', 'state': 'open',
+                'deps': [] if index == 0 else [f'task-{index - 1}'], 'outputs': [],
+            }}}
+            for index in range(count)
+        ]
+        rows.append({'sequence': count + 1, 'actor': 'alice', 'kind': 'publication', 'payload': {
+            'id': 'root-failure', 'type': 'FAIL', 'text': 'root blocker',
+            'task': 'task-0', 'output': None, 'related': [],
+        }})
+
+        projection: Any = project_events(rows)
+        tasks: dict[str, Any] = {task['id']: task for task in projection['queue']}
+        self.assertEqual(len(tasks), count)
+        self.assertEqual(tasks[f'task-{count - 1}']['blockers'][0]['id'], 'root-failure')
+        self.assertFalse(tasks[f'task-{count - 1}']['readiness'])
+        validate_graph(tasks)
+
+        with self.assertRaisesRegex(DomainError, 'dependency cycle'):
+            validate_graph({'a': {'deps': ['b']}, 'b': {'deps': ['a']}})
+        with self.assertRaisesRegex(DomainError, 'unknown dependency missing'):
+            validate_graph({'a': {'deps': ['missing']}})
+
+    def test_malformed_event_json_is_reported_as_domain_error(self):
+        with self.assertRaisesRegex(DomainError, 'malformed event payload JSON'):
+            project_events([{'sequence': 1, 'actor': 'alice', 'kind': 'task', 'payload': '{'}])
 
     def test_available_work_wait_is_not_reported_as_zero_dependencies_ready(self):
         data = dict(tasks=[], waits={'bob': [{'mode': 'work', 'items': [], 'reason': 'available'}]},
@@ -93,7 +131,7 @@ class ObserverV2Test(unittest.TestCase):
                                     output=None, readiness=False, limitations='', resolves=[]))
         self.emit('publication', dict(id='resolution', type='RESOLUTION', text='resolved with evidence', task='result',
                                     related=[], output=None, readiness=False, limitations='', resolves=['failure']))
-        data = load_board(self.run)
+        data = load_board(self.run_dir)
         self.assertFalse(data['blockers'])
         rows = BoardView().rows(data)
         self.assertEqual([task['id'] for task in rows], ['result'])
