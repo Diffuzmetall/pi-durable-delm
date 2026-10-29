@@ -56,6 +56,20 @@ class Native14PackageTest(unittest.TestCase):
         self.assertIn("lock", guide)
         self.assertIn("фоновую работу", guide)
 
+    def test_visible_board_and_theme_startup_contract_is_shipped(self):
+        for relative in ("prompts/setup-delm.md", "docs/agent-setup.md", "docs/user-guide.md"):
+            with self.subTest(path=relative):
+                self.assertIn("terminal-layout.md", (ROOT / relative).read_text())
+        guide = (ROOT / "docs/terminal-layout.md").read_text()
+        for contract in ("2×2", "постоянно видимой", "до запуска", "--session", "--continue", "--ansi"):
+            self.assertIn(contract, guide)
+        self.assertNotIn("/home/ubuntu/", guide)
+        evidence = json.loads((ROOT / "evidence/native14/live-theme-reopen-2026-10-29.json").read_text())
+        self.assertTrue(evidence["same_full_identities"])
+        self.assertTrue(evidence["board_alongside_four_actors"])
+        self.assertEqual(evidence["actors_reopened"], 4)
+        self.assertFalse(evidence["bootstrap_replayed"])
+
     def test_real_archive_installs_same_tui_and_setup_prompt_without_runtime(self):
         with tempfile.TemporaryDirectory(prefix="delm-native14-package-") as temporary:
             directory = Path(temporary)
@@ -71,8 +85,11 @@ class Native14PackageTest(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             archive = directory / json.loads(result.stdout)[0]["filename"]
             with tarfile.open(archive, "r:gz") as payload:
-                self.assertNotIn("package/docs/Pi-Durable-1.4-current-host-plan.md", payload.getnames())
+                for private_document in ("Pi-Durable-1.4-current-host-plan.md",
+                                         "pi-durable-host-session-retrospective-2026-10-29.md"):
+                    self.assertNotIn("package/docs/" + private_document, payload.getnames())
                 for relative in ("scripts/delm_board.py", "prompts/setup-delm.md", "docs/agent-setup.md",
+                                 "docs/terminal-layout.md", "evidence/native14/live-theme-reopen-2026-10-29.json",
                                  "extensions/delm/native14.js"):
                     self.assertEqual(payload.extractfile("package/" + relative).read(), (ROOT / relative).read_bytes())
                 self.assertIn(b"DeLM BOARD | READ ONLY", payload.extractfile("package/scripts/delm_board.py").read())
