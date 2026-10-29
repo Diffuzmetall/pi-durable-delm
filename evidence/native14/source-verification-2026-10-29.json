@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "date": "2026-10-29",
+  "scope": "Current source verification and bounded read-only inventory of the existing four-actor run; not installed artifact, live-model or fresh-machine acceptance",
+  "source_baseline": "1012edb",
+  "git": {
+    "repository": "https://github.com/Diffuzmetall/pi-durable-delm",
+    "pr": 1,
+    "pr_state": "MERGED",
+    "merge_commit": "1012edb",
+    "feature_head": "2adb04466c9c53dc4cf4294abd66a9a840e49c45",
+    "identical_feature_and_main_tree": "d19948a2a83e337e9921f87635099958d95b3311",
+    "local_main_update": "fast-forward; no duplicate merge or rewritten history"
+  },
+  "checks": [
+    {"command": "python3 -B -m unittest discover -s tests -v", "passed": 55, "exit": 0},
+    {"command": "python3 -B -m unittest discover -s tests/packaging -v", "passed": 10, "exit": 0, "initial_result": "FAIL: six stale packaged_sha256 entries; corrected fingerprints and two adapted statuses, then reran this suite successfully"},
+    {"command": "python3 -B -m unittest discover -s tests/native14-package -p test_package.py -v", "passed": 4, "exit": 0},
+    {"command": "python3 -B tests/native14-launch-bootstrap.py", "passed": 1, "exit": 0},
+    {"command": "python3 -B tests/native14-launch-control.py", "passed": 8, "exit": 0},
+    {"command": "node --import EXISTING_NATIVE_GLOBAL_RUNTIME --test tests/*.test.mjs", "passed": 33, "initial_failed_file": "tests/delm-reload.test.mjs", "initial_exit": 1, "cause": "Repo-local jiti was not installed; test file could not import jiti"},
+    {"command": "node --import TEMPORARY_EXISTING_RUNTIME_AND_JITI_RESOLVER --test tests/delm-reload.test.mjs", "passed": 3, "exit": 0, "environment": "Reused existing Native SDK 1.4 runtime and already installed jiti@2.7.0; temporary registerHooks resolver mapped only the jiti package to its existing lib/jiti.mjs; no installation, repository symlink, model credentials or global configuration changed"}
+  ],
+  "passed_checks_total": 114,
+  "test_boundaries": [
+    "The Node result is a 33-check pass plus a separately repaired 3-check environment run, not a single green full-suite invocation",
+    "Python run emitted nonfatal ResourceWarnings about unclosed SQLite connections; no claim of warning-free execution",
+    "SDK model providers in these tests are deterministic faux providers, not external paid models",
+    "No full actual-host fixture acceptance was rerun"
+  ],
+  "fingerprint_repair": {
+    "extensions/delm/native14-owner.js": "ecfa907e5c65e23e952429c699c08c5832132f700a1be4ba5db7299e387c5d4c",
+    "scripts/delm_local.py": "7c650aa8f526d502e7884001c131aba62092ddfa9421200dba436f8c45608b51",
+    "scripts/delm_domain.py": "13212c67e3bf3c0e5e906302c8194323c00b4785e712476fddb1388837e00d07",
+    "scripts/delm_board.py": "2f07abe5e2490b109fcc1a1598356c4575635ec488dd73ebe61feb6165f33556",
+    "prompts/delm-worker.md": "a5c6716058a2e7ff133769de2ebcf5d713780a00b68ea7f48d0ece66b5ffb671",
+    "extensions/delm/index.js": "71c988a5e19030ef62fde4ce676ff5813e3aa3c965af5274687a6fefbc7595a3"
+  },
+  "live_inventory": {
+    "run_name": "pi-durable-host-20261028-4sol",
+    "board_reachable": true,
+    "approved_inputs_verified": true,
+    "tasks": 85,
+    "done": 85,
+    "sequence": 922,
+    "blockers": 0,
+    "exact_owners_responded": ["alice", "bob", "carol", "dave"],
+    "stopped_owners": 0,
+    "waiting_watches": 0,
+    "failed_watches": 0,
+    "historical_cancelled_watches": 3,
+    "persistent_titles": ["DeLM Alice", "DeLM Bob", "DeLM Carol", "DeLM Dave"],
+    "title_repair": "Carol's missing title set using her idle Native TUI /name command, confirmed in capture and title.txt; no model input submitted",
+    "drafts": "Not read, submitted, cleared or altered; Alice's existing input preserved",
+    "actors_restarted": false,
+    "installed_payload_updated": false
+  },
+  "tern": {
+    "version": "0.9.2 (23735aa)",
+    "layout": "Four existing actor blocks arranged as equal 2x2 splits; board and existing retrospective file moved to separate named tabs; no actor or file block closed",
+    "actor_block_ids": {"alice": 57853209477121, "bob": 57857504444417, "carol": 57861799411713, "dave": 57866094379009},
+    "board_block_id": 57836029607939,
+    "verification_block_id": 59163174502402,
+    "pixel_or_live_resize_verdict": "UNCONFIRMED: daemon metadata still reports Bob at 8 columns after layout change. Reattach/render the remote Tern window before claiming visual usability. A balanced split tree is not proof of terminal resize."
+  },
+  "remaining_boundaries": [
+    "Installed payload differs from current source in at least board, extension and worker prompt; source publication does not activate it",
+    "Current four-actor run retains its existing frozen contract and exact session owners",
+    "Historical acceptance archives and source_sha256 origins are unchanged",
+    "No changes to the separate pi-durable-host Git repository are included",
+    "Two pre-existing untracked host plan/retrospective documents retain local conversation/session locations; preserved locally, not published as part of this source verification",
+    "No universal production-readiness, performance benchmark or fresh-machine E2E claim"
+  ]
+}

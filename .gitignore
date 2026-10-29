@@ -12,3 +12,5 @@ __pycache__/
 *.db-*
 *.tgz
 .DS_Store
+.codegraph/
+.pi/session-work-context/
