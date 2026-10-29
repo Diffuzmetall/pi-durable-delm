@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[2]
 class PacklistTest(unittest.TestCase):
     @unittest.skipUnless(shutil.which("npm"), "npm prerequisite unavailable; artifact build not verified")
     def test_python_caches_excluded_under_explicit_files_directories(self):
-        rules=[ROOT / parent / ".npmignore" for parent in ("scripts","packaging","tests","examples","skills","vendor")]
+        rules=[ROOT / parent / ".npmignore" for parent in ("scripts","packaging","tests","examples","skills","vendor","evidence/native14")]
         if not any(path.exists() for path in rules):
             self.skipTest("Source-build rules intentionally absent from npm payload; archive cache scan is a separate check")
         self.assertTrue(all(path.is_file() for path in rules), "Partial source checkout is missing build rules")
@@ -24,7 +24,8 @@ class PacklistTest(unittest.TestCase):
             expected = []
             for parent, content in (("scripts", "scripts"), ("packaging", "packaging"),
                                     ("tests", "tests/host"), ("examples", "examples/slugify"),
-                                    ("skills", "skills/delm/Tools"), ("vendor", "vendor/DeLM/board")):
+                                    ("skills", "skills/delm/Tools"), ("vendor", "vendor/DeLM/board"),
+                                    ("evidence/native14", "evidence/native14/acceptance")):
                 (root / parent).mkdir(parents=True, exist_ok=True)
                 (root / parent / ".npmignore").write_bytes((ROOT / parent / ".npmignore").read_bytes())
                 destination = root / content
