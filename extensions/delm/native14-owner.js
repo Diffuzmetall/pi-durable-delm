@@ -1,6 +1,6 @@
 // Private DeLM control inside the existing Native owner. No Harness/storage/model runtime is created.
 import { createServer } from 'node:net';
-import { lstat, realpath, chmod } from 'node:fs/promises';
+import { lstat, realpath, chmod, writeFile } from 'node:fs/promises';
 import { realpathSync } from 'node:fs';
 import { basename, dirname, isAbsolute, join, resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
@@ -120,6 +120,9 @@ export function prepareNative14Owner(controller, {run,actor,workspace,controlSoc
           fail('SCOPE_MISMATCH','Native session already belongs to a different DeLM binding');
         doc.binding=binding; doc.instanceId??=randomUUID(); return doc.instanceId;
       },host.context);
+      // Native reads title.txt before mounting the TUI; never replace an operator's /name.
+      await writeFile(join(host.directory,'title.txt'),`DeLM ${actor[0].toUpperCase()}${actor.slice(1)}\n`,{flag:'wx',mode:0o600})
+        .catch(error=>{if(error.code!=='EEXIST') throw error;});
       state.identity={protocol:NATIVE14_PROTOCOL,sdkVersion:'1.4.0',...binding,instanceId};
       const parent=await lstat(dirname(options.controlSocket));
       if(!parent.isDirectory() || parent.isSymbolicLink() || parent.uid!==process.getuid?.() || (parent.mode&0o077))

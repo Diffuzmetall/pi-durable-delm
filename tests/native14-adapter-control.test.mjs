@@ -1,7 +1,7 @@
 // Focused real SDK1.4/SQLite + private in-owner endpoint. Controller/model doubles are TEST ONLY.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, writeFile, lstat, rm } from 'node:fs/promises';
+import { mkdtemp, mkdir, writeFile, readFile, lstat, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { createConnection } from 'node:net';
@@ -25,11 +25,12 @@ function rpc(path,request) {
     socket.on('data',chunk=>{buffer+=chunk;const end=buffer.indexOf('\n');if(end>=0){socket.destroy();resolve(JSON.parse(buffer.slice(0,end)));}});
   });
 }
-async function fixture({unsafe=false}={}) {
+async function fixture({unsafe=false,actor='bob',title}={}) {
   const directory=await mkdtemp(join(tmpdir(),'n14-owner-'));
   const run=join(directory,'run'), native=join(directory,'session'), privateDir=join(directory,'ipc');
   await mkdir(run);await mkdir(native);await mkdir(privateDir,{mode:unsafe?0o755:0o700});
-  await writeFile(join(run,'config.json'),JSON.stringify({workspace:process.cwd(),actors:{bob:{}}}));
+  await writeFile(join(run,'config.json'),JSON.stringify({workspace:process.cwd(),actors:{[actor]:{}}}));
+  if(title!==undefined) await writeFile(join(native,'title.txt'),title);
   const faux=fauxProvider(),models=createModels();models.setProvider(faux.provider);
   faux.setResponses(Array.from({length:8},()=>fauxAssistantMessage('SDK owner received approved input')));
   let controller,host,root,socket,generation=0;
@@ -39,7 +40,7 @@ async function fixture({unsafe=false}={}) {
       async admit(conversation,id,ctx){this.admissions.push(id);await this.onAdmit(conversation,id,ctx);}};
     const base=withFixtureMcp(createRegistry());Object.defineProperty(base,HINDSIGHT_CONTROLLER,{value:controller});
     socket=join(privateDir,`g${++generation}.sock`);
-    const options={run,actor:'bob',controlSocket:socket};
+    const options={run,actor,controlSocket:socket};
     const registry=install(base,options);
     host=await Harness.open(await openNodeSqliteStorage(join(native,'session.sqlite')),{registry,models},context);
     root=await host.root(context,{agent:{cwd:process.cwd(),model:{provider:'faux',modelId:'faux-1'}}});
@@ -88,6 +89,22 @@ test('current owner endpoint preserves bind/close, approval identity/type/SHA, r
     assert.equal(f.controller.admissions.length,0,'reopen replay re-admitted input');
     assert.deepEqual((await f.call({method:'status',identity})).result.waits,[]);
   } finally {await f.close();}
+});
+
+test('actor names become persistent Native titles before the TUI starts; reopen preserves custom titles',async()=>{
+  for(const actor of ['alice','bob','carol','dave']) {
+    const f=await fixture({actor});
+    try {
+      assert.equal(await readFile(join(f.native,'title.txt'),'utf8'),`DeLM ${actor[0].toUpperCase()}${actor.slice(1)}\n`);
+      await writeFile(join(f.native,'title.txt'),'My review session\n');
+      await f.reopen();
+      assert.equal(await readFile(join(f.native,'title.txt'),'utf8'),'My review session\n');
+      assert.equal(f.controller.admissions.length,0,'naming must not submit model input');
+    } finally {await f.close();}
+  }
+  const f=await fixture({title:'Existing user title\n'});
+  try {assert.equal(await readFile(join(f.native,'title.txt'),'utf8'),'Existing user title\n');}
+  finally {await f.close();}
 });
 
 test('stop racing a held real admission prevents subsequent submit without touching approved bytes or original owner close',async()=>{
