@@ -1,19 +1,21 @@
 """Fenced domain operations on real local board transactions and HTTP/CLI."""
 import concurrent.futures
+import importlib
 import importlib.util
 import json
-from pathlib import Path
 import subprocess
 import sys
 import tempfile
 import threading
 import unittest
 from http.server import ThreadingHTTPServer
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
-import delm_local as local
-from delm_domain import DomainError, project_events
+local = importlib.import_module('delm_local')
+_domain = importlib.import_module('delm_domain')
+DomainError, project_events = _domain.DomainError, _domain.project_events
 
 
 class DomainTest(unittest.TestCase):
@@ -59,6 +61,14 @@ class DomainTest(unittest.TestCase):
         self.assertEqual(done['state'], 'done')
         reopened = local.LocalBoard(self.base / 'context.sqlite', self.board.actors)
         self.assertEqual(reopened.domain(actor, dict(op='projection'))['queue'][0]['state'], 'done')
+
+    def test_malformed_cached_response_is_reported_as_domain_error(self):
+        request = {'op': 'create', 'request_id': 'cached-corrupt', 'subject': 'job', 'detail': 'real useful work'}
+        self.board.domain('alice', request)
+        with self.board.connect() as db:
+            db.execute("UPDATE domain_requests SET response='{' WHERE actor='alice' AND request_id='cached-corrupt'")
+        with self.assertRaisesRegex(DomainError, 'malformed cached domain response JSON'):
+            self.board.domain('alice', request)
 
     def test_dependency_cycle_parent_mapping_and_partial_not_done(self):
         parent = self.create(criteria=['one', 'two'])

@@ -21,6 +21,21 @@ Run `context --help` or `context domain --help` for the implemented v2 operation
 
 Refresh the board before choosing work, crossing scope, handoff and final verification. An action's fresh view counts as a read. After native wake, consume the normal v2 snapshot/read→ack flow when available, or ordinary `context read` on a legacy run; `--all` only for actual recovery. UI/watchers never read for the model.
 
+## Working discipline and lifecycle checkpoints
+
+Deliver a thin REAL end-to-end vertical slice early, then useful increments to that working flow; not all infrastructure, then all DB, API and UI. Necessary groundwork names its near-term consuming slice and bounded executable check. For each independently usable output, name the added behavior, explicit consumer, minimal dependencies, write/resource boundary and early handoff. Release a checked minimal executable contract before the producer's whole milestone when useful; matching mocks do not prove integration.
+
+Build cohesive, composable modules with small explicit interfaces, not speculative frameworks, plugins or a service per task. A prototype answers a consequential unknown; it is not production acceptance. Prefer ready useful work in your current area to retain context, but switch safely at completion, a blocker or a checkpoint. Affinity is not permanent specialist ownership, permission to abandon active writes or permission to call self-review independent.
+
+Load the applicable skill body and required references before applying it. Catalogue metadata, a listed name and an earlier turn are not current loading evidence. Record actual read/application evidence or why no skill fits in the existing task output, not another ledger. Contract delivery, successful skill reads and observed behavior are separate claims.
+
+Use these checkpoints without ritual acknowledgements or repeatedly loading the whole repository:
+
+- **Recovery after resume/compaction:** recover the current task, relevant instructions/plan/ISA and original criteria, ownership/resources, unresolved failures and handoffs before writing. The persistent contract does not replace fresh task facts.
+- **Claim/decomposition/handoff:** reconcile the current board, remaining original criteria, actual owners and available inputs. Identify the runnable slice, consumer and independently checkable output before claiming or splitting; preserve dependencies and write boundaries. Small adjustments belong in the existing task, not manufactured work to fill seats.
+- **Milestone acceptance:** identify ONE candidate by revision plus hashes of dirty/untracked inputs. Split complementary independent checks among existing eligible peers with isolated writable resources; one integrator aggregates evidence, not all testing while peers idle. Preserve author exclusions. No reviewer per microtask or repeated full suite per actor; return confirmed failures to their owners and recheck affected claims on the repaired candidate.
+- **Before waiting:** inspect eligible work across areas and unresolved original criteria. A FREE actor uses work-available waiting only when no useful eligible work remains. A retained unfinished claim may wait for exact dependencies; checkpoint, stop writes and safely release/handoff ownership before switching. Work hints are neither assignment nor dependency DONE. Use the precise wait protocol below; never expand permissions to keep busy.
+
 ## Fenced task operations
 
 Use `context domain '<JSON object>'` with `op` and a unique stable `request_id` for each mutation. On uncertain outcome replay the exact same payload/ID; changed arguments need a new request_id. Never supply actor identity or credentials; the existing executable binds them.
@@ -47,7 +62,7 @@ Retain lease_id. `lease-renew` adds lease_id, task, generation, ttl; `lease-rele
 
 ## Continue the whole authorized plan
 
-Verify within your owned task, record evidence and complete it, then read the board and take READY complementary work. Independent source review/QA is at meaningful milestones/finally with existing peers, not a new agent for each microtask. One integrator checks the stable shared candidate; return defects to owners. Do not stop after one contract/task/milestone when the user's backlog remains authorized.
+Verify within your owned task, record evidence and complete it, then read the board and take READY complementary work. Apply the lifecycle checkpoints above for independent milestone checks and safe switching. Do not stop after one contract/task/milestone when the user's backlog remains authorized.
 
 When no useful independent READY work remains but authorized backlog still exists, a FREE actor uses `delm_wait(action=work,reason=...)` WITHOUT items, then finishes the turn. This requires loaded build `20261026-work-available-v4` or newer compatible implementation; workAvailableNow means inspect/claim now, not assignment or dependency DONE. A compact WORK AVAILABLE wake is a hint: read/ack its receipt, refresh the board and claim atomically; another actor may win first. A direct handoff after arming also wakes its recipient. Never infer fairness or automatic work stealing. If the whole authorized plan is complete, report completion rather than wait for optional future work.
 

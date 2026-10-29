@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 """DeLM board: interactive read-only observer, or board server with an observer."""
 import argparse
-from collections import Counter
-from contextlib import closing
 import curses
 import json
-from pathlib import Path
 import re
 import shutil
 import sqlite3
@@ -14,6 +11,11 @@ import sys
 import textwrap
 import time
 import unicodedata
+from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
+from contextlib import closing
+from pathlib import Path
+from typing import Any
 
 from delm_domain import project_events
 
@@ -68,6 +70,57 @@ def native_waits(db):
         if entry['state'] == 'waiting':
             result.append(dict(entry, native_id=record['id']))
     return result
+
+
+def native14_waits(run, actors):
+    """Read exact live owners through their bounded, identity-fenced status API."""
+    unknown = dict.fromkeys(actors)
+    try:
+        state = json.loads((run / 'launch.json').read_text())
+        if (state['schema'] != 2 or state['run'] != str(run)
+                or state['native']['protocol'] != 'delm.native14.control.v1'
+                or not isinstance(state['actors'], dict)):
+            return unknown
+    except (OSError, ValueError, KeyError, TypeError):
+        return unknown
+
+    client = Path(__file__).resolve().parents[1] / 'skills/delm/Tools/NativeControl.mjs'
+
+    def observe(actor):
+        try:
+            record = state['actors'][actor]
+            identity = record['identity']
+            if (identity['actor'] != actor or identity['run'] != str(run)
+                    or identity['workspace'] != state['workspace']
+                    or identity['protocol'] != 'delm.native14.control.v1'
+                    or identity['conversationId'] != 1):
+                return None
+            # Only status; the existing client checks socket permissions and the owner
+            # checks the complete identity. Never open Native SQLite or consume wakes.
+            response = subprocess.run(['node', str(client)], input=json.dumps({
+                'socket': record['socket'], 'identity': identity, 'method': 'status',
+            }), capture_output=True, text=True, timeout=2)
+            if response.returncode:
+                return None
+            frame = json.loads(response.stdout)
+            if frame['delm_control'] != 14:
+                return None
+            waits = frame['result']['waits']
+            if not isinstance(waits, list) or any(
+                    not isinstance(wait, dict) or wait.get('state') not in ('waiting', 'sent', 'failed', 'cancelled')
+                    for wait in waits):
+                return None
+            active = [wait for wait in waits if wait['state'] == 'waiting']
+            if any(not isinstance(w.get('items'), list) or
+                   any(not isinstance(item, str) for item in w['items']) for w in active):
+                return None
+            return active
+        except (OSError, ValueError, KeyError, TypeError, subprocess.TimeoutExpired):
+            return None
+
+    # A stalled owner must not multiply the observer's timeout by the roster size.
+    with ThreadPoolExecutor(max_workers=max(1, min(8, len(actors)))) as pool:
+        return dict(zip(actors, pool.map(observe, actors)))
 
 
 def event_time(note, now_ns=None):
@@ -141,8 +194,11 @@ def load_board(run):
     for i in range(1, len(events)):
         if events[i][1] < events[i - 1][1]:
             legacy_start = i
-    data = dict(actors=list(config['actors']), workspace=config.get('workspace', 'isolated'),
-                statuses={}, tasks=[], notes=[], waits={}, sequence=events[-1][0] if events else 0)
+    data: dict[str, Any] = {
+        'actors': list(config['actors']), 'workspace': config.get('workspace', 'isolated'),
+        'statuses': {}, 'tasks': [], 'notes': [], 'waits': {},
+        'sequence': events[-1][0] if events else 0,
+    }
     data.update(blockers=projection.get('blockers', []), leases=leases,
                 sessions=projection.get('sessions', []), events=projection.get('events', []))
     times = {}
@@ -165,7 +221,9 @@ def load_board(run):
     data['tasks'].sort(key=lambda task: (order.get(task['state'], 2), task['sequence']))
     # Existing run metadata only; never open a second owner or write to native databases.
     manifest = run / 'dcg-reopen-sessions.json'
-    if manifest.exists():
+    if (run / 'launch.json').exists():
+        data['waits'] = native14_waits(run, data['actors'])
+    elif manifest.exists():
         for actor, info in json.loads(manifest.read_text()).items():
             if actor not in data['actors']:
                 continue
