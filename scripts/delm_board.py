@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any
 
 from delm_domain import project_events
+from delm_sdk_observer import observe_sdk
 
 
 def clean(value, multiline=False):
@@ -110,7 +111,7 @@ def native14_waits(run, actors):
                     not isinstance(wait, dict) or wait.get('state') not in ('waiting', 'sent', 'failed', 'cancelled')
                     for wait in waits):
                 return None
-            active = [wait for wait in waits if wait['state'] == 'waiting']
+            active = [wait for wait in waits if wait['state'] in ('waiting', 'failed')]
             if any(not isinstance(w.get('items'), list) or
                    any(not isinstance(item, str) for item in w['items']) for w in active):
                 return None
@@ -170,7 +171,7 @@ def task_line(row, width):
     return ' │ '.join(cells)
 
 
-def load_board(run):
+def load_board(run, host_client=None):
     config = json.loads((run / 'config.json').read_text())
     with closing(sqlite3.connect((run / 'context.sqlite').as_uri() + '?mode=ro', uri=True, timeout=1)) as db:
         db.execute('PRAGMA query_only=ON')
@@ -221,7 +222,9 @@ def load_board(run):
     data['tasks'].sort(key=lambda task: (order.get(task['state'], 2), task['sequence']))
     # Existing run metadata only; never open a second owner or write to native databases.
     manifest = run / 'dcg-reopen-sessions.json'
-    if (run / 'launch.json').exists():
+    if (run / 'sdk-launch.json').exists():
+        data.update(observe_sdk(run, data['actors'], data['workspace'], host_client))
+    elif (run / 'launch.json').exists():
         data['waits'] = native14_waits(run, data['actors'])
     elif manifest.exists():
         for actor, info in json.loads(manifest.read_text()).items():
@@ -243,7 +246,8 @@ def load_board(run):
 def agent_line(data, actor):
     claims = [t for t in data['tasks'] if t['owner'] == actor and t['state'] in ('claimed', 'blocked')]
     waits = data['waits'].get(actor)
-    if waits and any(wait.get('mode') == 'work' for wait in waits):
+    failed = waits and any(wait.get('state') == 'failed' for wait in waits)
+    if waits and any(wait.get('mode') == 'work' for wait in waits) and all(not wait['items'] for wait in waits):
         current = 'WAIT → available work'
     elif waits:
         tasks = {task['id']: task for task in data['tasks']}
@@ -256,13 +260,23 @@ def agent_line(data, actor):
             elif task['state'] != 'done':
                 owner = task['owner'].upper() if task['owner'] != '-' else 'OPEN'
                 pending.append(f'{task_label(task)} [{owner}]')
-        current = f"WAIT → {', '.join(pending) or 'wake pending'} | ready {len(ids) - len(pending)}/{len(ids)}"
+        ready = len(ids) - len(pending)
+        if any(wait.get('mode') == 'work' for wait in waits):
+            pending.insert(0, 'available work')
+        current = f"WAIT → {', '.join(pending) or 'wake pending'} | ready {ready}/{len(ids)}"
     elif actor in data['waits'] and waits is None:
         current = 'WAIT UNKNOWN'
     elif claims:
         current = 'CLAIM ' + '; '.join(f"{task_label(t)} {task_title(t)}" for t in claims)
     else:
         current = 'NO CLAIM'
+    if failed:
+        current = current.replace('WAIT', 'WAIT FAILED', 1)
+    if claims and not current.startswith('CLAIM '):
+        current += ' | CLAIM ' + ', '.join(task_label(task) for task in claims)
+    activity = data.get('activity', {}).get(actor)
+    if activity in ('running', 'idle', 'disabled'):
+        current = activity.upper() + ' | ' + current
     lifecycle = next((entry for entry in data.get('sessions', []) if entry.get('actor') == actor), {})
     if lifecycle.get('state') in ('active', 'idle', 'ended', 'blocked'):
         current += f" | {lifecycle['state'].upper()} gen {lifecycle.get('generation', 0)}"
@@ -272,8 +286,8 @@ def agent_line(data, actor):
     return f'{actor:6} {current} | reported: {reported}'
 
 
-def snapshot(run):
-    data = load_board(run)
+def snapshot(run, host_client=None):
+    data = load_board(run, host_client=host_client)
     counts = Counter(t['state'] for t in data['tasks'])
     lines = ['DeLM | read-only board', 'Workspace: ' + data['workspace'], '',
              f"CLAIMED {counts['claimed']} | OPEN {counts['open']} | BLOCKED {counts['blocked']} | DONE {counts['done']}",
@@ -394,7 +408,7 @@ def wrapped(text, width):
             for line in (textwrap.wrap(paragraph, max(1, width), replace_whitespace=False) or [''])]
 
 
-def interactive(screen, run, server=None):
+def interactive(screen, run, server=None, host_client=None):
     curses.curs_set(0)
     curses.set_escdelay(25)
     screen.timeout(100)
@@ -422,7 +436,7 @@ def interactive(screen, run, server=None):
     while server is None or server.poll() is None:
         if time.monotonic() >= refresh:
             try:
-                data = load_board(run)
+                data = load_board(run, host_client=host_client)
                 error = ''
             except (OSError, sqlite3.Error, ValueError) as exc:
                 error = f'Read unavailable (retaining last view): {exc}'
@@ -589,33 +603,35 @@ def interactive(screen, run, server=None):
                 view.move(rows, delta)
 
 
-def show(run, server=None):
+def show(run, server=None, host_client=None):
     if sys.stdin.isatty() and sys.stdout.isatty():
-        curses.wrapper(interactive, run, server)
+        curses.wrapper(interactive, run, server, host_client)
     else:
         while server is None or server.poll() is None:
             width, height = shutil.get_terminal_size((100, 30))
-            print('\033[2J\033[H' + '\n'.join(line[:width - 1] for line in snapshot(run)[:height - 1]), end='', flush=True)
+            print('\033[2J\033[H' + '\n'.join(line[:width - 1] for line in snapshot(run, host_client=host_client)[:height - 1]), end='', flush=True)
             time.sleep(1)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('run', type=Path)
+    parser.add_argument('--host-client', type=Path,
+                        help='Operator-owned private SDK Host client JSON (loopback, read-only GET only)')
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument('--once', action='store_true', help='print all tasks once; no server or writes')
     mode.add_argument('--observe', action='store_true', help='attach read-only UI; never start or stop the board server')
     args = parser.parse_args()
     run = args.run.resolve()
     if args.once:
-        print('\n'.join(snapshot(run)))
+        print('\n'.join(snapshot(run, host_client=args.host_client)))
     elif args.observe:
-        show(run)
+        show(run, host_client=args.host_client)
     else:
         with (run / 'server.log').open('a') as log:
             server = subprocess.Popen([sys.executable, str(Path(__file__).with_name('delm_local.py')), 'serve', str(run)], stdout=log, stderr=log)
             try:
-                show(run, server)
+                show(run, server, host_client=args.host_client)
                 if server.poll() is not None:
                     raise SystemExit(f"board server exited {server.returncode}; see {run / 'server.log'}")
             except KeyboardInterrupt:

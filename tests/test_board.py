@@ -135,6 +135,64 @@ class BoardTest(unittest.TestCase):
         self.assertEqual(len(data['waits']['dave']), 1)
         self.assertEqual(before, [p.read_bytes() for p in paths])
 
+    def test_sdk_manifest_takes_precedence_over_legacy_native_metadata(self):
+        self.native14_manifest()
+        (self.run_dir / 'sdk-launch.json').write_text('{}')
+        observed = {'waits': {'alice': [], 'dave': [
+            {'state': 'waiting', 'items': ['active-id', '0']}]},
+            'activity': {'alice': 'running', 'dave': 'idle'}}
+        client = self.run_dir / 'operator-client.json'
+        with patch('delm_board.observe_sdk', return_value=observed) as observer, \
+             patch('delm_board.native14_waits', side_effect=AssertionError('No SDK to Native fallback')):
+            data = load_board(self.run_dir, host_client=client)
+        observer.assert_called_once_with(self.run_dir, data['actors'], 'isolated', client)
+        self.assertIn('WAIT → ISOL-1 [ALICE] | ready 1/2', agent_line(data, 'dave'))
+        self.assertIn('CLAIM ISOL-1', agent_line(data, 'alice'))
+        self.assertIn('RUNNING', agent_line(data, 'alice'))
+        self.assertEqual(data['tasks'][0]['waited_by'], ['dave'])
+
+    def test_sdk_without_operator_client_is_unknown_never_no_wait(self):
+        (self.run_dir / 'sdk-launch.json').write_text('{}')
+        with patch('delm_board.native14_waits', side_effect=AssertionError('No legacy fallback')):
+            data = load_board(self.run_dir)
+        self.assertIn('WAIT UNKNOWN', agent_line(data, 'alice'))
+        self.assertIn('CLAIM ISOL-1', agent_line(data, 'alice'))
+        self.assertIn('WAIT UNKNOWN', agent_line(data, 'dave'))
+        self.assertEqual(data['tasks'][0]['waited_by'], [])
+
+    def test_failed_wait_is_visible_and_claim_preserved(self):
+        data = load_board(self.run_dir)
+        data['waits']['alice'] = [{'state': 'failed', 'items': ['active-id']}]
+        self.assertIn('WAIT FAILED', agent_line(data, 'alice'))
+        self.assertIn('CLAIM ISOL-1', agent_line(data, 'alice'))
+
+    def test_mixed_work_and_named_waits_keep_named_dependencies(self):
+        data = load_board(self.run_dir)
+        data['waits']['dave'].append({'state': 'waiting', 'mode': 'work', 'items': []})
+        text = agent_line(data, 'dave')
+        self.assertIn('available work', text)
+        self.assertIn('ISOL-1 [ALICE]', text)
+        self.assertIn('ready 1/2', text)
+
+    def test_native14_failed_wait_is_not_hidden_as_a_claim(self):
+        self.native14_manifest()
+        response = {'delm_control': 14, 'result': {'waits': [
+            {'state': 'failed', 'items': ['active-id'], 'taskId': 267}]}}
+        with patch('delm_board.subprocess.run', return_value=
+                   subprocess.CompletedProcess([], 0, json.dumps(response), '')):
+            data = load_board(self.run_dir)
+        self.assertIn('WAIT FAILED', agent_line(data, 'alice'))
+        self.assertIn('CLAIM ISOL-1', agent_line(data, 'alice'))
+
+    def test_malformed_native14_envelopes_are_unknown_not_crashes(self):
+        self.native14_manifest()
+        for frame in ([], None, {'delm_control': 14, 'result': None},
+                      {'delm_control': 14, 'result': []}):
+            with self.subTest(frame=frame), patch('delm_board.subprocess.run', return_value=
+                    subprocess.CompletedProcess([], 0, json.dumps(frame), '')):
+                data = load_board(self.run_dir)
+            self.assertIn('WAIT UNKNOWN', agent_line(data, 'dave'))
+
     def test_native14_failure_is_unknown_not_legacy_or_no_claim(self):
         self.native14_manifest()
         def unavailable(argv, **kwargs):
